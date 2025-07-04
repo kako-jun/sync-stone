@@ -70,9 +70,11 @@ Es wird empfohlen, die exportierten Markdown-Dateien mit einem Texteditor zu öf
 *   **Änderungen der Lodestone-Spezifikationen**: Wenn sich die HTML-Struktur oder die Spezifikationen von The Lodestone ändern, funktioniert diese Erweiterung möglicherweise nicht mehr korrekt.
 *   **BBCode-Konvertierung**: Der BBCode von Lodestone wird als konvertiertes HTML abgerufen und dann von der Turndown-Bibliothek in Markdown konvertiert. Spezielle Notationen oder komplexe Layouts werden möglicherweise nicht perfekt reproduziert.
 
-<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120" style="margin-right: 20px;">
-  <div style="text-align:center;">
+<div style="text-align: right; margin-top: 20px;">
+  <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
+    <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120">
+  </div>
+  <div style="display: inline-block; vertical-align: middle;">
     <p style="margin:0; padding:0; font-size:1.2em;">Danke, FFXIV</p>
   </div>
 </div>

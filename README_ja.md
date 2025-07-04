@@ -70,9 +70,11 @@ SyncStone - 星紡のメモワール（せいぼう）は、FINAL FANTASY XIV関
 *   **ロドストの仕様変更**: ロドストのHTML構造や仕様が変更された場合、本拡張機能が正常に動作しなくなる可能性があります。
 *   **BBCodeの変換**: ロドストのBBCodeはHTMLに変換された状態で取得され、TurndownライブラリによってMarkdownに変換されます。特殊な記法や複雑なレイアウトは完全に再現されない場合があります。
 
-<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="ありがとうFF14" width="120" style="margin-right: 20px;">
-  <div style="text-align:center;">
+<div style="text-align: right; margin-top: 20px;">
+  <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
+    <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="ありがとう、FFXIV" width="120">
+  </div>
+  <div style="display: inline-block; vertical-align: middle;">
     <p style="margin:0; padding:0; font-size:1.2em;">ありがとう、FFXIV</p>
   </div>
 </div>

@@ -28,7 +28,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.finalfantasyxiv.com/lodestone/character/*/blog/*", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*/edit", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*/*"],
-      "js": ["node_modules/turndown/dist/turndown.js", "content.js"]
+      "js": ["lib/turndown.js", "content.js"]
     }
   ]
 }

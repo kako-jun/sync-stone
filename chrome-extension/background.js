@@ -1,4 +1,4 @@
-importScripts('node_modules/jszip/dist/jszip.min.js');
+importScripts('lib/jszip.min.js');
 
 // Function to generate a simple hash for unique filenames
 function generateHash(str) {

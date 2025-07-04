@@ -70,9 +70,11 @@ Il est recommandé d'ouvrir les fichiers Markdown exportés avec un éditeur de 
 *   **Modifications des spécifications de Lodestone**: Si la structure HTML ou les spécifications de The Lodestone changent, cette extension pourrait ne pas fonctionner correctement.
 *   **Conversion BBCode**: Le BBCode de Lodestone est récupéré sous forme de HTML converti, puis converti en Markdown par la bibliothèque Turndown. Les notations spéciales ou les mises en page complexes peuvent ne pas être parfaitement reproduites.
 
-<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120" style="margin-right: 20px;">
-  <div style="text-align:center;">
+<div style="text-align: right; margin-top: 20px;">
+  <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
+    <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120">
+  </div>
+  <div style="display: inline-block; vertical-align: middle;">
     <p style="margin:0; padding:0; font-size:1.2em;">Merci, FFXIV</p>
   </div>
 </div>

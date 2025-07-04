@@ -70,9 +70,11 @@ SyncStone은 'Stardustmemoir'이라는 이름으로, FINAL FANTASY XIV 관련 �
 *   **Lodestone 사양 변경**: Lodestone의 HTML 구조 또는 사양이 변경되면 이 확장 프로그램이 올바르게 작동하지 않을 수 있습니다.
 *   **BBCode 변환**: Lodestone의 BBCode는 변환된 HTML로 검색된 다음 Turndown 라이브러리에 의해 Markdown으로 변환됩니다. 특수 표기법이나 복잡한 레이아웃은 완벽하게 재현되지 않을 수 있습니다.
 
-<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120" style="margin-right: 20px;">
-  <div style="text-align:center;">
+<div style="text-align: right; margin-top: 20px;">
+  <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
+    <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120">
+  </div>
+  <div style="display: inline-block; vertical-align: middle;">
     <p style="margin:0; padding:0; font-size:1.2em;">고마워요, FFXIV</p>
   </div>
 </div>
