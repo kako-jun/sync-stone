@@ -1,0 +1,2376 @@
+https://jp.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/
+
+<html lang="ja" class="ja supports csstransforms3d no-touchevents" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"><head><meta charset="utf-8">
+
+<script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/e12fbea4/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script src="https://rec.ebis.ne.jp/rec.php?ebisV=6.17&amp;argument=n3xyJrCq&amp;referrer=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;pagetitle=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20XIV%2C%20The%20Lodestone&amp;pageurl=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ebisUA=Mozilla%2F5.0%20(Windows%20NT%2019.0.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F138.0.0.0%20Safari%2F537.36%20Edg%2F138.0.0.0&amp;lstd=1.196us98k4gb.1727327204&amp;ctd=1.196us98k4gb.1727327204&amp;td=196us98k4gb.1727327204&amp;ebisAccessTypes=pv&amp;ebisRand=1751602986640.0&amp;pids=&amp;js=cb" type="text/javascript" async=""></script><script type="text/javascript" async="" src="//taj1.ebis.ne.jp/n3xyJrCq/cmt.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=AW-836955280&amp;cx=c&amp;gtm=45He5710v812031932za200&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891~104908321~104908323"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=AW-992958796&amp;cx=c&amp;gtm=45He5710v812031932za200&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891~104908321~104908323"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-BNS0DNPBCS&amp;cx=c&amp;gtm=45He5710v812031932za200&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891~104908321~104908323"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-YQ42LCE4VJ&amp;cx=c&amp;gtm=45He5710v812031932za200&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891~104908321~104908323"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-TQ76JZP"></script><script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	(function() {
+		window.ldst_gtm_variable = {
+			'login': 'loginuser',
+			'theme':  'white'
+		};
+		
+			window.ldst_gtm_variable.mychara = 'mychara';
+		
+		
+	})();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TQ76JZP');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<title>Kako Jun 日記「歩み152. めっちゃマイナーなFFの本を紹介します」 | FINAL FANTASY XIV, The Lodestone</title>
+<meta name="description" content="Kako Junの日記「歩み152. めっちゃマイナーなFFの本を紹介します」ページです。">
+<meta name="keywords" content="FF14,FFXIV,Final Fantasy XIV,Final Fantasy 14,Lodestone,Players site,プレイヤーズサイト,ロードストーン,新生エオルゼア,A Realm Reborn,蒼天のイシュガルド,Heavensward,紅蓮のリベレーター,Stormblood,漆黒のヴィランズ,Shadowbringers,暁月のフィナーレ,Endwalker,黄金のレガシー,Dawntrail,MMORPG,オンラインゲーム">
+<meta name="author" content="SQUARE ENIX CO., LTD.">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="alternate" type="application/atom+xml" href="/lodestone/news/news.xml" title="ニュース | FINAL FANTASY XIV, The Lodestone">
+<link rel="alternate" type="application/atom+xml" href="/lodestone/news/topics.xml" title="トピックス | FINAL FANTASY XIV, The Lodestone">
+
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="https://lds-img.finalfantasyxiv.com/pc/global/images/favicon.ico?1720069015">
+<link rel="apple-touch-icon-precomposed" href="https://lds-img.finalfantasyxiv.com/h/0/U2uGfVX4GdZgU1jASO0m9h_xLg.png">
+<meta name="msapplication-TileImage" content="https://lds-img.finalfantasyxiv.com/h/0/U2uGfVX4GdZgU1jASO0m9h_xLg.png">
+
+<meta name="msapplication-TileColor" content="#000000">
+<link rel="alternate" hreflang="en-gb" href="https://eu.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">
+<link rel="alternate" hreflang="en-us" href="https://na.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">
+<link rel="alternate" hreflang="fr" href="https://fr.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">
+<link rel="alternate" hreflang="de" href="https://de.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">
+
+
+
+
+<link rel="amphtml" href="/lodestone/amp/character/39124727/blog/5075438">
+
+
+<!--[if lt IE 9]>
+	<script src="https://lds-img.finalfantasyxiv.com/h/I/SMlNRnAvuilc1lYKBpzKWpmADs.js"></script>
+
+<![endif]-->
+<!-- ** CSS ** -->
+
+<link href="https://lds-img.finalfantasyxiv.com/h/M/rH7Qt4UlHtk44BTrExqUZ4WCXg.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/-/tUrZCLFtMgzaHil2OXxbmdw2a0.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/N/3LUMH7_OeG7SzdazK8hUB6NNdY.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/j/JgAulXN0McN_xRNcKLLbnNh4fs.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/U/8CXzMYRfNQUo0ynnZiUfpQl26c.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/R/ZRK5y3At2tYcUMKEH5Ld_gFAMg.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/C/JM_Pg2qu2G2DsgdJf9jLZF2uM8.css" rel="stylesheet">
+<link href="https://lds-img.finalfantasyxiv.com/h/L/wO6tEYoqzr48YFT-0KS4ub-r1Y.css" rel="stylesheet">
+
+<link href="https://lds-img.finalfantasyxiv.com/h/e/Bscq1lIEfao6cP1TMAGrA40TVM.css" rel="stylesheet">
+	
+	<link href="https://lds-img.finalfantasyxiv.com/h/6/RRBV4sWwfc2TC-LzEQ-Awz46uk.css" rel="stylesheet" class="sys_theme_css" data-theme_white="https://lds-img.finalfantasyxiv.com/h/6/RRBV4sWwfc2TC-LzEQ-Awz46uk.css" data-theme_black="https://lds-img.finalfantasyxiv.com/h/H/exJ_ftIQH6iSxjY9YdSFEIPgQk.css">
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ogp -->
+<meta property="fb:app_id" content="">
+<meta property="og:type" content="blog">
+<meta property="og:description" content="Kako Junの日記「歩み152. めっちゃマイナーなFFの本を紹介します」ページです。">
+<meta property="og:title" content="Kako Jun 日記「歩み152. めっちゃマイナーなFFの本を紹介します」 | FINAL FANTASY XIV, The Lodestone">
+<meta property="og:url" content="https://jp.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">
+<meta property="og:site_name" content="FINAL FANTASY XIV, The Lodestone">
+<meta property="og:locale" content="ja_JP">
+
+	<meta property="og:image" content="https://lds-img.finalfantasyxiv.com/h/B/y8FVep6qdB_JEGEpnUDEbYnMgM.png">
+
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+	<meta name="twitter:site" content="@ff_xiv_jp">
+
+
+
+
+<script>
+	var base_domain = 'finalfantasyxiv.com';
+	var ldst_subdomain = 'jp';
+	var ldst_subdomain_suffix = '';
+	var strftime_fmt = {
+		'dateHHMM_now': '本日 %\u002dH:%M',
+		'dateYMDHMS': '%Y/%m/%d %H:%M:%S',
+		'dateYMDHM': '%Y/%m/%d %H:%M',
+		'dateYMDHM_jp': '%Y/%m/%d %H:%M',
+		'dateHM': '%H:%M',
+		'dateYMDH': '%Y/%m/%d %H',
+		'dateYMD': '%Y/%m/%d',
+		'dateEternal': '%Y年%m月%d日',
+		'dateYMDW': '%Y/%m/%d(%a)',
+		'dateHM': '%H:%M',
+		'week.0': '日',
+		'week.1': '月',
+		'week.2': '火',
+		'week.3': '水',
+		'week.4': '木',
+		'week.5': '金',
+		'week.6': '土'
+	};
+	var base_uri   = '/lodestone/';
+	var api_uri    = '/lodestone/api/';
+	var static_uri = 'https://lds\u002dimg.finalfantasyxiv.com/';
+	var subdomain  = 'jp';
+	var csrf_token = 'a5da37fec492d4afd38a652bab2865d61050cd13';
+	var cis_origin = 'https://secure.square\u002denix.com';
+	var ldst_max_image_size = 31457280;
+	var eorzeadb = {
+		cdn_prefix: 'https://lds\u002dimg.finalfantasyxiv.com/',
+		version: '1750142301',
+		version_js_uri:  'https://lds-img.finalfantasyxiv.com/pc/global/js/eorzeadb/version.js',
+		dynamic_tooltip: false
+	};
+	var cookie_suffix = '';
+	var ldst_is_loggedin = true;
+	var show_achievement = true;
+</script>
+<script src="https://lds-img.finalfantasyxiv.com/h/A/PknAmzDJUZCNhTGtSGGMIGi5k4.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/M/as_JV_jXpV9QkpR7VCqWjQTQDc.js"></script>
+
+
+	
+
+
+
+	
+
+
+
+<script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/992958796/?random=1751602986462&amp;cv=11&amp;fst=1751602986462&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be5710z8812031932za200zb812031932&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891&amp;u_w=2560&amp;u_h=1440&amp;url=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ref=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20&amp;npa=0&amp;pscdl=noapi&amp;auid=2086524027.1751598980&amp;uaa=x86&amp;uab=64&amp;uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.50%7CMicrosoft%2520Edge%3B138.0.3351.55&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/992958796/?random=1751602986472&amp;cv=11&amp;fst=1751602986472&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be5710z8812031932za200zb812031932&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891&amp;u_w=2560&amp;u_h=1440&amp;url=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ref=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20&amp;npa=0&amp;pscdl=noapi&amp;auid=2086524027.1751598980&amp;uaa=x86&amp;uab=64&amp;uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.50%7CMicrosoft%2520Edge%3B138.0.3351.55&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;_tu=Cg&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/836955280/?random=1751602986500&amp;cv=11&amp;fst=1751602986500&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be5710v9194427670z8812031932za200zb812031932&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891&amp;u_w=2560&amp;u_h=1440&amp;url=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ref=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20&amp;npa=0&amp;pscdl=noapi&amp;auid=2086524027.1751598980&amp;uaa=x86&amp;uab=64&amp;uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.50%7CMicrosoft%2520Edge%3B138.0.3351.55&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config&amp;rfmt=3&amp;fmt=4"></script><script type="text/javascript" src="https://b99.yahoo.co.jp/pagead/conversion_async.js"></script></head>
+<body class=" lang_jp">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQ76JZP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+
+<div class="brand"><div class="brand__section">
+	<div class="brand__logo">
+		<a href="
+				http://www.jp.square-enix.com/
+			" target="_blank" rel=" noopener"><img src="https://lds-img.finalfantasyxiv.com/h/a/1LbK-2Cqoku3zorQFR0VQ6jP0Y.png" width="130" height="14" alt="SQUARE ENIX">
+		</a>
+	</div>
+
+	
+		<div class="brand__search">
+			<form action="/lodestone/community/search/" class="brand__search__form">
+				<div class="brand__search__focus_bg"></div>
+				<div class="brand__search__base_bg"></div>
+				<input type="text" id="txt_search" class="brand__search--text" name="q" placeholder="キーワード検索">
+				<input type="submit" id="bt_search" class="brand__search--btn" value="">
+			</form>
+		</div>
+	
+
+	
+		<div class="brand__theme sys_theme_switcher">
+			<a href="javascript:void(0);"><i class="brand__theme--white sys_theme active js__tooltip" data-tooltip="スキン（黒）" data-theme="white"></i></a>
+			<a href="javascript:void(0);"><i class="brand__theme--black sys_theme js__tooltip" data-tooltip="スキン（白）" data-theme="black"></i></a>
+		</div>
+	
+
+	<div class="brand__lang dropdown_trigger_box">
+		<a href="javascript:void(0);" class="brand__lang__btn dropdown_trigger">日本語</a>
+		<ul class="brand__lang__select dropdown" style="opacity: 0;">
+		
+			<li><a href="https://jp.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">日本語</a></li>
+		
+			<li><a href="https://eu.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">English (UK)</a></li>
+		
+			<li><a href="https://na.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">English (US)</a></li>
+		
+			<li><a href="https://fr.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">Français</a></li>
+		
+			<li><a href="https://de.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/">Deutsch</a></li>
+		
+		</ul>
+	</div>
+
+
+	
+</div></div>
+
+
+	
+		
+<header class="l__header">
+	<div class="l__header__inner l__header__bg_image" style="background-image: url(https://lds-img.finalfantasyxiv.com/banner/1442/headerImage_7_2_ja.jpg);">
+		<a href="/lodestone/" class="l__header__link_top"></a>
+
+		<a href="/lodestone/topics/detail/272e3ae76b2663ef84b4d5833441597813e29d75/?utm_source=lodestone&amp;utm_medium=pc_header&amp;utm_campaign=jp_7_2patch	" class="l__header__link_management"></a>
+
+		
+		<div class="head-my-character__box"><div class="head-my-character">
+			<div class="head-my-character__face">
+				<a href="/lodestone/my/"><img src="https://img2.finalfantasyxiv.com/f/725dbef5c489c3021aa65b39d2ed2607_2f698530a28d671d20278c8518c804c9fc0.jpg?1751600041" width="50" height="50" alt=""></a>
+				
+			</div>
+			<div class="head-my-character__info">
+				<div class="head-my-character__detail">
+					<span class="head-my-character__name clearfix">Kako Jun</span>
+					
+					<span class="head-my-character__fc_name">BlackAnasy</span>
+				</div>
+				<span class="head-my-character__worldstatus state_sign--1">
+					<i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima
+				</span>
+			</div>
+			<div class="my-character-menu">
+				<ul class="clearfix">
+					<li class="my-character-menu__tab active">
+						<div class="my-character-menu__tab__button">
+							<span>マイメニュー</span>
+						</div>
+					</li>
+					<li class="my-character-menu__tab sys-my-character-menu__tab-switch">
+						<div class="my-character-menu__tab__button">
+							<span>キャラクター切替</span>
+						</div>
+					</li>
+				</ul>
+				<div class="my-menu clearfix">
+					<ul class="my-menu__colmun">
+						<li>
+							<a href="/lodestone/my/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_mypage');">マイページ</a>
+							<a href="/lodestone/character/39124727/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_mychr');">マイキャラクター</a>
+						</li>
+						<li>
+							<a href="/lodestone/character/39124727/blog/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_myblog');">日記</a>
+							<a href="/lodestone/character/39124727/event/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_myevent');">イベント</a>
+							<a href="/lodestone/character/39124727/achievement/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_myachievement');">アチーブメント</a>
+						</li>
+						<li>
+							
+								<a href="/lodestone/freecompany/9229564486342542946/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_myfc');">フリーカンパニー</a>
+							
+							
+							
+								<a href="/lodestone/my/crossworld_linkshell/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_mycwls');">CWLS</a>
+							
+							
+							<a href="/lodestone/character/39124727/friend/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_myfriend');">フレンド</a>
+							<a href="/lodestone/character/39124727/following/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_myfollowing');">フォロー</a>
+						</li>
+						<li class="link_logout bt_logout">
+							<a href="javascript:void(0)" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_logout');">ログアウト</a>
+						</li>
+					</ul>
+					<ul class="my-menu__colmun">
+						<li>
+							<a href="/lodestone/my/setting/account/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_chr_account');">公開範囲設定</a>
+							<a href="/lodestone/my/setting/block/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_block');">ブロックリスト</a>
+							
+								<a href="/lodestone/my/image/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_imgs');">画像管理</a>
+								<a href="/lodestone/my/setting/social/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_mymenu', 'ja_sns');">ソーシャルサービス連携</a>
+							
+						</li>
+					</ul>
+				</div>
+				<div class="select-character">
+					<img src="https://lds-img.finalfantasyxiv.com/h/4/4B8oEWBJPSsBksuYuyKeGt0nic.gif" width="24" height="24" alt="" class="select-character__loading">
+				</div>
+				<form action="/lodestone/api/account/select_character/" method="POST" class="select_character_api_xhr_form" onsubmit="return false;">
+<input type="hidden" name="csrf_token" value="a5da37fec492d4afd38a652bab2865d61050cd13">
+					<input type="hidden" name="character_id" value="">
+
+
+	<span class="error_message_common txt_warning hide"></span>
+
+
+</form>
+
+			</div>
+		</div></div>
+
+	</div>
+</header>
+
+	
+
+	
+		
+
+	
+
+
+
+<div class="global-nav">
+	<nav class="main-nav jp">
+		<ul class="main-nav__area main-nav__area__ clearfix ">
+			<li class="main-nav__news main-nav__item">
+				<a href="/lodestone/news/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_main-menu', 'ja_news-top');"><span>ニュース</span></a>
+				<nav class="sub-nav">
+					<div class="sub-nav__area ">
+
+						
+						<div class="sub-nav__list sub-nav__news">
+							<div class="sub-nav__list__inner">
+								<ul class="sub-nav__news__icon">
+									<li>
+										<a href="/lodestone/news/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_top');"><div>
+											<img src="https://lds-img.finalfantasyxiv.com/h/8/2GwuzUcvqLa-hgQeLUyd8xarI8.png" width="32" height="32" alt="最新ニュース">
+											最新ニュース
+										</div></a>
+									</li>
+									<li>
+										<a href="/lodestone/topics/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_topics');"><div>
+											<img src="https://lds-img.finalfantasyxiv.com/h/5/67ZyAIzQUaYoWBmyvFwNvGmCnQ.png" width="32" height="32" alt="トピックス">
+											トピックス
+										</div></a>
+									</li>
+									<li>
+										<a href="/lodestone/news/category/1" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_notices');"><div>
+											<img src="https://lds-img.finalfantasyxiv.com/h/-/Y5JdwnEWYfyO7OlH27eKIm91Ok.png" width="32" height="32" alt="お知らせ">
+											お知らせ
+										</div></a>
+									</li>
+									<li>
+										<a href="/lodestone/news/category/2" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_maintenance');"><div>
+											<img src="https://lds-img.finalfantasyxiv.com/h/s/-JfULvMAf26L7AaU1OGaGYwanI.png" width="32" height="32" alt="メンテナンス">
+											メンテナンス
+										</div></a>
+									</li>
+									<li>
+										<a href="/lodestone/news/category/3" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_updates');"><div>
+											<img src="https://lds-img.finalfantasyxiv.com/h/p/HPudyOQcwdv97RBwj3FQC552ps.png" width="32" height="32" alt="アップデート">
+											アップデート
+										</div></a>
+									</li>
+									<li>
+										<a href="/lodestone/news/category/4" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_Status');"><div>
+											<img src="https://lds-img.finalfantasyxiv.com/h/S/-IC2xIQhTl2ymYW7deE1fOII04.png" width="32" height="32" alt="障害情報">
+											障害情報
+										</div></a>
+									</li>
+								</ul>
+								<ul class="sub-nav__news__text">
+									<li><a href="/lodestone/special/patchnote_log/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_patch-notes_special-sites');"><div>
+										パッチノート＆パッチ特設サイト一覧
+										<span class="update">
+											<span id="datetime-6b6bda42b02">2025/05/27</span><script>document.getElementById('datetime-6b6bda42b02').innerHTML = ldst_strftime(1748332800, 'YMD');</script> Updated
+										</span>
+									</div></a></li>
+									<li><a href="/lodestone/special/update_log/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_lodestone-update-notes');"><div>
+										<span class="sub_text">公式プレイヤーズサイト</span>
+										Lodestone更新情報
+										<span class="update">
+											<span id="datetime-45a1bb6ad27">2025/05/27</span><script>document.getElementById('datetime-45a1bb6ad27').innerHTML = ldst_strftime(1748332800, 'YMD');</script> Updated
+										</span>
+									</div></a></li>
+									<li><a href="/lodestone/worldstatus/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_news_server-status');"><div>
+										ワールド稼働状況
+									</div></a></li>
+								</ul>
+							</div>
+						</div>
+
+
+					</div>
+				</nav>
+
+			</li>
+			<li class="main-nav__promotion main-nav__item">
+				<a href="/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_main-menu', 'ja_begin-ff14-top');"><span>FFXIVを始める</span></a>
+				<nav class="sub-nav ">
+					<div class="sub-nav__area ">
+
+						
+						<div class="sub-nav__list sub-nav__promotion">
+							<div class="sub-nav__list__inner">
+								<div class="sub-nav__promotion__inner">
+									<div class="sub-nav__promotion__link">
+										<div class="sub-nav__promotion__top">
+											<a href="/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_begin-ff14_pr');"><img src="https://lds-img.finalfantasyxiv.com/h/w/sxx2IhwyClmVCm5weOach6sQeM.jpg" width="632" height="140" alt="ファイナルファンタジーXIV: 新生エオルゼア"></a>
+										</div>
+										<ul class="sub-nav__promotion__page">
+											<li><a href="/benchmark/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_begin-ff14_benchmark');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/x/yLkmDjeDW9cU_l1mWtbQUnVIhs.png" width="64" height="40" alt="ベンチマーク">
+												<span>ベンチマーク</span>
+											</a></li>
+											<li><a href="
+												
+													https://www.finalfantasyxiv.com/freetrial/?utm_source=lodestone_lo&amp;utm_medium=pc_gmenu&amp;utm_campaign=jp_freetrial
+												" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_begin-ff14_freetrial');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/c/tWvZpXDc_g6yQd5YKK2k5jhuns.png" width="64" height="40" alt="無料体験プレイ">
+												<span>無料体験プレイ</span>
+											</a></li>
+											<li><a href="/product/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_begin-ff14_product');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/m/NCNLGrn3U9M85ky-NscraujvN8.png" width="64" height="40" alt="商品情報">
+												<span>商品情報</span>
+											</a></li>
+											<li><a href="/winning/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_begin-ff14_awards');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/j/udWU20sWmhYoEsQ_FtrAzVwJ3Q.png" width="64" height="40" alt="受賞・ノミネート歴">
+												<span>受賞・ノミネート歴</span>
+											</a></li>
+										</ul>
+									</div>
+									<div class="sub-nav__promotion__patch_site">
+										<a href="/dawntrail/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_begin-ff14_latest-expansion');"><span>
+											<img src="https://lds-img.finalfantasyxiv.com/h/a/3vbighaFf1Fjdbb7xzY-motFyA.png" width="296" height="232" alt="黄金のレガシー 特設サイト">
+										</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</nav>
+			</li>
+			<li class="main-nav__playguide main-nav__item">
+				<a href="/lodestone/playguide/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_main-menu', 'ja_playguide-top');"><span>プレイガイド</span></a>
+				<nav class="sub-nav ">
+					<div class="sub-nav__area ">
+
+						
+						<div class="sub-nav__list sub-nav__playguide">
+							<div class="sub-nav__list__inner">
+								<ul class="sub-nav__playguide__list">
+									<li><a href="/lodestone/playguide/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_playguide_playguide-top');">
+										<img src="https://lds-img.finalfantasyxiv.com/h/P/Lfl3LVb9KMPa5Ye8yxftZkelbc.png" width="40" height="40" alt="プレイガイド<br />トップ">
+										<span>プレイガイド<br>トップ</span>
+									</a></li>
+									<li><a href="/lodestone/playguide/#game_playguide" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_playguide_game-playguide');">
+										<img src="https://lds-img.finalfantasyxiv.com/h/q/qy4dUGMNkjoyVqPweYMIpOApik.png" width="40" height="40" alt="ゲームプレイガイド<br />初心者ガイド">
+										<span>ゲームプレイガイド<br>初心者ガイド</span>
+										<span class="update">
+											<span id="datetime-260eb1a4a4b">2025/05/27</span><script>document.getElementById('datetime-260eb1a4a4b').innerHTML = ldst_strftime(1748332800, 'YMD');</script> Updated
+										</span>
+									</a></li>
+									<li><a href="/lodestone/playguide/db/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_playguide_databese');">
+										<img src="https://lds-img.finalfantasyxiv.com/h/N/OYPWhQVCkovUbVcMMck0O4HABU.png" width="40" height="40" alt="エオルゼアデータベース">
+										<span>エオルゼア<br>データベース</span>
+										<span class="update">
+											<span id="datetime-8de0a8d3e26">2025/05/27</span><script>document.getElementById('datetime-8de0a8d3e26').innerHTML = ldst_strftime(1748332800, 'YMD');</script> Updated
+										</span>
+									</a></li>
+									<li><a href="/lodestone/playguide/#content_guide" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_playguide_contents-guide');">
+										<img src="https://lds-img.finalfantasyxiv.com/h/W/wlHP1NMpdQHcPKUG-swlv71fhE.png" width="40" height="40" alt="ゲームコンテンツガイド">
+										<span>ゲームコンテンツ<br>ガイド</span>
+										<span class="update">
+											<span id="datetime-8d23c65128d">2025/05/27</span><script>document.getElementById('datetime-8d23c65128d').innerHTML = ldst_strftime(1748332800, 'YMD');</script> Updated
+										</span>
+									</a></li>
+									<li><a href="/lodestone/playguide/#side_storyes" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_playguide_side-story');">
+										<img src="https://lds-img.finalfantasyxiv.com/h/Z/1QWgBsVU7ZboWyMZlRjCQcDRJg.png" width="40" height="40" alt="世界設定<br />サイドストーリー">
+										<span>世界設定<br>サイドストーリー</span>
+										<span class="update">
+											<span id="datetime-b24ced0a868">2024/12/20</span><script>document.getElementById('datetime-b24ced0a868').innerHTML = ldst_strftime(1734681600, 'YMD');</script> Updated
+										</span>
+									</a></li>
+									<li><a href="/lodestone/playguide/#option_service" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_playguide_option-service');">
+										<img src="https://lds-img.finalfantasyxiv.com/h/K/4fXwcEoJzDEmFRt-tD7PeeKvjE.png" width="40" height="40" alt="オプションサービス">
+										<span>オプションサービス</span>
+									</a></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</nav>
+
+			</li>
+			<li class="main-nav__community main-nav__item">
+				<a href="/lodestone/community/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_main-menu', 'ja_community-top');"><span>コミュニティ</span></a>
+				<nav class="sub-nav">
+					<div class="sub-nav__area">
+
+						
+						<div class="sub-nav__list sub-nav__community">
+							<div class="sub-nav__list__inner sub-nav__community__flex">
+								<div class="sub-nav__community__link">
+									<div class="sub-nav__community__top">
+										<div class="sub-nav__community__top__wrapper">
+											<h2 class="sub-nav__community__title"><img src="https://lds-img.finalfantasyxiv.com/h/q/GiEpnP3oCXluFjrlPlM-mgIbS8.png" width="16" height="16" alt="コミュニティ">コミュニティ</h2>
+											<ul class="sub-nav__community__list">
+												<li><a href="/lodestone/community/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_community-top');">
+													<img src="https://lds-img.finalfantasyxiv.com/h/i/Sa5YF2-VFf4IJ1cjjFAbPf4GWg.png" width="40" height="40" alt="コミュニティ<br />ウォール">
+													<span>コミュニティ<br>ウォール</span>
+												</a></li>
+												<li><a href="/lodestone/blog/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_blog');">
+													<img src="https://lds-img.finalfantasyxiv.com/h/h/6gPbLbzUQ_omC_mdXFUA3zPy7I.png" width="40" height="40" alt="日記">
+													<span>日記</span>
+												</a></li>
+											</ul>
+										</div>
+										<div class="sub-nav__community__top__wrapper">
+											<h2 class="sub-nav__community__title"><img src="https://lds-img.finalfantasyxiv.com/h/d/in_Sbc6SzxLU--Npa7URI-_kdg.png" width="16" height="16" alt="募集">募集</h2>
+											<ul class="sub-nav__community__list">
+												<li><a href="/lodestone/community_finder/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_community-finder');">
+													<img src="https://lds-img.finalfantasyxiv.com/h/V/kHxwEjpY-Fme83ta8VIfi1kyLU.png" width="40" height="40" alt="コミュニティ<br />ファインダー">
+													<span>コミュニティ<br>ファインダー</span>
+												</a></li>
+												<li><a href="/lodestone/event/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_event-party');">
+													<img src="https://lds-img.finalfantasyxiv.com/h/0/k5jD6-BJZHwKA2CtbNcDYZR6oY.png" width="40" height="40" alt="イベント＆パーティ募集">
+													<span>イベント＆<br>パーティ募集</span>
+												</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="sub-nav__community__search">
+										<h2 class="sub-nav__community__title"><img src="https://lds-img.finalfantasyxiv.com/h/X/uQVT3DEl1xlFWHu3UZU4-RBtVk.png" width="16" height="16" alt="検索">検索</h2>
+										<ul class="sub-nav__community__list sub-nav__community__search__list">
+											<li><a href="/lodestone/character/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_chara-search');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/5/YcEF3K-5SgqU0BxZtT0D1Zsa2A.png" width="40" height="40" alt="キャラクター検索">
+												<span>キャラクター検索</span>
+											</a></li>
+											<li><a href="/lodestone/linkshell/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_ls-search');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/b/SPCgcBAk4HvMngGzk6H4MfSINg.png" width="40" height="40" alt="リンクシェル検索">
+												<span>リンクシェル検索</span>
+											</a></li>
+											<li><a href="/lodestone/crossworld_linkshell/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_cwls-search');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/L/NUGcPcy-C8jvx6oKgEXgwJ1ePE.png" width="40" height="40" alt="CWLS検索">
+												<span>CWLS検索</span>
+											</a></li>
+											<li><a href="/lodestone/freecompany/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_fc-search');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/q/GJ-lsgAtsCCDwCm9te3a5sCjpU.png" width="40" height="40" alt="フリーカンパニー検索">
+												<span>フリーカンパニー検索</span>
+											</a></li>
+											<li><a href="/lodestone/pvpteam/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_pvp-team-search');">
+												<img src="https://lds-img.finalfantasyxiv.com/h/K/vZf_pjL1HRJCDF9mxKFKb8iISc.png" width="40" height="40" alt="PvPチーム検索">
+												<span>PvPチーム検索</span>
+											</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="sub-nav__community__side">
+									<div class="sub-nav__community__forum">
+										<ul class="sub-nav__community__forum__list">
+											<li><a href="https://forum.square-enix.com/ffxiv/forum.php" target="_blank" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_forum');" rel=" noopener">
+												<div class="forum">
+													<i><img src="https://lds-img.finalfantasyxiv.com/h/r/maZ-sHaqn4PMFANUlbH4GzztFM.png" width="40" height="40" alt="フォーラム">
+													</i><span>フォーラム</span>
+												</div>
+											</a></li>
+											<li><a href="https://forum.square-enix.com/ffxiv/search.php?do=getdaily_ll&amp;contenttype=vBForum_Post" target="_blank" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_forum-new-posts');" rel=" noopener">
+												<div>
+													<i><img src="https://lds-img.finalfantasyxiv.com/h/p/hIKumMfCocoSfxWeUUUIL78Jhg.png" width="16" height="16" alt="">
+													</i><span>新着</span>
+												</div>
+											</a></li>
+											<li><a href="
+													
+														https://forum.square-enix.com/ffxiv/search.php?do=process&amp;search_type=1&amp;contenttypeid=1&amp;devtrack=1&amp;starteronly=0&amp;showposts=1&amp;childforums=1&amp;forumchoice[]=512
+													" target="_blank" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_forum-dev-tracker');" rel=" noopener">
+												<div>
+													<i><img src="https://lds-img.finalfantasyxiv.com/h/p/hIKumMfCocoSfxWeUUUIL78Jhg.png" width="16" height="16" alt="">
+													</i><span>Dev Tracker</span>
+												</div>
+											</a></li>
+										</ul>
+									</div>
+									<ul class="sub-nav__community__fankit">
+										<li><a href="/lodestone/special/fankit/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_community_fankit');">
+											<div>
+												<span>ファンキット</span>
+												<span class="update">
+													<span id="datetime-2c2372ee5ff">2025/03/25</span><script>document.getElementById('datetime-2c2372ee5ff').innerHTML = ldst_strftime(1742889600, 'YMD');</script> Updated
+												</span>
+											</div>
+										</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</nav>
+
+			</li>
+			<li class="main-nav__ranking main-nav__item">
+				<a href="/lodestone/ranking/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_main-menu', 'ja_ranking-top');"><span>ランキング</span></a>
+					<nav class="sub-nav ">
+						<div class="sub-nav__area ">
+
+							
+							<div class="sub-nav__list sub-nav__ranking">
+								<div class="sub-nav__list__inner">
+									<ul class="sub-nav__ranking__list">
+										<li><a href="/lodestone/ranking/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_ranking-top');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/E/NtymEFiUJfAh25ffTrADsVFkLQ.png" width="40" height="40" alt="ランキングトップ">
+											<span>ランキングトップ</span>
+										</a></li>
+										<li><a href="/lodestone/ranking/crystallineconflict/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_feast');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/K/vZf_pjL1HRJCDF9mxKFKb8iISc.png" width="40" height="40" alt="クリスタルコンフリクト ランキング">
+											<span>クリスタルコンフリクト ランキング</span>
+										</a></li>
+										<li><a href="/lodestone/ranking/gc/weekly/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_gc');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/o/uRmujlTx4X_5c6wETNxssK1d_4.png" width="40" height="40" alt="グランドカンパニー<br />ランキング">
+											<span>グランドカンパニー<br>ランキング</span>
+										</a></li>
+										<li><a href="/lodestone/ranking/fc/weekly/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_fc');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/q/GJ-lsgAtsCCDwCm9te3a5sCjpU.png" width="40" height="40" alt="フリーカンパニー<br />ランキング">
+											<span>フリーカンパニー<br>ランキング</span>
+										</a></li>
+									</ul>
+									<ul class="sub-nav__ranking__list">
+										<li><a href="/lodestone/ranking/frontline/weekly/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_frontline');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/K/vZf_pjL1HRJCDF9mxKFKb8iISc.png" width="40" height="40" alt="フロントライン<br />ランキング">
+											<span>フロントライン<br>ランキング</span>
+										</a></li>
+										<li><a href="/lodestone/ranking/deepdungeon3/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_deepdungeon3');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/_/qP22LgUoAFKDTRayb_TEYu6d7g.png" width="40" height="40" alt="オルト・エウレカ ランキング">
+											<span>オルト・エウレカ ランキング</span>
+										</a></li>
+										<li><a href="/lodestone/ranking/deepdungeon2/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_deepdungeon2');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/_/qP22LgUoAFKDTRayb_TEYu6d7g.png" width="40" height="40" alt="アメノミハシラ<br />ランキング">
+											<span>アメノミハシラ<br>ランキング</span>
+										</a></li>
+										<li><a href="/lodestone/ranking/deepdungeon/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_ranking_deepdungeon');">
+											<img src="https://lds-img.finalfantasyxiv.com/h/p/op9iPrlMmYgTK3Q6NQKifyQOGA.png" width="40" height="40" alt="死者の宮殿<br />ランキング">
+											<span>死者の宮殿<br>ランキング</span>
+										</a></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</nav>
+
+			</li>
+			<li class="main-nav__help main-nav__item">
+				<a href="/lodestone/help/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_main-menu', 'ja_help-support-top');"><span>ヘルプ＆サポート</span></a>
+				<nav class="sub-nav ">
+					<div class="sub-nav__area ">
+
+						
+						<div class="sub-nav__list sub-nav__help">
+							<div class="sub-nav__list__inner">
+								<ul class="sub-nav__help__list">
+									<li><a href="/lodestone/help/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_help-support-top');">
+										<span>ヘルプ＆サポートトップ</span>
+									</a></li>
+									<li><a href="/lodestone/help/about_the_lodestone/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_about-lodestone');">
+										<span>サイトのご利用について</span>
+									</a></li>
+									<li><a href="
+										
+											https://support.jp.square-enix.com/faq.php?id=5381&amp;la=0
+										" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_faq');">
+										<span>よくあるご質問</span>
+									</a></li>
+									<li><a href="
+										
+											https://www.jp.square-enix.com/account/
+										" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_sqex-account');">
+										<span>スクウェア・エニックス アカウントについて</span>
+									</a></li>
+								</ul>
+								<ul class="sub-nav__help__other">
+									<li><a href="
+										
+											https://support.jp.square-enix.com/rule.php?id=5381&amp;la=0
+										" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_rule-policies');">
+										<div>
+											<i><img src="https://lds-img.finalfantasyxiv.com/h/p/hIKumMfCocoSfxWeUUUIL78Jhg.png" width="16" height="16" alt="">
+											</i><span>ルール＆ポリシー</span>
+										</div>
+									</a></li>
+									<li><a href="
+										
+											https://support.jp.square-enix.com/main.php?id=5381&amp;la=0
+										" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_customer-service');">
+										<div>
+											<i><img src="https://lds-img.finalfantasyxiv.com/h/p/hIKumMfCocoSfxWeUUUIL78Jhg.png" width="16" height="16" alt="">
+											</i><span>お問い合わせ</span>
+										</div>
+									</a></li>
+									<li><a href="https://secure.square-enix.com/account/app/svc/mogstation/" target="_blank" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_sub-menu', 'ja_help-support_mogstation');" rel=" noopener">
+										<div>
+											<i class="ic_mogst"><img src="https://lds-img.finalfantasyxiv.com/h/S/6IKp0hN6xQqTYPgnPIsd2fjzSI.png" width="32" height="32" alt="">
+											</i><span>モグステーション</span>
+										</div>
+									</a></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</nav>
+
+			</li>
+		</ul>
+	</nav>
+</div>
+
+	
+
+
+<div class="ldst__bg">
+	
+		<div id="breadcrumb">
+			<ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="clearfix">
+				<li class="breadcrumb__home" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+					<a href="/lodestone/" itemprop="item"><span itemprop="name">HOME</span></a>
+					<meta itemprop="position" content="1">
+				</li>
+				
+				
+					
+					
+					
+						<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+							<a href="/lodestone/my/" itemprop="item" class="breadcrumb__link"><span itemprop="name">マイページ</span></a>
+							<meta itemprop="position" content="2">
+						</li>
+					
+				
+					
+					
+					
+						<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+							<a href="/lodestone/character/39124727/blog/" itemprop="item" class="breadcrumb__link"><span itemprop="name">日記</span></a>
+							<meta itemprop="position" content="3">
+						</li>
+					
+				
+					
+					
+					
+						<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+							<span itemprop="name">歩み152. めっちゃマイナーなFFの本を紹介します</span>
+							<meta itemprop="position" content="4">
+						</li>
+					
+				
+			</ul>
+		</div>
+	
+
+	<h1 class="heading__title">日記</h1>
+
+	
+
+	<div class="ldst__contents clearfix">
+	
+		<div class="ldst__main">
+
+
+
+
+
+
+<div class="ldst__window">
+
+	
+		<h2 class="heading--lg">Kako Junの日記</h2>
+	
+
+	<div class="entry__blog">
+		<div class="entry__blog__view
+			
+				
+					 entry__blog__view--black
+				
+			
+			
+			 clearfix">
+			<div class="entry__blog__header clearfix"><time><span id="datetime-e288540ddc9">2022/08/10 16:40</span><script>document.getElementById('datetime-e288540ddc9').innerHTML = ldst_strftime(1660117200, 'YMDHM');</script></time><ul><li class="entry__blog__header__rich-mode js__tooltip" data-tooltip="リッチテキスト"><i class="icon-list__rich-mode"></i></li><li class="entry__blog__header__views js__tooltip" data-tooltip="日記閲覧数"><i class="icon-list__views"></i><span>513</span></li><li class="entry__blog__header__comment js__tooltip" data-tooltip="コメント数"><i class="icon-list__comment_16"></i><span>4</span></li></ul></div><div class="entry__blog__box clearfix"><div class="entry__blog__box__area"><h2 class="entry__blog__title">歩み152. めっちゃマイナーなFFの本を紹介します</h2><div class="entry__blog__tag"><i class="icon-list__tag"></i><ul><li><a href="/lodestone/character/39124727/blog/?tag=%E3%83%97%E3%83%AC%E3%82%A4%E6%97%A5%E8%A8%98">[プレイ日記]</a></li><li><a href="/lodestone/character/39124727/blog/?tag=%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E6%AD%93%E8%BF%8E">[コメント歓迎]</a></li><li><a href="/lodestone/character/39124727/blog/?tag=%E5%88%9D%E5%BF%83%E8%80%85">[初心者]</a></li></ul></div><div class="entry__blog__status--open">公開</div></div></div>
+		</div>
+	</div>
+
+	<div class="blog__area
+		
+			 blog__area--black
+		
+	">
+
+		
+
+		<div class="txt_selfintroduction"><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/85/71/85717524b27ffe9af0249b35a991ad8cb643a63e.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/85/71/85717524b27ffe9af0249b35a991ad8cb643a63e_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/85/71/85717524b27ffe9af0249b35a991ad8cb643a63e.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>バルデシオン分館で懐かしいBGMを聴いたせいで<br>過去視が発動し<br><br>ノスタルジーな気分になったので<br><br>FFとの出会いについて<br>書きたくなりました<br><br><br>私の1番好きなFFは5で<br><br>12を遊んだ後は<br><br>オキューリアみたいな上位の存在って好きだし<br>アルシドのキャラが好きだし<br>シドとバルフレアの最後の会話が好きだし<br><br>12がFFで1番じゃね……？<br>って思ってて<br><br>FF14のメインを終えた時<br>それを超えるかが楽しみです<br><br><br>評価の低いFF13やFF15はけっこう好きで<br><br>評価が1位というFF10が<br>それほど好きではありません<br><br><br>FF13の1本道なところがダメなのならば<br>FF10の時になぜ文句を言わなかった<br><br>って矛盾を感じるし<br><br>裏ボス用のダンジョンが無いとか<br>飛空挺が瞬間移動とか<br>手抜きを感じるからです<br><br>FF8はエスタとか、食べるとか<br>SaGaっぽいところが好きで<br><br>FF7との魅力の差は<br>派生作品の数の差ほど大きくない、という感覚です<br><br><br>たぶん<br>日本で生まれ育った学生、大人は<br>自然にFFと出会ったと予想します<br><br>広告で最新のナンバリングに興味を持つとか<br>友達経由で知るとか<br><br>リメイクで知って<br>過去作も遊びたくなるとか……<br><br><br>FF14を遊びながら<br>それ以外のFF本編13作品（11以外）を遊ぶのは<br><br>むちゃくちゃ大変なので<br><br>たぶん、FF14をオマージュ部分まで含めて<br>楽しんでるプレイヤーは、とっくに過去作を遊び終わってるはずで<br><br>コンプリートに必要な時間を考えると<br>10才代は少ないはずです<br><br><br>私のケースでも<br>FF1から時系列順に遊んだわけではありません<br><br>なぜFF5に思い入れがあるかというと<br><br>FF5は傑作なのに、日本以外では<br>自分から能動的に探さないと、一生知らないままで終わる<br>というギャップのあるタイトルだからです<br><br><br>FF5を英語で遊べるようになったのは<br>FF7をきっかけに、日本以外でもFFが有名になった後<br>だと記憶してます<br><br>ここに3冊の本があります<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/85/71/85717524b27ffe9af0249b35a991ad8cb643a63e.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/85/71/85717524b27ffe9af0249b35a991ad8cb643a63e_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/85/71/85717524b27ffe9af0249b35a991ad8cb643a63e.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br><br>日本ではおそらく<br>販売されなかった本であり<br><br>かつ、販売されてた期間の短い<br>ペーパーバック（ムック本？）であり<br><br>カラー印刷で、けっこう高いので<br><br>それらをコレクションして、日本に持ち込み<br>FFが7から15まで進んだ今も<br>大切に保管してるケースは相当マイナーだと思います<br><br>私以外の1億2000万人の中に<br>これらを持ってる方がいたら嬉しいです<br><br><br>これらは<br>シンガポールのオーチャード通りにある<br>日系デパートのKinokuniyaで買いました<br><br>三葉虫の化石とかも売ってる<br>黒くてオシャレな店です<br><br>1冊あたり30シンガポールドルでした<br><br>アメリカ、カナダ向けって書かれてるけど<br>英語圏なら、どこでも買えたのかもれません<br><br><br>もし、この本を見つけなかったら<br><br>私はいまFF14を遊んでないだろうし<br>日本にいないかもしれません<br><br>表紙がFF6ですが<br>中身は半分がFF5、半分がFF6の攻略です<br><br>PS1用にリメイクされた<br>FF4,5,6の販促のために、海外向けに作られた本のようです<br><br><br>作ったのはBradyGamesという集団のようで<br><br>Amazonで調べると、ほかのゲームの攻略本も出してたようです<br><br>問い合わせ先として載ってる bradygames.com というドメインは失効してました<br><br>うーん、ノスタルジー……<br><br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/97/3a/973a1c0da3775cffac9952a3f462b16f68189f64.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/97/3a/973a1c0da3775cffac9952a3f462b16f68189f64_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/97/3a/973a1c0da3775cffac9952a3f462b16f68189f64.jpg" data-origin_src_width="1024" data-origin_src_height="795" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>本のサイズは大きいです<br><br>日本のどの家庭にもある『とらぶるダークネス』1巻と比較すると<br>こんなに大きい<br><br>ファッション誌よりは小さいです<br><br>（「は」にアクセントが来るこの細かい表現を、1度使ってみたかった……！）<br><br><br>もっと分かりやすく<br>日本で販売された、FFのペーパーバックと比較しましょう<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/d8/6e/d86eba2b93a720f7f7b565a1a260d199d76ba5f0.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/d8/6e/d86eba2b93a720f7f7b565a1a260d199d76ba5f0_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/d8/6e/d86eba2b93a720f7f7b565a1a260d199d76ba5f0.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>私が把握してるのは<br>FF7,8,9,10のものです<br><br>これらは買えなくなる前に、揃えて保護しました<br><br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/0e/e7/0ee7e9b0b619ae3bf796a596225750ef0f135f34.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/0e/e7/0ee7e9b0b619ae3bf796a596225750ef0f135f34_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/0e/e7/0ee7e9b0b619ae3bf796a596225750ef0f135f34.jpg" data-origin_src_width="1024" data-origin_src_height="768" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>海外向けのほうが、ややサイズが大きいです<br><br>当時のスクエニ（スクウェア）は<br>日本向けは集英社のVジャンプ編集部にライセンスし<br><br>英語圏向けはBradyGamesにライセンスし<br><br>せっかくヒットしたFF7をきっかけに<br>カラー印刷にばえる素材を提供して<br><br>FFの地名度を、一気に上げようと計画したのかもしれません<br><br><br>たぶん、その頃は<br>広報の方針とかも、坂口さんが関わってたでしょうから<br><br>私の世界線は<br>坂口さんによって、日本方向に移動したことになります<br><br>なので、FF14の中で<br>坂口さんにその御礼を、FF5のようなシンプルな言葉で伝えたいし<br>恩人の銘の入った装備で冒険したいです<br><br><br>外側はもういい！ 中身を見せろ！<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/b5/84/b584483fca178c5a97d521b0cb884345694eee03.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/b5/84/b584483fca178c5a97d521b0cb884345694eee03_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/b5/84/b584483fca178c5a97d521b0cb884345694eee03.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>これが1ページ目です<br><br>このFF5のイラストが、私を夢中にさせました<br><br>初めて知ったKawaiiです<br><br><br>グラフィックだけでなく<br>冒険に役立つ情報も載ってます<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/da/88/da8808b397c189a866b400edc668d72b3b8942ae.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/da/88/da8808b397c189a866b400edc668d72b3b8942ae_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/da/88/da8808b397c189a866b400edc668d72b3b8942ae.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>例えば、クレセントと蜃気楼の町で<br>何を売ってるか、とかです<br><br>ちゃんとFFっぽいデザインになってて<br>ワクワクしちゃう<br><br><br>魔法のデータも載ってます<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/38/f3/38f3f1174ca9a24fe2119fead83275378aeb531c.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/38/f3/38f3f1174ca9a24fe2119fead83275378aeb531c_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/38/f3/38f3f1174ca9a24fe2119fead83275378aeb531c.jpg" data-origin_src_width="1024" data-origin_src_height="768" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>最近、CWLSのフレンドに協力してもらって<br>一気にラーニングの旅をしたのですが<br><br>みんなFF5が好きで<br>青魔法の1つ1つについて、思い入れがあるようで<br><br>あー、知った時期や場所が違っただけで<br>青魔法の魅力、思い出は共通なんだなーって思いました<br><br><br>ラーニングツアーでは<br>エデンの魔列車にも行きました<br><br>それの海外向け紹介は、こんな感じです<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/8a/ec/8aeccee5636070d91ee3f06caddc328b3b37249b.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/8a/ec/8aeccee5636070d91ee3f06caddc328b3b37249b_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/8a/ec/8aeccee5636070d91ee3f06caddc328b3b37249b.jpg" data-origin_src_width="1024" data-origin_src_height="768" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>こういう印刷されたマップを見ると<br>ゲームをしてる時よりドキドキします<br><br>エデンでも幽霊を仲間だと思って<br>さわって何度も部屋に行っちゃいました<br><br>とチャットしたらウケました<br><br>通じてる……！<br><br>相手が山王だろうと戦えてるぞ、オレは間違ってはいなかった……<br>の時のゴリのような気持ちです<br><br><br>FF6は、FF5みたいに未発売でなく<br>FF4としてSNESにあったそうですが<br><br>そもそもゲーム屋さん、家電屋さんを<br>日本でしか見たことがなく<br><br>でっかいホームセンターの<br>1番端の列で、モトローラの灰色の家電から選ぶ世界しか知らなかったので<br><br>ゲーム機を売ってる売り場すら知らず<br>FFとの接点が生まれるはずがありませんでした<br><br><br>こうしてFFをきっかけに<br>私の世界線はダイバージェンス1%を超えて変化したわけですが<br><br>ドラクエにはその力が無かったので<br><br>ドラクエを知るのは、その後のことです<br><br>ドラクエとFFの比較は御法度かもしれませんが<br>超える力を持つのは、FFだけだと思います<br><br><br>仮の話として<br>アラブ首長国連邦での富豪が<br><br>砂漠でランドクルーザーで遊ぶ以外の<br>日本の自由なゲーム、漫画に時間を投資する楽しみを知ったり<br><br>江戸時代に浮世絵をコレクションしてた、フランスのコレクターが<br>現代日本に転生したら<br><br>何が起こるかを想像してみてください<br><br><br>その想像と、たぶん<br>ほぼ同じことをやりました<br><br>やってしまった……！<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/bf/31/bf31bfa98602fd8b4cb14f71f5a5ac81aeec5a31.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/bf/31/bf31bfa98602fd8b4cb14f71f5a5ac81aeec5a31_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/bf/31/bf31bfa98602fd8b4cb14f71f5a5ac81aeec5a31.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>ドラゴンボール、ドラえもん……は元々知ってたけど<br><br>せっかくコレクションするのだし<br>鳥山先生が関わってるものは<br>たぶん、95%くらい揃えました<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/21/bd/21bd154f2dbaf0640385f80bc622963cc16035d2.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/21/bd/21bd154f2dbaf0640385f80bc622963cc16035d2_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/21/bd/21bd154f2dbaf0640385f80bc622963cc16035d2.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>映画のパンフレット……<br><br>ドラゴンボールより以前の仕事……<br><br>帯付きが価値が高い、と知ってからは<br>帯も揃えました<br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/67/0c/670c3a6f6da31e01487940c8eb438a7fa5accfdc.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/67/0c/670c3a6f6da31e01487940c8eb438a7fa5accfdc_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/67/0c/670c3a6f6da31e01487940c8eb438a7fa5accfdc.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br><br>その過程で、漫画、アニメ、ゲーム全般に興味を持ち<br><br>藤子不二雄、秋本治などのコレクションも進めて<br><br>90%くらいの絵とセリフを暗記しました<br>……が！<br><br>いま書店で買えるバージョンは<br>作者本人の書いたオリジナルのセリフではないと知ってからは<br>古いもので揃えました<br><br><br>そして、手塚神の存在と<br><br>神はすでに亡くなってることを知ったのです<br><br><br>なので、レジェンドである<br>漫画家、映画監督、ゲームクリエイターについては<br><br>存命なうちに<br>直接見ておきたいという気持ちが強くなり<br><br>原画展の初日に行って<br>ほかのファンと一緒に声を聞いたり<br><br>アポイントメントを取れる場合は<br>直接質問したりしました<br><br>藤子A先生を、肉眼で見ることができたのは<br>偶然だったので、運を使い切ったと思いました<br><br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/19/8e/198e2287690121f50e97a1275e5afa9ea27ecc56.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/19/8e/198e2287690121f50e97a1275e5afa9ea27ecc56_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/19/8e/198e2287690121f50e97a1275e5afa9ea27ecc56.jpg" data-origin_src_width="768" data-origin_src_height="1024" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>いろんなサインを持ってます<br><br>いま撮ってる最中に、ネコに襲われたが……<br><br>ネコに踏まれたくらいでは、怒らない感じの御方だった……<br><br>以前ならば、宮本茂さんや井上雄彦さんと<br>お話する機会すら作れたそうだけど<br>コロナの時代になって、2度と無い気がします……<br><br>チックショー！！！！<br><br><br>坂口さんが通った大学や<br>スクウェア創業の地にも行きました<br><br>任天堂のホテルに<br>改装中に見に行きました<br><br>金沢美大の伝説的なキャンパスも<br>解体される前に行きました<br><br><br>藤子不二雄が手塚神の本に出会ったという<br>高岡の文苑堂も<br><br>店舗がなくなる前に、たくさん写真に残したし<br><br>コンビ結成の座標である<br>城址公園の二子山にも行きました<br><br>私にとっては<br>メッカの座標より大事です<br><br><br>バードスタジオの前にも行きました<br><br>Dr.スランプでは、家に来たファンには直接サインしてると描かれてたし<br>空豆ピースケのように、サインをリクエストするセリフまで練習してたのですが<br><br>いまではファンに不公平が生じないように<br>サインをお断りしてる、と門に書かれてて<br><br>ぐおーぐおーと痛がる、ガスマスク姿の鳥山先生のような<br>気持ちになりましたが<br><br>スピードワゴンのようにクールに去りました<br><br>清州城で、これが鳥山先生の食べてる味かーと<br>食べたきしめんは、涙でショッパマンでした<br><br><br>PCの壁紙は、単色が見やすいと思うのですが<br><br>この時のバードスタジオ前で、空を撮った<br>空色1色の写真を採用してて<br><br>鳥山先生が犬の散歩で見てる空と<br>きっと一緒だ……<br>って元気をもらってます<br><br><br>日本語の掲示板も<br>たくさんROMりました<br><br>そこでは、日本の3大漫画は<br>ジョジョと刃牙と福本漫画だって書かれてたので<br><br>それらも全部読みました<br><br><br>そのせいなのか<br>ワンピース、ナルト、鬼滅、ハリウッド映画の大作を<br>面白いと思う感覚を喪失したみたいです<br><br>つまらなくはない……（いや、ワンピースはすげーつまらない回もあるけど）<br>けど、私は呪術やチェンソーマンのほうが<br><br>3倍くらい面白いって感じるし<br>それを描ける漫画家を、3倍くらい尊敬してます<br><br><br>あっ、ガンダムを忘れてた！<br><br>いま80才の、もう1人の神！<br><br>ガンダムも、めちゃめちゃ観ました<br><br>ただ、範囲が広すぎるので、70%くらい……？<br>（ビルダーズとかセンチネルは分かんない……）<br><br><br>ハサウェイは全部読んだ！<br><br>日本語が難しすぎる……ってブーしたら<br><br>これが難しくない人なんていませんって<br>励まされて、最後のオチまで辿り着いて<br><br>嬉しいのと悲しいのとで、めっちゃ印象に残った！<br><br>漆黒のウェポン戦のセリフの元ネタは<br>全部わかって、やった！と思った<br><br><br>パトレイバーもエヴァも最高すぎる<br><br>そしてまた、ゆうきまさみ作品をすべて集め<br>押井守作品をすべて観て<br><br>日本語の語彙が増え<br><br>庵野秀明の映画を<br>毎回、初日に観に行って<br><br>感動したテンションのまま<br>FF14にログインし…………のループもの？<br><br><br>本当は、少女漫画とか<br>大人向けのグロい漫画とかも<br><br>宇崎ちゃんのようにうざく語りたいけど<br>（宇崎ちゃんは語らないだろ……）<br><br>ええと、何の話だっけ……？<br><br><br>そうでした<br><br>言語Jネイティブじゃない中で<br>FF5に興味を持って、ちゃんとクリアしてるプレイヤーって<br><br>私以外も、きっと情報収集力と<br>行動力の化身みたいなやつばかりで<br><br>きっかけは、たぶんFF7のヒット<br><br><br>その7を倍にしたFF14で<br><br>久しぶりにFFが世界で<br>最高レベルにヒットしたというのは<br><br>これをきっかけに<br>当時の私みたいな子供が、いま日本方向の世界線に移動してる最中かも<br>って感じて<br><br>みんな来ーい！ ここはとてもいいところだ！<br>って∀ガンダムのように思いました<br><br><br>私は、FF7以前の日本でのFFの姿を<br>資料を通してしか知らないし<br><br>当たり前のことをしてたら<br>当たり前にFFのファンになった<br>という流れじゃないので<br><br>チャットしてて<br>ちょっと変……って思われるだろうけど<br><br><br><div class="img_box"><a href="https://lds-img.finalfantasyxiv.com/accimg2/a0/d9/a0d90e71a118a1e8ac17f8729cd578910a068f1d.jpg" rel="view_image"><img src="https://lds-img.finalfantasyxiv.com/accimg2/a0/d9/a0d90e71a118a1e8ac17f8729cd578910a068f1d_110_110.jpg" data-src_width="110" data-src_height="110" data-origin_src="https://lds-img.finalfantasyxiv.com/accimg2/a0/d9/a0d90e71a118a1e8ac17f8729cd578910a068f1d.jpg" data-origin_src_width="1024" data-origin_src_height="529" width="110" height="110" alt="" style="margin-left:-55px; margin-top: -55px;"></a></div><br><br>ぷるぷる、わたし悪いスライムじゃないよ<br><br>（まさかのドラクエオチぃいいい）<br></div>
+		<div class="blog__area__like js__blog__area__like"><a href="/lodestone/error/charge_expire" class="blog__area__like__bt_like js__tooltip" data-tooltip="いいね"></a><a href="#" class="blog__area__like__text js__open_like_list js__like_count_wrapper" data-like_count="3" data-api="/lodestone/character/39124727/blog/5075438/likes"><span class="js__like_count">3</span> 件のいいね</a><span class="blog__area__like__text__zero js__like_zero" style="display: none">0 件のいいね</span></div>
+
+		<div class="blog__area__like__list__wrapper">
+		</div>
+	</div>
+
+	<div class="l__blogsocial">
+		
+			<ul class="btn__edit">
+				
+					<li><a href="javascript:void(0)" data-character_id="39124727" data-blog_id="5075438" class="js__blog_delete">日記削除</a></li>
+				
+			</ul>
+		
+		
+<ul class="social__btn"><li><a href="http://www.facebook.com/share.php?u=https://jp.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/" target="_blank" rel=" noopener"><i class="xiv-lds xiv-lds-facebook js__tooltip" data-tooltip="シェアする"></i></a></li><li><a href="https://x.com/intent/tweet?url=https://jp.finalfantasyxiv.com/lodestone/character/39124727/blog/5075438/&amp;text=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20XIV%2C%20The%20Lodestone" target="_blank" rel=" noopener"><i class="xiv-lds xiv-lds-x js__tooltip" data-tooltip="ポストする"></i></a></li></ul>
+
+	</div>
+
+	<ul class="btn__nav parts__space--32">
+		
+			<li class="btn__nav__prev"><a href="/lodestone/character/39124727/blog/5075297">前の日記</a></li>
+		
+
+		<li class="btn__nav__center" style="left: 282px;"><a href="/lodestone/character/39124727/blog/">日記一覧</a></li>
+
+		
+			<li class="btn__nav__next"><a href="/lodestone/character/39124727/blog/5080050">次の日記</a></li>
+		
+	</ul>
+
+	<div class="title__comment">コメント（4）</div>
+
+	
+
+	
+		
+			<div class="select-pulldown">
+				<form action="?">
+					<select name="order" onchange="this.form.submit()" class="select-pulldown__open">
+						<option value="1">コメントの古い順</option>
+						<option value="2">コメントの新しい順</option>
+					</select>
+				</form>
+			</div>
+		
+	
+
+
+	
+		<a name="comment_18559802"></a>
+
+
+	<div class="entry">
+		<a href="/lodestone/character/37960262/" class="entry__link">
+			<div class="entry__chara__face">
+				<img src="https://img2.finalfantasyxiv.com/f/412831291ccc4157a167dd9ee7368f59_138751880f18161a907d7cf0faa43f07fc0.jpg?1751601952" alt="">
+			</div>
+			<div class="entry__box">
+				<p class="entry__name">Bco Full-metal</p>
+				<p class="entry__world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Ridill [Gaia]</p>
+				<time class="entry__time--comment"> 
+
+<span id="datetime-2237f87354a" class="datetime_dynamic_ymdhm" data-epoch="1660122775">2022/08/10 18:12</span>
+<script>
+document.getElementById('datetime-2237f87354a').innerHTML = ldst_strftime_dynamic_ymdhm(1660122775);
+</script>
+
+</time>
+			</div>
+		</a>
+
+		
+		
+	
+	
+		<div class="parts__blocklist_add">
+			
+			<a href="javascript:void(0)" class="parts__blocklist_add__icon js__tooltip js__click_trigger" data-tooltip="ブロックリスト追加"></a>
+			
+			<div class="parts__switch js__click_item">
+				<div class="heading--md-first">ブロックリストへの追加</div>
+				<p class="entry__toggle__text">対象キャラクターを<a href="/lodestone/my/setting/block/">ブロックリスト</a>に追加しますか？<br>追加することで対象キャラクターに対して様々な効果や制限が発動します。</p>
+				
+				<ul class="btn__switch character__connect__form">
+					<li class="form__submit"><form action="/lodestone/api/character/37960262/block/" method="POST" class="block_xhr_form" onsubmit="return false;">
+<input type="hidden" name="csrf_token" value="a5da37fec492d4afd38a652bab2865d61050cd13">
+	<input type="submit" value="はい">
+
+
+	<span class="error_message_common txt_warning hide"></span>
+
+
+</form>
+
+</li>
+					<li><a href="javascript:void(0)" class="js__click_trigger">いいえ</a></li>
+				</ul>
+			</div>
+		</div>
+	
+
+
+		
+
+	</div>
+	<div class="thread__comment__body">企業運営の攻略Wikiが主流の現代、紙の攻略本って今ではマイナーですが読むの楽しいですよねえ～！<br>昔はよくクリア済のゲームでもゲオで攻略本買ったり、4コマギャグバトル買ったりしてましたｗ<br><br>…あっ、刃牙で一番好きなバトルは加藤VSドリアンで、ToLoveるダークネスで一番好きなのはナナちゃんです！</div>
+	<div class="btn__comment__area">
+		
+			
+
+	<a href="javascript:void(0)" class="btn__report js__report" data-table_name="blog_comments" data-table_id="18559802" data-table_field="" data-target_element_id="#report_target_blog_comments_18559802" data-reported="0">レポート</a>
+
+
+	
+
+
+
+
+
+<div id="report_target_blog_comments_18559802" class="hide">
+
+	<div class="inr">
+		
+			<div class="thumb"><img src="https://img2.finalfantasyxiv.com/f/412831291ccc4157a167dd9ee7368f59_138751880f18161a907d7cf0faa43f07fc0.jpg?1751601952" width="50" height="50" alt=""></div>
+		
+		
+		<div class="posted_character">
+			<div>投稿者</div>
+			
+				<div class="player_id"><a href="/lodestone/character/37960262/">Bco Full-metal</a>
+				<span><i class="xiv-lds xiv-lds-home-world"></i>Ridill [Gaia]</span></div>
+			
+		</div>
+	</div>
+		
+	<hr>
+	
+	<div class="inr">
+		<div class="clearfix">
+			
+				<div class="thumb left"><img src="https://img2.finalfantasyxiv.com/f/412831291ccc4157a167dd9ee7368f59_138751880f18161a907d7cf0faa43f07fc0.jpg?1751601952" width="50" height="50" alt=""></div>
+			
+			<div class="balloon_header"><div class="balloon_footer"><div class="balloon_body"><div class="balloon_body_inner">企業運営の攻略Wikiが主流の現代、紙の攻略本って今ではマイナーですが読むの楽しいですよねえ～！<br>昔はよくクリア済のゲームでもゲオで攻略本買ったり、4コマギャグバトル買ったりしてましたｗ<br><br>…あっ、刃牙で一番好きなバトルは加藤VSドリアンで、ToLoveるダークネスで一番好きなのはナナちゃんです！</div></div></div></div>
+		</div>
+		
+		<div class="tr">
+			
+				<div class="player_id"><a href="/lodestone/character/37960262/">Bco Full-metal</a>
+				<span> <i class="xiv-lds xiv-lds-home-world"></i>Ridill [Gaia]</span></div>
+				<span class="ml5 pr6"> 
+
+<span id="datetime-30087427fc2">2022/08/10 18:12:55</span>
+<script>
+document.getElementById('datetime-30087427fc2').innerHTML = ldst_strftime(1660122775, 'YMDHMS');
+</script>
+
+</span>
+				
+			
+		</div>
+	</div>
+	
+</div>
+
+
+		
+		
+			<a href="javascript:void(0)" data-character_id="39124727" data-blog_id="5075438" data-comment_id="18559802" class="btn__black js__comment_delete">このコメントを削除</a>
+		
+	</div>
+
+
+	
+		<a name="comment_18559841"></a>
+
+
+	<div class="entry">
+		<a href="/lodestone/character/39124727/" class="entry__link">
+			<div class="entry__chara__face">
+				<img src="https://img2.finalfantasyxiv.com/f/725dbef5c489c3021aa65b39d2ed2607_2f698530a28d671d20278c8518c804c9fc4.jpg?1751600041" alt="">
+			</div>
+			<div class="entry__box">
+				<p class="entry__name">Kako Jun</p>
+				<p class="entry__world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p>
+				<time class="entry__time--comment"> 
+
+<span id="datetime-4db300d65c0" class="datetime_dynamic_ymdhm" data-epoch="1660124228">2022/08/10 18:37</span>
+<script>
+document.getElementById('datetime-4db300d65c0').innerHTML = ldst_strftime_dynamic_ymdhm(1660124228);
+</script>
+
+</time>
+			</div>
+		</a>
+
+		
+		
+
+		
+
+	</div>
+	<div class="thread__comment__body">そうなんです！<br>読んでる間、ゲームを遊んでるような気持ちになれるのです<br><br>攻略本の後半にある「その後の地域」という言葉にゾクゾクします<br><br>ドラクエの4コママンガは、たぶん全巻揃えました<br>（100冊くらいあったんですね……）<br><br>ドラクエやFFは、新刊が出続けてるので大変です<br><br><br>ドリアンいいですねー<br><br>ドリアンから死刑囚のバランスが崩れたというか<br>話が偶然で進んでるようになった気がしますが、その偶然さが好きでもあります<br><br>克己が好きなので、トーナメントでの花山戦や<br>ドリアン戦で（公園でだけ強い人みたいな）武器を使うシーンが好きです<br><br><br>私もララやモモよりはナナです<br>1番はリコなので、あやかしトライアングルは最初からウマーです</div>
+	<div class="btn__comment__area">
+		
+		
+			<a href="javascript:void(0)" data-character_id="39124727" data-blog_id="5075438" data-comment_id="18559841" class="btn__black js__comment_delete">このコメントを削除</a>
+		
+	</div>
+
+
+	
+		<a name="comment_18559885"></a>
+
+
+	<div class="entry">
+		<a href="/lodestone/character/40412138/" class="entry__link">
+			<div class="entry__chara__face">
+				<img src="https://img2.finalfantasyxiv.com/f/179d22fdb4d9e70160ba24ab8fcf3d9a_134930215abb8a90ec37d6cc05b05e08fc0.jpg?1751601733" alt="">
+			</div>
+			<div class="entry__box">
+				<p class="entry__name">Tama Hime</p>
+				<p class="entry__world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Masamune [Mana]</p>
+				<time class="entry__time--comment"> 
+
+<span id="datetime-a202fb2c666" class="datetime_dynamic_ymdhm" data-epoch="1660126601">2022/08/10 19:16</span>
+<script>
+document.getElementById('datetime-a202fb2c666').innerHTML = ldst_strftime_dynamic_ymdhm(1660126601);
+</script>
+
+</time>
+			</div>
+		</a>
+
+		
+		
+	
+	
+		<div class="parts__blocklist_add">
+			
+			<a href="javascript:void(0)" class="parts__blocklist_add__icon js__tooltip js__click_trigger" data-tooltip="ブロックリスト追加"></a>
+			
+			<div class="parts__switch js__click_item">
+				<div class="heading--md-first">ブロックリストへの追加</div>
+				<p class="entry__toggle__text">対象キャラクターを<a href="/lodestone/my/setting/block/">ブロックリスト</a>に追加しますか？<br>追加することで対象キャラクターに対して様々な効果や制限が発動します。</p>
+				
+					<p class="entry__toggle__attention">このキャラクターはフォロワーリストに追加されているキャラクターです。<br>ブロックリストに追加後にフォロワーから解除します。</p>
+				
+				<ul class="btn__switch character__connect__form">
+					<li class="form__submit"><form action="/lodestone/api/character/40412138/block/" method="POST" class="block_xhr_form" onsubmit="return false;">
+<input type="hidden" name="csrf_token" value="a5da37fec492d4afd38a652bab2865d61050cd13">
+	<input type="submit" value="はい">
+
+
+	<span class="error_message_common txt_warning hide"></span>
+
+
+</form>
+
+</li>
+					<li><a href="javascript:void(0)" class="js__click_trigger">いいえ</a></li>
+				</ul>
+			</div>
+		</div>
+	
+
+
+		
+
+	</div>
+	<div class="thread__comment__body">FFや他の作品も特に制作者さんへの愛を感じます。<br>私はどの作品もニワカかのですが一番印象に残るシーンがあります。<br>一番初めてさわったFFがFF9でした。その中で<br>【髪を切るダガー】の曲とともに当時では考えられない綺麗なムービーで当時子供だった私には長髪の女性がバッサリとダガーで髪を切るシーンが今でも忘れられません。<br><br>長髪より短髪の髪が好きになったくらいですw<br><br>最後のヲチがkawiiですね(＾ω＾Ｕ)</div>
+	<div class="btn__comment__area">
+		
+			
+
+	<a href="javascript:void(0)" class="btn__report js__report" data-table_name="blog_comments" data-table_id="18559885" data-table_field="" data-target_element_id="#report_target_blog_comments_18559885" data-reported="0">レポート</a>
+
+
+
+
+<div id="report_target_blog_comments_18559885" class="hide">
+
+	<div class="inr">
+		
+			<div class="thumb"><img src="https://img2.finalfantasyxiv.com/f/179d22fdb4d9e70160ba24ab8fcf3d9a_134930215abb8a90ec37d6cc05b05e08fc0.jpg?1751601733" width="50" height="50" alt=""></div>
+		
+		
+		<div class="posted_character">
+			<div>投稿者</div>
+			
+				<div class="player_id"><a href="/lodestone/character/40412138/">Tama Hime</a>
+				<span><i class="xiv-lds xiv-lds-home-world"></i>Masamune [Mana]</span></div>
+			
+		</div>
+	</div>
+		
+	<hr>
+	
+	<div class="inr">
+		<div class="clearfix">
+			
+				<div class="thumb left"><img src="https://img2.finalfantasyxiv.com/f/179d22fdb4d9e70160ba24ab8fcf3d9a_134930215abb8a90ec37d6cc05b05e08fc0.jpg?1751601733" width="50" height="50" alt=""></div>
+			
+			<div class="balloon_header"><div class="balloon_footer"><div class="balloon_body"><div class="balloon_body_inner">FFや他の作品も特に制作者さんへの愛を感じます。<br>私はどの作品もニワカかのですが一番印象に残るシーンがあります。<br>一番初めてさわったFFがFF9でした。その中で<br>【髪を切るダガー】の曲とともに当時では考えられない綺麗なムービーで当時子供だった私には長髪の女性がバッサリとダガーで髪を切るシーンが今でも忘れられません。<br><br>長髪より短髪の髪が好きになったくらいですw<br><br>最後のヲチがkawiiですね(＾ω＾Ｕ)</div></div></div></div>
+		</div>
+		
+		<div class="tr">
+			
+				<div class="player_id"><a href="/lodestone/character/40412138/">Tama Hime</a>
+				<span> <i class="xiv-lds xiv-lds-home-world"></i>Masamune [Mana]</span></div>
+				<span class="ml5 pr6"> 
+
+<span id="datetime-2bcbf64bf68">2022/08/10 19:16:41</span>
+<script>
+document.getElementById('datetime-2bcbf64bf68').innerHTML = ldst_strftime(1660126601, 'YMDHMS');
+</script>
+
+</span>
+				
+			
+		</div>
+	</div>
+	
+</div>
+
+
+		
+		
+			<a href="javascript:void(0)" data-character_id="39124727" data-blog_id="5075438" data-comment_id="18559885" class="btn__black js__comment_delete">このコメントを削除</a>
+		
+	</div>
+
+
+	
+		<a name="comment_18569433"></a>
+
+
+	<div class="entry">
+		<a href="/lodestone/character/39124727/" class="entry__link">
+			<div class="entry__chara__face">
+				<img src="https://img2.finalfantasyxiv.com/f/725dbef5c489c3021aa65b39d2ed2607_2f698530a28d671d20278c8518c804c9fc0.jpg?1751600041" alt="">
+			</div>
+			<div class="entry__box">
+				<p class="entry__name">Kako Jun</p>
+				<p class="entry__world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p>
+				<time class="entry__time--comment"> 
+
+<span id="datetime-6947ac21cad" class="datetime_dynamic_ymdhm" data-epoch="1660711476">2022/08/17 13:44</span>
+<script>
+document.getElementById('datetime-6947ac21cad').innerHTML = ldst_strftime_dynamic_ymdhm(1660711476);
+</script>
+
+</time>
+			</div>
+		</a>
+
+		
+		
+
+		
+
+	</div>
+	<div class="thread__comment__body">FFってパーティメンバーの誰か1人に<br>途中でサプライズを用意するのが、法則化してるのが好きです<br><br>FF4……転職して白くなる<br>FF5……1人交代する<br>FF6……隠れキャラが仲間になる<br>FF7……1人減る<br>FF8……特になし？<br><br>そして、FF9は髪が短くなるでしたね<br><br>ジブリでは「結局この髪型か！」と監督にツッコむのが<br>毎回の様式美らしいですが<br><br>ダガーネットの髪は<br>エンディングで元の長さに戻ってたので、逆に驚きました</div>
+	<div class="btn__comment__area">
+		
+		
+			<a href="javascript:void(0)" data-character_id="39124727" data-blog_id="5075438" data-comment_id="18569433" class="btn__black js__comment_delete">このコメントを削除</a>
+		
+	</div>
+
+
+	
+</div>
+
+	<div id="spacer" style="height: 160px;"></div>
+	<div class="blog__comment_box" id="commentbox" style="height: 160px; position: fixed; bottom: -128px; left: 165px;">
+		<div class="blog__comment_box__wrapper" id="commentbox_in">
+			<div class="form__horizontal input_box blog__comment_box__inner">
+				<a href="javascript:void(0)" class="blog__comment_box__header" id="commentbox_trigger" style="cursor: pointer;">コメント投稿</a>
+				
+					
+						<div id="commentbox_logout">
+							<p class="parts__text__mog">サービスアカウントの契約期間が切れているか、ゲームにログインができないキャラクターのため本機能を利用することができません。<br>契約期間の確認やアカウントのお手続きは<a href="https://secure.square-enix.com/account/app/svc/mogstation/" target="_blank" rel=" noopener">モグステーション</a>にて行ってください。</p>
+							<a href="https://secure.square-enix.com/account/app/svc/mogstation/" target="_blank" class="btn__mogstation" rel=" noopener"><i class="btn__mogstation__icon"></i>モグステーション</a>
+						</div>
+					
+				
+			</div>
+		</div>
+	</div>
+
+
+
+		</div>
+
+		<div class="ldst__side">
+			
+				
+	
+		
+			<ul class="l__rside__bnr clearfix">
+	<li>
+		<a href="https://secure.square-enix.com/account/app/svc/mogstation/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_mogstation" target="_blank" class="l__rside__bnr--mog_station" rel=" noopener">
+			<img src="https://lds-img.finalfantasyxiv.com/h/1/71x9270TssyZ-BY15BGKLpQ3_U.png" width="150" height="48" alt="モグステーション">
+		</a>
+	</li>
+	<li>
+		<a href="https://store.finalfantasyxiv.com/ffxivstore/" target="_blank" class="l__rside__bnr--store" rel=" noopener">
+			<img src="https://lds-img.finalfantasyxiv.com/h/c/WT9jpRaUeWfj_sHl9O2DibFQFw.png" width="150" height="48" alt="">
+		</a>
+	</li>
+	<li>
+		<a href="https://forum.square-enix.com/ffxiv/forum.php?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_forum" target="_blank" class="l__rside__bnr--forums" rel=" noopener">
+			<img src="https://lds-img.finalfantasyxiv.com/h/b/Zx3IKAoWqpT8QeLJ2_SzVxCj9M.png" width="150" height="48" alt="フォーラム">
+		</a>
+	</li>
+	<li>
+		<a href="/pr/blog/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_officalblog" target="_blank" class="l__rside__bnr--blog" rel=" noopener">
+			<img src="https://lds-img.finalfantasyxiv.com/h/n/dzlIJG3KqRiEbORwH2d7LzyZaI.png" width="150" height="48" alt="公式ブログ">
+		</a>
+	</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	
+		
+			
+
+	<div class="l__rside__bnr-pr">
+		<a href="https://store.finalfantasyxiv.com/ffxivstore/ja-jp/?utm_source=lodestone&amp;utm_medium=strapi-banner&amp;utm_campaign=belt-leather_collection&amp;argument=n3xyJrCq&amp;dmai=a68634397be297" class="bt_sale" target="_blank" rel=" noopener">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/news_image/LDS_pr_optionitem250701_f6bc776126.jpg" width="300" height="300" alt="">
+			
+		</a>
+	</div>
+
+
+		
+	
+		
+			<div class="mb10"><a href="/lodestone/special/mogmog-collection/202507/5jc8r6hlb2?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_mogmog-collection"><img src="https://lds-img.finalfantasyxiv.com/banner/1467/mogmog17_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="/lodestone/cosmic_exploration/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_cosmic_exploration"><img src="https://lds-img.finalfantasyxiv.com/banner/1452/CE_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="/crafting_gathering_guide/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_cgguide	"><img src="https://lds-img.finalfantasyxiv.com/banner/1127/CGguide_v60_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="/jobguide/battle/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_jobguide"><img src="https://lds-img.finalfantasyxiv.com/banner/1087/jobguide_v70_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="/uiguide/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_uiguide"><img src="https://lds-img.finalfantasyxiv.com/banner/669/uiguide_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="/tales_of_adventure/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_tales_of_adventure"><img src="https://lds-img.finalfantasyxiv.com/banner/1077/LDS_Tales_of_Adventure_v70_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="/lodestone/special/friend_recruit/?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_friendrecruit"><img src="https://lds-img.finalfantasyxiv.com/banner/201/RFC_ja.jpg"></a></div>
+		
+	
+		
+			<div class="mb10"><a href="https://www.jp.square-enix.com/recruit/career/careerlink/index.html?utm_source=lodestone&amp;utm_medium=pc_banner&amp;utm_campaign=jp_recruit" target="_blank" rel=" noopener"><img src="https://lds-img.finalfantasyxiv.com/banner/165/Staff_Recruitment.jpg"></a></div>
+		
+	
+		
+			
+	
+		
+
+<div class="ldst__side__box">
+	
+
+
+<div class="heading--side">
+	<h3>マイキャラクター</h3>
+	<a href="/lodestone/character/39124727/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_column', 'ja_mychr');" class="heading--side__icon icon-list__side js__tooltip" data-tooltip="もっと見る"></a>
+</div>
+<div class="frame__chara frame__chara--side">
+	<a href="/lodestone/character/39124727/" onclick="ldst_ga('send', 'event', 'lodestone_li', 'pc_column', 'ja_mychr');" class="frame__chara__link frame__chara__link--side">
+		<div class="frame__chara__box">
+			<p class="frame__chara__name frame__chara__name--side">Kako Jun</p>
+			<p class="frame__chara__world frame__chara__world--side"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="<i class='xiv-lds xiv-lds-home-world'></i>ホームワールド"></i>Anima [Mana]</p>
+		</div>
+	</a>
+	<a href="/lodestone/account/select_character/" class="frame__chara__btn js__tooltip" data-tooltip="キャラクター一覧"><i class="icon-btn__switch"></i></a>
+</div>
+
+<div class="character__side">
+	
+	<div class="character__side__view clearfix">
+		<div class="character__side__class">
+			<div class="character__side__class__arms">
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--0 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/4b/4b9b00689fbcc2b2428e0ba06b3f8411f1e88a12.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/b1/b178d8a439f116ca4c65a9d855d1a9daf0ef936e.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・フライパン</h2><p class="db-tooltip__item__category">調理道具(主道具)</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/949a12d7149/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name">物理基本性能</div><div class="db-tooltip__item_spec__name">物理オートアタック</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">攻撃間隔</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value"><strong class="">59</strong></div><div class="db-tooltip__item_spec__value"><strong class="">55.06</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">2.80</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">調理師</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +1107</li><li class=""><span>加工精度</span> +593</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">70%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>甲冑師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%83%95%E3%83%A9%E3%82%A4%E3%83%91%E3%83%B3%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+			</div>
+			<div class="character__side__class__data">
+				<p>LEVEL 90 調理師</p>
+				<div class="character__side__class_icon">
+					<img src="https://lds-img.finalfantasyxiv.com/h/m/1kMI2v_KEVgo30RFvdFCyySkFo.png" width="20" height="20" alt="">
+				</div>
+				<img src="https://lds-img.finalfantasyxiv.com/h/S/iPB8REfyot2Fu_5R3MXFFcON8U.png" width="266" height="28" alt="" class="character__side__classjob">
+			</div>
+		</div>
+		<div class="character__side__detail clearfix">
+
+			<div class="character__side__detail__icon">
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--2 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/07/071ad84cb95319a184d32211f4fecbbed1b89389.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+		
+			<div class="mirage_staining no_paint"></div>
+		
+	
+
+	
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 no_paint"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/5d/5d03a2cd302eb579302b1e5bf9c2335d00296271.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/h/iMiPYBWuh22FtFJTn2coPIp0I0.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾可" data-tooltip="クレスト装飾可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・クラフターキャップ</h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/bd/bd4f0108cfbe274766e273853216d92f876145f2.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>ヘッドバンデージ<a href="/lodestone/playguide/db/item/cd424b220c0/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">頭防具</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/ff9d63512d1/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">253</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">505</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>加工精度</span> +356</li><li class=""><span>CP</span> +9</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">名匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">作業精度 +27</span></div></li><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">名匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">作業精度 +27</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">71%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>裁縫師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>○</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%83%97%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--3 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/e9/e90dd3c92aa730e7b3bdfba05b30ba55d2e7ad02.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+		
+			<div class="mirage_staining no_paint"></div>
+		
+	
+
+	
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 no_paint"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/96/9684eaaf0c4f250725243141ef358e4d8e51c453.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/h/iMiPYBWuh22FtFJTn2coPIp0I0.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾可" data-tooltip="クレスト装飾可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・クラフターダブレット</h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/d9/d98866879d3ac50b50505523df34969da12ae3ac.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>黒麻胴着<a href="/lodestone/playguide/db/item/b6d36282f9a/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">胴防具</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/4300c858d55/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">339</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">677</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +949</li><li class=""><span>加工精度</span> +356</li><li class=""><span>CP</span> +6</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">80%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>裁縫師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>○</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%80%E3%83%96%E3%83%AC%E3%83%83%E3%83%88%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--4 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/22/229a6873acdd834a83cfdc738c901d871a94f02e.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+		
+			<div class="mirage_staining no_paint"></div>
+		
+	
+
+	
+		<div class="stain2-mirage">
+			
+				
+					<div class="mirage_staining no_paint"></div>
+				
+			
+		</div>
+	
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 no_paint"></div><div class="stain2-mirage"><div class="mirage_staining--19 no_paint"></div></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/cf/cf2098cf578b9d5435b720eea9de64255bdd9e29.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・クラフターフィンガレスグローブ</h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/2c/2cfa7e0276635a754b1d9d8053139cbf2c56c0ed.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>ララフェルリストバンド<a href="/lodestone/playguide/db/item/bc757947073/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">手防具</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/13fad16d8f6/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">253</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">505</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>加工精度</span> +356</li><li class=""><span>CP</span> +9</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">71%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>革細工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>○</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A3%E3%83%B3%E3%82%AC%E3%83%AC%E3%82%B9%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%96%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--6 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/ee/eedb44a21bb2c35e259c690e1c00c8a1362e74e1.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+		
+			<div class="mirage_staining painted_cover" style="background-color: #e4aa8a;"></div>
+		
+	
+
+	
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 painted_cover" style="background-color: #e4aa8a;"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/1d/1de3e4103828c1381f4ff60a23f587745d5a77c0.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・クラフタートラウザー</h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/88/885b73a503b2d567e5a57de5052028a1e9ce20a2.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>タイツ<a href="/lodestone/playguide/db/item/3e0bf4614bc/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">脚防具</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/f187647f71a/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">339</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">677</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><hr class="db-tooltip__line"><div class="list_1col eorzeadb_tooltip_mb10"><div class="stain"><a href="/lodestone/playguide/db/item/c18be404e86/">カララント:サーモンピンク</a></div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +63</li><li class=""><span>加工精度</span> +356</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">魔匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">CP +10</span></div></li><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">71%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>裁縫師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>○</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%88%E3%83%A9%E3%82%A6%E3%82%B6%E3%83%BC%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--7 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/75/755d625efe33faf2b3f1ef923eeb144ab08bb3b5.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+		
+			<div class="mirage_staining no_paint"></div>
+		
+	
+
+	
+		<div class="stain2-mirage">
+			
+				
+					<div class="mirage_staining no_paint"></div>
+				
+			
+		</div>
+	
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 no_paint"></div><div class="stain2-mirage"><div class="mirage_staining--19 no_paint"></div></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/e9/e9e81ad95ca5ba588c9f3d88c7447c54cacec0b2.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・クラフターブーツ</h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/e6/e6d8c4bdcc96712e6a0407ff0fe5fcd6e39360e2.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>サマーサンセット・サンダル<a href="/lodestone/playguide/db/item/dc4d35f8824/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">足防具</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/41dd39d8f10/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">253</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">505</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +63</li><li class=""><span>加工精度</span> +356</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">魔匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">CP +10</span></div></li><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">71%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>革細工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>○</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%96%E3%83%BC%E3%83%84%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--glasses ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+		</div>
+	
+			</div>
+			<div class="character__side__detail__image">
+				<a href="/lodestone/character/39124727/">
+					<img src="https://img2.finalfantasyxiv.com/f/725dbef5c489c3021aa65b39d2ed2607_2f698530a28d671d20278c8518c804c9fl0.jpg?1751600041" width="212" height="" alt="">
+					<div class="character__side__detail__avg">0577</div>
+				</a>
+			</div>
+			<div class="character__side__detail__icon">
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--1 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/08/08d74edfae2d219e59db8a8e77fc3f078bd3e9be.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/88/8843a3c889f8752e5c9de539d1d70c9f33fef5da.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_rare">パーフェクショニスト・クリナリーナイフ</h2><p class="db-tooltip__item__category">調理道具(副道具)</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/f343074686c/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 590</div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">調理師</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +1107</li><li class=""><span>加工精度</span> +593</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">70%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>1%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>鍛冶師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>590.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p class="db-tooltip__cannot_materia_prohibition">禁断装着不可</p><p><span class="db-view__sells">SHOP取り扱い:</span><a href="/lodestone/playguide/db/shop/?category2=sundry_splendors&amp;q=%22%E3%83%91%E3%83%BC%E3%83%95%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%8B%E3%82%B9%E3%83%88%E3%83%BB%E3%82%AF%E3%83%AA%E3%83%8A%E3%83%AA%E3%83%BC%E3%83%8A%E3%82%A4%E3%83%95%22">あり</a></p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--8 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/99/9908204069db2e55163d7cde2d7adfae422cf572.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+	<div class="mirage_staining unpaitable"></div>
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 unpaitable"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/a5/a5f409b7b8fb21029ca237edbab9ed78f41737a1.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="ex_bind">BIND</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_common">インテグラル・クラフターイヤリング<span class="icon"></span></h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/20/20b73ef35939efeda338c86727b68f37ca77f59a.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>胡蝶蘭耳飾り:紅<a href="/lodestone/playguide/db/item/ae19fa11cb3/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">耳飾り</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/41af4e1659e/?hq=1"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 560</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">1</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">1</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +56</li><li class=""><span>CP</span> +70</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">魔匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">CP +10</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia8"></div><div class="db-tooltip__materia__txt">巨匠のエクスマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +13</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">61%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>49%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>木工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>560.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p><span class="db-view__sells">SHOP販売価格:</span><a href="/lodestone/playguide/db/shop/?category2=gil&amp;q=%22%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%82%A4%E3%83%A4%E3%83%AA%E3%83%B3%E3%82%B0%22">21,283 Gil</a></p><span><span class="db-tooltip__sells">買取価格:</span>489 Gil</span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div><div class="db-popup__inner"><div class="db-tooltip__info_text"><a href="/lodestone/character/19934845/">Evil God</a></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--9 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/93/9382a7eddf59f67a77746849f568399466502a29.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+	<div class="mirage_staining unpaitable"></div>
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 unpaitable"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/00/00f3d99fd98c866030e6c8579e00fb4c2cd9803a.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="ex_bind">BIND</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_common">インテグラル・クラフターネックレス<span class="icon"></span></h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/41/41a94e5dcb2a65850c87f7d207425369e60a62f1.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>ウェイファーラー・ネックレス<a href="/lodestone/playguide/db/item/ca3e7da5e0c/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">首飾り</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/e1918ad7836/?hq=1"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 560</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">1</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">1</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +56</li><li class=""><span>CP</span> +70</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">魔匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">CP +10</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia8"></div><div class="db-tooltip__materia__txt">巨匠のエクスマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +13</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">61%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>50%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>木工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>560.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p><span class="db-view__sells">SHOP販売価格:</span><a href="/lodestone/playguide/db/shop/?category2=gil&amp;q=%22%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%82%AF%E3%83%AC%E3%82%B9%22">21,283 Gil</a></p><span><span class="db-tooltip__sells">買取価格:</span>489 Gil</span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div><div class="db-popup__inner"><div class="db-tooltip__info_text"><a href="/lodestone/character/24525741/">Zen Zera</a></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--10 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/57/573c7b3df02ea817499c1d29544edf26e31e6f04.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+	<div class="mirage_staining unpaitable"></div>
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 unpaitable"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/2b/2bc9fe110b3ba74ab2e0053163d6799dffc5e409.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="ex_bind">BIND</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_common">インテグラル・クラフターブレスレット<span class="icon"></span></h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/f8/f81f6b4e9af75cb515672f2e66e7bf9c94927b4a.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>エンペラーズ・ニューブレスレット<a href="/lodestone/playguide/db/item/1b9470c33e2/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">腕輪</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/0294f9fcaaa/?hq=1"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 560</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">1</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">1</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +56</li><li class=""><span>CP</span> +70</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia10"></div><div class="db-tooltip__materia__txt">巨匠のアルテマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +18</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia8"></div><div class="db-tooltip__materia__txt">巨匠のエクスマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +13</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia9"></div><div class="db-tooltip__materia__txt">巨匠のオメガマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +12</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">61%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>49%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>木工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>560.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p><span class="db-view__sells">SHOP販売価格:</span><a href="/lodestone/playguide/db/shop/?category2=gil&amp;q=%22%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%96%E3%83%AC%E3%82%B9%E3%83%AC%E3%83%83%E3%83%88%22">21,283 Gil</a></p><span><span class="db-tooltip__sells">買取価格:</span>424 Gil</span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div><div class="db-popup__inner"><div class="db-tooltip__info_text"><a href="/lodestone/character/24525741/">Zen Zera</a></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--11 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/29/2905a666572f653c85b610ab8b9027fb9cf465d8.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+	<div class="mirage_staining unpaitable"></div>
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 unpaitable"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/84/847fe1cb08f414c4d38febc80dec3aa1cd77828f.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="ex_bind">BIND</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_common">インテグラル・クラフターリング<span class="icon"></span></h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/ba/baebc2fd0a60fd2424b78c16bf8dc8282496c545.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>エンペラーズ・ニューリング<a href="/lodestone/playguide/db/item/9665ddcaccf/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">指輪</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/b004cf9607c/?hq=1"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 560</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">1</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">1</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>加工精度</span> +109</li><li class=""><span>CP</span> +36</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia7"></div><div class="db-tooltip__materia__txt">魔匠のメガマテリジャ<br><span class="db-tooltip__materia__txt--base">CP +7</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia8"></div><div class="db-tooltip__materia__txt">巨匠のエクスマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +13</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materiga"></div><div class="db-tooltip__materia__txt">巨匠のマテリガ<br><span class="db-tooltip__materia__txt--base">加工精度 +4</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">61%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>49%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>木工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>560.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p><span class="db-view__sells">SHOP販売価格:</span><a href="/lodestone/playguide/db/shop/?category2=gil&amp;q=%22%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%22">21,283 Gil</a></p><span><span class="db-tooltip__sells">買取価格:</span>424 Gil</span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div><div class="db-popup__inner"><div class="db-tooltip__info_text"><a href="/lodestone/character/42143721/">Chame Huran</a></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--12 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/29/2905a666572f653c85b610ab8b9027fb9cf465d8.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+						
+	
+	<div class="mirage_staining unpaitable"></div>
+
+
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><div class="mirage_staining--19 unpaitable"></div><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/84/847fe1cb08f414c4d38febc80dec3aa1cd77828f.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="ex_bind">BIND</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/te5gEgEroS6xWX-bPrAVizJcSg.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管可" data-tooltip="ミラージュドレッサー保管可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_common">インテグラル・クラフターリング<span class="icon"></span></h2><div class="db-tooltip__item__mirage clearifx"><div class="db-tooltip__item__mirage__ic"><img src="https://lds-img.finalfantasyxiv.com/itemicon/ba/baebc2fd0a60fd2424b78c16bf8dc8282496c545.png?n7.25" width="32" height="32" alt="" class="ic_reflection"><div class="tooltip__item__mirage__frame"></div></div><p>エンペラーズ・ニューリング<a href="/lodestone/playguide/db/item/9665ddcaccf/" class="db-tooltip__item__mirage__btn"></a></p></div><p class="db-tooltip__item__category">指輪</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/b004cf9607c/?hq=1"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 560</div><div class="db-popup__inner"><div class="db-tooltip__item_spec"><div class="clearfix"><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--armor">物理防御力</div><div class="db-tooltip__item_spec__name db-tooltip__item_spec__name--last">魔法防御力</div></div><div class="clearfix"><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--armor"><strong class="">1</strong></div><div class="db-tooltip__item_spec__value db-tooltip__item_spec__value--last"><strong class="">1</strong></div></div></div></div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">クラフター</div><div class="db-tooltip__item_equipment__level">Lv 90～</div></div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>加工精度</span> +109</li><li class=""><span>CP</span> +36</li></ul><h3 class="db-tooltip__sub_title">Materia</h3><hr class="db-tooltip__line"><ul class="db-tooltip__materia"><li class="clearfix db-tooltip__materia__normal"><div class="socket materia7"></div><div class="db-tooltip__materia__txt">魔匠のメガマテリジャ<br><span class="db-tooltip__materia__txt--base">CP +7</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materia8"></div><div class="db-tooltip__materia__txt">巨匠のエクスマテリジャ<br><span class="db-tooltip__materia__txt--base">加工精度 +13</span></div></li><li class="clearfix db-tooltip__materia__forbidden"><div class="socket materiga"></div><div class="db-tooltip__materia__txt">巨匠のマテリガ<br><span class="db-tooltip__materia__txt--base">加工精度 +4</span></div></li></ul><h3 class="db-tooltip__sub_title">Craft &amp; Repair</h3><hr class="db-tooltip__line"><ul class="db-tooltip__item_repair"><li><span class="db-tooltip__item_repair__title">耐久度</span><span class="txt_durability_calc_099">61%</span></li><li><span class="db-tooltip__item_repair__title">錬精度</span><span>49%</span></li><li><span class="db-tooltip__item_repair__title">修理レベル</span><span>木工師 Lv 80～</span></li><li><span class="db-tooltip__item_repair__title">修理資材</span><span>ダークマターG8</span></li><li><span class="db-tooltip__item_repair__title">マテリア装着レベル</span><span>クラフター Lv 90～</span></li></ul><ul class="db-tooltip__item-info__list"><li>マテリア精製:<span>○</span></li><li>武具投影:<span>○</span></li><li>分解適正スキル:<span>560.00</span></li><li>染色:<span>×</span></li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p><span class="db-view__sells">SHOP販売価格:</span><a href="/lodestone/playguide/db/shop/?category2=gil&amp;q=%22%E3%82%A4%E3%83%B3%E3%83%86%E3%82%B0%E3%83%A9%E3%83%AB%E3%83%BB%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%22">21,283 Gil</a></p><span><span class="db-tooltip__sells">買取価格:</span>424 Gil</span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div><div class="db-popup__inner"><div class="db-tooltip__info_text"><a href="/lodestone/character/24525741/">Zen Zera</a></div></div></div></div></div>
+
+			
+		</div>
+	
+				
+		
+		<div class="character__side__item_icon character__side__item_icon--13 ic_reflection_box js__db_tooltip tooltip_pos__right_space" onflg="0">
+			
+				<img src="https://lds-img.finalfantasyxiv.com/itemicon/ea/ea3774acb77f7841f01d5c3df9e8d7f260e9d079.png?n7.25" width="34" height="34" alt="" class="character__side__item_icon__img">
+				<div class="character__side__item_icon character__side__item_icon--frame"></div>
+				
+					
+					
+						
+
+					
+				
+				
+
+
+<div class="db-tooltip db-tooltip__wrapper item_detail_box"><div class="db-tooltip__l_main"><div class="popup_w412_body_gold"><div class="clearfix"><div class="db-tooltip__header clearfix"><div class="db-tooltip__item__icon"><img src="https://lds-img.finalfantasyxiv.com/h/I/3yf_x6lEOM5blcAMdAeRiyZc2A.png" width="76" height="76" alt=""><img src="https://lds-img.finalfantasyxiv.com/itemicon/47/47627d02f90f9cbbb06319c8ec7ae7d3050d3a77.png?n7.25" width="64" height="64" alt="" class="db-tooltip__item__icon__item_image"><div class="db-tooltip__item__icon__cover"></div></div><div class="db-tooltip__item__txt"><div class="db-tooltip__item__element"><span class="rare">RARE</span><span class="ex_bind">EX</span><ul class="db-tooltip__item__storage"><li><img src="https://lds-img.finalfantasyxiv.com/h/C/GCeqpMdmlXy1eMmi0K_899AWnA.png" width="20" height="20" class="js__tooltip" alt="クレスト装飾不可" data-tooltip="クレスト装飾不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/w/bYicY0UQPnsG5cFAQClqLocfMw.png" width="20" height="20" class="js__tooltip" alt="ミラージュドレッサー保管不可" data-tooltip="ミラージュドレッサー保管不可"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/5/oa00pPEkTk1Mc-dDLmJ7mc2h4o.png" width="20" height="20" class="js__tooltip" alt="愛蔵品キャビネット収納不可" data-tooltip="愛蔵品キャビネット収納不可"></li></ul></div><h2 class="db-tooltip__item__name 	txt-rarity_common">マイスターの証:調理師</h2><p class="db-tooltip__item__category">ソウルクリスタル</p></div></div></div><div class="db-tooltip__bt_item_detail"><a href="/lodestone/playguide/db/item/bbaf09c51fc/"><img src="https://lds-img.finalfantasyxiv.com/h/n/6qzNivC4udOJblZ2lgDIdWnGl4.png" width="300" height="60" alt="このアイテムの情報を見る"></a></div><div class="db-tooltip__item__level ">ITEM LEVEL 136</div><div class="db-popup__inner"><div class="db-tooltip__item_equipment"><div class="db-tooltip__item_equipment__class">調理師</div><div class="db-tooltip__item_equipment__level">Lv 55～</div></div><hr class="db-tooltip__line"><div class="db-tooltip__help_text">調理師のマイスターとして認められた証</div><h3 class="db-tooltip__sub_title">Bonuses</h3><hr class="db-tooltip__line"><ul class="db-tooltip__basic_bonus"><li class=""><span>作業精度</span> +20</li><li class=""><span>加工精度</span> +20</li><li class=""><span>CP</span> +15</li></ul></div><div class="db-popup__inner"><hr class="db-tooltip__line"><div class="db-tooltip__item_footer"><p><span class="db-view__sells">SHOP販売:</span>なし</p><span class="db-view__unsellable"><span class="db-tooltip__unsellable">売却不可</span></span><span class="db-tooltip__market_notsell">マーケット取引不可</span></div></div></div></div></div>
+
+			
+		</div>
+	
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="character__side__currency">
+	
+		
+		
+	
+
+	<ul class="character__side__currency__list clearfix">
+		
+		
+			
+				
+				<li>
+					
+	
+		<a href="/lodestone/playguide/db/shop/?q=%22%E3%82%A2%E3%83%A9%E3%82%AC%E3%83%B3%E3%83%88%E3%83%BC%E3%83%A0%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%3A%E8%A9%A9%E5%AD%A6%22">
+	
+
+						<img src="https://lds-img.finalfantasyxiv.com/h/p/yLKCqTGCJ_XMtEbBMBnPMlJR8s.png" alt="" width="32" height="32" class="js__tooltip" data-tooltip="アラガントームストーン:詩学">
+						1412
+						
+					
+	
+		</a>
+	
+
+				</li>
+			
+				
+				<li>
+					
+	
+		<div>
+	
+
+						<img src="https://lds-img.finalfantasyxiv.com/h/N/Z1hIVKTY_lqGCcQcAlZn-nwqD4.png" alt="" width="32" height="32" class="js__tooltip" data-tooltip="アラガントームストーン:美学<br>※モードゥナのレヴナンツトールにいるNPC“オーリアナ”(X:22.7 Y:6.6)において、アラガントームストーン:天道と交換できます。">
+						0
+						
+					
+	
+		</div>
+	
+
+				</li>
+			
+				
+				<li>
+					
+	
+		<a href="/lodestone/playguide/db/shop/?q=%22%E3%82%A2%E3%83%A9%E3%82%AC%E3%83%B3%E3%83%88%E3%83%BC%E3%83%A0%E3%82%B9%E3%83%88%E3%83%BC%E3%83%B3%3A%E5%A4%A9%E9%81%93%22">
+	
+
+						<img src="https://lds-img.finalfantasyxiv.com/h/H/GFN5s0s9BgS_jfHjjxSi95YDG0.png" alt="" width="32" height="32" class="js__tooltip" data-tooltip="アラガントームストーン:天道">
+						0
+						
+					
+	
+		</a>
+	
+
+				</li>
+			
+				
+		
+
+		
+		
+			
+				
+					<li>
+						
+	
+		<div>
+	
+
+							<img src="https://lds-img.finalfantasyxiv.com/h/U/rJKUbxNkQVeN72t6rfKgBPbAoI.png
+" width="32" height="32" class="js__tooltip" data-tooltip="クラフタースクリップ:白貨<br>※モードゥナのスクリップ取引窓口(X:22.4 Y:6.7)で紫貨へ交換できます。">
+							3195
+						
+	
+		</div>
+	
+
+					</li>
+				
+			
+				
+					<li>
+						
+	
+		<a href="/lodestone/playguide/db/shop/?q=%22%E3%82%AF%E3%83%A9%E3%83%95%E3%82%BF%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%83%E3%83%97%3A%E7%B4%AB%E8%B2%A8%22">
+	
+
+							<img src="https://lds-img.finalfantasyxiv.com/h/K/h9MjKo2tjlLL1e4iV8SrBBtjj0.png
+" width="32" height="32" class="js__tooltip" data-tooltip="クラフタースクリップ:紫貨">
+							3340
+						
+	
+		</a>
+	
+
+					</li>
+				
+			
+				
+			
+		
+
+		
+		
+			
+				
+					<li>
+						
+	
+		<div>
+	
+
+							<img src="https://lds-img.finalfantasyxiv.com/h/F/Jud8K4-LquMpsdmomg3-NLbTTY.png
+" width="32" height="32" class="js__tooltip" data-tooltip="ギャザラースクリップ:白貨<br>※モードゥナのスクリップ取引窓口(X:22.4 Y:6.7)で紫貨へ交換できます。">
+							2839
+						
+	
+		</div>
+	
+
+					</li>
+				
+			
+				
+					<li>
+						
+	
+		<a href="/lodestone/playguide/db/shop/?q=%22%E3%82%AE%E3%83%A3%E3%82%B6%E3%83%A9%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%83%E3%83%97%3A%E7%B4%AB%E8%B2%A8%22">
+	
+
+							<img src="https://lds-img.finalfantasyxiv.com/h/K/u7c7fp1zwm36IcXmFz20L_qZJo.png
+" width="32" height="32" class="js__tooltip" data-tooltip="ギャザラースクリップ:紫貨">
+							1990
+						
+	
+		</a>
+	
+
+					</li>
+				
+			
+				
+			
+		
+	</ul>
+</div>
+
+</div>
+
+
+
+
+<div class="ldst__side__box">
+
+	
+	<div class="heading--side">
+		<h3>フリーカンパニー</h3>
+		<a href="/lodestone/freecompany/9229564486342542946/" class="heading--side__icon icon-list__side js__tooltip" data-tooltip="もっと見る"></a>
+	</div>
+
+	<div class="entry">
+		<a href="/lodestone/freecompany/9229564486342542946/" class="entry__freecompany parts__space--reset">
+			<div class="entry__freecompany__crest">
+				<div class="entry__freecompany__crest--position">
+					<img src="https://lds-img.finalfantasyxiv.com/h/V/strFm2JQDmMpQN9NHfCA2X3vGI.png" width="68" height="68" alt="" class="entry__freecompany__crest__base">
+					<div class="entry__freecompany__crest__image">
+						
+
+		
+			<img src="https://img2.finalfantasyxiv.com/c/B28_26086146b1dac887f1745fd5fc8b4555_93_64x64.png" width="64" height="64">
+		
+		<img src="https://img2.finalfantasyxiv.com/c/F3f_fdeb76450beedbae580f24b8275fbeb0_00_64x64.png" width="64" height="64">
+		<img src="https://img2.finalfantasyxiv.com/c/S03_0fcfdbb05debe4f139728065b3827bc0_00_64x64.png" width="64" height="64">
+
+
+					</div>
+				</div>
+			</div>
+			<div class="entry__freecompany__box">
+				<p class="entry__freecompany__gc">黒渦団 &lt;盟友&gt;</p>
+				<p class="entry__freecompany__name--side entry__name--freecompany">BlackAnasy</p>
+				<p class="entry__freecompany__gc">
+					Blasy
+				</p>
+			</div>
+		</a>
+	</div>
+
+	<ul class="ldst__side__btn parts__space--reset">
+		<li><a href="/lodestone/freecompany/9229564486342542946/member/" class="btn__menu">メンバー</a></li>
+		<li><a href="/lodestone/freecompany/9229564486342542946/forum/" class="btn__menu">フォーラム</a></li>
+	</ul>
+
+	<h4 class="heading--side--sm">最新アクティビティ</h4>
+	
+		<div class="side__list__box">
+		
+
+	<div class="entry more_"><a href="/lodestone/ranking/fc/monthly/202506/?filter=1&amp;worldname=Anima&amp;gcid=1" class="entry__activity"><div class="entry__activity__box"><div class="entry__activity__box__header clearfix"><time class="entry__activity__time"><span id="datetime-f7341ae7fee" class="datetime_dynamic_ymdhm" data-epoch="1751376511">2025/07/01 22:28</span><script>document.getElementById('datetime-f7341ae7fee').innerHTML = ldst_strftime_dynamic_ymdhm(1751376511);</script></time><div class="entry__activity__data"><p class="entry__activity__data--name">BlackAnasy</p><p class="entry__activity__data--world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p></div></div><div class="entry__activity__txt"><div class="entry__activity__txt--icon"><span class="icon-activity__rankin js__tooltip" data-tooltip="ランキング"></span></div><div class="entry__activity__txt--message"><p>「フリーカンパニー月間ランキング（黒渦団）」第354位になりました。</p></div></div></div></a><a href="/lodestone/freecompany/9229564486342542946/" class="entry__activity__link"><div class="entry__chara__icon"><div class="entry__activity__crest"><img src="https://lds-img.finalfantasyxiv.com/h/V/strFm2JQDmMpQN9NHfCA2X3vGI.png" width="50" height="50"><img src="https://img2.finalfantasyxiv.com/c/B28_26086146b1dac887f1745fd5fc8b4555_93_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/F3f_fdeb76450beedbae580f24b8275fbeb0_00_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/S03_0fcfdbb05debe4f139728065b3827bc0_00_64x64.png" width="64" height="64"></div></div></a></div>
+
+
+	<div class="entry more_"><a href="/lodestone/ranking/fc/weekly/202523/?filter=1&amp;worldname=Anima&amp;gcid=1" class="entry__activity"><div class="entry__activity__box"><div class="entry__activity__box__header clearfix"><time class="entry__activity__time"><span id="datetime-00fdfd61a58" class="datetime_dynamic_ymdhm" data-epoch="1750078408">2025/06/16 21:53</span><script>document.getElementById('datetime-00fdfd61a58').innerHTML = ldst_strftime_dynamic_ymdhm(1750078408);</script></time><div class="entry__activity__data"><p class="entry__activity__data--name">BlackAnasy</p><p class="entry__activity__data--world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p></div></div><div class="entry__activity__txt"><div class="entry__activity__txt--icon"><span class="icon-activity__rankin js__tooltip" data-tooltip="ランキング"></span></div><div class="entry__activity__txt--message"><p>「フリーカンパニーランキング（黒渦団）」第428位になりました。</p></div></div></div></a><a href="/lodestone/freecompany/9229564486342542946/" class="entry__activity__link"><div class="entry__chara__icon"><div class="entry__activity__crest"><img src="https://lds-img.finalfantasyxiv.com/h/V/strFm2JQDmMpQN9NHfCA2X3vGI.png" width="50" height="50"><img src="https://img2.finalfantasyxiv.com/c/B28_26086146b1dac887f1745fd5fc8b4555_93_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/F3f_fdeb76450beedbae580f24b8275fbeb0_00_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/S03_0fcfdbb05debe4f139728065b3827bc0_00_64x64.png" width="64" height="64"></div></div></a></div>
+
+
+	<div class="entry more_"><a href="/lodestone/ranking/fc/weekly/202522/?filter=1&amp;worldname=Anima&amp;gcid=1" class="entry__activity"><div class="entry__activity__box"><div class="entry__activity__box__header clearfix"><time class="entry__activity__time"><span id="datetime-845ca6ec40f" class="datetime_dynamic_ymdhm" data-epoch="1749473761">2025/06/09 21:56</span><script>document.getElementById('datetime-845ca6ec40f').innerHTML = ldst_strftime_dynamic_ymdhm(1749473761);</script></time><div class="entry__activity__data"><p class="entry__activity__data--name">BlackAnasy</p><p class="entry__activity__data--world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p></div></div><div class="entry__activity__txt"><div class="entry__activity__txt--icon"><span class="icon-activity__rankin js__tooltip" data-tooltip="ランキング"></span></div><div class="entry__activity__txt--message"><p>「フリーカンパニーランキング（黒渦団）」第389位になりました。</p></div></div></div></a><a href="/lodestone/freecompany/9229564486342542946/" class="entry__activity__link"><div class="entry__chara__icon"><div class="entry__activity__crest"><img src="https://lds-img.finalfantasyxiv.com/h/V/strFm2JQDmMpQN9NHfCA2X3vGI.png" width="50" height="50"><img src="https://img2.finalfantasyxiv.com/c/B28_26086146b1dac887f1745fd5fc8b4555_93_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/F3f_fdeb76450beedbae580f24b8275fbeb0_00_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/S03_0fcfdbb05debe4f139728065b3827bc0_00_64x64.png" width="64" height="64"></div></div></a></div>
+
+
+	<div class="entry more_"><a href="/lodestone/ranking/fc/weekly/202521/?filter=1&amp;worldname=Anima&amp;gcid=1" class="entry__activity"><div class="entry__activity__box"><div class="entry__activity__box__header clearfix"><time class="entry__activity__time"><span id="datetime-4c554e0ab4a" class="datetime_dynamic_ymdhm" data-epoch="1748869560">2025/06/02 22:06</span><script>document.getElementById('datetime-4c554e0ab4a').innerHTML = ldst_strftime_dynamic_ymdhm(1748869560);</script></time><div class="entry__activity__data"><p class="entry__activity__data--name">BlackAnasy</p><p class="entry__activity__data--world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p></div></div><div class="entry__activity__txt"><div class="entry__activity__txt--icon"><span class="icon-activity__rankin js__tooltip" data-tooltip="ランキング"></span></div><div class="entry__activity__txt--message"><p>「フリーカンパニーランキング（黒渦団）」第482位になりました。</p></div></div></div></a><a href="/lodestone/freecompany/9229564486342542946/" class="entry__activity__link"><div class="entry__chara__icon"><div class="entry__activity__crest"><img src="https://lds-img.finalfantasyxiv.com/h/V/strFm2JQDmMpQN9NHfCA2X3vGI.png" width="50" height="50"><img src="https://img2.finalfantasyxiv.com/c/B28_26086146b1dac887f1745fd5fc8b4555_93_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/F3f_fdeb76450beedbae580f24b8275fbeb0_00_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/S03_0fcfdbb05debe4f139728065b3827bc0_00_64x64.png" width="64" height="64"></div></div></a></div>
+
+
+	<div data-min_id="7656035140" class="entry more_" data-has_next=""><a href="/lodestone/ranking/fc/weekly/202519/?filter=1&amp;worldname=Anima&amp;gcid=1" class="entry__activity"><div class="entry__activity__box"><div class="entry__activity__box__header clearfix"><time class="entry__activity__time"><span id="datetime-c3ed46aa978" class="datetime_dynamic_ymdhm" data-epoch="1747660182">2025/05/19 22:09</span><script>document.getElementById('datetime-c3ed46aa978').innerHTML = ldst_strftime_dynamic_ymdhm(1747660182);</script></time><div class="entry__activity__data"><p class="entry__activity__data--name">BlackAnasy</p><p class="entry__activity__data--world"><i class="xiv-lds xiv-lds-home-world js__tooltip" data-tooltip="ホームワールド"></i>Anima [Mana]</p></div></div><div class="entry__activity__txt"><div class="entry__activity__txt--icon"><span class="icon-activity__rankin js__tooltip" data-tooltip="ランキング"></span></div><div class="entry__activity__txt--message"><p>「フリーカンパニーランキング（黒渦団）」第398位になりました。</p></div></div></div></a><a href="/lodestone/freecompany/9229564486342542946/" class="entry__activity__link"><div class="entry__chara__icon"><div class="entry__activity__crest"><img src="https://lds-img.finalfantasyxiv.com/h/V/strFm2JQDmMpQN9NHfCA2X3vGI.png" width="50" height="50"><img src="https://img2.finalfantasyxiv.com/c/B28_26086146b1dac887f1745fd5fc8b4555_93_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/F3f_fdeb76450beedbae580f24b8275fbeb0_00_64x64.png" width="64" height="64"><img src="https://img2.finalfantasyxiv.com/c/S03_0fcfdbb05debe4f139728065b3827bc0_00_64x64.png" width="64" height="64"></div></div></a></div>
+
+
+
+
+		</div>
+	
+
+
+</div>
+
+
+
+
+
+
+
+<div class="ldst__side__box">
+
+<div class="heading--side">
+	<h3>PvPチーム</h3>
+</div>
+
+	<p class="parts__zero--side">所属しているPvPチームがありません。</p>
+
+
+</div>
+
+
+
+
+<div class="ldst__side__box">
+
+
+<div class="heading--side">
+	<h3>イベント</h3>
+	<a href="/lodestone/character/39124727/event/" class="heading--side__icon icon-list__side js__tooltip" data-tooltip="もっと見る"></a>
+</div>
+
+<ul class="btn__mycharacter parts__space--reset">
+	
+		<li><a href="/lodestone/my/event/post/" class="btn__menu"><span class="icon__create">イベント作成</span></a></li>
+	
+	<li><a href="/lodestone/event/" class="btn__menu"><span class="icon__search">募集を探す</span></a></li>
+</ul>
+
+
+
+
+
+</div>
+
+
+
+
+<div class="ldst__side__box">
+<div class="heading--side">
+	<h3>アチーブメント</h3>
+	<a href="/lodestone/character/39124727/achievement/" class="heading--side__icon icon-list__side js__tooltip" data-tooltip="もっと見る"></a>
+</div>
+
+
+
+
+	<h4 class="heading--side--sm">達成ヒストリー</h4>
+	<ul class="side__list__box">
+		
+			<li class="entry">
+				<a href="/lodestone/character/39124727/achievement/detail/2017/" class="entry__achievement--side">
+					<div class="entry__achievement__item">
+						<div class="entry__achievement__frame">
+							<img src="https://lds-img.finalfantasyxiv.com/itemicon/d7/d703ae52299c61264d64032c1df38e7f2f8c6ef2.png?n7.25" width="40" height="40" alt="">
+						</div>
+					</div>
+					<div class="entry__achievement--list entry__achievement--history">
+						<time class="entry__activity__time">
+
+<span id="datetime-c65927a1b99">2022/12/10</span>
+<script>
+document.getElementById('datetime-c65927a1b99').innerHTML = ldst_strftime(1670603946, 'YMD');
+</script>
+
+</time>
+						<p class="entry__activity__txt">クエスト「アルパの導き手」を達成しました。
+						</p>
+					</div>
+				</a>
+			</li>
+		
+			<li class="entry">
+				<a href="/lodestone/character/39124727/achievement/detail/3046/" class="entry__achievement--side">
+					<div class="entry__achievement__item">
+						<div class="entry__achievement__frame">
+							<img src="https://lds-img.finalfantasyxiv.com/itemicon/66/66324fa2074f22e34ba8504952bec4f5cc652c3f.png?n7.25" width="40" height="40" alt="">
+						</div>
+					</div>
+					<div class="entry__achievement--list entry__achievement--history">
+						<time class="entry__activity__time">
+
+<span id="datetime-7bf56639ca4">2022/12/09</span>
+<script>
+document.getElementById('datetime-7bf56639ca4').innerHTML = ldst_strftime(1670592412, 'YMD');
+</script>
+
+</time>
+						<p class="entry__activity__txt">PvP「クリスタルベアラー：ブロンズ」を達成しました。
+						</p>
+					</div>
+				</a>
+			</li>
+		
+			<li class="entry">
+				<a href="/lodestone/character/39124727/achievement/detail/2214/" class="entry__achievement--side">
+					<div class="entry__achievement__item">
+						<div class="entry__achievement__frame">
+							<img src="https://lds-img.finalfantasyxiv.com/itemicon/6c/6ce5d8efbfd10ac1843e7ecce046a225cacbefb6.png?n7.25" width="40" height="40" alt="">
+						</div>
+					</div>
+					<div class="entry__achievement--list entry__achievement--history">
+						<time class="entry__activity__time">
+
+<span id="datetime-9eee45e67a1">2022/11/28</span>
+<script>
+document.getElementById('datetime-9eee45e67a1').innerHTML = ldst_strftime(1669564486, 'YMD');
+</script>
+
+</time>
+						<p class="entry__activity__txt">アイテム「エウレカウェポン：シフィアス・エウレカ」を達成しました。
+						</p>
+					</div>
+				</a>
+			</li>
+		
+	</ul>
+
+
+</div>
+
+
+
+
+
+
+
+
+	
+
+
+		
+	
+
+
+			
+		</div>
+	
+	</div>
+	
+</div><script type="text/javascript" id="" charset="">(function(g,h,k,e,c,f){window[c]=window[c]||[];var m=function(a,d,q,l,r,t){l=a.getElementsByTagName(d)[0];a=a.createElement(d);d="text/javascript";a.type=d;a.async=q;a.onload=function(){window[r].init({argument:t,auto:!0})};a._p=l;return a},b=m(g,h,k,e,c,f),n="//taj",p=e+f+"/cmt.js";b.src=n+"1."+p;b._p.parentNode.insertBefore(b,b._p);b.onerror=function(a){a=m(g,h,k,e,c,f);a.src=n+"2."+p;a._p.parentNode.insertBefore(a,a._p)}})(document,"script",!0,"ebis.ne.jp/","ebis","n3xyJrCq");</script>
+
+
+
+
+	<div id="link_spsite" class="link_sp-site"><a href="javascript:void(0)">スマートフォン版へ</a><br></div><footer class="l__footer"><div class="page-top"><span class="page-top__btn" style="right: 64px; opacity: 0.5;"></span></div><div class="l__footer__inner"><div class="l__footer__logo"><a href="/lodestone/"><img src="https://lds-img.finalfantasyxiv.com/h/L/EbtcXqPUGzsVYdi23FpUR25oH4.png" width="320" height="32" alt=""></a></div><div class="l__footer__shop"><a href="http://store.jp.square-enix.com/item_list.html#SERIES=11" target="_blank" class="l__footer__shop__btn" rel=" noopener">関連商品</a><a href="http://store.jp.square-enix.com/CATEGORY/GAME/#SERIES=11&amp;pointercat=SERIES" target="_blank" class="l__footer__shop__btn" rel=" noopener">e-STOREで購入</a><a href="/lodestone/playguide/#returner" class="l__footer__shop__btn">ゲームダウンロード</a></div><p class="l__footer__officiel">Official Information</p><ul class="l__footer__sns"><li><a href="https://www.facebook.com/finalfantasyxivjp/" target="_blank" class="l__footer__sns--link" rel=" noopener"><i class="xiv-lds xiv-lds-facebook xiv-lds-3x"></i><span>Facebook</span></a></li><li class="l__footer__sns--twitter"><a href="https://x.com/ff_xiv_jp" target="_blank" rel=" noopener"><i class="xiv-lds xiv-lds-x xiv-lds-3x"></i>X</a> / <a href="https://x.com/FFXIV_NEWS_JP" target="_blank" rel=" noopener">News</a></li><li><a href="http://www.youtube.com/finalfantasyxiv" target="_blank" class="l__footer__sns--link" rel=" noopener"><i class="xiv-lds xiv-lds-youtube xiv-lds-3x"></i><span>YouTube</span></a></li><li><a href="https://www.instagram.com/ffxiv/" target="_blank" class="l__footer__sns--link" rel=" noopener"><i class="xiv-lds xiv-lds-instagram xiv-lds-3x"></i><span>Instagram</span></a></li><li><a href="https://www.twitch.tv/finalfantasyxiv" target="_blank" class="l__footer__sns--link" rel=" noopener"><i class="xiv-lds xiv-lds-twitch xiv-lds-3x"></i><span>Twitch</span></a></li><li><a href="https://lin.ee/GHvscZd" target="_blank" class="l__footer__sns--link" rel=" noopener"><i class="xiv-lds xiv-lds-line xiv-lds-3x"></i><span>LINE</span></a></li><li><a href="https://bsky.app/profile/jp.finalfantasyxiv.com" target="_blank" class="l__footer__sns--link" rel=" noopener"><i class="xiv-lds xiv-lds-bluesky xiv-lds-3x"></i><span>Bluesky</span></a></li></ul><ul class="l__footer__link-list"><li><a href="https://www.jp.square-enix.com/cero/" target="_blank" rel=" noopener">レーティング制度について</a></li><li><a href="https://www.jp.square-enix.com/caution.html" target="_blank" class="caution" rel=" noopener">著作権について</a></li><li><a href="https://www.jp.square-enix.com/privacy/" target="_blank" rel=" noopener">プライバシーポリシー</a></li><li><a href="https://support.jp.square-enix.com/?n=5" target="_blank" rel=" noopener">サポートセンター</a></li><li class="link_license" id="link_license"><a href="/license/" target="_blank" rel=" noopener">ライセンス</a></li><li><a href="https://support.jp.square-enix.com/rule.php?id=5381&amp;la=0" target="_blank" rel=" noopener">ルール＆ポリシー</a></li><li><a href="/transmission_information/" target="_blank" rel=" noopener">利用者情報の外部送信について</a></li></ul></div><div class="l__footer__legal-area"><div class="l__footer__legal-area__inner clearfix"><div class="l__footer__legal-area__box"><ul class="l__footer__legal-area__bnr-list"><li><img src="https://lds-img.finalfantasyxiv.com/h/D/egrXwtjrQC8nFGhA1rWb0PO8R0.png" width="245" height="39" alt="PlayStation PS5 PS4"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/M/5T9l7AE_cSDlsD4EM4rjEQRgCE.png" width="227" height="39" alt="XBOX SERIES XIS"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/A/yMH5ByftiG5IuGyj1wY_JAH4JU.png" width="102" height="39" alt="Windows"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/v/hyXqlwktN4v0EssRTzkbMf_7OQ.png" width="30" height="39" alt="Mac"></li><li><img src="https://lds-img.finalfantasyxiv.com/h/U/15QxPO___EcPlhMI9ydNRRxEY8.png" width="90" height="39" alt="STEAM"></li></ul><ul class="l__footer__legal-area__bnr-list"><li><img src="https://lds-img.finalfantasyxiv.com/h/1/2jP3Gk7HvXGme3xT0WHl_BNHNU.png" width="33" height="39" alt="CERO"></li></ul><p class="l__footer__legal-area__text">©2025 Sony Interactive Entertainment LLC."PlayStation Family Mark", "PlayStation", "PS5 logo", "PS5", "PS4 logo" and "PS4" are registered trademarks or trademarks of Sony Interactive Entertainment Inc.<br>Microsoft, the Xbox Sphere mark, the Series X|S logo and Xbox Series X|S are trademarks of the Microsoft group of companies.<br>Windows is either a registered trademark or trademark of Microsoft Corporation in the United States and/or other countries.<br>Mac is a trademark of Apple Inc.<br>©2025 Valve Corporation. Steam and the Steam logo are trademarks and/or registered trademarks of Valve Corporation in the U.S. and/or other countries.</p></div><div class="l__footer__legal-area__box"><p class="l__footer__legal-area__copyright">© SQUARE ENIX<br>LOGO ILLUSTRATION:© YOSHITAKA AMANO</p></div></div></div></footer>
+
+
+
+
+<script src="https://lds-img.finalfantasyxiv.com/pc/ja/js/i18n.js?1751355923"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/i/2ur_0e4qXk_NwNv0bGjrUHThCM.js"></script><iframe height="0" width="0" style="display: none; visibility: hidden;"></iframe><iframe allow="join-ad-interest-group" data-tagging-id="AW-992958796" data-load-time="1751602986470" height="0" width="0" src="https://td.doubleclick.net/td/rul/992958796?random=1751602986462&amp;cv=11&amp;fst=1751602986462&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be5710z8812031932za200zb812031932&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891&amp;u_w=2560&amp;u_h=1440&amp;url=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ref=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20&amp;npa=0&amp;pscdl=noapi&amp;auid=2086524027.1751598980&amp;uaa=x86&amp;uab=64&amp;uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.50%7CMicrosoft%2520Edge%3B138.0.3351.55&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config" style="display: none; visibility: hidden;"></iframe><iframe allow="join-ad-interest-group" data-tagging-id="AW-992958796" data-load-time="1751602986474" height="0" width="0" src="https://td.doubleclick.net/td/rul/992958796?random=1751602986472&amp;cv=11&amp;fst=1751602986472&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be5710z8812031932za200zb812031932&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891&amp;u_w=2560&amp;u_h=1440&amp;url=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ref=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20&amp;npa=0&amp;pscdl=noapi&amp;auid=2086524027.1751598980&amp;uaa=x86&amp;uab=64&amp;uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.50%7CMicrosoft%2520Edge%3B138.0.3351.55&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;_tu=Cg" style="display: none; visibility: hidden;"></iframe><iframe allow="join-ad-interest-group" data-tagging-id="AW-836955280" data-load-time="1751602986506" height="0" width="0" src="https://td.doubleclick.net/td/rul/836955280?random=1751602986500&amp;cv=11&amp;fst=1751602986500&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be5710v9194427670z8812031932za200zb812031932&amp;gcd=13l3l3l3l1l1&amp;dma=0&amp;tag_exp=101509157~103116026~103200004~103233427~103351869~103351871~104684208~104684211~104718208~104839054~104839056~104885889~104885891&amp;u_w=2560&amp;u_h=1440&amp;url=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F5075438%2F&amp;ref=https%3A%2F%2Fjp.finalfantasyxiv.com%2Flodestone%2Fcharacter%2F39124727%2Fblog%2F%3Fpage%3D4&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Kako%20Jun%20%E6%97%A5%E8%A8%98%E3%80%8C%E6%AD%A9%E3%81%BF152.%20%E3%82%81%E3%81%A3%E3%81%A1%E3%82%83%E3%83%9E%E3%82%A4%E3%83%8A%E3%83%BC%E3%81%AAFF%E3%81%AE%E6%9C%AC%E3%82%92%E7%B4%B9%E4%BB%8B%E3%81%97%E3%81%BE%E3%81%99%E3%80%8D%20%7C%20FINAL%20FANTASY%20&amp;npa=0&amp;pscdl=noapi&amp;auid=2086524027.1751598980&amp;uaa=x86&amp;uab=64&amp;uafvl=Not)A%253BBrand%3B8.0.0.0%7CChromium%3B138.0.7204.50%7CMicrosoft%2520Edge%3B138.0.3351.55&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=19.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config" style="display: none; visibility: hidden;"></iframe>
+<script src="https://lds-img.finalfantasyxiv.com/h/g/uQNBgvCaabd4gw5kMpaT-psp1Q.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/b/RKD_bGx738E81TyiPQN4kGf-_Y.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/Z/wqo4GxX1wALdnxx6xOv38NxFVY.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/e/TSPHxkEhdcyaPMm0rpoBtk1dZA.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/P/O9-IKBqOphhkhVvm2QPrR9x5p4.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/9/TTeYt1mN0BF3R1Av3fWlknchv4.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/8/b_tPmOnEw1tyr2dp2InkGxUlMA.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/Y/6WaukM6m3WFE2JXrCEb6tsknik.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/E/ImNUSWkI-O9dQP5ADa41RiGxGY.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/t/kQLYFR8rOESAOiyT9o2PsRnLq0.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/r/Y_JvrIbgN8Xtl2ujedLKSELxYU.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/i/XmnZpu1aR3XmPVAiCoEqlYB8hU.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/A/LATlIIBarKmGFTTVid87k_GPFg.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/W/r-0ziwRwdsVj1lEyFHfmVyFgKw.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/M/piXyeCeUEtNAzCIq6jXoqNimzE.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/9/pf80o5uRrWwGkWRSEJjvfK0ndQ.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/M/OIfkF0BnyASNQ0RswButWbIKCU.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/U/jhEwPt7MvJy47-ExjjZ3lHW3qI.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/0/f52zA7ACWvjEMB1oWe8kfyGWH0.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/l/-_ePiHXNE_1t8LnRcmRAbhRME8.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/P/MYGDtxveSuUwuhprm8oj1Hhuq8.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/M/it7tc9wvjlJJstEQUNjiModhdM.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/n/HMQm8_JEoqrSmuv5RmmKgTldGc.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/0/j_cpIlVjAeks6y86N6Ij6c-2zw.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/B/QtL7MpYZceLSMO7FqMzOeyzNAI.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/h/NnUa9nzEy8QLFuJau-vgaP8TG8.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/i/r833kNqOfzlfhGG9JcVezyKEPA.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/J/bn7hi1K54nJoYzQDvBs-W_myaM.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/A/BQdbDebhaep1cTffUqTVhcd6O8.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/4/MyeAOp1aN6EdaDdgK9g-dcORUk.js"></script>
+<script src="https://lds-img.finalfantasyxiv.com/h/R/IdmdfnmB2AY4sDNcyfiZZGOmRo.js"></script>
+
+
+<div id="dialog_bg" style="opacity:0; visibility: hidden;"></div>
+<!-- dialog -->
+<div name="ldstDialog" class="overlay__area js__overlay" style="opacity: 0; visibility: hidden; top: 6312.5px; left: 433px;">
+	<p class="overlay__text--icon"></p>
+
+	<div class="outbound_consent hide">
+		<input type="checkbox" name="outbound_consent" value="1" id="outbound_consent" class="form__checkbox">
+		<label for="outbound_consent" class="form__checkbox__label form__outbound">
+			外部参照に関する注意事項に同意しました。<br>今後、この画面をスキップします。
+		</label>
+	</div>
+
+	<!-- SIMPLE DIALOG -->
+	<a href="javascript:void(0);" class="js__dialog_btn btn__color--radius js__overlay_ok">OK</a>
+	<!-- //SIMPLE DIALOG -->
+	<!-- CONFIRM DIALOG -->
+	<ul class="js__dialog_btn overlay__btn js__overlay_btn">
+		<li><a href="javascript:void(0);" class="js__overlay_yes">はい</a></li>
+		<li><a href="javascript:void(0);" class="js__overlay_no">いいえ</a></li>
+	</ul>
+	<!-- //CONFIRM DIALOG -->
+</div>
+<!-- //dialog -->
+
+
+
+<div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><div class="tooltip__text" style="position: fixed; display: none;"></div><div id="eorzeadb_tooltip" style="display: none; position: absolute; top: 0px; left: 0px;"></div><div id="report-form" class="hide">
+	<!-- report_form -->	<form action="/lodestone/api/abuse_report/" method="POST" class="report_xhr_form" onsubmit="return false;">
+<input type="hidden" name="csrf_token" value="a5da37fec492d4afd38a652bab2865d61050cd13">
+	<input type="hidden" name="table_name">
+	<input type="hidden" name="table_id">
+	<input type="hidden" name="table_field">
+	<div id="report_box"><div id="report_box_in">
+		<div class="base_header_long"><div class="base_footer"><div class="base_body">
+
+			<h3 class="header_title"></h3>
+
+			<div class="input_area">
+				<div class="area_body"><div class="area_header"><div class="area_footer">
+	<h2 class="ic_silver">報告の対象内容</h2>
+</div></div></div>
+
+<div class="report_body_02 pt5 pb5"></div>
+
+<div class="area_body"><div class="area_header pt10"><div class="area_footer pb10">
+
+	<div class="report_target"></div>
+
+</div></div></div>
+
+
+<div class="report_body_02">
+
+	<div class="error_msg mt10 mb0 hide">内容に不備があります。</div>
+
+	<div class="inner">
+		<p class="txt_red mb5">（*）は必須入力箇所です。</p>
+
+		<div class="outer">
+			<div class="table_black m0auto">
+				<table class="table_style2">
+					<tbody><tr>
+						<th>報告者</th>
+						<td>
+							<div class="thumb"><img src="https://img2.finalfantasyxiv.com/f/725dbef5c489c3021aa65b39d2ed2607_2f698530a28d671d20278c8518c804c9fc0.jpg?1751600041" width="50" height="50" alt=""></div><!--
+							--><div class="player_id txt_yellow">Kako Jun&nbsp;<span><i class="xiv-lds xiv-lds-home-world"></i>Anima [Mana]</span></div>
+						</td>
+					</tr>
+					<tr class="reason">
+						<th>報告した理由</th>
+						<td>
+							<select name="report_reason_id" data-target_error_box=".reason">
+								<option value="">理由を選択してください。</option>
+								<option value="1">性的・差別行為</option>
+								<option value="2">迷惑行為</option>
+								<option value="3">その他</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="contents_head contents">
+						<th colspan="2">報告内容を記入してください。 <span class="txt_red small">*</span>
+						<div class="caption highlight relative">
+							<div class="txt_warning small">1000文字まで<br>改行は1文字としてカウントされます。</div>
+							<div class="input_charcounter_box">
+								
+								<span class="input_charcounter" data-target="#report_input_body" data-max_length="1000">0</span> / 			1000
+
+							</div>
+						</div>
+					</th>
+					</tr>
+					<tr class="contents">
+						<th colspan="2" class="pb0">
+						
+	<span class="error_message_body txt_warning hide"></span>
+
+						
+	<span class="error_message_common txt_warning hide"></span>
+
+						<textarea name="body" id="report_input_body" rows="13" data-target_error_box=".contents" placeholder="報告内容をできるだけ具体的に記入してください。"></textarea>
+						</th>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+
+	</div>
+	<!-- //inner -->
+
+	<hr>
+
+	<div class="bt_form clearfix">
+		<input type="submit" class="button bt_confirm">
+		<a href="javascript:void(0);" class="button bt_cancel sys_report_close"></a>
+	</div>
+
+</div>
+<!-- //report_body_02 -->
+
+			</div>
+
+			<div class="confirm_area hide">
+				<div class="area_body"><div class="area_header"><div class="area_footer">
+	<h2 class="ic_silver">報告の対象内容</h2>
+</div></div></div>
+
+<div class="report_body_02 pt5 pb5"></div>
+
+<div class="area_body"><div class="area_header pt10"><div class="area_footer pb10">
+
+	<div class="report_target"></div>
+	
+</div></div></div>
+
+<div class="confirm_area_inline"></div>
+<script type="text/html" id="tmpl_confirm_area">
+<div class="report_body_02">
+
+	<div class="confirm_msg mt10 mb0"><p>以下の内容を確認の上、問題がなければ「送信」をクリックしてください</p></div>
+
+	<div class="inner">
+
+		<div class="outer">
+			<div class="table_black m0auto">
+	
+				<table class="table_style2">
+					<tr class="reporter">
+						<th>報告者</th>
+						<td>
+							<div class="thumb"><img src="https://img2.finalfantasyxiv.com/f/725dbef5c489c3021aa65b39d2ed2607_2f698530a28d671d20278c8518c804c9fc0.jpg?1751600041" width="50" height="50" alt=""></div><!--
+							--><div class="player_id txt_yellow">Kako Jun&nbsp;<span><i class="xiv-lds xiv-lds-home-world"></i>Anima [Mana]</span></div>
+						</td>
+					</tr>
+					<tr class="reason">
+						<th>報告した理由</th>
+						<td>
+							<%= param.report_reason_id ? report_reason_str : '' %>
+						</td>
+					</tr>
+					<tr class="contents_head">
+						<th colspan="2">報告内容</th>
+					</tr>
+					<tr class="contents">
+						<th colspan="2">
+							<%== param.body.n2br() %>
+						</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<!-- //inner -->
+	
+	<hr>
+	
+	<div class="bt_form clearfix">
+		<input type="submit" value="" class="button bt_send">
+		<a href="#reportform" class="button bt_revision"></a>
+	</div>
+	
+</div>
+</script>
+<!-- //report_body_02 -->
+
+			</div>
+
+			<div class="done_area hide">
+				<div class="area_body"><div class="area_header pt10"><div class="area_footer pb10">
+	<div class="inner">
+		<div class="ic_check_text">
+			レポートが完了いたしました。
+		</div>
+	</div>
+</div></div></div>
+
+<div class="report_body_02">
+
+	<hr class="mt10">
+	
+	<a href="javascript:void(0);" class="button bt_close m0auto sys_report_close"></a>
+
+</div>
+
+			</div>
+
+		</div></div></div>
+	</div></div>
+
+</form>
+
+	<!-- //report_form -->
+</div><div style="display: none; visibility: hidden;"><script async="null" src="https://s.yimg.jp/images/listing/tool/cv/ytag.js"></script>
+<script>window.yjDataLayer=window.yjDataLayer||[];function ytag(){yjDataLayer.push(arguments)}ytag({type:"ycl_cookie"});</script></div><div style="display: none; visibility: hidden;"><script async="null" src="https://s.yimg.jp/images/listing/tool/cv/ytag.js"></script>
+<script>window.yjDataLayer=window.yjDataLayer||[];function ytag(){yjDataLayer.push(arguments)}ytag({type:"ycl_cookie"});</script></div><div style="display: none; visibility: hidden;"><script async="null" src="https://s.yimg.jp/images/listing/tool/cv/ytag.js"></script>
+<script>window.yjDataLayer=window.yjDataLayer||[];function ytag(){yjDataLayer.push(arguments)}ytag({type:"yjad_retargeting",config:{yahoo_retargeting_id:"EMDH9A34PW",yahoo_retargeting_label:"",yahoo_retargeting_page_type:"",yahoo_retargeting_items:[{item_id:"",category_id:"",price:"",quantity:""}]}});</script>
+</div><div style="display: none; visibility: hidden;"><script async="null" src="https://s.yimg.jp/images/listing/tool/cv/ytag.js"></script>
+<script>window.yjDataLayer=window.yjDataLayer||[];function ytag(){yjDataLayer.push(arguments)}ytag({type:"yss_retargeting",config:{yahoo_ss_retargeting_id:"1001014711",yahoo_sstag_custom_params:{}}});</script>
+</div></body></html>
