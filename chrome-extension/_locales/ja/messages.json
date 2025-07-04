@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "SyncStone - 星紡のメモワール",
+    "description": "拡張機能の名前"
+  },
+  "extensionDescription": {
+    "message": "ロドストの日記をMarkdown形式でエクスポートするChrome拡張機能",
+    "description": "拡張機能の説明"
+  },
+  "exportAllArticlesButton": {
+    "message": "全記事をエクスポート",
+    "description": "全記事エクスポートボタンのテキスト"
+  },
+  "exportCurrentArticleButton": {
+    "message": "現在の記事をエクスポート",
+    "description": "現在の記事エクスポートボタンのテキスト"
+  },
+  "accessIntervalLabel": {
+    "message": "アクセス間隔 (ミリ秒):",
+    "description": "アクセス間隔入力フィールドのラベル"
+  },
+  "confirmationText": {
+    "message": "件の記事をエクスポートします。続行しますか？",
+    "description": "全記事エクスポート前の確認テキスト"
+  },
+  "yesButton": {
+    "message": "はい",
+    "description": "確認ダイアログの「はい」ボタンのテキスト"
+  },
+  "noButton": {
+    "message": "いいえ",
+    "description": "確認ダイアログの「いいえ」ボタンのテキスト"
+  },
+  "downloadingImages": {
+    "message": "画像をダウンロード中",
+    "description": "画像ダウンロード中の進捗テキスト"
+  },
+  "exportingArticles": {
+    "message": "記事をエクスポート中",
+    "description": "記事エクスポート中の進捗テキスト"
+  },
+  "exportComplete": {
+    "message": "エクスポートが完了しました！",
+    "description": "エクスポート完了時のテキスト"
+  },
+  "startingExport": {
+    "message": "エクスポートを開始します...",
+    "description": "エクスポート開始時のテキスト"
+  },
+  "lodestoneExportDescription": {
+    "message": "The Lodestoneの日記をエクスポートします。",
+    "description": "ポップアップの説明テキスト"
+  }
+}

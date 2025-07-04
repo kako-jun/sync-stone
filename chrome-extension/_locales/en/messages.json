@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "SyncStone - Stardustmemoir",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Chrome extension to export Lodestone diaries to Markdown.",
+    "description": "Description of the extension."
+  },
+  "exportAllArticlesButton": {
+    "message": "Export All Articles",
+    "description": "Text for the button to export all articles."
+  },
+  "exportCurrentArticleButton": {
+    "message": "Export Current Article",
+    "description": "Text for the button to export the current article."
+  },
+  "accessIntervalLabel": {
+    "message": "Access Interval (ms):",
+    "description": "Label for the access interval input field."
+  },
+  "confirmationText": {
+    "message": " articles will be exported. Continue?",
+    "description": "Confirmation text before exporting all articles."
+  },
+  "yesButton": {
+    "message": "Yes",
+    "description": "Text for the Yes button in confirmation dialog."
+  },
+  "noButton": {
+    "message": "No",
+    "description": "Text for the No button in confirmation dialog."
+  },
+  "downloadingImages": {
+    "message": "Downloading Images",
+    "description": "Progress text when downloading images."
+  },
+  "exportingArticles": {
+    "message": "Exporting Articles",
+    "description": "Progress text when exporting articles."
+  },
+  "exportComplete": {
+    "message": "Export Complete!",
+    "description": "Text when export is complete."
+  },
+  "startingExport": {
+    "message": "Starting Export...",
+    "description": "Text when export is starting."
+  },
+  "lodestoneExportDescription": {
+    "message": "Export your Lodestone diaries.",
+    "description": "Description text in popup."
+  }
+}

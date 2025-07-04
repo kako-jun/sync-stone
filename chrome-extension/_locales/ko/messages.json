@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "SyncStone - Stardustmemoir",
+    "description": "확장 프로그램의 이름"
+  },
+  "extensionDescription": {
+    "message": "Lodestone 일기를 Markdown으로 내보내는 Chrome 확장 프로그램",
+    "description": "확장 프로그램에 대한 설명"
+  },
+  "exportAllArticlesButton": {
+    "message": "모든 게시물 내보내기",
+    "description": "모든 게시물 내보내기 버튼 텍스트"
+  },
+  "exportCurrentArticleButton": {
+    "message": "현재 게시물 내보내기",
+    "description": "현재 게시물 내보내기 버튼 텍스트"
+  },
+  "accessIntervalLabel": {
+    "message": "액세스 간격 (밀리초):",
+    "description": "액세스 간격 입력 필드 레이블"
+  },
+  "confirmationText": {
+    "message": "개의 게시물이 내보내집니다. 계속하시겠습니까?",
+    "description": "모든 게시물 내보내기 전 확인 텍스트"
+  },
+  "yesButton": {
+    "message": "예",
+    "description": "확인 대화 상자의 예 버튼 텍스트"
+  },
+  "noButton": {
+    "message": "아니요",
+    "description": "확인 대화 상자의 아니요 버튼 텍스트"
+  },
+  "downloadingImages": {
+    "message": "이미지 다운로드 중",
+    "description": "이미지 다운로드 중 진행 텍스트"
+  },
+  "exportingArticles": {
+    "message": "게시물 내보내기 중",
+    "description": "게시물 내보내기 중 진행 텍스트"
+  },
+  "exportComplete": {
+    "message": "내보내기 완료!",
+    "description": "내보내기 완료 시 텍스트"
+  },
+  "startingExport": {
+    "message": "내보내기 시작 중...",
+    "description": "내보내기 시작 시 텍스트"
+  },
+  "lodestoneExportDescription": {
+    "message": "Lodestone 일기를 내보냅니다.",
+    "description": "팝업 설명 텍스트"
+  }
+}

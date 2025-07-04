@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "SyncStone - 星紡のメモワール",
+  "name": "__MSG_extensionName__",
   "version": "0.1.0",
-  "description": "The Lodestoneの日記をエクスポート・インポートするためのChrome拡張機能",
+  "description": "__MSG_extensionDescription__",
   "permissions": [
     "activeTab",
     "scripting",

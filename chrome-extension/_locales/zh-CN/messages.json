@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "SyncStone - Stardustmemoir",
+    "description": "扩展程序的名称"
+  },
+  "extensionDescription": {
+    "message": "将Lodestone日记导出为Markdown的Chrome扩展程序",
+    "description": "扩展程序的描述"
+  },
+  "exportAllArticlesButton": {
+    "message": "导出所有文章",
+    "description": "导出所有文章按钮的文本"
+  },
+  "exportCurrentArticleButton": {
+    "message": "导出当前文章",
+    "description": "导出当前文章按钮的文本"
+  },
+  "accessIntervalLabel": {
+    "message": "访问间隔 (毫秒):",
+    "description": "访问间隔输入字段的标签"
+  },
+  "confirmationText": {
+    "message": " 篇文章将被导出。继续？",
+    "description": "导出所有文章前的确认文本"
+  },
+  "yesButton": {
+    "message": "是",
+    "description": "确认对话框中“是”按钮的文本"
+  },
+  "noButton": {
+    "message": "否",
+    "description": "确认对话框中“否”按钮的文本"
+  },
+  "downloadingImages": {
+    "message": "正在下载图片",
+    "description": "下载图片时的进度文本"
+  },
+  "exportingArticles": {
+    "message": "正在导出文章",
+    "description": "导出文章时的进度文本"
+  },
+  "exportComplete": {
+    "message": "导出完成！",
+    "description": "导出完成时的文本"
+  },
+  "startingExport": {
+    "message": "正在开始导出...",
+    "description": "导出开始时的文本"
+  },
+  "lodestoneExportDescription": {
+    "message": "导出您的Lodestone日记。",
+    "description": "弹出窗口中的描述文本"
+  }
+}

@@ -1,67 +1,67 @@
-# SyncStone - 星紡のメモワール Chrome拡張機能
+# SyncStone - Stardust Memoir Chrome Extension
 
-SyncStoneは、FINAL FANTASY XIVの公式プレイヤーズサイト「The Lodestone（ロドスト）」に投稿された日記を、Markdown形式でローカルにエクスポートするためのChrome拡張機能です。ロドストの日記にはエクスポート機能がないため、大切な思い出を失わないようにバックアップすることを目的としています。
+SyncStone, named "Stardustmemoir", is a playful nod to FINAL FANTASY XIV's scenario titles. This extension operates as a standalone Chrome extension designed to export your diary entries from The Lodestone (FINAL FANTASY XIV's official player site) into Markdown format for local storage. Since The Lodestone lacks an export function, the primary goal is to help you back up your precious memories.
 
-## 機能概要
+## Features
 
-*   **単一記事のエクスポート**: 現在開いているロドストの日記個別記事ページ、または日記編集ページから、記事のタイトル、本文、画像（ロドスト内部の画像のみ）、コメント、いいね数、公開日時、タグを取得し、Markdownファイルと画像をまとめたZIPファイルとしてダウンロードします。
-*   **全記事のエクスポート**: ロドストの日記一覧ページから、すべての記事のタイトル、本文、画像（ロドスト内部の画像のみ）、コメント、いいね数、公開日時、タグを取得し、Markdown形式に変換してZIPファイルとしてダウンロードします。この際、すべてのロドスト内部画像もダウンロードされ、ZIPファイル内に`images/`フォルダとして含まれます。
-*   **コメントの取得**: 記事に付随するコメントの本文も取得し、Markdownファイル内に含めます。
-*   **画像の一括ダウンロード**: 全記事エクスポート時、ロドストの画像管理ページからすべての画像を事前にダウンロードし、ZIPファイルに含めます。これにより、記事内で参照されている画像が重複してダウンロードされることを防ぎ、ローカルでの閲覧時に画像が正しく表示されるようにします。
-*   **記事一覧の生成**: 全記事エクスポート時、エクスポートされたすべての記事へのリンクを含む`記事一覧.md`ファイルをZIPファイル内に生成します。このファイルは、[Visual Studio Code](https://code.visualstudio.com/) などのMarkdownプレビュー機能を備えたテキストエディタで開くと、エクスポートされた記事へのリンク集として便利に利用できます。
+*   **Export Single Article**: Exports the current Lodestone diary article page or diary editing page, including the article title, body, images (Lodestone internal images only), comments, likes, publication date, and tags. It downloads a ZIP file containing the Markdown file and associated images.
+*   **Export All Articles**: Exports all diary entries from The Lodestone's diary list page, including article titles, bodies, images (Lodestone internal images only), comments, likes, publication dates, and tags. It converts them to Markdown format and downloads them as a single ZIP file. All internal Lodestone images are also downloaded and included in an `images/` folder within the ZIP file.
+*   **Comment Retrieval**: Retrieves the full text of comments associated with articles and includes them in the Markdown files.
+*   **Bulk Image Download**: When exporting all articles, all images from The Lodestone's image management page are pre-downloaded and included in the ZIP file. This prevents duplicate downloads of images referenced across multiple articles and ensures images are displayed correctly when viewed locally.
+*   **Article List Generation**: When exporting all articles, a `Article_List.md` file is generated within the ZIP file, containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
-## インストール方法
+## Installation
 
-1.  このリポジリをクローンまたはダウンロードします。
-2.  Chromeブラウザを開き、アドレスバーに `chrome://extensions` と入力して拡張機能管理ページを開きます。
-3.  右上の「デベロッパーモード」をオンにします。
-4.  「パッケージ化されていない拡張機能を読み込む」ボタンをクリックします。
-5.  ダウンロードまたはクローンしたリポジリ内の `chrome-extension` フォルダを選択します。
-6.  SyncStone拡張機能がChromeに追加されます。
+1.  Clone or download this repository.
+2.  Open Chrome browser and navigate to `chrome://extensions`.
+3.  Toggle on "Developer mode" in the top right corner.
+4.  Click on the "Load unpacked" button.
+5.  Select the `chrome-extension` folder within the downloaded or cloned repository.
+6.  The SyncStone extension will be added to Chrome.
 
-## 使用方法
+## Usage
 
-### 1. アクセス間隔の設定
+### 1. Setting Access Interval
 
-拡張機能のポップアップを開くと、「アクセス間隔 (ミリ秒)」という入力欄があります。これは、ロドストのサーバーに連続してアクセスする際の待機時間です。サーバーへの負荷を考慮し、デフォルトは2000ミリ秒（2秒）に設定されており、2000ミリ秒未満には設定できません。必要に応じて調整してください。
+When you open the extension's popup, you'll find an input field for "Access Interval (milliseconds)". This sets the waiting time between consecutive accesses to The Lodestone's server. To consider server load, the default is set to 2000 milliseconds (2 seconds) and cannot be set to less than 2000 milliseconds. Adjust as needed.
 
-### 2. 単一記事のエクスポート
+### 2. Exporting a Single Article
 
-1.  エクスポートしたいロドストの日記個別記事ページ、または日記編集ページを開きます。
-2.  ChromeのツールバーにあるSyncStoneのアイコンをクリックしてポップアップを開きます。
-3.  「現在の記事をエクスポート」ボタンをクリックします。
-4.  Markdownファイルと画像を含むZIPファイルがダウンロードされます。
+1.  Open the Lodestone diary article page or diary editing page you wish to export.
+2.  Click the SyncStone icon in your Chrome toolbar to open the popup.
+3.  Click the "Export Current Article" button.
+4.  A ZIP file containing the Markdown file and images will be downloaded.
 
-### 3. 全記事のエクスポート
+### 3. Exporting All Articles
 
-1.  ロドストの日記一覧ページ（例: `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`）を開きます。
-2.  ChromeのツールバーにあるSyncStoneのアイコンをクリックしてポップアップを開きます。
-3.  「全記事をエクスポート」ボタンをクリックします。
-4.  エクスポート対象の記事数が表示され、続行するかどうかの確認ダイアログが表示されます。「はい」をクリックするとエクスポートが開始されます。
-5.  エクスポート中は進捗バーが表示されます。完了するとZIPファイルがダウンロードされます。
+1.  Open The Lodestone's diary list page (e.g., `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`).
+2.  Click the SyncStone icon in your Chrome toolbar to open the popup.
+3.  Click the "Export All Articles" button.
+4.  A confirmation dialog will appear, showing the number of articles to be exported and asking if you wish to proceed. Click "Yes" to start the export.
+5.  A progress bar will be displayed during the export. Once completed, a ZIP file will be downloaded.
 
-### 4. エクスポートされるファイル
+### 4. Exported Files
 
-ダウンロードされるZIPファイルには、以下のものが含まれます。
+The downloaded ZIP file will contain the following:
 
-*   **Markdownファイル (`.md`)**: 各記事が個別のMarkdownファイルとして保存されます。ファイル名には記事のタイトルが使用されます。
-    *   Markdownファイルの冒頭には、YAMLフロントマター形式で以下のメタデータが含まれます。
-        *   `title`: 記事のタイトル
-        *   `date`: 公開日時
-        *   `likes`: いいね数
-        *   `comments`: コメント数
-        *   `tags`: タグのリスト
-    *   記事本文とコメント本文はMarkdown形式で記述されます。
-*   **`images/`フォルダ**: ロドスト内部の画像（`finalfantasyxiv.com`ドメインの画像）がダウンロードされ、このフォルダに保存されます。Markdownファイル内の画像リンクは、このフォルダ内の画像への相対パスに書き換えられます。
-*   **`記事一覧.md`**: エクスポートされたすべての記事へのリンクを含むMarkdownファイルです。このファイルは、[Visual Studio Code](https://code.visualstudio.com/) などのMarkdownプレビュー機能を備えたテキストエディタで開くと、エクスポートされた記事へのリンク集として便利に利用できます。
+*   **Markdown files (`.md`)**: Each article is saved as a separate Markdown file. The filename will be based on the article's title.
+    *   The beginning of each Markdown file will include the following metadata in YAML front matter format:
+        *   `title`: Article title
+        *   `date`: Publication date
+        *   `likes`: Number of likes
+        *   `comments`: Number of comments
+        *   `tags`: List of tags
+    *   Article body and comment body will be in Markdown format.
+*   **`images/` folder**: Lodestone internal images (`finalfantasyxiv.com` domain images) are downloaded and saved in this folder. Image links within Markdown files will be rewritten to relative paths within this folder.
+*   **`Article_List.md`**: A Markdown file containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
-### 5. エクスポートされたMarkdownファイルの閲覧
+### 5. Viewing Exported Markdown Files
 
-エクスポートされたMarkdownファイルは、[Visual Studio Code](https://code.visualstudio.com/) などのMarkdownプレビュー機能を備えたテキストエディタで開くことを推奨します。ZIPファイルを展開し、Markdownファイルと`images/`フォルダが同じ階層にあることを確認してください。これにより、Markdownプレビューで画像が正しく表示されます。
+It is recommended to open the exported Markdown files with a text editor that supports Markdown preview, such as [Visual Studio Code](https://code.visualstudio.com/). Ensure that the ZIP file is extracted and the Markdown files and `images/` folder are in the same directory. This will allow images to be displayed correctly in the Markdown preview.
 
-## 注意事項
+## Important Notes
 
-*   **サーバー負荷**: 全記事エクスポート機能は、ロドストのサーバーに連続してアクセスします。設定可能なアクセス間隔を適切に設定し、サーバーに過度な負荷をかけないようにご協力ください。
-*   **外部画像**: ロドスト以外のドメインの画像はダウンロードされず、元のURLのままMarkdown内にリンクされます。
-*   **ロドストの仕様変更**: ロドストのHTML構造や仕様が変更された場合、本拡張機能が正常に動作しなくなる可能性があります。
-*   **BBCodeの変換**: ロドストのBBCodeはHTMLに変換された状態で取得され、TurndownライブラリによってMarkdownに変換されます。特殊な記法や複雑なレイアウトは完全に再現されない場合があります。
+*   **Server Load**: The "Export All Articles" feature accesses The Lodestone's server consecutively. Please set the configurable access interval appropriately to avoid placing excessive load on the server.
+*   **External Images**: Images from domains other than The Lodestone will not be downloaded and will remain linked with their original URLs in the Markdown files.
+*   **Lodestone Specification Changes**: If The Lodestone's HTML structure or specifications change, this extension may not function correctly.
+*   **BBCode Conversion**: Lodestone's BBCode is retrieved as converted HTML and then converted to Markdown by the Turndown library. Special notations or complex layouts may not be perfectly reproduced.

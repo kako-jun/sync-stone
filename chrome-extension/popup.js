@@ -11,7 +11,7 @@ chrome.storage.local.get(['exportDelay'], (result) => {
 });
 
 document.getElementById('exportButton').addEventListener('click', () => {
-  const exportDelay = Math.max(parseInt(delayInput.value, 10), 2000); // Enforce minimum 2000ms
+  const exportDelay = parseInt(delayInput.value, 10);
   chrome.storage.local.set({ exportDelay: exportDelay });
   chrome.runtime.sendMessage({ action: 'startExport', exportDelay: exportDelay });
 });
@@ -34,15 +34,16 @@ const progressBar = document.getElementById('progressBar');
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'showExportConfirmation') {
-    confirmationText.innerText = `${request.totalArticles}件の記事をエクスポートします。続行しますか？`;
+    confirmationText.innerText = `${request.totalArticles}${chrome.i18n.getMessage('confirmationText')}`;
     confirmationDialog.style.display = 'block';
   } else if (request.action === 'updateProgress') {
     progressBarContainer.style.display = 'block';
     const percentage = (request.current / request.total) * 100;
     progressBar.style.width = `${percentage}%`;
-    progressText.innerText = `${request.type === 'images' ? '画像をダウンロード中' : '記事をエクスポート中'}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
+    const progressTypeMessage = request.type === 'images' ? chrome.i18n.getMessage('downloadingImages') : chrome.i18n.getMessage('exportingArticles');
+    progressText.innerText = `${progressTypeMessage}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
   } else if (request.action === 'exportComplete') {
-    progressText.innerText = 'エクスポートが完了しました！';
+    progressText.innerText = chrome.i18n.getMessage('exportComplete');
     progressBar.style.width = '100%';
     setTimeout(() => {
       window.close();
@@ -51,12 +52,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 confirmYesButton.addEventListener('click', () => {
-  const exportDelay = Math.max(parseInt(delayInput.value, 10), 2000); // Enforce minimum 2000ms
+  const exportDelay = parseInt(delayInput.value, 10);
   chrome.runtime.sendMessage({ action: 'confirmExport', exportDelay: exportDelay });
   confirmationDialog.style.display = 'none';
   // Show progress bar immediately
   progressBarContainer.style.display = 'block';
-  progressText.innerText = 'エクスポートを開始します...';
+  progressText.innerText = chrome.i18n.getMessage('startingExport');
 });
 
 confirmNoButton.addEventListener('click', () => {
