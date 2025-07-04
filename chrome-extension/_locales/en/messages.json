@@ -50,5 +50,17 @@
   "lodestoneExportDescription": {
     "message": "Export your Lodestone diaries.",
     "description": "Description text in popup."
+  },
+  "notOnBlogListPageError": {
+    "message": "Please run this on a Lodestone blog list page.",
+    "description": "Error message when not on blog list page"
+  },
+  "notOnBlogPageError": {
+    "message": "Please run this on a Lodestone blog page.",
+    "description": "Error message when not on blog page"
+  },
+  "notOnIndividualArticlePageError": {
+    "message": "Please run this on an individual Lodestone article page or edit page.",
+    "description": "Error message when not on individual article page"
   }
 }

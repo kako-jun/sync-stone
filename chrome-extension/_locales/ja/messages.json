@@ -50,5 +50,17 @@
   "lodestoneExportDescription": {
     "message": "The Lodestoneの日記をエクスポートします。",
     "description": "ポップアップの説明テキスト"
+  },
+  "notOnBlogListPageError": {
+    "message": "ロドストの日記一覧ページで実行してください。",
+    "description": "日記一覧ページでない場合のエラーメッセージ"
+  },
+  "notOnBlogPageError": {
+    "message": "ロドストの日記ページで実行してください。",
+    "description": "日記ページでない場合のエラーメッセージ"
+  },
+  "notOnIndividualArticlePageError": {
+    "message": "ロドストの個別記事ページまたは編集画面で実行してください。",
+    "description": "個別記事ページでない場合のエラーメッセージ"
   }
 }

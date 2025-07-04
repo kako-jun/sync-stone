@@ -5,7 +5,8 @@ const turndownService = new TurndownService();
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'scrapeLodestone') {
-    console.log('Lodestoneの日記一覧スクレイピングを開始します。');
+    
+    // 現在のページから記事を抽出
     const blogEntries = document.querySelectorAll('li.entry__blog');
     const extractedData = [];
 
@@ -31,11 +32,60 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
     });
 
-    console.log('抽出した日記データ:', extractedData);
+    // ページネーション情報を取得
+    let totalPages = 1;
+    const paginationElement = document.querySelector('.btn__pager__current');
+    if (paginationElement) {
+      const paginationText = paginationElement.innerText;
+      const match = paginationText.match(/(\d+)\s*\/\s*(\d+)/);
+      if (match && match[2]) {
+        totalPages = parseInt(match[2], 10);
+      }
+    }
+
+    
+    // 抽出したデータと総ページ数をbackground.jsに送り返す
+    chrome.runtime.sendMessage({ 
+      action: 'lodestoneData', 
+      data: extractedData, 
+      totalPages: totalPages,
+      currentPage: 1
+    });
+  } else if (request.action === 'scrapeAdditionalPage') {
+    
+    // 記事を抽出（最初のページと同じロジック）
+    const blogEntries = document.querySelectorAll('li.entry__blog');
+    const extractedData = [];
+
+    blogEntries.forEach(entry => {
+      const urlElement = entry.querySelector('a.entry__blog__link');
+      const titleElement = entry.querySelector('h2.entry__blog__title');
+      const timeElement = entry.querySelector('time span');
+      const tagsElements = entry.querySelectorAll('div.entry__blog__tag ul li');
+      const thumbnailElement = entry.querySelector('div.entry__blog__img__inner img');
+
+      const url = urlElement ? urlElement.href : null;
+      const title = titleElement ? titleElement.innerText.trim() : null;
+      const date = timeElement ? timeElement.innerText.trim() : null;
+      const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[[\\]]/g, '').trim());
+      const thumbnail = thumbnailElement ? thumbnailElement.src : null;
+
+      extractedData.push({
+        url,
+        title,
+        date,
+        tags,
+        thumbnail
+      });
+    });
+
+    
     // 抽出したデータをbackground.jsに送り返す
-    chrome.runtime.sendMessage({ action: 'lodestoneData', data: extractedData });
+    chrome.runtime.sendMessage({ 
+      action: 'additionalPageData', 
+      data: extractedData
+    });
   } else if (request.action === 'getArticleContent') {
-    console.log('日記編集画面から記事内容を取得します。');
     const articleContent = document.querySelector('textarea#blog__body');
     if (articleContent) {
       sendResponse({ success: true, content: articleContent.value });
@@ -43,7 +93,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ success: false, message: '記事内容が見つかりませんでした。' });
     }
   } else if (request.action === 'getArticleDetails') {
-    console.log('個別記事ページから詳細情報を取得します。');
     const titleElement = document.querySelector('h2.entry__title');
     const bodyElement = document.querySelector('div.entry__body');
     const likesElement = document.querySelector('p.like__count');
@@ -94,7 +143,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ success: false, message: '記事の詳細情報が見つかりませんでした。' });
     }
   } else if (request.action === 'processImagesAndConvertToMarkdown') {
-    console.log('HTMLをMarkdownに変換し、画像パスを処理します。');
     const { title, htmlContent, likes, commentsCount, publishDate, tags, imageMap, commentsData } = request;
 
     // TurndownServiceのルールをカスタマイズして画像パスを置換
@@ -135,8 +183,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     sendResponse({ success: true, markdown });
+    return true; // Indicate that sendResponse will be called asynchronously
   } else if (request.action === 'scrapeImageListPage') {
-    console.log('画像一覧ページから画像URLをスクレイピングします。');
     const imageUrls = [];
     const imageElements = document.querySelectorAll('.image__list img'); // ロドストの画像一覧ページのセレクタを想定
     imageElements.forEach(img => {
