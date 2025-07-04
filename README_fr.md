@@ -1,6 +1,10 @@
-# SyncStone - Mémoire d'Étoiles (Seibou) Extension Chrome
+# SyncStone - Stardustmemoir Extension Chrome
 
 SyncStone, nommé "Stardustmemoir", est un clin d'œil ludique aux titres de scénario de FINAL FANTASY XIV. Cette extension fonctionne comme une extension Chrome autonome conçue pour exporter vos entrées de journal de The Lodestone (le site officiel des joueurs de FINAL FANTASY XIV) au format Markdown pour un stockage local. Étant donné que The Lodestone ne dispose pas de fonction d'exportation, l'objectif principal est de vous aider à sauvegarder vos précieux souvenirs.
+
+<p align="center">
+  <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
+</p>
 
 ## Fonctionnalités
 
@@ -65,3 +69,10 @@ Il est recommandé d'ouvrir les fichiers Markdown exportés avec un éditeur de 
 *   **Images externes**: Les images provenant de domaines autres que The Lodestone ne seront pas téléchargées et resteront liées avec leurs URL d'origine dans les fichiers Markdown.
 *   **Modifications des spécifications de Lodestone**: Si la structure HTML ou les spécifications de The Lodestone changent, cette extension pourrait ne pas fonctionner correctement.
 *   **Conversion BBCode**: Le BBCode de Lodestone est récupéré sous forme de HTML converti, puis converti en Markdown par la bibliothèque Turndown. Les notations spéciales ou les mises en page complexes peuvent ne pas être parfaitement reproduites.
+
+<div style="display:flex; justify-content:center; align-items:center; margin-top: 20px;">
+  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="100" style="margin-right: 20px;">
+  <div style="text-align:center;">
+    <p style="margin:0; padding:0; font-size:1.2em;">Merci, FFXIV</p>
+  </div>
+</div>

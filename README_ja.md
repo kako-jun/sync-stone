@@ -2,6 +2,10 @@
 
 SyncStoneは「星紡のメモワール（せいぼう）」と名付けられ、FINAL FANTASY XIVのシナリオタイトルを意識した遊び心のある名称です。本拡張機能は、ロドスト（The Lodestone）に投稿された日記をMarkdown形式でローカルにエクスポートするためのChrome拡張機能です。ロドストの日記にはエクスポート機能がないため、大切な思い出を失わないようにバックアップすることを目的としています。
 
+<p align="center">
+  <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
+</p>
+
 ## 機能概要
 
 *   **単一記事のエクスポート**: 現在開いているロドストの日記個別記事ページ、または日記編集ページから、記事のタイトル、本文、画像（ロドスト内部の画像のみ）、コメント、いいね数、公開日時、タグを取得し、Markdownファイルと画像をまとめたZIPファイルとしてダウンロードします。
@@ -65,3 +69,10 @@ SyncStoneは「星紡のメモワール（せいぼう）」と名付けられ�
 *   **外部画像**: ロドスト以外のドメインの画像はダウンロードされず、元のURLのままMarkdown内にリンクされます。
 *   **ロドストの仕様変更**: ロドストのHTML構造や仕様が変更された場合、本拡張機能が正常に動作しなくなる可能性があります。
 *   **BBCodeの変換**: ロドストのBBCodeはHTMLに変換された状態で取得され、TurndownライブラリによってMarkdownに変換されます。特殊な記法や複雑なレイアウトは完全に再現されない場合があります。
+
+<div style="display:flex; justify-content:center; align-items:center; margin-top: 20px;">
+  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="ありがとう、FFXIV" width="100" style="margin-right: 20px;">
+  <div style="text-align:center;">
+    <p style="margin:0; padding:0; font-size:1.2em;">ありがとう、FFXIV</p>
+  </div>
+</div>
