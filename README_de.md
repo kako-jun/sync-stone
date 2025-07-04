@@ -1,6 +1,6 @@
 # SyncStone - Stardustmemoir Chrome-Erweiterung
 
-SyncStone, benannt "Stardustmemoir", ist eine spielerische Anspielung auf die Szenariotitel von FINAL FANTASY XIV. Diese Erweiterung funktioniert als eigenständige Chrome-Erweiterung, die entwickelt wurde, um Ihre Tagebucheinträge von The Lodestone (der offiziellen Spielerseite von FINAL FANTASY XIV) im Markdown-Format für die lokale Speicherung zu exportieren. Da The Lodestone keine Exportfunktion bietet, ist das Hauptziel, Ihnen beim Sichern Ihrer wertvollen Erinnerungen zu helfen.
+SyncStone, benannt "Stardustmemoir", ist ein inoffizielles Tool für FINAL FANTASY XIV. Diese Erweiterung funktioniert als eigenständige Chrome-Erweiterung, die entwickelt wurde, um Ihre Tagebucheinträge von The Lodestone (der offiziellen Spielerseite von FINAL FANTASY XIV) im Markdown-Format für die lokale Speicherung zu exportieren. Da The Lodestone keine Exportfunktion bietet, ist das Hauptziel, Ihnen beim Sichern Ihrer wertvollen Erinnerungen zu helfen.
 
 <p align="center">
   <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
@@ -16,7 +16,7 @@ SyncStone, benannt "Stardustmemoir", ist eine spielerische Anspielung auf die Sz
 
 ## Installation
 
-1.  Klonen oder laden Sie dieses Repository herunter.
+1.  Klonen oder [laden Sie](https://github.com/kako-jun/sync-stone/archive/refs/heads/main.zip) dieses Repository herunter.
 2.  Öffnen Sie den Chrome-Browser und navigieren Sie zu `chrome://extensions`.
 3.  Schalten Sie den "Entwicklermodus" oben rechts ein.
 4.  Klicken Sie auf die Schaltfläche "Entpackte Erweiterung laden".
@@ -70,8 +70,8 @@ Es wird empfohlen, die exportierten Markdown-Dateien mit einem Texteditor zu öf
 *   **Änderungen der Lodestone-Spezifikationen**: Wenn sich die HTML-Struktur oder die Spezifikationen von The Lodestone ändern, funktioniert diese Erweiterung möglicherweise nicht mehr korrekt.
 *   **BBCode-Konvertierung**: Der BBCode von Lodestone wird als konvertiertes HTML abgerufen und dann von der Turndown-Bibliothek in Markdown konvertiert. Spezielle Notationen oder komplexe Layouts werden möglicherweise nicht perfekt reproduziert.
 
-<div style="display:flex; justify-content:center; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="100" style="margin-right: 20px;">
+<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
+  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120" style="margin-right: 20px;">
   <div style="text-align:center;">
     <p style="margin:0; padding:0; font-size:1.2em;">Danke, FFXIV</p>
   </div>

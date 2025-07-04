@@ -2,7 +2,7 @@
 
 [日本語](README_ja.md) | [Français](README_fr.md) | [Deutsch](README_de.md) | [简体中文](README_zh-CN.md) | [한국어](README_ko.md)
 
-SyncStone, named "Stardustmemoir", is a playful nod to FINAL FANTASY XIV's scenario titles. This extension operates as a standalone Chrome extension designed to export your diary entries from The Lodestone (FINAL FANTASY XIV's official player site) into Markdown format for local storage. Since The Lodestone lacks an export function, the primary goal is to help you back up your precious memories.
+SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTASY XIV. This extension operates as a standalone Chrome extension designed to export your diary entries from The Lodestone (FINAL FANTASY XIV's official player site) into Markdown format for local storage. Since The Lodestone lacks an export function, the primary goal is to help you back up your precious memories.
 
 <p align="center">
   <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
@@ -18,7 +18,7 @@ SyncStone, named "Stardustmemoir", is a playful nod to FINAL FANTASY XIV's scena
 
 ## Installation
 
-1.  Clone or download this repository.
+1.  Clone or [download](https://github.com/kako-jun/sync-stone/archive/refs/heads/main.zip) this repository.
 2.  Open Chrome browser and navigate to `chrome://extensions`.
 3.  Toggle on "Developer mode" in the top right corner.
 4.  Click on the "Load unpacked" button.
@@ -72,8 +72,8 @@ It is recommended to open the exported Markdown files with a text editor that su
 *   **Lodestone Specification Changes**: If The Lodestone's HTML structure or specifications change, this extension may not function correctly.
 *   **BBCode Conversion**: Lodestone's BBCode is retrieved as converted HTML and then converted to Markdown by the Turndown library. Special notations or complex layouts may not be perfectly reproduced.
 
-<div style="display:flex; justify-content:center; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="100" style="margin-right: 20px;">
+<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
+  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120" style="margin-right: 20px;">
   <div style="text-align:center;">
     <p style="margin:0; padding:0; font-size:1.2em;">Thank you, FFXIV</p>
   </div>

@@ -1,6 +1,6 @@
 # SyncStone - Stardustmemoir Chrome 확장 프로그램
 
-SyncStone은 'Stardustmemoir'이라는 이름으로, FINAL FANTASY XIV 시나리오 제목에 대한 유쾌한 오마주입니다. 이 확장 프로그램은 Lodestone(FINAL FANTASY XIV 공식 플레이어 사이트)의 일기 항목을 로컬 저장용 Markdown 형식으로 내보내기 위해 설계된 독립형 Chrome 확장 프로그램입니다. Lodestone에는 내보내기 기능이 없으므로, 소중한 추억을 백업하는 것이 주요 목표입니다.
+SyncStone은 'Stardustmemoir'이라는 이름으로, FINAL FANTASY XIV 관련 비공식 도구입니다. 이 확장 프로그램은 Lodestone(FINAL FANTASY XIV 공식 플레이어 사이트)의 일기 항목을 로컬 저장용 Markdown 형식으로 내보내기 위해 설계된 독립형 Chrome 확장 프로그램입니다. Lodestone에는 내보내기 기능이 없으므로, 소중한 추억을 백업하는 것이 주요 목표입니다.
 
 <p align="center">
   <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
@@ -16,7 +16,7 @@ SyncStone은 'Stardustmemoir'이라는 이름으로, FINAL FANTASY XIV 시나리
 
 ## 설치
 
-1.  이 저장소를 복제하거나 다운로드합니다.
+1.  이 저장소를 복제하거나 [다운로드합니다](https://github.com/kako-jun/sync-stone/archive/refs/heads/main.zip).
 2.  Chrome 브라우저를 열고 주소 표시줄에 `chrome://extensions`를 입력하여 확장 프로그램 관리 페이지를 엽니다.
 3.  오른쪽 상단에서 "개발자 모드"를 웁니다.
 4.  "압축 해제된 확장 프로그램 로드" 버튼을 클릭합니다.
@@ -70,8 +70,8 @@ SyncStone은 'Stardustmemoir'이라는 이름으로, FINAL FANTASY XIV 시나리
 *   **Lodestone 사양 변경**: Lodestone의 HTML 구조 또는 사양이 변경되면 이 확장 프로그램이 올바르게 작동하지 않을 수 있습니다.
 *   **BBCode 변환**: Lodestone의 BBCode는 변환된 HTML로 검색된 다음 Turndown 라이브러리에 의해 Markdown으로 변환됩니다. 특수 표기법이나 복잡한 레이아웃은 완벽하게 재현되지 않을 수 있습니다.
 
-<div style="display:flex; justify-content:center; align-items:center; margin-top: 20px;">
-  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="100" style="margin-right: 20px;">
+<div style="display:flex; justify-content:flex-end; align-items:center; margin-top: 20px;">
+  <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120" style="margin-right: 20px;">
   <div style="text-align:center;">
     <p style="margin:0; padding:0; font-size:1.2em;">고마워요, FFXIV</p>
   </div>
