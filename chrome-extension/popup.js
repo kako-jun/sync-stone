@@ -35,6 +35,8 @@ function restoreExportState() {
           let progressTypeMessage;
           if (state.type === 'images') {
             progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+          } else if (state.type === 'collecting') {
+            progressTypeMessage = `Collecting pages (${state.articles || 0} articles)`;
           } else {
             progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
           }
@@ -49,6 +51,7 @@ function restoreExportState() {
 document.addEventListener('DOMContentLoaded', () => {
   applyI18nMessages();
   restoreExportState();
+  checkCurrentArticle(); // 現在の記事情報を取得
 });
 
 const delayInput = document.getElementById('delayInput');
@@ -87,9 +90,10 @@ document.getElementById('exportButton').addEventListener('click', () => {
 });
 
 document.getElementById('exportCurrentArticleButton').addEventListener('click', () => {
+  showStatusMessage('Starting download...', 'info');
+  // ボタンを無効化して重複クリックを防ぐ
+  document.getElementById('exportCurrentArticleButton').disabled = true;
   chrome.runtime.sendMessage({ action: 'exportCurrentArticle' });
-  // エラーメッセージが表示される可能性があるため、すぐにポップアップを閉じない
-  // window.close(); // ポップアップを閉じる
 });
 
 // Confirmation dialog elements
@@ -111,23 +115,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     progressBarContainer.style.display = 'block';
     const percentage = (request.current / request.total) * 100;
     progressBar.style.width = `${percentage}%`;
-    const progressTypeMessage = request.type === 'images' ? chrome.i18n.getMessage('downloadingImages') : chrome.i18n.getMessage('exportingArticles');
+    let progressTypeMessage;
+    if (request.type === 'images') {
+      progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+    } else if (request.type === 'collecting') {
+      progressTypeMessage = `Collecting pages (${request.articles || 0} articles)`;
+    } else {
+      progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+    }
     progressText.innerText = `${progressTypeMessage}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
   } else if (request.action === 'exportComplete') {
     progressText.innerText = chrome.i18n.getMessage('exportComplete');
     progressBar.style.width = '100%';
-    
-    setTimeout(() => {
-      window.close();
-    }, 1500);
+    showStatusMessage('Export completed!', 'success');
   } else if (request.action === 'showError') {
-    alert(request.message);
+    showStatusMessage(request.message, 'error');
+    // エラー時はボタンを再有効化
+    document.getElementById('exportCurrentArticleButton').disabled = false;
   } else if (request.action === 'exportSuccess') {
-    alert(request.message || 'エクスポートが完了しました！');
-    
-    setTimeout(() => {
-      window.close();
-    }, 500);
+    showStatusMessage(request.message || 'Export completed!', 'success');
+    // 成功時はボタンを再有効化
+    document.getElementById('exportCurrentArticleButton').disabled = false;
+  } else if (request.action === 'articleInfo') {
+    displayArticleInfo(request.title, request.bodyLength, request.imageCount, request.likes, request.commentsCount);
   }
 });
 
@@ -145,3 +155,111 @@ confirmNoButton.addEventListener('click', () => {
   confirmationDialog.style.display = 'none';
   window.close();
 });
+
+// 現在の記事情報をチェックする関数
+function checkCurrentArticle() {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs[0]) {
+      const currentUrl = tabs[0].url;
+      
+      // ページが変わった時にダイアログ状態をリセット
+      resetDialogStates();
+      
+      // ページタイプを判定
+      const hasLodestone = currentUrl.includes('/lodestone/character/');
+      const hasBlog = currentUrl.includes('/blog/');
+      const hasEdit = currentUrl.includes('/edit');
+      const isIndividualArticle = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/\d+/);
+      const isBlogListPattern = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/?(\?.*)?$/);
+      
+      const isBlogListPage = hasLodestone && hasBlog && !hasEdit && !isIndividualArticle && isBlogListPattern;
+      const isValidBlogPage = hasLodestone && hasBlog && (hasEdit || isIndividualArticle);
+      
+      // ボタンの表示制御
+      const exportAllButton = document.getElementById('exportButton');
+      const exportCurrentButton = document.getElementById('exportCurrentArticleButton');
+      const articleInfoContainer = document.getElementById('articleInfoContainer');
+      
+      if (isBlogListPage) {
+        // 目次ページ: 全体エクスポートのみ
+        exportAllButton.style.display = 'block';
+        exportCurrentButton.style.display = 'none';
+        articleInfoContainer.style.display = 'none';
+      } else if (isValidBlogPage) {
+        // 個別記事ページ: 両方のボタンを表示
+        exportAllButton.style.display = 'block';
+        exportCurrentButton.style.display = 'block';
+        
+        // 記事情報を取得
+        chrome.tabs.sendMessage(tabs[0].id, { action: 'getArticleInfo' }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.log('Content script not available:', chrome.runtime.lastError.message);
+            return;
+          }
+          if (response && response.success) {
+            displayArticleInfo(response.title, response.bodyLength, response.imageCount, response.likes, response.commentsCount);
+          }
+        });
+      } else {
+        // その他のページ: 両方非表示
+        exportAllButton.style.display = 'none';
+        exportCurrentButton.style.display = 'none';
+        articleInfoContainer.style.display = 'none';
+      }
+    }
+  });
+}
+
+// ダイアログ状態をリセットする関数
+function resetDialogStates() {
+  const confirmationDialog = document.getElementById('confirmationDialog');
+  const progressBarContainer = document.getElementById('progressBarContainer');
+  const statusMessage = document.getElementById('statusMessage');
+  const exportCurrentButton = document.getElementById('exportCurrentArticleButton');
+  
+  // 確認ダイアログを非表示
+  confirmationDialog.style.display = 'none';
+  
+  // 進捗バーを非表示
+  progressBarContainer.style.display = 'none';
+  
+  // ステータスメッセージを非表示
+  statusMessage.style.display = 'none';
+  
+  // ボタンを再有効化
+  if (exportCurrentButton) {
+    exportCurrentButton.disabled = false;
+  }
+}
+
+// 記事情報を表示する関数
+function displayArticleInfo(title, bodyLength, imageCount, likes, commentsCount) {
+  const articleInfoContainer = document.getElementById('articleInfoContainer');
+  const articleTitle = document.getElementById('articleTitle');
+  const articleStats = document.getElementById('articleStats');
+  
+  articleTitle.textContent = 'Title: ' + (title || 'Could not retrieve');
+  articleStats.textContent = 'Body: ' + (bodyLength || 0) + ' chars | Images: ' + (imageCount || 0) + ' | Likes: ' + (likes || 0) + ' | Comments: ' + (commentsCount || 0);
+  
+  articleInfoContainer.style.display = 'block';
+}
+
+// ステータスメッセージを表示する関数
+function showStatusMessage(message, type) {
+  const statusMessage = document.getElementById('statusMessage');
+  statusMessage.textContent = message;
+  statusMessage.style.display = 'block';
+  
+  // スタイルを設定
+  statusMessage.style.backgroundColor = type === 'error' ? '#ffebee' : 
+                                       type === 'success' ? '#e8f5e8' : 
+                                       '#e3f2fd';
+  statusMessage.style.color = type === 'error' ? '#c62828' : 
+                             type === 'success' ? '#2e7d32' : 
+                             '#1565c0';
+  statusMessage.style.border = `1px solid ${type === 'error' ? '#ef9a9a' : 
+                                            type === 'success' ? '#a5d6a7' : 
+                                            '#90caf9'}`;
+  
+  // 成功メッセージは自動で消さない
+}

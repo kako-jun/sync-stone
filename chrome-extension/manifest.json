@@ -7,7 +7,8 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "downloads"
   ],
   "host_permissions": [
     "https://*.finalfantasyxiv.com/*",
@@ -26,7 +27,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.finalfantasyxiv.com/lodestone/character/*/blog/*", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*/edit", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*/*"],
+      "matches": ["https://*.finalfantasyxiv.com/lodestone/character/*/blog", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*/edit", "https://*.finalfantasyxiv.com/lodestone/character/*/blog/*/*", "https://*.finalfantasyxiv.com/lodestone/my/image/*"],
       "js": ["lib/turndown.js", "content.js"]
     }
   ]

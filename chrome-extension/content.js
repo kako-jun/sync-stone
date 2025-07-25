@@ -3,7 +3,10 @@
 // TurndownServiceのインスタンスを作成
 const turndownService = new TurndownService();
 
+console.log('Content script loaded on:', window.location.href);
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log('Content script received message:', request);
   if (request.action === 'scrapeLodestone') {
     
     // 現在のページから記事を抽出
@@ -37,7 +40,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const paginationElement = document.querySelector('.btn__pager__current');
     if (paginationElement) {
       const paginationText = paginationElement.innerText;
-      const match = paginationText.match(/(\d+)\s*\/\s*(\d+)/);
+      // "1ページ / 12ページ" の形式から総ページ数を抽出
+      const match = paginationText.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
       if (match && match[2]) {
         totalPages = parseInt(match[2], 10);
       }
@@ -51,6 +55,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       totalPages: totalPages,
       currentPage: 1
     });
+    
+    // sendResponseで応答を送信
+    sendResponse({ success: true, totalPages: totalPages, articleCount: extractedData.length });
   } else if (request.action === 'scrapeAdditionalPage') {
     
     // 記事を抽出（最初のページと同じロジック）
@@ -85,27 +92,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       action: 'additionalPageData', 
       data: extractedData
     });
+    
+    // sendResponseで成功を通知
+    sendResponse({ success: true, articleCount: extractedData.length });
   } else if (request.action === 'getArticleContent') {
     const articleContent = document.querySelector('textarea#blog__body');
     if (articleContent) {
       sendResponse({ success: true, content: articleContent.value });
     } else {
-      sendResponse({ success: false, message: '記事内容が見つかりませんでした。' });
+      sendResponse({ success: false, message: 'Article content not found.' });
     }
   } else if (request.action === 'getArticleDetails') {
-    const titleElement = document.querySelector('h2.entry__title');
-    const bodyElement = document.querySelector('div.entry__body');
-    const likesElement = document.querySelector('p.like__count');
-    const commentsCountElement = document.querySelector('p.comment__count');
-    const publishDateElement = document.querySelector('time.entry__footer__time') || document.querySelector('time.entry__header__time') || document.querySelector('div.entry__header time');
-    const tagsElements = document.querySelectorAll('div.entry__tag_list ul li') || document.querySelectorAll('div.entry__blog__tag ul li');
+    console.log('Processing getArticleDetails request');
+    const titleElement = document.querySelector('h2.entry__blog__title');
+    const bodyElement = document.querySelector('div.txt_selfintroduction');
+    console.log('Found elements:', { title: !!titleElement, body: !!bodyElement });
+    const likesElement = document.querySelector('.blog__area__like__text__zero, .js__like_count');
+    const commentsCountElement = document.querySelector('.entry__blog__header__comment span');
+    const publishDateElement = document.querySelector('.entry__blog__header time span, time[datetime]');
+    const tagsElements = document.querySelectorAll('.entry__blog__tag ul li a');
 
     const title = titleElement ? titleElement.innerText.trim() : null;
     const bodyHtml = bodyElement ? bodyElement.innerHTML : null;
-    const likes = likesElement ? parseInt(likesElement.innerText.trim(), 10) : 0;
+    const likes = likesElement ? parseInt(likesElement.innerText.replace(/[^\d]/g, ''), 10) : 0;
     const commentsCount = commentsCountElement ? parseInt(commentsCountElement.innerText.trim(), 10) : 0;
-    const publishDate = publishDateElement ? publishDateElement.getAttribute('datetime') || publishDateElement.innerText.trim() : null;
-    const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[[\\]]/g, '').trim());
+    const publishDate = publishDateElement ? (publishDateElement.getAttribute('datetime') || publishDateElement.innerText.trim()) : null;
+    const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[\[\]]/g, '').trim());
 
     const imageUrls = [];
     if (bodyHtml) {
@@ -117,30 +129,34 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           imageUrls.push(img.src);
         }
       });
+      // サムネイル画像も追加
+      const thumbnailElement = document.querySelector('.thumb_list img');
+      if (thumbnailElement && thumbnailElement.getAttribute('data-origin_src')) {
+        imageUrls.push(thumbnailElement.getAttribute('data-origin_src'));
+      }
     }
 
     const commentsData = [];
-    const commentItems = document.querySelectorAll('.entry__comment__item');
-    commentItems.forEach(item => {
-      const authorElement = item.querySelector('.entry__comment__name');
-      const timeElement = item.querySelector('.entry__comment__time');
-      const bodyElement = item.querySelector('.entry__comment__body');
-
-      const author = authorElement ? authorElement.innerText.trim() : 'Unknown';
-      const timestamp = timeElement ? timeElement.innerText.trim() : '';
-      const commentBodyHtml = bodyElement ? bodyElement.innerHTML : '';
-
-      commentsData.push({
-        author,
-        timestamp,
-        commentBodyHtml
-      });
+    // コメントを取得
+    const commentElements = document.querySelectorAll('.blog__commentarea .comment');
+    commentElements.forEach(comment => {
+      const authorElement = comment.querySelector('.comment__author');
+      const timestampElement = comment.querySelector('.comment__date');
+      const bodyElement = comment.querySelector('.comment__message');
+      
+      if (authorElement && bodyElement) {
+        commentsData.push({
+          author: authorElement.innerText.trim(),
+          timestamp: timestampElement ? timestampElement.innerText.trim() : '',
+          commentBodyHtml: bodyElement.innerHTML
+        });
+      }
     });
 
     if (title && bodyHtml) {
       sendResponse({ success: true, title, bodyHtml, likes, commentsCount, publishDate, tags, imageUrls, commentsData });
     } else {
-      sendResponse({ success: false, message: '記事の詳細情報が見つかりませんでした。' });
+      sendResponse({ success: false, message: 'Article details not found.' });
     }
   } else if (request.action === 'processImagesAndConvertToMarkdown') {
     const { title, htmlContent, likes, commentsCount, publishDate, tags, imageMap, commentsData } = request;
@@ -174,7 +190,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     markdown += turndownService.turndown(htmlContent);
 
     if (commentsData && commentsData.length > 0) {
-      markdown += '\n\n## コメント\n\n';
+      markdown += '\n\n## Comments\n\n';
       commentsData.forEach(comment => {
         markdown += `### ${comment.author} (${comment.timestamp})\n\n`;
         markdown += turndownService.turndown(comment.commentBodyHtml);
@@ -208,5 +224,40 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
     }
     sendResponse({ success: true, imageUrls, totalPages });
+  } else if (request.action === 'getArticleInfo') {
+    console.log('Processing getArticleInfo request');
+    const titleElement = document.querySelector('h2.entry__blog__title');
+    const bodyElement = document.querySelector('div.txt_selfintroduction');
+    const likesElement = document.querySelector('.blog__area__like__text__zero, .js__like_count');
+    const commentsCountElement = document.querySelector('.entry__blog__header__comment span');
+    
+    const title = titleElement ? titleElement.innerText.trim() : null;
+    const bodyHtml = bodyElement ? bodyElement.innerHTML : null;
+    const bodyText = bodyElement ? bodyElement.innerText.trim() : '';
+    const bodyLength = bodyText.length;
+    const likes = likesElement ? parseInt(likesElement.innerText.replace(/[^\d]/g, ''), 10) : 0;
+    const commentsCount = commentsCountElement ? parseInt(commentsCountElement.innerText.trim(), 10) : 0;
+    
+    // 画像数を数える
+    let imageCount = 0;
+    if (bodyHtml) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(bodyHtml, 'text/html');
+      const imgElements = doc.querySelectorAll('img');
+      imageCount = imgElements.length;
+      
+      // サムネイル画像も数える
+      const thumbnailElement = document.querySelector('.thumb_list img');
+      if (thumbnailElement && thumbnailElement.getAttribute('data-origin_src')) {
+        imageCount++;
+      }
+    }
+    
+    if (title) {
+      sendResponse({ success: true, title, bodyLength, imageCount, likes, commentsCount });
+    } else {
+      sendResponse({ success: false, message: 'Could not retrieve article information.' });
+    }
   }
+  return true; // 非同期処理を使用するため
 });
