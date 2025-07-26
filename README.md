@@ -1,6 +1,6 @@
 # SyncStone - Stardustmemoir Chrome Extension
 
-[日本語](README_ja.md) | [Français](README_fr.md) | [Deutsch](README_de.md) | [简体中文](README_zh-CN.md) | [한국어](README_ko.md)
+[日本語](README_ja.md) | [Français](README_fr.md) | [Deutsch](README_de.md) | [简体中文](README_zh.md) | [한국어](README_ko.md)
 
 SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTASY XIV. This extension operates as a standalone Chrome extension designed to export your diary entries from The Lodestone (FINAL FANTASY XIV's official player site) into Markdown format for local storage. Since The Lodestone lacks an export function, the primary goal is to help you back up your precious memories.
 
@@ -10,26 +10,41 @@ SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTAS
 
 ## Features
 
-*   **Export Single Article**: Exports the current Lodestone diary article page or diary editing page, including the article title, body, images (Lodestone internal images only), comments, likes, publication date, and tags. It downloads a ZIP file containing the Markdown file and associated images.
-*   **Export All Articles**: Exports all diary entries from The Lodestone's diary list page, including article titles, bodies, images (Lodestone internal images only), comments, likes, publication dates, and tags. It converts them to Markdown format and downloads them as a single ZIP file. All internal Lodestone images are also downloaded and included in an `images/` folder within the ZIP file.
+*   **Export Single Article**: Exports the current Lodestone diary article page or diary editing page, including the article title, body, all images (both internal and external), comments, likes, publication date, and tags. It downloads a ZIP file containing the Markdown file and associated images.
+*   **Export All Articles**: Exports all diary entries from The Lodestone's diary list page, including article titles, bodies, all images (both internal and external), comments, likes, publication dates, and tags. It converts them to Markdown format and downloads them as a single ZIP file. All images are downloaded and included in an `images/` folder within the ZIP file.
 *   **Comment Retrieval**: Retrieves the full text of comments associated with articles and includes them in the Markdown files.
 *   **Bulk Image Download**: When exporting all articles, all images from The Lodestone's image management page are pre-downloaded and included in the ZIP file. This prevents duplicate downloads of images referenced across multiple articles and ensures images are displayed correctly when viewed locally.
 *   **Article List Generation**: When exporting all articles, a `Article_List.md` file is generated within the ZIP file, containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Installation
 
+### Option 1: Download from Releases (Recommended)
+1.  Download the latest `sync-stone-chrome-extension.zip` from [GitHub Releases](https://github.com/kako-jun/sync-stone/releases).
+2.  Extract the ZIP file to any folder.
+3.  Open Chrome browser and navigate to `chrome://extensions`.
+4.  Toggle on "Developer mode" in the top right corner.
+5.  Click on the "Load unpacked" button.
+6.  Select the extracted folder.
+7.  The SyncStone extension will be added to Chrome.
+
+### Option 2: Build from Source
 1.  Clone or [download](https://github.com/kako-jun/sync-stone/archive/refs/heads/main.zip) this repository.
-2.  Open Chrome browser and navigate to `chrome://extensions`.
-3.  Toggle on "Developer mode" in the top right corner.
-4.  Click on the "Load unpacked" button.
-5.  Select the `chrome-extension` folder within the downloaded or cloned repository.
-6.  The SyncStone extension will be added to Chrome.
+2.  Navigate to the `chrome-extension` folder and run:
+    ```bash
+    npm install
+    npm run build
+    ```
+3.  Open Chrome browser and navigate to `chrome://extensions`.
+4.  Toggle on "Developer mode" in the top right corner.
+5.  Click on the "Load unpacked" button.
+6.  Select the `chrome-extension/dist` folder.
+7.  The SyncStone extension will be added to Chrome.
 
 ## Usage
 
 ### 1. Setting Access Interval
 
-When you open the extension's popup, you'll find an input field for "Access Interval (milliseconds)". This sets the waiting time between consecutive accesses to The Lodestone's server. To consider server load, the default is set to 2000 milliseconds (2 seconds) and cannot be set to less than 2000 milliseconds. Adjust as needed.
+When you open the extension's popup, you'll find an input field for "Access Interval (milliseconds)". This sets the waiting time between consecutive accesses to The Lodestone's server and affects both page loading timeouts and processing delays. To consider server load, the default is set to 2000 milliseconds (2 seconds) and cannot be set to less than 2000 milliseconds. Adjust as needed.
 
 ### 2. Exporting a Single Article
 
@@ -57,9 +72,9 @@ The downloaded ZIP file will contain the following:
         *   `likes`: Number of likes
         *   `comments`: Number of comments
         *   `tags`: List of tags
-    *   Article body and comment body will be in Markdown format.
-*   **`images/` folder**: Lodestone internal images (`finalfantasyxiv.com` domain images) are downloaded and saved in this folder. Image links within Markdown files will be rewritten to relative paths within this folder.
-*   **`Article_List.md`**: A Markdown file containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
+    *   Article body and comment content will be in Markdown format.
+*   **`images/` folder**: All images (both internal Lodestone images and external images) are downloaded and saved in this folder. Image links within Markdown files will be rewritten to relative paths within this folder.
+*   **`記事一覧.md` (Article_List.md)**: A Markdown file containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
 ### 5. Viewing Exported Markdown Files
 
@@ -68,9 +83,17 @@ It is recommended to open the exported Markdown files with a text editor that su
 ## Important Notes
 
 *   **Server Load**: The "Export All Articles" feature accesses The Lodestone's server consecutively. Please set the configurable access interval appropriately to avoid placing excessive load on the server.
-*   **External Images**: Images from domains other than The Lodestone will not be downloaded and will remain linked with their original URLs in the Markdown files.
+*   **Image Download**: All images are downloaded and included in the ZIP file, including both internal Lodestone images and external images. If an image fails to download, the original URL will be preserved in the Markdown file.
 *   **Lodestone Specification Changes**: If The Lodestone's HTML structure or specifications change, this extension may not function correctly.
 *   **BBCode Conversion**: Lodestone's BBCode is retrieved as converted HTML and then converted to Markdown by the Turndown library. Special notations or complex layouts may not be perfectly reproduced.
+
+## Technical Specifications
+
+*   **Built with TypeScript**: The extension is developed using TypeScript for better code maintainability and type safety.
+*   **Chrome Extension Manifest V3**: Fully compatible with the latest Chrome extension standards.
+*   **Service-Oriented Architecture**: Code is organized into separate service classes (LodestoneAPI, ImageProcessor, MarkdownConverter) for better modularity.
+*   **Build System**: Uses Vite for fast development and production builds.
+*   **Dynamic Timeout Management**: All timeouts are dynamically calculated based on the user's access interval setting to ensure consistent behavior.
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">

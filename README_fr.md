@@ -8,26 +8,41 @@ SyncStone, nommé "Stardustmemoir", est un outil non officiel lié à FINAL FANT
 
 ## Fonctionnalités
 
-*   **Exporter un seul article**: Exporte la page d'article de journal Lodestone actuelle ou la page d'édition de journal, y compris le titre de l'article, le corps, les images (uniquement les images internes à Lodestone), les commentaires, les mentions J'aime, la date de publication et les balises. Il télécharge un fichier ZIP contenant le fichier Markdown et les images associées.
-*   **Exporter tous les articles**: Exporte toutes les entrées de journal de la page de liste de journaux de The Lodestone, y compris les titres d'articles, les corps, les images (uniquement les images internes à Lodestone), les commentaires, les mentions J'aime, les dates de publication et les balises. Il les convertit au format Markdown et les télécharge sous forme de fichier ZIP unique. Toutes les images internes à Lodestone sont également téléchargées et incluses dans un dossier `images/` dans le fichier ZIP.
+*   **Exporter un seul article**: Exporte la page d'article de journal Lodestone actuelle ou la page d'édition de journal, y compris le titre de l'article, le corps, toutes les images (internes et externes), les commentaires, les mentions J'aime, la date de publication et les balises. Il télécharge un fichier ZIP contenant le fichier Markdown et les images associées.
+*   **Exporter tous les articles**: Exporte toutes les entrées de journal de la page de liste de journaux de The Lodestone, y compris les titres d'articles, les corps, toutes les images (internes et externes), les commentaires, les mentions J'aime, les dates de publication et les balises. Il les convertit au format Markdown et les télécharge sous forme de fichier ZIP unique. Toutes les images sont téléchargées et incluses dans un dossier `images/` dans le fichier ZIP.
 *   **Récupération des commentaires**: Récupère le texte intégral des commentaires associés aux articles et les inclut dans les fichiers Markdown.
 *   **Téléchargement en masse d'images**: Lors de l'exportation de tous les articles, toutes les images de la page de gestion d'images de The Lodestone sont pré-téléchargées et incluses dans le fichier ZIP. Cela évite les téléchargements en double d'images référencées dans plusieurs articles et garantit que les images sont affichées correctement lors de la consultation locale.
 *   **Génération de la liste d'articles**: Lors de l'exportation de tous les articles, un fichier `Article_List.md` est généré dans le fichier ZIP, contenant des liens vers tous les articles exportés. Ce fichier peut être utilisé de manière pratique comme une collection de liens vers vos articles exportés lorsqu'il est ouvert avec des éditeurs de texte compatibles avec la prévisualisation Markdown comme [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Installation
 
+### Option 1: Télécharger depuis les Releases (Recommandé)
+1.  Téléchargez le dernier `sync-stone-chrome-extension.zip` depuis [GitHub Releases](https://github.com/kako-jun/sync-stone/releases).
+2.  Extrayez le fichier ZIP dans n'importe quel dossier.
+3.  Ouvrez le navigateur Chrome et accédez à `chrome://extensions`.
+4.  Activez le "Mode développeur" en haut à droite.
+5.  Cliquez sur le bouton "Charger l'extension non empaquetée".
+6.  Sélectionnez le dossier extrait.
+7.  L'extension SyncStone sera ajoutée à Chrome.
+
+### Option 2: Construire depuis la source
 1.  Clonez ou [téléchargez](https://github.com/kako-jun/sync-stone/archive/refs/heads/main.zip) ce dépôt.
-2.  Ouvrez le navigateur Chrome et accédez à `chrome://extensions`.
-3.  Activez le "Mode développeur" en haut à droite.
-4.  Cliquez sur le bouton "Charger l'extension non empaquetée".
-5.  Sélectionnez le dossier `chrome-extension` dans le dépôt téléchargé ou cloné.
-6.  L'extension SyncStone sera ajoutée à Chrome.
+2.  Naviguez vers le dossier `chrome-extension` et exécutez:
+    ```bash
+    npm install
+    npm run build
+    ```
+3.  Ouvrez le navigateur Chrome et accédez à `chrome://extensions`.
+4.  Activez le "Mode développeur" en haut à droite.
+5.  Cliquez sur le bouton "Charger l'extension non empaquetée".
+6.  Sélectionnez le dossier `chrome-extension/dist`.
+7.  L'extension SyncStone sera ajoutée à Chrome.
 
 ## Utilisation
 
 ### 1. Réglage de l'intervalle d'accès
 
-Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un champ de saisie pour "Intervalle d'accès (millisecondes)". Cela définit le temps d'attente entre les accès consécutifs au serveur de The Lodestone. Pour tenir compte de la charge du serveur, la valeur par défaut est de 2000 millisecondes (2 secondes) et ne peut pas être inférieure à 2000 millisecondes. Ajustez si nécessaire.
+Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un champ de saisie pour "Intervalle d'accès (millisecondes)". Cela définit le temps d'attente entre les accès consécutifs au serveur de The Lodestone et affecte également les délais de chargement des pages et les retards de traitement. Pour tenir compte de la charge du serveur, la valeur par défaut est de 2000 millisecondes (2 secondes) et ne peut pas être inférieure à 2000 millisecondes. Ajustez si nécessaire.
 
 ### 2. Exportation d'un seul article
 
