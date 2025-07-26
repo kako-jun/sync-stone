@@ -33,14 +33,14 @@ SyncStone은 'Stardustmemoir'이라는 이름으로, FINAL FANTASY XIV 관련 �
 
 1.  내보내려는 Lodestone 일기 게시물 페이지 또는 일기 편집 페이지를 엽니다.
 2.  Chrome 도구 모음에서 SyncStone 아이콘을 클릭하여 팝업을 엽니다.
-3.  "현재 게시물 내보내기" 버튼을 클릭합니다.
+3.  "Export Current Article" 버튼을 클릭합니다.
 4.  Markdown 파일과 이미지가 포함된 ZIP 파일이 다운로드됩니다.
 
 ### 3. 모든 게시물 내보내기
 
 1.  Lodestone의 일기 목록 페이지(예: `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`)를 엽니다.
 2.  Chrome 도구 모음에서 SyncStone 아이콘을 클릭하여 팝업을 엽니다.
-3.  "모든 게시물 내보내기" 버튼을 클릭합니다.
+3.  "Export All Articles" 버튼을 클릭합니다.
 4.  내보낼 게시물 수가 표시되고 계속할지 묻는 확인 대화 상자가 나타납니다. "예"를 클릭하여 내보내기를 시작합니다.
 5.  내보내는 동안 진행률 표시줄이 표시됩니다. 완료되면 ZIP 파일이 다운로드됩니다.
 
@@ -55,7 +55,7 @@ SyncStone은 동일한 절차를 사용하여 다른 플레이어의 일기 항�
 
 **사용 방법**:
 1. 게시물을 내보내려는 다른 플레이어의 일기 목록 페이지를 엽니다
-2. 자신의 게시물과 동일한 절차를 따라 "모든 게시물 내보내기"를 클릭합니다
+2. 자신의 게시물과 동일한 절차를 따라 "Export All Articles"를 클릭합니다
 3. 시스템이 자동으로 다른 플레이어의 게시물임을 감지하고 적절히 처리합니다
 
 **기술적 차이점**:

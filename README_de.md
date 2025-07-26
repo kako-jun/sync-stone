@@ -33,14 +33,14 @@ Wenn Sie das Popup der Erweiterung öffnen, finden Sie ein Eingabefeld für "Zug
 
 1.  Öffnen Sie die Lodestone-Tagebuchartikelseite oder Tagebuchbearbeitungsseite, die Sie exportieren möchten.
 2.  Klicken Sie auf das SyncStone-Symbol in Ihrer Chrome-Symbolleiste, um das Popup zu öffnen.
-3.  Klicken Sie auf die Schaltfläche "Aktuellen Artikel exportieren".
+3.  Klicken Sie auf die Schaltfläche "Export Current Article".
 4.  Eine ZIP-Datei mit der Markdown-Datei und den Bildern wird heruntergeladen.
 
 ### 3. Exportieren aller Artikel
 
 1.  Öffnen Sie die Lodestone-Tagebuchlistenseite (z. B. `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`).
 2.  Klicken Sie auf das SyncStone-Symbol in Ihrer Chrome-Symbolleiste, um das Popup zu öffnen.
-3.  Klicken Sie auf die Schaltfläche "Alle Artikel exportieren".
+3.  Klicken Sie auf die Schaltfläche "Export All Articles".
 4.  Ein Bestätigungsdialog wird angezeigt, der die Anzahl der zu exportierenden Artikel anzeigt und Sie fragt, ob Sie fortfahren möchten. Klicken Sie auf "Ja", um den Export zu starten.
 5.  Während des Exports wird ein Fortschrittsbalken angezeigt. Nach Abschluss wird eine ZIP-Datei heruntergeladen.
 
@@ -55,7 +55,7 @@ SyncStone kann auch Tagebucheinträge anderer Spieler mit demselben Verfahren ex
 
 **Verwendung**:
 1. Öffnen Sie die Tagebuchlistenseite des anderen Spielers, dessen Artikel Sie exportieren möchten
-2. Folgen Sie demselben Verfahren wie für Ihre eigenen Artikel und klicken Sie auf "Alle Artikel exportieren"
+2. Folgen Sie demselben Verfahren wie für Ihre eigenen Artikel und klicken Sie auf "Export All Articles"
 3. Das System erkennt automatisch, dass es sich um Artikel eines anderen Spielers handelt und verarbeitet sie entsprechend
 
 **Technische Unterschiede**:

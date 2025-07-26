@@ -48,14 +48,14 @@ Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un c
 
 1.  Ouvrez la page d'article de journal Lodestone ou la page d'édition de journal que vous souhaitez exporter.
 2.  Cliquez sur l'icône SyncStone dans la barre d'outils de Chrome pour ouvrir la fenêtre contextuelle.
-3.  Cliquez sur le bouton "Exporter l'article actuel".
+3.  Cliquez sur le bouton "Export Current Article".
 4.  Un fichier ZIP contenant le fichier Markdown et les images sera téléchargé.
 
 ### 3. Exportation de tous les articles
 
 1.  Ouvrez la page de liste de journaux de The Lodestone (par exemple: `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`).
 2.  Cliquez sur l'icône SyncStone dans la barre d'outils de Chrome pour ouvrir la fenêtre contextuelle.
-3.  Cliquez sur le bouton "Exporter tous les articles".
+3.  Cliquez sur le bouton "Export All Articles".
 4.  Une boîte de dialogue de confirmation apparaîtra, affichant le nombre d'articles à exporter et vous demandant si vous souhaitez continuer. Cliquez sur "Oui" pour démarrer l'exportation.
 5.  Une barre de progression s'affichera pendant l'exportation. Une fois terminée, un fichier ZIP sera téléchargé.
 
@@ -70,7 +70,7 @@ SyncStone peut également exporter les entrées de journal d'autres joueurs en u
 
 **Comment utiliser** :
 1. Ouvrez la page de liste de journaux de l'autre joueur dont vous voulez exporter les articles
-2. Suivez la même procédure que pour vos propres articles et cliquez sur "Exporter tous les articles"
+2. Suivez la même procédure que pour vos propres articles et cliquez sur "Export All Articles"
 3. Le système détecte automatiquement qu'il s'agit d'articles d'un autre joueur et les traite de manière appropriée
 
 **Différences techniques** :
