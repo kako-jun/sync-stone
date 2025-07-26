@@ -31,7 +31,7 @@ Wenn Sie das Popup der Erweiterung öffnen, finden Sie ein Eingabefeld für "Zug
 
 ### 2. Exportieren eines einzelnen Artikels
 
-1.  Öffnen Sie die Lodestone-Tagebuchartikelseite oder Tagebuchbearbeitungsseite, die Sie exportieren möchten.
+1.  Öffnen Sie die Lodestone-Tagebuchartikelseite (z.B. `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`), die Sie exportieren möchten.
 2.  Klicken Sie auf das SyncStone-Symbol in Ihrer Chrome-Symbolleiste, um das Popup zu öffnen.
 3.  Klicken Sie auf die Schaltfläche "Export Current Article".
 4.  Eine ZIP-Datei mit der Markdown-Datei und den Bildern wird heruntergeladen.

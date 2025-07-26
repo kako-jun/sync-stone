@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Chrome extension to export Lodestone diaries to Markdown.",
+    "message": "Chrome extension to export Lodestone diary entries in Markdown format.",
     "description": "Description of the extension."
   },
   "exportAllArticlesButton": {
@@ -52,7 +52,7 @@
     "description": "Text when export is starting."
   },
   "lodestoneExportDescription": {
-    "message": "Export your Lodestone diaries.",
+    "message": "Export your Lodestone diary entries in Markdown format.",
     "description": "Description text in popup."
   },
   "notOnBlogListPageError": {

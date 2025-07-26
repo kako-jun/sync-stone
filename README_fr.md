@@ -46,7 +46,7 @@ Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un c
 
 ### 2. Exportation d'un seul article
 
-1.  Ouvrez la page d'article de journal Lodestone ou la page d'édition de journal que vous souhaitez exporter.
+1.  Ouvrez la page d'article de journal Lodestone (ex: `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`) que vous souhaitez exporter.
 2.  Cliquez sur l'icône SyncStone dans la barre d'outils de Chrome pour ouvrir la fenêtre contextuelle.
 3.  Cliquez sur le bouton "Export Current Article".
 4.  Un fichier ZIP contenant le fichier Markdown et les images sera téléchargé.

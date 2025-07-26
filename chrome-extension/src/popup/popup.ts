@@ -45,7 +45,7 @@ let isDeveloperMode = false;
 const messages: { [key: string]: { [key: string]: string } } = {
   ja: {
     extensionName: 'SyncStone - 星紡のメモワール',
-    lodestoneExportDescription: 'ロドストのブログ記事をMarkdown形式でエクスポートします',
+    lodestoneExportDescription: 'ロドストの記事を、Markdown形式でエクスポートします。',
     accessIntervalLabel: 'アクセス間隔:',
     exportAllArticlesButton: 'すべての記事をエクスポート',
     exportAllArticlesButtonFirstPage: '1ページ目へ移動 → すべての記事をエクスポート',
@@ -57,13 +57,25 @@ const messages: { [key: string]: { [key: string]: string } } = {
     exportingArticles: '記事をエクスポート中',
     exportComplete: 'エクスポート完了！',
     startingExport: 'エクスポートを開始しています...',
+    startingDownload: 'ダウンロードを開始しています...',
     cancelExport: '⛔ エクスポートをキャンセル',
+    exportCancelled: 'エクスポートをキャンセルしました',
     developerModeLabel: '🛠️ 開発者モード (最大5記事)',
-    languageLabel: '🌐 Language:'
+    languageLabel: '🌐 Language:',
+    singleArticleExported: '記事がエクスポートされました！',
+    failedToExportArticle: '記事のエクスポートに失敗しました: ',
+    failedToExportArticles: '記事のエクスポートに失敗しました: ',
+    failedToDownloadImages: '画像のダウンロードに失敗しました: ',
+    couldNotRetrieveTitle: '取得できませんでした',
+    contentScriptNotAvailable: 'コンテンツスクリプトが利用できません: ',
+    notOnBlogListPageError: 'ブログ一覧ページではありません',
+    connectionError: '接続を確立できませんでした。受信側が存在しません。',
+    guidanceTitle: 'ロドストのブログページに移動してください',
+    guidanceDetails: '• 記事一覧ページ → 全記事エクスポート<br>• 個別記事ページ → 個別 + 全記事エクスポート'
   },
   en: {
     extensionName: 'SyncStone - Stardustmemoir',
-    lodestoneExportDescription: 'Export your Lodestone diaries.',
+    lodestoneExportDescription: 'Export your Lodestone diary entries in Markdown format.',
     accessIntervalLabel: 'Access Interval:',
     exportAllArticlesButton: 'Export All Articles',
     exportAllArticlesButtonFirstPage: 'Go to Page 1 and Export All',
@@ -75,9 +87,21 @@ const messages: { [key: string]: { [key: string]: string } } = {
     exportingArticles: 'Exporting Articles',
     exportComplete: 'Export Complete!',
     startingExport: 'Starting Export...',
+    startingDownload: 'Starting download...',
     cancelExport: '⛔ Cancel Export',
+    exportCancelled: 'Export cancelled',
     developerModeLabel: '🛠️ Developer Mode (Max 5 articles)',
-    languageLabel: '🌐 Language:'
+    languageLabel: '🌐 Language:',
+    singleArticleExported: 'Single article exported successfully!',
+    failedToExportArticle: 'Failed to export article: ',
+    failedToExportArticles: 'Failed to export articles: ',
+    failedToDownloadImages: 'Failed to download images: ',
+    couldNotRetrieveTitle: 'Could not retrieve',
+    contentScriptNotAvailable: 'Content script not available: ',
+    notOnBlogListPageError: 'Not on blog list page',
+    connectionError: 'Could not establish connection. Receiving end does not exist.',
+    guidanceTitle: 'Please navigate to a Lodestone blog page',
+    guidanceDetails: '• Blog list page → Export all articles<br>• Individual article page → Individual + Export all'
   }
 };
 
@@ -127,7 +151,7 @@ function restoreExportState(): void {
 
     if (response.isExporting) {
       if (response.showingConfirmation) {
-        elements.confirmationText.innerText = `${response.total}${chrome.i18n.getMessage('confirmationText')}`;
+        elements.confirmationText.innerText = `${response.total}${messages[currentLanguage].confirmationText}`;
         elements.confirmationDialog.style.display = 'block';
       }
 
@@ -143,9 +167,9 @@ function restoreExportState(): void {
         if (elements.progressText) {
           let progressTypeMessage: string;
           if (response.type === 'images') {
-            progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+            progressTypeMessage = messages[currentLanguage].downloadingImages;
           } else {
-            progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+            progressTypeMessage = messages[currentLanguage].exportingArticles;
           }
           elements.progressText.innerText = `${progressTypeMessage}: ${response.current} / ${response.total} (${(response.current / response.total * 100).toFixed(1)}%)`;
         }
@@ -163,7 +187,7 @@ function initializeElements(): void {
     confirmationDialog: document.getElementById('confirmationDialog') as HTMLElement,
     confirmationText: document.getElementById('confirmationText') as HTMLElement,
     confirmYesButton: document.getElementById('confirmYes') as HTMLButtonElement,
-    confirmNoButton: document.getElementById('confirmNoButton') as HTMLButtonElement,
+    confirmNoButton: document.getElementById('confirmNo') as HTMLButtonElement,
     
     // New Settings Elements
     languageSelect: document.getElementById('languageSelect') as HTMLSelectElement,
@@ -237,7 +261,7 @@ function setupEventListeners(): void {
 
   // Export current article button
   elements.exportCurrentArticleButton.addEventListener('click', () => {
-    showStatusMessage('Starting download...', 'info');
+    showStatusMessage(messages[currentLanguage].startingDownload, 'info');
     elements.exportCurrentArticleButton.disabled = true;
     
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
@@ -260,12 +284,12 @@ function setupEventListeners(): void {
     elements.confirmationDialog.style.display = 'none';
     
     // Show starting message
-    showStatusMessage('エクスポートを開始しています...', 'info');
+    showStatusMessage(messages[currentLanguage].startingExport, 'info');
     
     // Legacy support
     if (elements.progressBarContainer && elements.progressText) {
       elements.progressBarContainer.style.display = 'block';
-      elements.progressText.innerText = chrome.i18n.getMessage('startingExport');
+      elements.progressText.innerText = messages[currentLanguage].startingExport;
     }
   });
 
@@ -278,8 +302,7 @@ function setupEventListeners(): void {
   elements.cancelExportButton.addEventListener('click', () => {
     chrome.runtime.sendMessage({ action: 'cancelExport' });
     elements.exportControlContainer.style.display = 'none';
-    const cancelMsg = messages[currentLanguage].exportComplete.replace('完了', 'キャンセル');
-    showStatusMessage('エクスポートをキャンセルしました', 'info');
+    showStatusMessage(messages[currentLanguage].exportCancelled, 'info');
     resetProgress();
   });
 
@@ -287,6 +310,7 @@ function setupEventListeners(): void {
   elements.languageSelect.addEventListener('change', () => {
     currentLanguage = elements.languageSelect.value;
     applyI18nMessages();
+    checkCurrentArticle(); // Re-check to update button texts
   });
 
   // Developer mode checkbox
@@ -300,7 +324,7 @@ function setupEventListeners(): void {
 chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
   switch (request.action) {
     case 'showExportConfirmation':
-      elements.confirmationText.innerText = `${request.totalArticles}${chrome.i18n.getMessage('confirmationText')}`;
+      elements.confirmationText.innerText = `${request.totalArticles}${messages[currentLanguage].confirmationText}`;
       elements.confirmationDialog.style.display = 'block';
       break;
 
@@ -328,9 +352,9 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
         
         let progressTypeMessage: string;
         if (request.type === 'images') {
-          progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+          progressTypeMessage = messages[currentLanguage].downloadingImages;
         } else {
-          progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+          progressTypeMessage = messages[currentLanguage].exportingArticles;
         }
         elements.progressText.innerText = `${progressTypeMessage}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
       }
@@ -343,11 +367,11 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       // Complete both progress bars
       completeImageProgress();
       completeArticleProgress();
-      showStatusMessage('エクスポートが完了しました！', 'success');
+      showStatusMessage(messages[currentLanguage].exportComplete, 'success');
       
       // Legacy support
       if (elements.progressText && elements.progressBar) {
-        elements.progressText.innerText = chrome.i18n.getMessage('exportComplete');
+        elements.progressText.innerText = messages[currentLanguage].exportComplete;
         elements.progressBar.style.width = '100%';
       }
       break;
@@ -360,7 +384,7 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       break;
 
     case 'exportSuccess':
-      showStatusMessage(request.message || 'Export completed!', 'success');
+      showStatusMessage(request.message || messages[currentLanguage].exportComplete, 'success');
       elements.exportCurrentArticleButton.disabled = false;
       break;
 
@@ -379,14 +403,26 @@ function checkCurrentArticle(): void {
     resetDialogStates();
 
     const currentUrl = tab.url;
-    const hasLodestone = currentUrl.includes('/lodestone/character/');
+    
+    // Check if URL is a Lodestone character blog URL
+    const isLodestoneCharacterUrl = currentUrl.startsWith('https://jp.finalfantasyxiv.com/lodestone/character/');
+    
+    if (!isLodestoneCharacterUrl) {
+      // Not a Lodestone character page at all - show guidance
+      elements.exportButton.style.display = 'none';
+      elements.exportCurrentArticleButton.style.display = 'none';
+      elements.articleInfoContainer.style.display = 'none';
+      showGuidanceMessage();
+      return;
+    }
+    
     const hasBlog = currentUrl.includes('/blog/');
     const hasEdit = currentUrl.includes('/edit');
-    const isIndividualArticle = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/\d+/);
+    const isIndividualArticle = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/\d+/) && !hasEdit;
     const isBlogListPattern = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/?(\?.*)?$/);
 
-    const isBlogListPage = hasLodestone && hasBlog && !hasEdit && !isIndividualArticle && isBlogListPattern;
-    const isValidBlogPage = hasLodestone && hasBlog && (hasEdit || isIndividualArticle);
+    const isBlogListPage = hasBlog && !hasEdit && !isIndividualArticle && isBlogListPattern;
+    const isValidBlogPage = hasBlog && isIndividualArticle;
 
     if (isBlogListPage) {
       // Blog list page: show only export all button
@@ -395,17 +431,20 @@ function checkCurrentArticle(): void {
       elements.articleInfoContainer.style.display = 'none';
       
       // Check if this is page 1 or later pages
-      const isFirstPage = !currentUrl.includes('page=') || currentUrl.includes('page=1');
+      const pageMatch = currentUrl.match(/[?&]page=(\d+)/);
+      const pageNumber = pageMatch ? parseInt(pageMatch[1], 10) : 1;
+      const isFirstPage = pageNumber === 1;
+      
       elements.exportButton.textContent = isFirstPage 
-        ? chrome.i18n.getMessage('exportAllArticlesButton')
-        : chrome.i18n.getMessage('exportAllArticlesButtonFirstPage');
+        ? messages[currentLanguage].exportAllArticlesButton
+        : messages[currentLanguage].exportAllArticlesButtonFirstPage;
     } else if (isValidBlogPage) {
       // Individual article page: show both buttons
       elements.exportButton.style.display = 'block';
       elements.exportCurrentArticleButton.style.display = 'block';
       
       // Update button text to clarify the two-step process
-      elements.exportButton.textContent = chrome.i18n.getMessage('exportAllArticlesButtonFirstPage');
+      elements.exportButton.textContent = messages[currentLanguage].exportAllArticlesButtonFirstPage;
 
       // Get article information
       if (tab.id) {
@@ -420,12 +459,10 @@ function checkCurrentArticle(): void {
         });
       }
     } else {
-      // Other pages: hide both buttons but show guidance
+      // Lodestone character page but not a blog page - show guidance
       elements.exportButton.style.display = 'none';
       elements.exportCurrentArticleButton.style.display = 'none';
       elements.articleInfoContainer.style.display = 'none';
-      
-      // Show guidance message
       showGuidanceMessage();
     }
   });
@@ -443,12 +480,6 @@ function resetDialogStates(): void {
   // Legacy support
   if (elements.progressBarContainer) {
     elements.progressBarContainer.style.display = 'none';
-  }
-  
-  // Hide guidance message if it exists
-  const guidanceMessage = document.getElementById('guidanceMessage');
-  if (guidanceMessage) {
-    guidanceMessage.style.display = 'none';
   }
 }
 
@@ -476,11 +507,10 @@ function showGuidanceMessage(): void {
         <span style="font-size: 24px;">📍</span>
       </div>
       <div style="font-weight: bold; margin-bottom: 8px;">
-        ロドストのブログページに移動してください
+        ${messages[currentLanguage].guidanceTitle}
       </div>
       <div style="font-size: 12px; opacity: 0.9;">
-        • 記事一覧ページ → 全記事エクスポート<br>
-        • 個別記事ページ → 個別 + 全記事エクスポート
+        ${messages[currentLanguage].guidanceDetails}
       </div>
     `;
     
@@ -496,7 +526,7 @@ function showGuidanceMessage(): void {
 
 // Display article information
 function displayArticleInfo(title: string, bodyLength: number, imageCount: number, likes: number, commentsCount: number): void {
-  elements.articleTitle.textContent = 'Title: ' + (title || 'Could not retrieve');
+  elements.articleTitle.textContent = 'Title: ' + (title || messages[currentLanguage].couldNotRetrieveTitle);
   elements.articleStats.textContent = `Body: ${bodyLength || 0} chars | Images: ${imageCount || 0} | Likes: ${likes || 0} | Comments: ${commentsCount || 0}`;
   elements.articleInfoContainer.style.display = 'block';
 }

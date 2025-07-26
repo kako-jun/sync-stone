@@ -48,7 +48,7 @@ When you open the extension's popup, you'll find an input field for "Access Inte
 
 ### 2. Exporting a Single Article
 
-1.  Open the Lodestone diary article page or diary editing page you wish to export.
+1.  Open the Lodestone diary article page (e.g., `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`) you wish to export.
 2.  Click the SyncStone icon in your Chrome toolbar to open the popup.
 3.  Click the "Export Current Article" button.
 4.  A ZIP file containing the Markdown file and images will be downloaded.

@@ -31,7 +31,7 @@ SyncStone，名为“Stardustmemoir”，是与 FINAL FANTASY XIV 相关的非�
 
 ### 2. 导出单个文章
 
-1.  打开您要导出的 Lodestone 日记文章页面或日记编辑页面。
+1.  打开您要导出的 Lodestone 日记文章页面（例如：`https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`）。
 2.  点击 Chrome 工具栏中的 SyncStone 图标以打开弹出窗口。
 3.  点击"Export Current Article"按钮。
 4.  将下载一个包含 Markdown 文件和图片的 ZIP 文件。

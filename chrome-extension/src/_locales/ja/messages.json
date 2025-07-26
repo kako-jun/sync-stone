@@ -4,7 +4,7 @@
     "description": "拡張機能の名前"
   },
   "extensionDescription": {
-    "message": "ロドストの日記をMarkdown形式でエクスポートするChrome拡張機能",
+    "message": "ロドストの記事を、Markdown形式でエクスポートするChrome拡張機能",
     "description": "拡張機能の説明"
   },
   "exportAllArticlesButton": {
@@ -52,7 +52,7 @@
     "description": "エクスポート開始時のテキスト"
   },
   "lodestoneExportDescription": {
-    "message": "The Lodestoneの日記をエクスポートします。",
+    "message": "ロドストの記事を、Markdown形式でエクスポートします。",
     "description": "ポップアップの説明テキスト"
   },
   "notOnBlogListPageError": {
