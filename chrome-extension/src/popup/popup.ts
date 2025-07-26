@@ -71,7 +71,21 @@ const messages: { [key: string]: { [key: string]: string } } = {
     notOnBlogListPageError: 'ブログ一覧ページではありません',
     connectionError: '接続を確立できませんでした。受信側が存在しません。',
     guidanceTitle: 'ロドストのブログページに移動してください',
-    guidanceDetails: '• 記事一覧ページ → 全記事エクスポート<br>• 個別記事ページ → 個別 + 全記事エクスポート'
+    guidanceDetails: '• 記事一覧ページ → 全記事エクスポート<br>• 個別記事ページ → 個別 + 全記事エクスポート',
+    guidanceLinkText: 'ロドストにアクセス',
+    articleInfoHeader: '記事情報',
+    articleTitle: 'タイトル: ',
+    articleBody: '本文: ',
+    articleImages: '画像: ',
+    articleLikes: 'いいね: ',
+    articleComments: 'コメント: ',
+    chars: '文字',
+    件: '件',
+    imageDownloadHeader: '📸 画像エクスポート',
+    articleProcessHeader: '📝 記事エクスポート',
+    imageDownloadComplete: '画像エクスポート完了',
+    articleProcessComplete: '記事エクスポート完了',
+    completed: '完了'
   },
   en: {
     extensionName: 'SyncStone - Stardustmemoir',
@@ -101,7 +115,21 @@ const messages: { [key: string]: { [key: string]: string } } = {
     notOnBlogListPageError: 'Not on blog list page',
     connectionError: 'Could not establish connection. Receiving end does not exist.',
     guidanceTitle: 'Please navigate to a Lodestone blog page',
-    guidanceDetails: '• Blog list page → Export all articles<br>• Individual article page → Individual + Export all'
+    guidanceDetails: '• Blog list page → Export all articles<br>• Individual article page → Individual + Export all',
+    guidanceLinkText: 'Go to Lodestone',
+    articleInfoHeader: 'Article Info',
+    articleTitle: 'Title: ',
+    articleBody: 'Body: ',
+    articleImages: 'Images: ',
+    articleLikes: 'Likes: ',
+    articleComments: 'Comments: ',
+    chars: ' chars',
+    件: '',
+    imageDownloadHeader: '📸 Exporting Images',
+    articleProcessHeader: '📝 Exporting Articles',
+    imageDownloadComplete: 'Image export complete',
+    articleProcessComplete: 'Article export complete',
+    completed: 'Complete'
   }
 };
 
@@ -129,7 +157,16 @@ function applyI18nMessages(): void {
     }
   }
   
-  updateButtonsForDeveloperMode();
+  // Update progress headers
+  const imageProgressHeader = document.getElementById('imageProgressHeader');
+  if (imageProgressHeader) {
+    imageProgressHeader.textContent = msgs.imageDownloadHeader;
+  }
+  
+  const articleProgressHeader = document.getElementById('articleProgressHeader');
+  if (articleProgressHeader) {
+    articleProgressHeader.textContent = msgs.articleProcessHeader;
+  }
 }
 
 // Initialize settings with defaults (no persistence)
@@ -253,7 +290,8 @@ function setupEventListeners(): void {
     chrome.runtime.sendMessage({ 
       action: 'setExportDelay', 
       delay: exportDelay,
-      developerMode: isDeveloperMode 
+      developerMode: isDeveloperMode,
+      language: currentLanguage
     }, () => {
       chrome.runtime.sendMessage({ action: 'exportAllArticles' });
     });
@@ -266,7 +304,11 @@ function setupEventListeners(): void {
     
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
     // Set the export delay first, then start export
-    chrome.runtime.sendMessage({ action: 'setExportDelay', delay: exportDelay }, () => {
+    chrome.runtime.sendMessage({ 
+      action: 'setExportDelay', 
+      delay: exportDelay,
+      language: currentLanguage
+    }, () => {
       chrome.runtime.sendMessage({ action: 'exportSingleArticle' });
     });
   });
@@ -277,7 +319,11 @@ function setupEventListeners(): void {
     elements.delayInput.value = exportDelay.toString();
     
     // Set the export delay first, then confirm export
-    chrome.runtime.sendMessage({ action: 'setExportDelay', delay: exportDelay }, () => {
+    chrome.runtime.sendMessage({ 
+      action: 'setExportDelay', 
+      delay: exportDelay,
+      language: currentLanguage
+    }, () => {
       chrome.runtime.sendMessage({ action: 'confirmExportAll' });
     });
     
@@ -310,13 +356,19 @@ function setupEventListeners(): void {
   elements.languageSelect.addEventListener('change', () => {
     currentLanguage = elements.languageSelect.value;
     applyI18nMessages();
+    
+    // Update guidance message if it's currently displayed
+    const guidanceMessage = document.getElementById('guidanceMessage');
+    if (guidanceMessage && guidanceMessage.style.display !== 'none') {
+      updateGuidanceMessage();
+    }
+    
     checkCurrentArticle(); // Re-check to update button texts
   });
 
   // Developer mode checkbox
   elements.developerMode.addEventListener('change', () => {
     isDeveloperMode = elements.developerMode.checked;
-    updateButtonsForDeveloperMode();
   });
 }
 
@@ -379,7 +431,16 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
     case 'showError':
       // Hide cancel button on error
       elements.exportControlContainer.style.display = 'none';
-      showStatusMessage(request.message, 'error');
+      
+      // Translate common error messages
+      let errorMessage = request.message;
+      if (errorMessage.includes('Could not establish connection. Receiving end does not exist.')) {
+        errorMessage = messages[currentLanguage].failedToExportArticle + messages[currentLanguage].connectionError;
+      } else if (errorMessage.includes('Failed to export article:')) {
+        errorMessage = errorMessage.replace('Failed to export article:', messages[currentLanguage].failedToExportArticle);
+      }
+      
+      showStatusMessage(errorMessage, 'error');
       elements.exportCurrentArticleButton.disabled = false;
       break;
 
@@ -483,6 +544,54 @@ function resetDialogStates(): void {
   }
 }
 
+// Update guidance message content
+function updateGuidanceMessage(): void {
+  const guidanceMessage = document.getElementById('guidanceMessage');
+  if (guidanceMessage) {
+    guidanceMessage.innerHTML = `
+      <div style="margin-bottom: 10px;">
+        <span style="font-size: 24px;">ℹ️</span>
+      </div>
+      <div style="font-weight: bold; margin-bottom: 8px;">
+        ${messages[currentLanguage].guidanceTitle}
+      </div>
+      <div style="font-size: 12px; opacity: 0.9; margin-bottom: 12px;">
+        ${messages[currentLanguage].guidanceDetails}
+      </div>
+      <div style="text-align: center;">
+        <a href="https://jp.finalfantasyxiv.com/lodestone/" target="_blank" id="guidanceLink" style="
+          display: inline-block;
+          background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+          color: white;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          font-size: 12px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        ">
+          ${messages[currentLanguage].guidanceLinkText}
+        </a>
+      </div>
+    `;
+    
+    // Add event listeners for hover effects (CSP-compliant)
+    const guidanceLink = document.getElementById('guidanceLink');
+    if (guidanceLink) {
+      guidanceLink.addEventListener('mouseenter', () => {
+        guidanceLink.style.transform = 'translateY(-1px)';
+        guidanceLink.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+      });
+      
+      guidanceLink.addEventListener('mouseleave', () => {
+        guidanceLink.style.transform = 'translateY(0)';
+        guidanceLink.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+      });
+    }
+  }
+}
+
 // Show guidance message for unsupported pages
 function showGuidanceMessage(): void {
   let guidanceMessage = document.getElementById('guidanceMessage');
@@ -502,32 +611,33 @@ function showGuidanceMessage(): void {
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     `;
     
-    guidanceMessage.innerHTML = `
-      <div style="margin-bottom: 10px;">
-        <span style="font-size: 24px;">📍</span>
-      </div>
-      <div style="font-weight: bold; margin-bottom: 8px;">
-        ${messages[currentLanguage].guidanceTitle}
-      </div>
-      <div style="font-size: 12px; opacity: 0.9;">
-        ${messages[currentLanguage].guidanceDetails}
-      </div>
-    `;
-    
-    // Insert after extension description
+    // Insert after extension description first
     const description = document.getElementById('extensionDescription');
     if (description && description.parentNode) {
       description.parentNode.insertBefore(guidanceMessage, description.nextSibling);
     }
+    
+    // Set content using the shared function after DOM insertion
+    updateGuidanceMessage();
   } else {
     guidanceMessage.style.display = 'block';
+    // Update content when showing existing message
+    updateGuidanceMessage();
   }
 }
 
 // Display article information
 function displayArticleInfo(title: string, bodyLength: number, imageCount: number, likes: number, commentsCount: number): void {
-  elements.articleTitle.textContent = 'Title: ' + (title || messages[currentLanguage].couldNotRetrieveTitle);
-  elements.articleStats.textContent = `Body: ${bodyLength || 0} chars | Images: ${imageCount || 0} | Likes: ${likes || 0} | Comments: ${commentsCount || 0}`;
+  const msgs = messages[currentLanguage];
+  
+  // Update article info header
+  const articleInfoHeader = elements.articleInfoContainer.querySelector('h3');
+  if (articleInfoHeader) {
+    articleInfoHeader.textContent = msgs.articleInfoHeader;
+  }
+  
+  elements.articleTitle.textContent = msgs.articleTitle + (title || msgs.couldNotRetrieveTitle);
+  elements.articleStats.textContent = `${msgs.articleBody}${bodyLength || 0}${msgs.chars} | ${msgs.articleImages}${imageCount || 0}${msgs.件} | ${msgs.articleLikes}${likes || 0}${msgs.件} | ${msgs.articleComments}${commentsCount || 0}${msgs.件}`;
   elements.articleInfoContainer.style.display = 'block';
 }
 
@@ -540,10 +650,19 @@ function showImageProgress(current: number, total: number, pageInfo?: { currentP
   elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
   
   let progressText = '';
+  const msgs = messages[currentLanguage];
   if (pageInfo) {
-    progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}/${total}件`;
+    if (currentLanguage === 'ja') {
+      progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}/${total}件`;
+    } else {
+      progressText = `Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${current}/${total}`;
+    }
   } else {
-    progressText = `画像: ${current}/${total}件`;
+    if (currentLanguage === 'ja') {
+      progressText = `画像: ${current}/${total}件`;
+    } else {
+      progressText = `Images: ${current}/${total}`;
+    }
   }
   
   // 現在処理中のアイテム情報を追加（20文字まで）
@@ -564,9 +683,17 @@ function showArticleProgress(current: number, total: number, pageInfo?: { curren
   
   let progressText = '';
   if (pageInfo) {
-    progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}/${total}件`;
+    if (currentLanguage === 'ja') {
+      progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}/${total}件`;
+    } else {
+      progressText = `Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Articles: ${current}/${total}`;
+    }
   } else {
-    progressText = `記事: ${current}/${total}件`;
+    if (currentLanguage === 'ja') {
+      progressText = `記事: ${current}/${total}件`;
+    } else {
+      progressText = `Articles: ${current}/${total}`;
+    }
   }
   
   // 現在処理中のアイテム情報を追加（30文字まで）
@@ -581,8 +708,8 @@ function showArticleProgress(current: number, total: number, pageInfo?: { curren
 function completeImageProgress(): void {
   if (elements.imageProgressContainer.style.display !== 'none') {
     elements.imageProgressBar.style.width = '100%';
-    elements.imageProgressBar.textContent = '完了';
-    elements.imageProgressText.textContent = '画像ダウンロード完了';
+    elements.imageProgressBar.textContent = messages[currentLanguage].completed;
+    elements.imageProgressText.textContent = messages[currentLanguage].imageDownloadComplete;
     // Keep the container visible to show completion
   }
 }
@@ -590,8 +717,8 @@ function completeImageProgress(): void {
 function completeArticleProgress(): void {
   if (elements.articleProgressContainer.style.display !== 'none') {
     elements.articleProgressBar.style.width = '100%';
-    elements.articleProgressBar.textContent = '完了';
-    elements.articleProgressText.textContent = '記事処理完了';
+    elements.articleProgressBar.textContent = messages[currentLanguage].completed;
+    elements.articleProgressText.textContent = messages[currentLanguage].articleProcessComplete;
   }
 }
 
@@ -625,17 +752,8 @@ function showStatusMessage(message: string, type: 'error' | 'success' | 'info'):
 
 // Update buttons for developer mode
 function updateButtonsForDeveloperMode(): void {
-  const msgs = messages[currentLanguage];
-  if (isDeveloperMode) {
-    const devSuffix = currentLanguage === 'ja' ? ' (開発用: 最大5件)' : ' (Dev: Max 5)';
-    elements.exportButton.textContent = msgs.exportAllArticlesButton + devSuffix;
-    elements.exportButton.style.backgroundColor = '#ff9800';
-    elements.exportButton.style.color = 'white';
-  } else {
-    elements.exportButton.textContent = msgs.exportAllArticlesButton;
-    elements.exportButton.style.backgroundColor = '';
-    elements.exportButton.style.color = '';
-  }
+  // Developer mode no longer changes button appearance or text
+  // The mode is only used internally for limiting the number of articles processed
 }
 
 // Initialize popup when DOM is loaded

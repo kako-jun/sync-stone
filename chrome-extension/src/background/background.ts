@@ -21,6 +21,31 @@ let isCancelled = false;
 let currentExportDelay = CONFIG.DEFAULT_EXPORT_DELAY;
 let isDeveloperMode = false;
 let isOwnBlog = true;
+let currentLanguage = 'ja'; // Default language
+
+// Background script messages
+const backgroundMessages: { [key: string]: { [key: string]: string } } = {
+  ja: {
+    contentScriptNotAvailable: 'ページをリロードしてから再度お試しください。',
+    couldNotRetrieveData: '記事データを取得できませんでした。',
+    notOnBlogListPageError: 'ブログ一覧ページではありません。',
+    singleArticleExported: '記事がエクスポートされました！',
+    exportComplete: 'エクスポート完了！',
+    failedToExport: 'エクスポートに失敗しました: ',
+    failedToDownloadImages: '画像のダウンロードに失敗しました: ',
+    blogListMoved: 'ブログ一覧ページに移動しました。全記事エクスポートボタンをもう一度押してください。'
+  },
+  en: {
+    contentScriptNotAvailable: 'Please reload the page and try again.',
+    couldNotRetrieveData: 'Could not retrieve article data from page.',
+    notOnBlogListPageError: 'Not on blog list page.',
+    singleArticleExported: 'Single article exported successfully!',
+    exportComplete: 'Export complete!',
+    failedToExport: 'Failed to export: ',
+    failedToDownloadImages: 'Failed to download images: ',
+    blogListMoved: 'Moved to blog list page. Please press the export all articles button again.'
+  }
+};
 
 // Browser action click handler
 chrome.action.onClicked.addListener((tab) => {
@@ -39,7 +64,7 @@ chrome.action.onClicked.addListener((tab) => {
   } else {
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: chrome.i18n.getMessage('notOnBlogListPageError') 
+      message: backgroundMessages[currentLanguage].notOnBlogListPageError 
     });
   }
 });
@@ -62,7 +87,7 @@ function navigateToBlogListFirstPage(): void {
           if (newTab.id) {
             chrome.tabs.sendMessage(newTab.id, {
               action: 'showExportNotification',
-              message: 'ブログ一覧ページに移動しました。全記事エクスポートボタンをもう一度押してください。'
+              message: backgroundMessages[currentLanguage].blogListMoved
             });
           }
         }, currentExportDelay);
@@ -70,7 +95,7 @@ function navigateToBlogListFirstPage(): void {
     } else {
       chrome.runtime.sendMessage({ 
         action: 'showError', 
-        message: chrome.i18n.getMessage('notOnBlogListPageError') 
+        message: backgroundMessages[currentLanguage].notOnBlogListPageError 
       });
     }
   });
@@ -86,7 +111,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'setExportDelay') {
     currentExportDelay = Math.max(request.delay || CONFIG.DEFAULT_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
     isDeveloperMode = request.developerMode || false;
-    console.log(`開発者モード: ${isDeveloperMode ? '有効' : '無効'}, 遅延: ${currentExportDelay}ms`);
+    currentLanguage = request.language || 'ja'; // Update language setting
+    console.log(`開発者モード: ${isDeveloperMode ? '有効' : '無効'}, 遅延: ${currentExportDelay}ms, 言語: ${currentLanguage}`);
     sendResponse({ success: true });
     return true;
   }
@@ -97,8 +123,37 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'exportAllArticles') {
-    // Always navigate to first page for consistency
-    navigateToBlogListFirstPage();
+    console.log('exportAllArticles action received');
+    // Check if we're already on the first page of blog list
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tab = tabs[0];
+      if (!tab?.url) return;
+      
+      console.log('Current URL:', tab.url);
+      const currentUrl = tab.url;
+      const isBlogListFirstPage = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/?(\?.*)?$/) && 
+                                  (!currentUrl.includes('page=') || currentUrl.includes('page=1'));
+      
+      console.log('Is blog list first page:', isBlogListFirstPage);
+      
+      if (isBlogListFirstPage) {
+        // Already on first page, start export directly
+        if (tab.id) {
+          console.log('Sending scrapeLodestone message to tab:', tab.id);
+          chrome.tabs.sendMessage(tab.id, { action: 'scrapeLodestone' }).catch(error => {
+            console.error('Failed to send message to content script:', error);
+            chrome.runtime.sendMessage({ 
+              action: 'showError', 
+              message: backgroundMessages[currentLanguage].contentScriptNotAvailable
+            });
+          });
+        }
+      } else {
+        // Navigate to first page
+        console.log('Navigating to first page');
+        navigateToBlogListFirstPage();
+      }
+    });
     return true;
   }
   
@@ -134,10 +189,36 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 async function handleSingleArticleExport(): Promise<void> {
   try {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!tabs[0]?.url) return;
+    if (!tabs[0]?.url || !tabs[0]?.id) return;
 
-    const lodestoneAPI = new LodestoneAPI(currentExportDelay);
-    const article = await lodestoneAPI.getArticleDetails(tabs[0].url);
+    console.log('Attempting single article export on URL:', tabs[0].url);
+
+    // Get article data from content script
+    let response;
+    try {
+      response = await chrome.tabs.sendMessage(tabs[0].id, { action: 'getSingleArticleData' });
+      console.log('Content script response:', response);
+    } catch (error) {
+      console.error('Failed to communicate with content script:', error);
+      throw new Error(backgroundMessages[currentLanguage].contentScriptNotAvailable);
+    }
+    
+    if (!response?.success) {
+      throw new Error(backgroundMessages[currentLanguage].couldNotRetrieveData);
+    }
+    
+    // Convert response to ArticleDetails format
+    const article: ArticleDetails = {
+      title: response.title,
+      bodyHtml: response.bodyHtml,
+      likes: response.likes,
+      commentsCount: response.commentsCount,
+      publishDate: response.publishDate,
+      tags: response.tags,
+      imageUrls: response.imageUrls,
+      thumbnailUrls: response.thumbnailUrls,
+      commentsData: response.commentsData
+    };
     
     const zip = new JSZip();
     const imageProcessor = new ImageProcessor(zip, currentExportDelay);
@@ -171,13 +252,13 @@ async function handleSingleArticleExport(): Promise<void> {
 
     chrome.runtime.sendMessage({ 
       action: 'exportSuccess', 
-      message: 'Single article exported successfully!' 
+      message: backgroundMessages[currentLanguage].singleArticleExported
     });
   } catch (error) {
     console.error('Error in single article export:', error);
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: 'Failed to export article: ' + (error instanceof Error ? error.message : String(error))
+      message: backgroundMessages[currentLanguage].failedToExport + (error instanceof Error ? error.message : String(error))
     });
   }
 }
@@ -228,7 +309,7 @@ async function handleAllArticlesExport(): Promise<void> {
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: 'Failed to export articles: ' + (error instanceof Error ? error.message : String(error)) 
+      message: backgroundMessages[currentLanguage].failedToExport + (error instanceof Error ? error.message : String(error)) 
     });
   }
 }
@@ -273,7 +354,7 @@ async function handleImageDownload(): Promise<void> {
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: 'Failed to download images: ' + (error instanceof Error ? error.message : String(error)) 
+      message: backgroundMessages[currentLanguage].failedToDownloadImages + (error instanceof Error ? error.message : String(error)) 
     });
   }
 }
@@ -428,9 +509,24 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
   chrome.runtime.sendMessage({ action: 'exportComplete' });
 }
 
-// Legacy handlers for compatibility (will be removed)
 async function handleLodestoneData(data: BlogEntry[], totalPages: number): Promise<void> {
-  // This is now handled directly in handleAllArticlesExport
+  console.log('handleLodestoneData called with', data.length, 'articles');
+  
+  // Show confirmation dialog
+  chrome.runtime.sendMessage({
+    action: 'showExportConfirmation',
+    totalArticles: data.length
+  });
+  
+  // Set export state for confirmation
+  exportState = {
+    isExporting: false,
+    showingConfirmation: true,
+    showingProgress: false,
+    type: 'articles',
+    current: 0,
+    total: data.length
+  };
 }
 
 function handleCancelExport(): void {
