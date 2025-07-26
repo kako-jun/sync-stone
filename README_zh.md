@@ -79,7 +79,7 @@ SyncStone 也可以使用相同的程序导出其他玩家的日记条目。这�
         *   `tags`: 标签列表
     *   文章正文和评论正文将采用 Markdown 格式。
 *   **`images/` 文件夹**: Lodestone 内部图片（`finalfantasyxiv.com` 域图片）将下载并保存到此文件夹中。Markdown 文件中的图片链接将被重写为此文件夹中的相对路径。
-*   **`Article_List.md`**: 一个 Markdown 文件，包含指向所有导出文章的链接。当使用支持 Markdown 预览的文本编辑器（如 [Visual Studio Code](https://code.visualstudio.com/)）打开时，此文件可以方便地用作导出文章的链接集合。
+*   **`index.md`**: 一个 Markdown 文件，包含指向所有导出文章的链接。当使用支持 Markdown 预览的文本编辑器（如 [Visual Studio Code](https://code.visualstudio.com/)）打开时，此文件可以方便地用作导出文章的链接集合。
 
 ### 6. 查看导出的 Markdown 文件
 

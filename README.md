@@ -14,7 +14,7 @@ SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTAS
 *   **Export All Articles**: Exports all diary entries from The Lodestone's diary list page, including article titles, bodies, all images (both internal and external), comments, likes, publication dates, and tags. It converts them to Markdown format and downloads them as a single ZIP file. All images are downloaded and included in an `images/` folder within the ZIP file.
 *   **Comment Retrieval**: Retrieves the full text of comments associated with articles and includes them in the Markdown files.
 *   **Bulk Image Download**: When exporting all articles, all images from The Lodestone's image management page are pre-downloaded and included in the ZIP file. This prevents duplicate downloads of images referenced across multiple articles and ensures images are displayed correctly when viewed locally.
-*   **Article List Generation**: When exporting all articles, a `Article_List.md` file is generated within the ZIP file, containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
+*   **Article List Generation**: When exporting all articles, an `index.md` file is generated within the ZIP file, containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Installation
 
@@ -96,7 +96,7 @@ The downloaded ZIP file will contain the following:
         *   `tags`: List of tags
     *   Article body and comment content will be in Markdown format.
 *   **`images/` folder**: All images (both internal Lodestone images and external images) are downloaded and saved in this folder. Image links within Markdown files will be rewritten to relative paths within this folder.
-*   **`記事一覧.md` (Article_List.md)**: A Markdown file containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
+*   **`index.md`**: A Markdown file containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
 ### 6. Viewing Exported Markdown Files
 

@@ -94,7 +94,7 @@ Le fichier ZIP téléchargé contiendra les éléments suivants:
         *   `tags`: Liste des balises
     *   Le corps de l'article et le corps des commentaires seront au format Markdown.
 *   **Dossier `images/`**: Les images internes à Lodestone (images du domaine `finalfantasyxiv.com`) sont téléchargées et enregistrées dans ce dossier. Les liens d'image dans les fichiers Markdown seront réécrits en chemins relatifs dans ce dossier.
-*   **`Article_List.md`**: Un fichier Markdown contenant des liens vers tous les articles exportés. Ce fichier peut être utilisé de manière pratique comme une collection de liens vers vos articles exportés lorsqu'il est ouvert avec des éditeurs de texte compatibles avec la prévisualisation Markdown comme [Visual Studio Code](https://code.visualstudio.com/).
+*   **`index.md`**: Un fichier Markdown contenant des liens vers tous les articles exportés. Ce fichier peut être utilisé de manière pratique comme une collection de liens vers vos articles exportés lorsqu'il est ouvert avec des éditeurs de texte compatibles avec la prévisualisation Markdown comme [Visual Studio Code](https://code.visualstudio.com/).
 
 ### 6. Affichage des fichiers Markdown exportés
 

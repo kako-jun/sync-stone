@@ -44,7 +44,7 @@ let isDeveloperMode = false;
 // Language messages
 const messages: { [key: string]: { [key: string]: string } } = {
   ja: {
-    extensionName: 'SyncStone',
+    extensionName: 'SyncStone - 星紡のメモワール',
     lodestoneExportDescription: 'ロドストのブログ記事をMarkdown形式でエクスポートします',
     accessIntervalLabel: 'アクセス間隔:',
     exportAllArticlesButton: '全記事エクスポート',
@@ -62,7 +62,7 @@ const messages: { [key: string]: { [key: string]: string } } = {
     languageLabel: '🌐 Language:'
   },
   en: {
-    extensionName: 'SyncStone',
+    extensionName: 'SyncStone - Stardustmemoir',
     lodestoneExportDescription: 'Export your Lodestone diaries.',
     accessIntervalLabel: 'Access Interval:',
     exportAllArticlesButton: 'Export All Articles',

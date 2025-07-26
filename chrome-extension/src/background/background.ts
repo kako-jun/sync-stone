@@ -406,8 +406,8 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
   }
   
   // Generate article list
-  const articleListContent = `# 記事一覧\n\n${articleListMarkdown.join('\n')}`;
-  zip.file('記事一覧.md', articleListContent);
+  const articleListContent = `# Articles Index\n\n${articleListMarkdown.join('\n')}`;
+  zip.file('index.md', articleListContent);
 
   // Download final ZIP
   const content = await zip.generateAsync({

@@ -79,7 +79,7 @@ SyncStone은 동일한 절차를 사용하여 다른 플레이어의 일기 항�
         *   `tags`: 태그 목록
     *   게시물 본문과 댓글 본문은 Markdown 형식입니다.
 *   **`images/` 폴더**: Lodestone 내부 이미지(`finalfantasyxiv.com` 도메인 이미지)는 이 폴더에 다운로드되어 저장됩니다. Markdown 파일 내의 이미지 링크는 이 폴더 내의 상대 경로로 다시 작성됩니다.
-*   **`Article_List.md`**: 내보낸 모든 게시물에 대한 링크가 포함된 Markdown 파일입니다. 이 파일은 [Visual Studio Code](https://code.visualstudio.com/)와 같은 Markdown 미리보기 기능이 있는 텍스트 편집기로 열면 내보낸 게시물에 대한 링크 모음으로 편리하게 사용할 수 있습니다。
+*   **`index.md`**: 내보낸 모든 게시물에 대한 링크가 포함된 Markdown 파일입니다. 이 파일은 [Visual Studio Code](https://code.visualstudio.com/)와 같은 Markdown 미리보기 기능이 있는 텍스트 편집기로 열면 내보낸 게시물에 대한 링크 모음으로 편리하게 사용할 수 있습니다。
 
 ### 6. 내보낸 Markdown 파일 보기
 
