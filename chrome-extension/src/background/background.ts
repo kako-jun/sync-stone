@@ -84,7 +84,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'setExportDelay') {
-    currentExportDelay = Math.max(request.delay, CONFIG.MIN_EXPORT_DELAY);
+    currentExportDelay = Math.max(request.delay || CONFIG.DEFAULT_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
     isDeveloperMode = request.developerMode || false;
     console.log(`開発者モード: ${isDeveloperMode ? '有効' : '無効'}, 遅延: ${currentExportDelay}ms`);
     sendResponse({ success: true });
@@ -177,7 +177,7 @@ async function handleSingleArticleExport(): Promise<void> {
     console.error('Error in single article export:', error);
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: 'Failed to export article: ' + error.message 
+      message: 'Failed to export article: ' + (error instanceof Error ? error.message : String(error))
     });
   }
 }
@@ -228,7 +228,7 @@ async function handleAllArticlesExport(): Promise<void> {
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: 'Failed to export articles: ' + error.message 
+      message: 'Failed to export articles: ' + (error instanceof Error ? error.message : String(error)) 
     });
   }
 }
@@ -273,7 +273,7 @@ async function handleImageDownload(): Promise<void> {
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ 
       action: 'showError', 
-      message: 'Failed to download images: ' + error.message 
+      message: 'Failed to download images: ' + (error instanceof Error ? error.message : String(error)) 
     });
   }
 }

@@ -132,6 +132,9 @@ export class ImageProcessor {
     
     try {
       const tab = await chrome.tabs.create({ url: imageUrlListPage, active: false });
+      if (!tab.id) {
+        throw new Error('Failed to create tab');
+      }
       await waitForTabLoad(tab.id, calculateTimeout(this.exportDelay));
 
       const response = await chrome.tabs.sendMessage(tab.id, { 

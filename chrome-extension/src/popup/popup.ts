@@ -132,17 +132,23 @@ function restoreExportState(): void {
       }
 
       if (response.showingProgress) {
-        elements.progressBarContainer.style.display = 'block';
-        const percentage = (response.current / response.total) * 100;
-        elements.progressBar.style.width = `${percentage}%`;
-
-        let progressTypeMessage: string;
-        if (response.type === 'images') {
-          progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
-        } else {
-          progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+        if (elements.progressBarContainer) {
+          elements.progressBarContainer.style.display = 'block';
         }
-        elements.progressText.innerText = `${progressTypeMessage}: ${response.current} / ${response.total} (${percentage.toFixed(1)}%)`;
+        if (elements.progressBar) {
+          const percentage = (response.current / response.total) * 100;
+          elements.progressBar.style.width = `${percentage}%`;
+        }
+
+        if (elements.progressText) {
+          let progressTypeMessage: string;
+          if (response.type === 'images') {
+            progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+          } else {
+            progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+          }
+          elements.progressText.innerText = `${progressTypeMessage}: ${response.current} / ${response.total} (${(response.current / response.total * 100).toFixed(1)}%)`;
+        }
       }
     }
   });
@@ -177,9 +183,9 @@ function initializeElements(): void {
     articleProgressBar: document.getElementById('articleProgressBar') as HTMLElement,
     
     // Legacy elements for backward compatibility
-    progressBarContainer: document.getElementById('progressBarContainer'),
-    progressText: document.getElementById('progressText'),
-    progressBar: document.getElementById('progressBar'),
+    progressBarContainer: document.getElementById('progressBarContainer') as HTMLElement | undefined,
+    progressText: document.getElementById('progressText') as HTMLElement | undefined,
+    progressBar: document.getElementById('progressBar') as HTMLElement | undefined,
     
     articleInfoContainer: document.getElementById('articleInfoContainer') as HTMLElement,
     articleTitle: document.getElementById('articleTitle') as HTMLElement,

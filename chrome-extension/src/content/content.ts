@@ -60,7 +60,7 @@ function handleScrapeLodestone(sendResponse: (response: MessageResponse) => void
     const url = urlElement?.href || '';
     const title = titleElement?.innerText.trim() || '';
     const date = timeElement?.innerText.trim() || '';
-    const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[\[\]]/g, '').trim());
+    const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
     const thumbnail = thumbnailElement?.src || null;
 
     extractedData.push({ url, title, date, tags, thumbnail });
@@ -105,7 +105,7 @@ function handleScrapeAdditionalPage(sendResponse: (response: MessageResponse) =>
     const url = urlElement?.href || '';
     const title = titleElement?.innerText.trim() || '';
     const date = timeElement?.innerText.trim() || '';
-    const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[\[\]]/g, '').trim());
+    const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
     const thumbnail = thumbnailElement?.src || null;
 
     extractedData.push({ url, title, date, tags, thumbnail });
@@ -141,8 +141,8 @@ function handleGetArticleDetails(sendResponse: (response: MessageResponse) => vo
   const likes = likesElement ? parseInt(likesElement.innerText.replace(/[^\d]/g, ''), 10) : 0;
   const commentsCount = commentsCountElement ? parseInt(commentsCountElement.innerText.trim(), 10) : 0;
   const publishDate = publishDateElement ? 
-    (publishDateElement.getAttribute('datetime') || publishDateElement.innerText.trim()) : null;
-  const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[\[\]]/g, '').trim());
+    (publishDateElement.getAttribute('datetime') || (publishDateElement as HTMLElement).innerText.trim()) : null;
+  const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
 
   const imageUrls: string[] = [];
   const thumbnailUrls: string[] = [];

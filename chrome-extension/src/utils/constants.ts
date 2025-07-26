@@ -35,7 +35,7 @@ export const CONFIG = {
   BASE_PAGE_LOAD_TIMEOUT: 5000,
   TIMEOUT_MULTIPLIER: 3,  // タイムアウト = アクセス間隔 × 3
   EXPERIMENTAL_MAX_PAGES: 2
-} as const;
+};
 
 /**
  * Calculate timeout value based on user's export delay setting

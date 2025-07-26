@@ -69,6 +69,9 @@ export class LodestoneAPI {
    */
   async getArticleDetails(articleUrl: string): Promise<ArticleDetails> {
     const tab = await chrome.tabs.create({ url: articleUrl, active: false });
+    if (!tab.id) {
+      throw new Error('Failed to create tab');
+    }
     
     try {
       await waitForTabLoad(tab.id, calculateTimeout(this.exportDelay));
@@ -175,6 +178,9 @@ export class LodestoneAPI {
   private async scrapePage(baseUrl: string, pageNumber: number): Promise<BlogEntry[]> {
     const pageUrl = `${baseUrl}&page=${pageNumber}`;
     const tab = await chrome.tabs.create({ url: pageUrl, active: false });
+    if (!tab.id) {
+      throw new Error('Failed to create tab');
+    }
 
     try {
       await waitForTabLoad(tab.id, calculateTimeout(this.exportDelay));
