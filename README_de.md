@@ -27,7 +27,7 @@ SyncStone, benannt "Stardustmemoir", ist ein inoffizielles Tool für FINAL FANTA
 
 ### 1. Zugriffsintervall einstellen
 
-Wenn Sie das Popup der Erweiterung öffnen, finden Sie ein Eingabefeld für "Zugriffsintervall (Millisekunden)". Dies legt die Wartezeit zwischen aufeinanderfolgenden Zugriffen auf den Server von The Lodestone fest. Um die Serverlast zu berücksichtigen, ist der Standardwert auf 2000 Millisekunden (2 Sekunden) eingestellt und kann nicht unter 2000 Millisekunden liegen. Passen Sie ihn bei Bedarf an.
+Wenn Sie das Popup der Erweiterung öffnen, finden Sie ein Eingabefeld für "Zugriffsintervall". Dies legt die Wartezeit (in Millisekunden) zwischen aufeinanderfolgenden Zugriffen auf den Server von The Lodestone fest. Um die Serverlast zu berücksichtigen, ist der Standardwert auf 2000 Millisekunden (2 Sekunden) eingestellt und kann nicht unter 2000 Millisekunden liegen. Passen Sie ihn bei Bedarf an.
 
 ### 2. Exportieren eines einzelnen Artikels
 
@@ -44,7 +44,29 @@ Wenn Sie das Popup der Erweiterung öffnen, finden Sie ein Eingabefeld für "Zug
 4.  Ein Bestätigungsdialog wird angezeigt, der die Anzahl der zu exportierenden Artikel anzeigt und Sie fragt, ob Sie fortfahren möchten. Klicken Sie auf "Ja", um den Export zu starten.
 5.  Während des Exports wird ein Fortschrittsbalken angezeigt. Nach Abschluss wird eine ZIP-Datei heruntergeladen.
 
-### 4. Exportierte Dateien
+### 4. Exportieren von Artikeln anderer Spieler (Versteckte Funktion)
+
+**Wichtig**: Diese Funktion wird unter der Erwartung einer angemessenen Nutzung bereitgestellt.
+
+SyncStone kann auch Tagebucheinträge anderer Spieler mit demselben Verfahren exportieren. Dies ist in folgenden Situationen wertvoll:
+
+- **Bewahrung von Erinnerungen, die durch Kontolöschung verloren gehen würden**: Wenn Freunde FFXIV vollständig verlassen, werden ihre Tagebücher unzugänglich. Sie können die Aufzeichnungen gemeinsamer Abenteuer und wertvoller Erinnerungen bewahren, damit sie nicht verloren gehen.
+- **Aufzeichnung gemeinsamer Erfahrungen**: Gemeinsam abgeschlossene Aktivitäten, gemeinsam besuchte Events und andere geteilte Erinnerungen können als Aufzeichnungen bewahrt werden.
+
+**Verwendung**:
+1. Öffnen Sie die Tagebuchlistenseite des anderen Spielers, dessen Artikel Sie exportieren möchten
+2. Folgen Sie demselben Verfahren wie für Ihre eigenen Artikel und klicken Sie auf "Alle Artikel exportieren"
+3. Das System erkennt automatisch, dass es sich um Artikel eines anderen Spielers handelt und verarbeitet sie entsprechend
+
+**Technische Unterschiede**:
+- Bei Artikeln anderer Spieler sind die Bildergalerieseiten nicht zugänglich, daher werden nur Bilder heruntergeladen, die in den Artikeln enthalten sind
+- Die exportierte ZIP-Datei wird `lodestone_others_blog_export.zip` genannt, um sie von Ihren eigenen Artikeln zu unterscheiden
+
+**Nutzungsrichtlinien**:
+- Bitte verwenden Sie diese Funktion für den legitimen Zweck der Bewahrung von Erinnerungen
+- Bitte respektieren Sie die Privatsphäre und verwenden Sie sie in angemessenen Grenzen
+
+### 5. Exportierte Dateien
 
 Die heruntergeladene ZIP-Datei enthält Folgendes:
 
@@ -59,7 +81,7 @@ Die heruntergeladene ZIP-Datei enthält Folgendes:
 *   **`images/`-Ordner**: Interne Lodestone-Bilder (Bilder der Domain `finalfantasyxiv.com`) werden heruntergeladen und in diesem Ordner gespeichert. Bildlinks in Markdown-Dateien werden in relative Pfade innerhalb dieses Ordners umgeschrieben.
 *   **`Article_List.md`**: Eine Markdown-Datei, die Links zu allen exportierten Artikeln enthält. Diese Datei kann bequem als Sammlung von Links zu Ihren exportierten Artikeln verwendet werden, wenn sie mit Markdown-Vorschau-fähigen Texteditoren wie [Visual Studio Code](https://code.visualstudio.com/) geöffnet wird.
 
-### 5. Anzeigen exportierter Markdown-Dateien
+### 6. Anzeigen exportierter Markdown-Dateien
 
 Es wird empfohlen, die exportierten Markdown-Dateien mit einem Texteditor zu öffnen, der eine Markdown-Vorschau unterstützt, wie z. B. [Visual Studio Code](https://code.visualstudio.com/). Stellen Sie sicher, dass die ZIP-Datei entpackt ist und sich die Markdown-Dateien und der `images/`-Ordner im selben Verzeichnis befinden. Dadurch werden Bilder in der Markdown-Vorschau korrekt angezeigt.
 

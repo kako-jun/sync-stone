@@ -42,7 +42,7 @@ SyncStone, nommé "Stardustmemoir", est un outil non officiel lié à FINAL FANT
 
 ### 1. Réglage de l'intervalle d'accès
 
-Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un champ de saisie pour "Intervalle d'accès (millisecondes)". Cela définit le temps d'attente entre les accès consécutifs au serveur de The Lodestone et affecte également les délais de chargement des pages et les retards de traitement. Pour tenir compte de la charge du serveur, la valeur par défaut est de 2000 millisecondes (2 secondes) et ne peut pas être inférieure à 2000 millisecondes. Ajustez si nécessaire.
+Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un champ de saisie pour "Intervalle d'accès". Cela définit le temps d'attente (en millisecondes) entre les accès consécutifs au serveur de The Lodestone et affecte également les délais de chargement des pages et les retards de traitement. Pour tenir compte de la charge du serveur, la valeur par défaut est de 2000 millisecondes (2 secondes) et ne peut pas être inférieure à 2000 millisecondes. Ajustez si nécessaire.
 
 ### 2. Exportation d'un seul article
 
@@ -59,7 +59,29 @@ Lorsque vous ouvrez la fenêtre contextuelle de l'extension, vous trouverez un c
 4.  Une boîte de dialogue de confirmation apparaîtra, affichant le nombre d'articles à exporter et vous demandant si vous souhaitez continuer. Cliquez sur "Oui" pour démarrer l'exportation.
 5.  Une barre de progression s'affichera pendant l'exportation. Une fois terminée, un fichier ZIP sera téléchargé.
 
-### 4. Fichiers exportés
+### 4. Exportation des articles d'autres joueurs (Fonctionnalité cachée)
+
+**Important** : Cette fonctionnalité est fournie avec l'attente d'une utilisation appropriée.
+
+SyncStone peut également exporter les entrées de journal d'autres joueurs en utilisant la même procédure. Ceci est précieux dans des situations telles que :
+
+- **Préservation des souvenirs qui seraient perdus en raison de la suppression de compte** : Lorsque des amis quittent complètement FFXIV, leurs journaux deviennent inaccessibles. Vous pouvez préserver les enregistrements d'aventures partagées et de souvenirs précieux pour éviter qu'ils ne soient perdus.
+- **Enregistrement d'expériences partagées** : Les activités accomplies ensemble, les événements auxquels vous avez participé ensemble, et d'autres souvenirs partagés peuvent être préservés comme enregistrements.
+
+**Comment utiliser** :
+1. Ouvrez la page de liste de journaux de l'autre joueur dont vous voulez exporter les articles
+2. Suivez la même procédure que pour vos propres articles et cliquez sur "Exporter tous les articles"
+3. Le système détecte automatiquement qu'il s'agit d'articles d'un autre joueur et les traite de manière appropriée
+
+**Différences techniques** :
+- Pour les articles d'autres joueurs, les pages de galerie d'images ne sont pas accessibles, donc seules les images contenues dans les articles sont téléchargées
+- Le fichier ZIP exporté sera nommé `lodestone_others_blog_export.zip` pour le distinguer de vos propres articles
+
+**Directives d'utilisation** :
+- Veuillez utiliser cette fonctionnalité dans le but légitime de préserver les souvenirs
+- Veuillez respecter la vie privée et utiliser dans des limites appropriées
+
+### 5. Fichiers exportés
 
 Le fichier ZIP téléchargé contiendra les éléments suivants:
 
@@ -74,7 +96,7 @@ Le fichier ZIP téléchargé contiendra les éléments suivants:
 *   **Dossier `images/`**: Les images internes à Lodestone (images du domaine `finalfantasyxiv.com`) sont téléchargées et enregistrées dans ce dossier. Les liens d'image dans les fichiers Markdown seront réécrits en chemins relatifs dans ce dossier.
 *   **`Article_List.md`**: Un fichier Markdown contenant des liens vers tous les articles exportés. Ce fichier peut être utilisé de manière pratique comme une collection de liens vers vos articles exportés lorsqu'il est ouvert avec des éditeurs de texte compatibles avec la prévisualisation Markdown comme [Visual Studio Code](https://code.visualstudio.com/).
 
-### 5. Affichage des fichiers Markdown exportés
+### 6. Affichage des fichiers Markdown exportés
 
 Il est recommandé d'ouvrir les fichiers Markdown exportés avec un éditeur de texte prenant en charge la prévisualisation Markdown, tel que [Visual Studio Code](https://code.visualstudio.com/). Assurez-vous que le fichier ZIP est extrait et que les fichiers Markdown et le dossier `images/` se trouvent dans le même répertoire. Cela permettra aux images d'être affichées correctement dans la prévisualisation Markdown.
 

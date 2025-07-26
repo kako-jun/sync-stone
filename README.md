@@ -44,7 +44,7 @@ SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTAS
 
 ### 1. Setting Access Interval
 
-When you open the extension's popup, you'll find an input field for "Access Interval (milliseconds)". This sets the waiting time between consecutive accesses to The Lodestone's server and affects both page loading timeouts and processing delays. To consider server load, the default is set to 2000 milliseconds (2 seconds) and cannot be set to less than 2000 milliseconds. Adjust as needed.
+When you open the extension's popup, you'll find an input field for "Access Interval". This sets the waiting time (in milliseconds) between consecutive accesses to The Lodestone's server and affects both page loading timeouts and processing delays. To consider server load, the default is set to 2000 milliseconds (2 seconds) and cannot be set to less than 2000 milliseconds. Adjust as needed.
 
 ### 2. Exporting a Single Article
 
@@ -61,7 +61,29 @@ When you open the extension's popup, you'll find an input field for "Access Inte
 4.  A confirmation dialog will appear, showing the number of articles to be exported and asking if you wish to proceed. Click "Yes" to start the export.
 5.  A progress bar will be displayed during the export. Once completed, a ZIP file will be downloaded.
 
-### 4. Exported Files
+### 4. Exporting Other Players' Articles (Hidden Feature)
+
+**Important**: This feature is provided with the expectation of appropriate use.
+
+SyncStone can also export diary entries from other players using the same procedure. This is valuable in situations such as:
+
+- **Preserving memories that would be lost due to account deletion**: When friends completely withdraw from FFXIV, their diaries become inaccessible. You can preserve the records of shared adventures and precious memories to prevent them from being lost.
+- **Recording shared experiences**: Activities completed together, events participated in together, and other shared memories can be preserved as records.
+
+**How to use**:
+1. Open the diary list page of the other player whose articles you want to export
+2. Follow the same procedure as for your own articles and click "Export All Articles"
+3. The system automatically detects that these are another player's articles and processes them appropriately
+
+**Technical differences**:
+- For other players' articles, the image gallery pages are not accessible, so only images contained within the articles are downloaded
+- The exported ZIP file will be named `lodestone_others_blog_export.zip` to distinguish it from your own articles
+
+**Usage guidelines**:
+- Please use this feature for the legitimate purpose of preserving memories
+- Please respect privacy and use within appropriate bounds
+
+### 5. Exported Files
 
 The downloaded ZIP file will contain the following:
 
@@ -76,7 +98,7 @@ The downloaded ZIP file will contain the following:
 *   **`images/` folder**: All images (both internal Lodestone images and external images) are downloaded and saved in this folder. Image links within Markdown files will be rewritten to relative paths within this folder.
 *   **`記事一覧.md` (Article_List.md)**: A Markdown file containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
 
-### 5. Viewing Exported Markdown Files
+### 6. Viewing Exported Markdown Files
 
 It is recommended to open the exported Markdown files with a text editor that supports Markdown preview, such as [Visual Studio Code](https://code.visualstudio.com/). Ensure that the ZIP file is extracted and the Markdown files and `images/` folder are in the same directory. This will allow images to be displayed correctly in the Markdown preview.
 
