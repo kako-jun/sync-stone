@@ -9,8 +9,14 @@ interface PopupElements {
   confirmYesButton: HTMLButtonElement;
   confirmNoButton: HTMLButtonElement;
   
+  // New Settings Elements
+  languageSelect: HTMLSelectElement;
+  developerMode: HTMLInputElement;
+  
   // Progress Elements
   progressSection: HTMLElement;
+  exportControlContainer: HTMLElement;
+  cancelExportButton: HTMLButtonElement;
   imageProgressContainer: HTMLElement;
   imageProgressHeader: HTMLElement;
   imageProgressText: HTMLElement;
@@ -32,23 +38,86 @@ interface PopupElements {
 }
 
 let elements: PopupElements;
+let currentLanguage = 'ja';
+let isDeveloperMode = false;
+
+// Language messages
+const messages: { [key: string]: { [key: string]: string } } = {
+  ja: {
+    extensionName: 'SyncStone',
+    lodestoneExportDescription: 'ロドストのブログ記事をMarkdown形式でエクスポートします',
+    accessIntervalLabel: 'アクセス間隔:',
+    exportAllArticlesButton: '全記事エクスポート',
+    exportAllArticlesButtonFirstPage: '1ページ目へ移動 → 全記事エクスポート',
+    exportCurrentArticleButton: 'この記事をエクスポート',
+    yesButton: 'はい',
+    noButton: 'いいえ',
+    confirmationText: '件の記事が見つかりました。エクスポートしますか？',
+    downloadingImages: '画像をダウンロード中',
+    exportingArticles: '記事をエクスポート中',
+    exportComplete: 'エクスポート完了！',
+    startingExport: 'エクスポートを開始しています...',
+    cancelExport: '⛔ エクスポートをキャンセル',
+    developerModeLabel: '🛠️ 開発者モード (最大5記事)',
+    languageLabel: '🌐 Language:'
+  },
+  en: {
+    extensionName: 'SyncStone',
+    lodestoneExportDescription: 'Export your Lodestone diaries.',
+    accessIntervalLabel: 'Access Interval:',
+    exportAllArticlesButton: 'Export All Articles',
+    exportAllArticlesButtonFirstPage: 'Go to Page 1 and Export All',
+    exportCurrentArticleButton: 'Export Current Article',
+    yesButton: 'Yes',
+    noButton: 'No',
+    confirmationText: ' articles will be exported. Continue?',
+    downloadingImages: 'Downloading Images',
+    exportingArticles: 'Exporting Articles',
+    exportComplete: 'Export Complete!',
+    startingExport: 'Starting Export...',
+    cancelExport: '⛔ Cancel Export',
+    developerModeLabel: '🛠️ Developer Mode (Max 5 articles)',
+    languageLabel: '🌐 Language:'
+  }
+};
 
 // Initialize internationalization messages
 function applyI18nMessages(): void {
-  const setElementText = (id: string, messageKey: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.textContent = chrome.i18n.getMessage(messageKey);
+  const msgs = messages[currentLanguage];
+  
+  document.getElementById('extensionTitle')!.textContent = msgs.extensionName;
+  document.getElementById('extensionDescription')!.textContent = msgs.lodestoneExportDescription;
+  document.getElementById('accessIntervalLabel')!.textContent = msgs.accessIntervalLabel;
+  document.getElementById('exportButton')!.textContent = msgs.exportAllArticlesButton;
+  document.getElementById('exportCurrentArticleButton')!.textContent = msgs.exportCurrentArticleButton;
+  document.getElementById('confirmYes')!.textContent = msgs.yesButton;
+  document.getElementById('confirmNo')!.textContent = msgs.noButton;
+  document.getElementById('cancelExportButton')!.textContent = msgs.cancelExport;
+  
+  // Update developer mode label
+  const devModeLabel = document.querySelector('label:has(#developerMode)');
+  if (devModeLabel) {
+    const checkbox = devModeLabel.querySelector('#developerMode');
+    if (checkbox) {
+      devModeLabel.innerHTML = '';
+      devModeLabel.appendChild(checkbox);
+      devModeLabel.appendChild(document.createTextNode(' ' + msgs.developerModeLabel));
     }
-  };
+  }
+  
+  updateButtonsForDeveloperMode();
+}
 
-  setElementText('extensionTitle', 'extensionName');
-  setElementText('extensionDescription', 'lodestoneExportDescription');
-  setElementText('accessIntervalLabel', 'accessIntervalLabel');
-  setElementText('exportButton', 'exportAllArticlesButton');
-  setElementText('exportCurrentArticleButton', 'exportCurrentArticleButton');
-  setElementText('confirmYes', 'yesButton');
-  setElementText('confirmNo', 'noButton');
+// Initialize settings with defaults (no persistence)
+function initializeSettings(): void {
+  currentLanguage = 'ja';
+  isDeveloperMode = false;
+  
+  elements.languageSelect.value = currentLanguage;
+  elements.developerMode.checked = isDeveloperMode;
+  elements.delayInput.value = '2000';
+  
+  applyI18nMessages();
 }
 
 // Restore export state from background script
@@ -88,10 +157,16 @@ function initializeElements(): void {
     confirmationDialog: document.getElementById('confirmationDialog') as HTMLElement,
     confirmationText: document.getElementById('confirmationText') as HTMLElement,
     confirmYesButton: document.getElementById('confirmYes') as HTMLButtonElement,
-    confirmNoButton: document.getElementById('confirmNo') as HTMLButtonElement,
+    confirmNoButton: document.getElementById('confirmNoButton') as HTMLButtonElement,
+    
+    // New Settings Elements
+    languageSelect: document.getElementById('languageSelect') as HTMLSelectElement,
+    developerMode: document.getElementById('developerMode') as HTMLInputElement,
     
     // New Progress Elements
     progressSection: document.getElementById('progressSection') as HTMLElement,
+    exportControlContainer: document.getElementById('exportControlContainer') as HTMLElement,
+    cancelExportButton: document.getElementById('cancelExportButton') as HTMLButtonElement,
     imageProgressContainer: document.getElementById('imageProgressContainer') as HTMLElement,
     imageProgressHeader: document.getElementById('imageProgressHeader') as HTMLElement,
     imageProgressText: document.getElementById('imageProgressText') as HTMLElement,
@@ -144,8 +219,12 @@ function setupEventListeners(): void {
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
     elements.delayInput.value = exportDelay.toString();
     
-    // Set the export delay first, then start export
-    chrome.runtime.sendMessage({ action: 'setExportDelay', delay: exportDelay }, () => {
+    // Set the export delay and developer mode, then start export
+    chrome.runtime.sendMessage({ 
+      action: 'setExportDelay', 
+      delay: exportDelay,
+      developerMode: isDeveloperMode 
+    }, () => {
       chrome.runtime.sendMessage({ action: 'exportAllArticles' });
     });
   });
@@ -188,6 +267,27 @@ function setupEventListeners(): void {
     elements.confirmationDialog.style.display = 'none';
     window.close();
   });
+
+  // Cancel export button
+  elements.cancelExportButton.addEventListener('click', () => {
+    chrome.runtime.sendMessage({ action: 'cancelExport' });
+    elements.exportControlContainer.style.display = 'none';
+    const cancelMsg = messages[currentLanguage].exportComplete.replace('完了', 'キャンセル');
+    showStatusMessage('エクスポートをキャンセルしました', 'info');
+    resetProgress();
+  });
+
+  // Language selector
+  elements.languageSelect.addEventListener('change', () => {
+    currentLanguage = elements.languageSelect.value;
+    applyI18nMessages();
+  });
+
+  // Developer mode checkbox
+  elements.developerMode.addEventListener('change', () => {
+    isDeveloperMode = elements.developerMode.checked;
+    updateButtonsForDeveloperMode();
+  });
 }
 
 // Message listener for background script communication
@@ -199,11 +299,19 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       break;
 
     case 'updateProgress':
+      // Show cancel button when export starts
+      if (request.current === 1 && request.total > 1) {
+        elements.exportControlContainer.style.display = 'block';
+      }
+      
       // Use new progress display functions
       if (request.type === 'images') {
-        showImageProgress(request.current, request.total, request.pageInfo);
-      } else {
-        showArticleProgress(request.current, request.total, request.pageInfo);
+        showImageProgress(request.current, request.total, request.pageInfo, request.currentItem);
+      } else if (request.type === 'articles') {
+        showArticleProgress(request.current, request.total, request.pageInfo, request.currentItem);
+      } else if (request.type === 'pages') {
+        // ページ読み込み進捗は画像進捗として表示
+        showImageProgress(request.current, request.total, request.pageInfo, request.currentItem);
       }
       
       // Legacy support for old progress bar
@@ -223,6 +331,9 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       break;
 
     case 'exportComplete':
+      // Hide cancel button
+      elements.exportControlContainer.style.display = 'none';
+      
       // Complete both progress bars
       completeImageProgress();
       completeArticleProgress();
@@ -236,6 +347,8 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       break;
 
     case 'showError':
+      // Hide cancel button on error
+      elements.exportControlContainer.style.display = 'none';
       showStatusMessage(request.message, 'error');
       elements.exportCurrentArticleButton.disabled = false;
       break;
@@ -383,32 +496,50 @@ function displayArticleInfo(title: string, bodyLength: number, imageCount: numbe
 }
 
 // Progress Management Functions
-function showImageProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }): void {
+function showImageProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string): void {
   elements.imageProgressContainer.style.display = 'block';
   
   const percentage = total > 0 ? (current / total) * 100 : 0;
   elements.imageProgressBar.style.width = `${percentage}%`;
   elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
   
+  let progressText = '';
   if (pageInfo) {
-    elements.imageProgressText.textContent = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}/${total}件`;
+    progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}/${total}件`;
   } else {
-    elements.imageProgressText.textContent = `画像: ${current}/${total}件`;
+    progressText = `画像: ${current}/${total}件`;
   }
+  
+  // 現在処理中のアイテム情報を追加（20文字まで）
+  if (currentItem) {
+    const truncatedItem = currentItem.length > 20 ? currentItem.substring(0, 20) + '...' : currentItem;
+    progressText += ` | ${truncatedItem}`;
+  }
+  
+  elements.imageProgressText.textContent = progressText;
 }
 
-function showArticleProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }): void {
+function showArticleProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string): void {
   elements.articleProgressContainer.style.display = 'block';
   
   const percentage = total > 0 ? (current / total) * 100 : 0;
   elements.articleProgressBar.style.width = `${percentage}%`;
   elements.articleProgressBar.textContent = `${percentage.toFixed(1)}%`;
   
+  let progressText = '';
   if (pageInfo) {
-    elements.articleProgressText.textContent = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}/${total}件`;
+    progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}/${total}件`;
   } else {
-    elements.articleProgressText.textContent = `記事: ${current}/${total}件`;
+    progressText = `記事: ${current}/${total}件`;
   }
+  
+  // 現在処理中のアイテム情報を追加（30文字まで）
+  if (currentItem) {
+    const truncatedItem = currentItem.length > 30 ? currentItem.substring(0, 30) + '...' : currentItem;
+    progressText += ` | ${truncatedItem}`;
+  }
+  
+  elements.articleProgressText.textContent = progressText;
 }
 
 function completeImageProgress(): void {
@@ -429,6 +560,7 @@ function completeArticleProgress(): void {
 }
 
 function resetProgress(): void {
+  elements.exportControlContainer.style.display = 'none';
   elements.imageProgressContainer.style.display = 'none';
   elements.articleProgressContainer.style.display = 'none';
   elements.imageProgressBar.style.width = '0%';
@@ -455,10 +587,25 @@ function showStatusMessage(message: string, type: 'error' | 'success' | 'info'):
   elements.statusMessage.style.border = `1px solid ${style.border}`;
 }
 
+// Update buttons for developer mode
+function updateButtonsForDeveloperMode(): void {
+  const msgs = messages[currentLanguage];
+  if (isDeveloperMode) {
+    const devSuffix = currentLanguage === 'ja' ? ' (開発用: 最大5件)' : ' (Dev: Max 5)';
+    elements.exportButton.textContent = msgs.exportAllArticlesButton + devSuffix;
+    elements.exportButton.style.backgroundColor = '#ff9800';
+    elements.exportButton.style.color = 'white';
+  } else {
+    elements.exportButton.textContent = msgs.exportAllArticlesButton;
+    elements.exportButton.style.backgroundColor = '';
+    elements.exportButton.style.color = '';
+  }
+}
+
 // Initialize popup when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   initializeElements();
-  applyI18nMessages();
+  initializeSettings();
   setupEventListeners();
   restoreExportState();
   checkCurrentArticle();

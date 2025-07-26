@@ -38,16 +38,24 @@ export class LodestoneAPI {
   async scrapeAdditionalPages(
     baseUrl: string, 
     totalPages: number,
-    onProgress?: (page: number, total: number) => void
+    onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string) => void,
+    isCancelled?: () => boolean
   ): Promise<BlogEntry[]> {
     const allEntries: BlogEntry[] = [];
     const maxPages = Math.min(totalPages, CONFIG.EXPERIMENTAL_MAX_PAGES);
 
     for (let page = 2; page <= maxPages; page++) {
+      if (isCancelled?.()) {
+        break;
+      }
+      
       try {
         const entries = await this.scrapePage(baseUrl, page);
         allEntries.push(...entries);
-        onProgress?.(page, maxPages);
+        onProgress?.(allEntries.length, allEntries.length, {
+          currentPage: page,
+          totalPages: maxPages
+        }, `ページ ${page} (${entries.length}件発見)`);
       } catch (error) {
         console.error(`Error scraping page ${page}:`, error);
       }
@@ -94,21 +102,40 @@ export class LodestoneAPI {
    */
   async processArticlesBatch(
     articleUrls: string[],
-    onProgress?: (current: number, total: number) => void
+    onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string) => void,
+    isCancelled?: () => boolean,
+    isOwnBlog: boolean = true
   ): Promise<ArticleDetails[]> {
     const articles: ArticleDetails[] = [];
     let processedCount = 0;
 
     for (const url of articleUrls) {
+      if (isCancelled?.()) {
+        break;
+      }
+      
       try {
         const article = await this.getArticleDetails(url);
+        
+        // For other's blog, process images within each article
+        if (!isOwnBlog) {
+          // Mark all images as needing download for other's blog
+          article.imageUrls = [...new Set(article.imageUrls)]; // Remove duplicates
+        }
+        
         articles.push(article);
         processedCount++;
-        onProgress?.(processedCount, articleUrls.length);
+        onProgress?.(processedCount, articleUrls.length, {
+          currentPage: processedCount,
+          totalPages: articleUrls.length
+        }, article.title);
       } catch (error) {
         console.error(`Failed to process article: ${url}`, error);
         processedCount++;
-        onProgress?.(processedCount, articleUrls.length);
+        onProgress?.(processedCount, articleUrls.length, {
+          currentPage: processedCount,
+          totalPages: articleUrls.length
+        }, 'エラー: ' + url);
       }
     }
 

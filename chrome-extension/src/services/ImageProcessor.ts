@@ -13,35 +13,68 @@ export class ImageProcessor {
   }
 
   /**
-   * Download all images from Lodestone image list pages
+   * Download all images from Lodestone image list pages (for own blog only)
    */
-  async downloadAllImages(onProgress?: (current: number, total: number) => void): Promise<ImageMap> {
-    const allImageUrls = await this.getAllImageUrls();
-    return this.downloadImages(Array.from(allImageUrls), onProgress);
+  async downloadAllImages(
+    onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string) => void,
+    isCancelled?: () => boolean
+  ): Promise<ImageMap> {
+    const { allImageUrls, totalPages } = await this.getAllImageUrlsWithPageInfo(isCancelled, (current, total, pageInfo) => {
+      onProgress?.(current, total, pageInfo, `ページ ${pageInfo?.currentPage}/${pageInfo?.totalPages}`);
+    });
+    return this.downloadImages(Array.from(allImageUrls), onProgress, isCancelled);
+  }
+
+  /**
+   * Download images from individual articles (for other's blog or mixed use)
+   */
+  async downloadImagesFromArticles(
+    articles: { title: string; imageUrls: string[] }[],
+    onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string) => void,
+    isCancelled?: () => boolean
+  ): Promise<ImageMap> {
+    // Collect all unique image URLs from all articles
+    const allImageUrls = new Set<string>();
+    articles.forEach(article => {
+      article.imageUrls.forEach(url => allImageUrls.add(url));
+    });
+
+    return this.downloadImages(Array.from(allImageUrls), onProgress, isCancelled);
   }
 
   /**
    * Download specific images
    */
-  async downloadImages(imageUrls: string[], onProgress?: (current: number, total: number) => void): Promise<ImageMap> {
+  async downloadImages(
+    imageUrls: string[], 
+    onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string) => void,
+    isCancelled?: () => boolean
+  ): Promise<ImageMap> {
     const imageMap: ImageMap = {};
     let downloadedImageCount = 0;
     const totalImages = imageUrls.length;
 
     for (const imageUrl of imageUrls) {
+      if (isCancelled?.()) {
+        break;
+      }
+      
       try {
         const imageBlob = await this.fetchImage(imageUrl);
         const imagePath = this.generateImagePath(imageUrl);
+        const filename = extractFilenameFromUrl(imageUrl);
         
         this.zip.file(imagePath, imageBlob);
         imageMap[imageUrl] = imagePath;
         
         downloadedImageCount++;
-        onProgress?.(downloadedImageCount, totalImages);
+        onProgress?.(downloadedImageCount, totalImages, undefined, filename);
       } catch (error) {
         console.error(`Failed to download image: ${imageUrl}`, error);
         // Keep original URL if download fails
         imageMap[imageUrl] = imageUrl;
+        downloadedImageCount++;
+        onProgress?.(downloadedImageCount, totalImages, undefined, 'エラー: ' + extractFilenameFromUrl(imageUrl));
       }
     }
 
@@ -51,12 +84,27 @@ export class ImageProcessor {
   /**
    * Get all image URLs from all image list pages
    */
-  private async getAllImageUrls(): Promise<Set<string>> {
+  private async getAllImageUrls(isCancelled?: () => boolean): Promise<Set<string>> {
+    const { allImageUrls } = await this.getAllImageUrlsWithPageInfo(isCancelled);
+    return allImageUrls;
+  }
+
+  /**
+   * Get all image URLs with page information for progress tracking
+   */
+  private async getAllImageUrlsWithPageInfo(
+    isCancelled?: () => boolean,
+    onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }) => void
+  ): Promise<{ allImageUrls: Set<string>, totalPages: number }> {
     const allImageUrls = new Set<string>();
     let currentPage = 1;
     let totalPages = 1;
 
     while (currentPage <= totalPages) {
+      if (isCancelled?.()) {
+        break;
+      }
+      
       const imageUrls = await this.scrapeImageListPage(currentPage);
       imageUrls.forEach(url => allImageUrls.add(url));
       
@@ -64,10 +112,16 @@ export class ImageProcessor {
         totalPages = await this.getTotalPagesFromCurrentTab();
       }
       
+      // ページング進捗を更新
+      onProgress?.(allImageUrls.size, allImageUrls.size, {
+        currentPage,
+        totalPages
+      });
+      
       currentPage++;
     }
 
-    return allImageUrls;
+    return { allImageUrls, totalPages };
   }
 
   /**

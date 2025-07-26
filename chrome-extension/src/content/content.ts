@@ -77,14 +77,18 @@ function handleScrapeLodestone(sendResponse: (response: MessageResponse) => void
     }
   }
 
+  // Detect if this is own blog or other's blog
+  const isOwnBlog = detectOwnBlog();
+
   chrome.runtime.sendMessage({
     action: 'lodestoneData',
     data: extractedData,
     totalPages,
-    currentPage: 1
+    currentPage: 1,
+    isOwnBlog
   });
 
-  sendResponse({ success: true, totalPages, articleCount: extractedData.length });
+  sendResponse({ success: true, totalPages, articleCount: extractedData.length, isOwnBlog });
 }
 
 function handleScrapeAdditionalPage(sendResponse: (response: MessageResponse) => void): void {
@@ -393,4 +397,52 @@ function showExportNotification(message: string): void {
   }, 8000);
 
   document.body.insertBefore(notification, document.body.firstChild);
+}
+
+/**
+ * Detect if the current blog page is own blog or other's blog
+ * @returns true if it's own blog, false if it's other's blog
+ */
+function detectOwnBlog(): boolean {
+  // Check if URL contains '/lodestone/my/' which indicates own content
+  const currentUrl = window.location.href;
+  if (currentUrl.includes('/lodestone/my/')) {
+    return true;
+  }
+  
+  // Check GTM variable (most reliable method)
+  if (typeof window !== 'undefined' && (window as any).ldst_gtm_variable) {
+    const gtmVariable = (window as any).ldst_gtm_variable;
+    if (gtmVariable.mychara === 'notmychara') {
+      return false;
+    }
+    if (gtmVariable.mychara === 'mychara') {
+      return true;
+    }
+  }
+  
+  // Check for CSS class indicating other's blog
+  const blogViewElement = document.querySelector('.entry__blog__view--others');
+  if (blogViewElement) {
+    return false;
+  }
+  
+  // Check for own blog specific elements (like blog creation buttons)
+  const createBlogButton = document.querySelector('a[href*="/blog/add"]');
+  const myBlogIndicator = document.querySelector('a[href*="/lodestone/my/"]');
+  
+  // If we find blog creation elements, it's likely own blog
+  if (createBlogButton || myBlogIndicator) {
+    return true;
+  }
+  
+  // Check for comment posting capability (own blog allows commenting on own posts)
+  const commentLogoutElement = document.querySelector('#commentbox_logout');
+  if (commentLogoutElement) {
+    // If comment posting is disabled due to account issues, it might be other's blog
+    // But this is not a definitive indicator, so we use it as supporting evidence
+  }
+  
+  // Default to other's blog for safety
+  return false;
 }
