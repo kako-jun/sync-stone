@@ -1,2 +1,14 @@
 node_modules/
 chrome-extension/node_modules/
+
+# Temporary and generated files
+*.zip
+.claude_mcp_config.json
+setup-debug-mcp.sh
+browser-tools-extension/
+BrowserTools-1.2.0-extension.zip
+sync-stone-chrome-extension.zip
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,16 @@
+# Build output
+dist/
+*.zip
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Development files
+.vscode/
+.DS_Store
+*.log
+
+# Temporary files
+.tmp/
+temp/
