@@ -2,11 +2,21 @@
   "name": "sync-stone-chrome-extension",
   "version": "1.0.0",
   "description": "Chrome extension to export FF14 Lodestone blogs to Markdown",
+  "type": "module",
   "scripts": {
-    "build": "zip -r ../sync-stone-chrome-extension.zip . -x 'package*.json' 'node_modules/*'"
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "type-check": "tsc --noEmit",
+    "package": "npm run build && cd dist && zip -r ../../sync-stone-chrome-extension.zip . -x 'node_modules/*'"
   },
   "dependencies": {
     "jszip": "^3.10.1",
     "turndown": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/node": "^20.11.17",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.0"
   }
 }

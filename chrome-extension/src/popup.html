@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>__MSG_extensionName__</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      width: 400px;
+      padding: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+    #confirmationDialog, #progressBarContainer {
+      display: none;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+    #progressBar {
+      width: 0%;
+      height: 20px;
+      background-color: #4CAF50;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="extensionTitle">__MSG_extensionName__</h1>
+  <p id="extensionDescription">__MSG_lodestoneExportDescription__</p>
+  <div style="margin-bottom: 10px;">
+    <label for="delayInput" id="accessIntervalLabel">__MSG_accessIntervalLabel__</label>
+    <input type="number" id="delayInput" value="2000" min="2000" max="10000" style="width: 70px;">
+    <span id="delayUnit">ms</span>
+  </div>
+  <button id="exportButton">__MSG_exportAllArticlesButton__</button>
+  <button id="exportCurrentArticleButton">__MSG_exportCurrentArticleButton__</button>
+  
+  <!-- Article Info Display -->
+  <div id="articleInfoContainer" style="display: none; margin-top: 10px; padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+    <h3 style="margin: 0 0 5px 0; font-size: 14px;">Article Info</h3>
+    <p id="articleTitle" style="margin: 2px 0; font-weight: bold; font-size: 12px;"></p>
+    <p id="articleStats" style="margin: 2px 0; font-size: 11px; color: #666;"></p>
+  </div>
+  
+  <!-- Status Message Display -->
+  <div id="statusContainer" style="margin-top: 10px;">
+    <div id="statusMessage" style="padding: 8px; border-radius: 4px; font-size: 12px; display: none;"></div>
+  </div>
+
+  <div id="confirmationDialog">
+    <p id="confirmationText"></p>
+    <button id="confirmYes">__MSG_yesButton__</button>
+    <button id="confirmNo">__MSG_noButton__</button>
+  </div>
+
+  <div id="progressBarContainer">
+    <p id="progressText"></p>
+    <div style="width: 100%; background-color: #ddd;">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
