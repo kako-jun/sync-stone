@@ -1,0 +1,95 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+        type: string
+      draft:
+        description: 'Create as draft release'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: chrome-extension/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: chrome-extension
+        run: npm ci
+        
+      - name: Type check
+        working-directory: chrome-extension
+        run: npm run type-check
+        
+      - name: Build and package extension
+        working-directory: chrome-extension
+        run: npm run package
+        
+      - name: Create tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a ${{ github.event.inputs.version }} -m "Release ${{ github.event.inputs.version }}"
+          git push origin ${{ github.event.inputs.version }}
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: SyncStone Chrome Extension ${{ github.event.inputs.version }}
+          body: |
+            ## SyncStone Chrome Extension ${{ github.event.inputs.version }}
+            
+            ロドストのブログ記事をMarkdown形式でエクスポートするChrome拡張機能です。
+            
+            ### インストール方法
+            1. 添付のZIPファイルをダウンロード
+            2. ZIPファイルを解凍
+            3. Chrome拡張機能の管理画面で「デベロッパーモード」を有効化
+            4. 「パッケージ化されていない拡張機能を読み込む」で解凍したフォルダを選択
+            
+            ### 主な機能
+            - 個別記事のMarkdownエクスポート
+            - 全記事の一括エクスポート
+            - 画像の自動ダウンロード（内部・外部問わず）
+            - コメントデータの取得
+            - メタデータ（タグ、いいね数など）の保存
+            - アクセス間隔の調整機能
+            
+            ### 技術仕様
+            - TypeScript + Vite による開発
+            - Chrome Extension Manifest V3 対応
+            - サービス指向アーキテクチャによる保守性向上
+            
+            ### 変更点
+            詳細な変更点については [CLAUDE.md](https://github.com/kako-jun/sync-stone/blob/main/CLAUDE.md) をご確認ください。
+          draft: ${{ github.event.inputs.draft }}
+          prerelease: false
+          
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: sync-stone-chrome-extension.zip
+          asset_name: sync-stone-chrome-extension.zip
+          asset_content_type: application/zip
