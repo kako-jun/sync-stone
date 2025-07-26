@@ -19,7 +19,8 @@
   "content_scripts": [
     {
       "matches": ["https://jp.finalfantasyxiv.com/lodestone/character/*/blog/*"],
-      "js": ["content.js"]
+      "js": ["turndown.browser.es.js", "content.js"],
+      "type": "module"
     }
   ],
   "action": {

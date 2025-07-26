@@ -17,6 +17,7 @@ interface MessageResponse {
 }
 
 chrome.runtime.onMessage.addListener((request: MessageRequest, sender, sendResponse) => {
+  console.log('Content script received message:', request.action);
   switch (request.action) {
     case 'scrapeLodestone':
       handleScrapeLodestone(sendResponse);
@@ -28,6 +29,9 @@ chrome.runtime.onMessage.addListener((request: MessageRequest, sender, sendRespo
       handleGetArticleContent(sendResponse);
       break;
     case 'getArticleDetails':
+      handleGetArticleDetails(sendResponse);
+      break;
+    case 'getSingleArticleData':
       handleGetArticleDetails(sendResponse);
       break;
     case 'processImagesAndConvertToMarkdown':
@@ -88,7 +92,7 @@ function handleScrapeLodestone(sendResponse: (response: MessageResponse) => void
     isOwnBlog
   });
 
-  sendResponse({ success: true, totalPages, articleCount: extractedData.length, isOwnBlog });
+  sendResponse({ success: true, data: extractedData, totalPages, articleCount: extractedData.length, isOwnBlog });
 }
 
 function handleScrapeAdditionalPage(sendResponse: (response: MessageResponse) => void): void {
@@ -116,7 +120,7 @@ function handleScrapeAdditionalPage(sendResponse: (response: MessageResponse) =>
     data: extractedData
   });
 
-  sendResponse({ success: true, articleCount: extractedData.length });
+  sendResponse({ success: true, data: extractedData, articleCount: extractedData.length });
 }
 
 function handleGetArticleContent(sendResponse: (response: MessageResponse) => void): void {
