@@ -16,7 +16,7 @@
     "description": "Text for the button to export the current article."
   },
   "accessIntervalLabel": {
-    "message": "Access Interval (ms):",
+    "message": "Access Interval:",
     "description": "Label for the access interval input field."
   },
   "confirmationText": {

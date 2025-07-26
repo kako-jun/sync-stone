@@ -3,10 +3,8 @@
 // TurndownServiceのインスタンスを作成
 const turndownService = new TurndownService();
 
-console.log('Content script loaded on:', window.location.href);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('Content script received message:', request);
   if (request.action === 'scrapeLodestone') {
     
     // 現在のページから記事を抽出
@@ -103,10 +101,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ success: false, message: 'Article content not found.' });
     }
   } else if (request.action === 'getArticleDetails') {
-    console.log('Processing getArticleDetails request');
     const titleElement = document.querySelector('h2.entry__blog__title');
     const bodyElement = document.querySelector('div.txt_selfintroduction');
-    console.log('Found elements:', { title: !!titleElement, body: !!bodyElement });
     const likesElement = document.querySelector('.blog__area__like__text__zero, .js__like_count');
     const commentsCountElement = document.querySelector('.entry__blog__header__comment span');
     const publishDateElement = document.querySelector('.entry__blog__header time span, time[datetime]');
@@ -120,6 +116,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const tags = Array.from(tagsElements).map(tag => tag.innerText.replace(/[\[\]]/g, '').trim());
 
     const imageUrls = [];
+    const thumbnailUrls = [];
+    
+    // サムネイル画像を取得（記事の先頭部分）
+    const thumbnailElements = document.querySelectorAll('.thumb_list img');
+    thumbnailElements.forEach(img => {
+      const originalSrc = img.getAttribute('data-origin_src');
+      if (originalSrc) {
+        thumbnailUrls.push(originalSrc);
+        imageUrls.push(originalSrc);
+      }
+    });
+    
+    // 本文内の画像を取得
     if (bodyHtml) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(bodyHtml, 'text/html');
@@ -129,37 +138,37 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           imageUrls.push(img.src);
         }
       });
-      // サムネイル画像も追加
-      const thumbnailElement = document.querySelector('.thumb_list img');
-      if (thumbnailElement && thumbnailElement.getAttribute('data-origin_src')) {
-        imageUrls.push(thumbnailElement.getAttribute('data-origin_src'));
-      }
     }
 
     const commentsData = [];
-    // コメントを取得
-    const commentElements = document.querySelectorAll('.blog__commentarea .comment');
-    commentElements.forEach(comment => {
-      const authorElement = comment.querySelector('.comment__author');
-      const timestampElement = comment.querySelector('.comment__date');
-      const bodyElement = comment.querySelector('.comment__message');
-      
-      if (authorElement && bodyElement) {
-        commentsData.push({
-          author: authorElement.innerText.trim(),
-          timestamp: timestampElement ? timestampElement.innerText.trim() : '',
-          commentBodyHtml: bodyElement.innerHTML
-        });
+    // コメントを取得 - Lodestoneの実際のHTML構造に合わせて修正
+    const commentBodies = document.querySelectorAll('.thread__comment__body');
+    
+    commentBodies.forEach(bodyElement => {
+      // コメント本文の直前の .entry 要素を探す
+      const entryElement = bodyElement.previousElementSibling;
+      if (entryElement && entryElement.classList.contains('entry')) {
+        const authorElement = entryElement.querySelector('.entry__name');
+        const timestampElement = entryElement.querySelector('.entry__time--comment');
+        
+        
+        if (authorElement && bodyElement) {
+          commentsData.push({
+            author: authorElement.innerText.trim(),
+            timestamp: timestampElement ? timestampElement.innerText.trim() : '',
+            commentBodyHtml: bodyElement.innerHTML
+          });
+        }
       }
     });
 
     if (title && bodyHtml) {
-      sendResponse({ success: true, title, bodyHtml, likes, commentsCount, publishDate, tags, imageUrls, commentsData });
+      sendResponse({ success: true, title, bodyHtml, likes, commentsCount, publishDate, tags, imageUrls, thumbnailUrls, commentsData });
     } else {
       sendResponse({ success: false, message: 'Article details not found.' });
     }
   } else if (request.action === 'processImagesAndConvertToMarkdown') {
-    const { title, htmlContent, likes, commentsCount, publishDate, tags, imageMap, commentsData } = request;
+    const { title, htmlContent, likes, commentsCount, publishDate, tags, imageMap, thumbnailUrls, commentsData } = request;
 
     // TurndownServiceのルールをカスタマイズして画像パスを置換
     turndownService.addRule('image', {
@@ -186,6 +195,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       });
     }
     markdown += `---\n\n`;
+
+    // サムネイル画像を記事の先頭に配置
+    if (thumbnailUrls && thumbnailUrls.length > 0) {
+      thumbnailUrls.forEach(thumbnailUrl => {
+        const localPath = imageMap[thumbnailUrl] || thumbnailUrl;
+        markdown += `![](${localPath})\n\n`;
+      });
+    }
 
     markdown += turndownService.turndown(htmlContent);
 
@@ -225,7 +242,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
     sendResponse({ success: true, imageUrls, totalPages });
   } else if (request.action === 'getArticleInfo') {
-    console.log('Processing getArticleInfo request');
     const titleElement = document.querySelector('h2.entry__blog__title');
     const bodyElement = document.querySelector('div.txt_selfintroduction');
     const likesElement = document.querySelector('.blog__area__like__text__zero, .js__like_count');

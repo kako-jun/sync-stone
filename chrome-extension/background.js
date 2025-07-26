@@ -232,7 +232,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 }
               if (response && response.success) {
                 console.log('Successfully got article details:', response);
-                const { title, bodyHtml, likes, commentsCount, publishDate, tags, imageUrls, commentsData } = response;
+                const { title, bodyHtml, likes, commentsCount, publishDate, tags, imageUrls, thumbnailUrls, commentsData } = response;
                 const imageMap = {};
                 const zip = new JSZip();
 
@@ -256,7 +256,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 }
                 
                 downloadImages().then(() => {
-                  chrome.tabs.sendMessage(tabs[0].id, { action: 'processImagesAndConvertToMarkdown', title, htmlContent: bodyHtml, likes, commentsCount, publishDate, tags, imageMap, commentsData }, (markdownResponse) => {
+                  chrome.tabs.sendMessage(tabs[0].id, { action: 'processImagesAndConvertToMarkdown', title, htmlContent: bodyHtml, likes, commentsCount, publishDate, tags, imageMap, thumbnailUrls, commentsData }, (markdownResponse) => {
                   if (markdownResponse && markdownResponse.success) {
                     console.log('Successfully converted to markdown');
                     const sanitizedTitle = title.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_').substring(0, 50);
@@ -479,8 +479,8 @@ async function exportAllArticles(urls) {
         if (chrome.runtime.lastError) {
           console.error('Content scriptとの通信エラー:', chrome.runtime.lastError.message);
         } else if (response && response.success) {
-          const { title, bodyHtml, likes, commentsCount, publishDate, tags, commentsData } = response;
-          const markdownResponse = await chrome.tabs.sendMessage(tab.id, { action: 'processImagesAndConvertToMarkdown', title, htmlContent: bodyHtml, likes, commentsCount, publishDate, tags, imageMap, commentsData });
+          const { title, bodyHtml, likes, commentsCount, publishDate, tags, thumbnailUrls, commentsData } = response;
+          const markdownResponse = await chrome.tabs.sendMessage(tab.id, { action: 'processImagesAndConvertToMarkdown', title, htmlContent: bodyHtml, likes, commentsCount, publishDate, tags, imageMap, thumbnailUrls, commentsData });
           if (markdownResponse && markdownResponse.success) {
             // Sanitize title for filename
             const sanitizedTitle = title.replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, '_').substring(0, 50);
