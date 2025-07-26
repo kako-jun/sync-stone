@@ -8,9 +8,23 @@ interface PopupElements {
   confirmationText: HTMLElement;
   confirmYesButton: HTMLButtonElement;
   confirmNoButton: HTMLButtonElement;
-  progressBarContainer: HTMLElement;
-  progressText: HTMLElement;
-  progressBar: HTMLElement;
+  
+  // Progress Elements
+  progressSection: HTMLElement;
+  imageProgressContainer: HTMLElement;
+  imageProgressHeader: HTMLElement;
+  imageProgressText: HTMLElement;
+  imageProgressBar: HTMLElement;
+  articleProgressContainer: HTMLElement;
+  articleProgressHeader: HTMLElement;
+  articleProgressText: HTMLElement;
+  articleProgressBar: HTMLElement;
+  
+  // Legacy elements (for backward compatibility)
+  progressBarContainer?: HTMLElement;
+  progressText?: HTMLElement;
+  progressBar?: HTMLElement;
+  
   articleInfoContainer: HTMLElement;
   articleTitle: HTMLElement;
   articleStats: HTMLElement;
@@ -75,9 +89,23 @@ function initializeElements(): void {
     confirmationText: document.getElementById('confirmationText') as HTMLElement,
     confirmYesButton: document.getElementById('confirmYes') as HTMLButtonElement,
     confirmNoButton: document.getElementById('confirmNo') as HTMLButtonElement,
-    progressBarContainer: document.getElementById('progressBarContainer') as HTMLElement,
-    progressText: document.getElementById('progressText') as HTMLElement,
-    progressBar: document.getElementById('progressBar') as HTMLElement,
+    
+    // New Progress Elements
+    progressSection: document.getElementById('progressSection') as HTMLElement,
+    imageProgressContainer: document.getElementById('imageProgressContainer') as HTMLElement,
+    imageProgressHeader: document.getElementById('imageProgressHeader') as HTMLElement,
+    imageProgressText: document.getElementById('imageProgressText') as HTMLElement,
+    imageProgressBar: document.getElementById('imageProgressBar') as HTMLElement,
+    articleProgressContainer: document.getElementById('articleProgressContainer') as HTMLElement,
+    articleProgressHeader: document.getElementById('articleProgressHeader') as HTMLElement,
+    articleProgressText: document.getElementById('articleProgressText') as HTMLElement,
+    articleProgressBar: document.getElementById('articleProgressBar') as HTMLElement,
+    
+    // Legacy elements for backward compatibility
+    progressBarContainer: document.getElementById('progressBarContainer'),
+    progressText: document.getElementById('progressText'),
+    progressBar: document.getElementById('progressBar'),
+    
     articleInfoContainer: document.getElementById('articleInfoContainer') as HTMLElement,
     articleTitle: document.getElementById('articleTitle') as HTMLElement,
     articleStats: document.getElementById('articleStats') as HTMLElement,
@@ -145,8 +173,15 @@ function setupEventListeners(): void {
     });
     
     elements.confirmationDialog.style.display = 'none';
-    elements.progressBarContainer.style.display = 'block';
-    elements.progressText.innerText = chrome.i18n.getMessage('startingExport');
+    
+    // Show starting message
+    showStatusMessage('エクスポートを開始しています...', 'info');
+    
+    // Legacy support
+    if (elements.progressBarContainer && elements.progressText) {
+      elements.progressBarContainer.style.display = 'block';
+      elements.progressText.innerText = chrome.i18n.getMessage('startingExport');
+    }
   });
 
   elements.confirmNoButton.addEventListener('click', () => {
@@ -164,23 +199,40 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       break;
 
     case 'updateProgress':
-      elements.progressBarContainer.style.display = 'block';
-      const percentage = (request.current / request.total) * 100;
-      elements.progressBar.style.width = `${percentage}%`;
-      
-      let progressTypeMessage: string;
+      // Use new progress display functions
       if (request.type === 'images') {
-        progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+        showImageProgress(request.current, request.total, request.pageInfo);
       } else {
-        progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+        showArticleProgress(request.current, request.total, request.pageInfo);
       }
-      elements.progressText.innerText = `${progressTypeMessage}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
+      
+      // Legacy support for old progress bar
+      if (elements.progressBarContainer && elements.progressBar && elements.progressText) {
+        elements.progressBarContainer.style.display = 'block';
+        const percentage = (request.current / request.total) * 100;
+        elements.progressBar.style.width = `${percentage}%`;
+        
+        let progressTypeMessage: string;
+        if (request.type === 'images') {
+          progressTypeMessage = chrome.i18n.getMessage('downloadingImages');
+        } else {
+          progressTypeMessage = chrome.i18n.getMessage('exportingArticles');
+        }
+        elements.progressText.innerText = `${progressTypeMessage}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
+      }
       break;
 
     case 'exportComplete':
-      elements.progressText.innerText = chrome.i18n.getMessage('exportComplete');
-      elements.progressBar.style.width = '100%';
-      showStatusMessage('Export completed!', 'success');
+      // Complete both progress bars
+      completeImageProgress();
+      completeArticleProgress();
+      showStatusMessage('エクスポートが完了しました！', 'success');
+      
+      // Legacy support
+      if (elements.progressText && elements.progressBar) {
+        elements.progressText.innerText = chrome.i18n.getMessage('exportComplete');
+        elements.progressBar.style.width = '100%';
+      }
       break;
 
     case 'showError':
@@ -263,9 +315,16 @@ function checkCurrentArticle(): void {
 // Reset dialog states
 function resetDialogStates(): void {
   elements.confirmationDialog.style.display = 'none';
-  elements.progressBarContainer.style.display = 'none';
   elements.statusMessage.style.display = 'none';
   elements.exportCurrentArticleButton.disabled = false;
+  
+  // Reset new progress displays
+  resetProgress();
+  
+  // Legacy support
+  if (elements.progressBarContainer) {
+    elements.progressBarContainer.style.display = 'none';
+  }
   
   // Hide guidance message if it exists
   const guidanceMessage = document.getElementById('guidanceMessage');
@@ -321,6 +380,61 @@ function displayArticleInfo(title: string, bodyLength: number, imageCount: numbe
   elements.articleTitle.textContent = 'Title: ' + (title || 'Could not retrieve');
   elements.articleStats.textContent = `Body: ${bodyLength || 0} chars | Images: ${imageCount || 0} | Likes: ${likes || 0} | Comments: ${commentsCount || 0}`;
   elements.articleInfoContainer.style.display = 'block';
+}
+
+// Progress Management Functions
+function showImageProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }): void {
+  elements.imageProgressContainer.style.display = 'block';
+  
+  const percentage = total > 0 ? (current / total) * 100 : 0;
+  elements.imageProgressBar.style.width = `${percentage}%`;
+  elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
+  
+  if (pageInfo) {
+    elements.imageProgressText.textContent = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}/${total}件`;
+  } else {
+    elements.imageProgressText.textContent = `画像: ${current}/${total}件`;
+  }
+}
+
+function showArticleProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }): void {
+  elements.articleProgressContainer.style.display = 'block';
+  
+  const percentage = total > 0 ? (current / total) * 100 : 0;
+  elements.articleProgressBar.style.width = `${percentage}%`;
+  elements.articleProgressBar.textContent = `${percentage.toFixed(1)}%`;
+  
+  if (pageInfo) {
+    elements.articleProgressText.textContent = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}/${total}件`;
+  } else {
+    elements.articleProgressText.textContent = `記事: ${current}/${total}件`;
+  }
+}
+
+function completeImageProgress(): void {
+  if (elements.imageProgressContainer.style.display !== 'none') {
+    elements.imageProgressBar.style.width = '100%';
+    elements.imageProgressBar.textContent = '完了';
+    elements.imageProgressText.textContent = '画像ダウンロード完了';
+    // Keep the container visible to show completion
+  }
+}
+
+function completeArticleProgress(): void {
+  if (elements.articleProgressContainer.style.display !== 'none') {
+    elements.articleProgressBar.style.width = '100%';
+    elements.articleProgressBar.textContent = '完了';
+    elements.articleProgressText.textContent = '記事処理完了';
+  }
+}
+
+function resetProgress(): void {
+  elements.imageProgressContainer.style.display = 'none';
+  elements.articleProgressContainer.style.display = 'none';
+  elements.imageProgressBar.style.width = '0%';
+  elements.articleProgressBar.style.width = '0%';
+  elements.imageProgressBar.textContent = '';
+  elements.articleProgressBar.textContent = '';
 }
 
 // Show status message
