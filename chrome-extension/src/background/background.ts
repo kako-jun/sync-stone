@@ -150,6 +150,16 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       handleDownloadAllImages(request.imageUrls, request.totalImages, sendResponse);
       return true; // 非同期処理のため
       
+    case 'getDownloadedImage':
+      const imageUrl = request.imageUrl;
+      const allImages = (globalThis as any).downloadedImages || [];
+      const imageData = allImages.find((img: any) => img.url === imageUrl);
+      sendResponse({ 
+        success: !!imageData, 
+        imageData: imageData || null
+      });
+      break;
+      
     case 'setAllEntriesData':
       console.log('[Background] setAllEntriesData received with isOwnBlog:', request.isOwnBlog);
       storedEntriesData = {
@@ -173,6 +183,9 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 
 // Handle export all articles
 function handleExportAllArticles(): void {
+  // 新しいエクスポート開始時に前回のデータをクリア
+  storedEntriesData = null;
+  
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
     if (!tab?.url || !tab?.id) return;
@@ -350,6 +363,7 @@ async function handleFetchImageListPage(url: string, delay: number, sendResponse
 
 // Handle downloading all images from background script (optimized for message passing)
 async function handleDownloadAllImages(imageUrls: string[], totalImages: number, sendResponse: (response: any) => void): Promise<void> {
+  console.log('[Background] handleDownloadAllImages called with', imageUrls.length, 'images, totalImages:', totalImages);
   try {
     const downloadedImages: any[] = [];
     let downloadedCount = 0;
@@ -367,6 +381,7 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
 
     for (const imageUrl of imageUrls) {
       if (isCancelled) {
+        console.log('[Background] Download cancelled at image', downloadedCount);
         break;
       }
 
@@ -393,6 +408,10 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
 
         downloadedCount++;
         
+        if (downloadedCount % 50 === 0 || downloadedCount === totalImages) {
+          console.log('[Background] Downloaded', downloadedCount, '/', totalImages, 'images');
+        }
+        
         // Update progress
         chrome.runtime.sendMessage({
           action: 'updateProgress',
@@ -414,11 +433,18 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
       }
     }
 
+    console.log('[Background] All downloads completed. Total:', downloadedCount, '/', totalImages);
+    
+    // Store images globally for retrieval
+    (globalThis as any).downloadedImages = downloadedImages;
+    
+    // Send simple completion signal
     sendResponse({
       success: true,
-      images: downloadedImages,
-      totalDownloaded: downloadedCount
+      totalDownloaded: downloadedCount,
+      message: 'Download completed, images stored globally'
     });
+    console.log('[Background] Response sent successfully');
 
   } catch (error) {
     sendResponse({

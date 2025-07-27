@@ -751,9 +751,9 @@ function showImageProgress(current: number, total: number, pageInfo?: { currentP
     elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
     
     if (currentLanguage === 'ja') {
-      progressText = `画像一覧を収集中 - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}件`;
+      progressText = `画像一覧を収集中 - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${pageInfo.imageCount || current}件`;
     } else {
-      progressText = `Collecting Images - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${current}`;
+      progressText = `Collecting Images - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${pageInfo.imageCount || current}`;
     }
   } else {
     // 画像ダウンロードフェーズ

@@ -156,63 +156,9 @@ function extractArticleDetails(): any {
   };
 }
 
-// Helper function to detect if it's own blog with retry for GTM variable
-async function detectOwnBlog(): Promise<boolean> {
-  console.log('[detectOwnBlog] Starting detection...');
-  
-  // 1. GTM variable check with retry (most reliable)
-  for (let attempt = 0; attempt < 10; attempt++) {
-    if (typeof window !== 'undefined' && (window as any).ldst_gtm_variable) {
-      const gtmVariable = (window as any).ldst_gtm_variable;
-      console.log('[detectOwnBlog] GTM variable found on attempt', attempt + 1, ':', JSON.stringify(gtmVariable));
-      console.log('[detectOwnBlog] mychara value:', gtmVariable.mychara, 'type:', typeof gtmVariable.mychara);
-      
-      if (gtmVariable.mychara === 'notmychara') {
-        console.log('[detectOwnBlog] GTM says NOT own blog');
-        return false;
-      }
-      if (gtmVariable.mychara === 'mychara') {
-        console.log('[detectOwnBlog] GTM says IS own blog');
-        return true;
-      }
-      console.log('[detectOwnBlog] GTM variable exists but mychara value is unexpected:', gtmVariable.mychara);
-      break; // GTM variable exists but mychara is undefined, continue to other checks
-    } else {
-      console.log('[detectOwnBlog] GTM variable not found, attempt', attempt + 1);
-      if (attempt < 9) {
-        await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms before retry
-      }
-    }
-  }
-  
-  // 2. DOM element check
-  const createBlogButton = document.querySelector('a[href*="/blog/add"]');
-  const editButton = document.querySelector('a[href*="/blog/edit"]');
-  console.log('[detectOwnBlog] Create button:', !!createBlogButton, 'Edit button:', !!editButton);
-  
-  if (createBlogButton || editButton) {
-    console.log('[detectOwnBlog] DOM elements say IS own blog');
-    return true;
-  }
-  
-  const othersViewElement = document.querySelector('.entry__blog__view--others');
-  console.log('[detectOwnBlog] Others view element:', !!othersViewElement);
-  if (othersViewElement) {
-    console.log('[detectOwnBlog] Others view element says NOT own blog');
-    return false;
-  }
-  
-  // 3. URL pattern check
-  const currentUrl = window.location.href;
-  console.log('[detectOwnBlog] Current URL:', currentUrl);
-  if (currentUrl.includes('/lodestone/my/')) {
-    console.log('[detectOwnBlog] URL pattern says IS own blog');
-    return true;
-  }
-  
-  // 4. Conservative default - assume NOT own blog if unclear
-  console.log('[detectOwnBlog] Unable to determine - defaulting to NOT own blog');
-  return false;
+// Helper function to detect if it's own blog
+function detectOwnBlog(): boolean {
+  return !document.body.hasAttribute('id') || document.body.id !== 'community';
 }
 
 // Show export notification banner
@@ -461,20 +407,13 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
 // Collect and download all images from image list pages
 async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JSZip): Promise<{ [key: string]: string }> {
   console.log('collectAndDownloadAllImagesInContent started');
+  
+  // 初期化：前回のデータをクリア
   const allImageUrls = new Set<string>();
   let currentPage = 1;
   let totalPages = 1;
   const imageMap: { [key: string]: string } = {};
 
-  // 画像収集開始の進捗表示
-  console.log('Sending initial progress update for image collection');
-  chrome.runtime.sendMessage({
-    action: 'updateProgress',
-    type: 'images',
-    current: 0,
-    total: 1,
-    pageInfo: { currentPage: 0, totalPages: 1 }
-  }).catch(() => {});
 
   // 画像一覧ページから画像URLを収集
   while (currentPage <= totalPages) {
@@ -506,15 +445,15 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
             totalPages: totalPages,
             response: response
           });
-          // 総ページ数が取得できたら進捗を更新
-          chrome.runtime.sendMessage({
-            action: 'updateProgress',
-            type: 'images',
-            current: 0,
-            total: response.imageUrls.length,
-            pageInfo: { currentPage: 1, totalPages: totalPages }
-          }).catch(() => {});
         }
+        // 各ページの進捗を更新（分母が確定してから）
+        chrome.runtime.sendMessage({
+          action: 'updateProgress',
+          type: 'images',
+          current: currentPage,
+          total: totalPages,
+          pageInfo: { currentPage: currentPage, totalPages: totalPages, imageCount: allImageUrls.size }
+        }).catch(() => {});
       }
     } catch (error) {
       console.error(`Failed to scrape image list page: ${imageUrlListPage}`, error);
@@ -527,10 +466,13 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
     return {};
   }
 
-  // 収集した画像をBackground Scriptでダウンロード（個別記事エクスポートと同じ方法）
+  // 収集した画像をBackground Scriptでダウンロード
   const imageUrlsArray = Array.from(allImageUrls);
+  console.log('[collectAndDownloadAllImagesInContent] Total unique images collected:', imageUrlsArray.length);
   
   if (imageUrlsArray.length > 0) {
+    console.log('[collectAndDownloadAllImagesInContent] Starting download of', imageUrlsArray.length, 'images');
+    
     const downloadedImageData: any = await new Promise((resolve, reject) => {
       chrome.runtime.sendMessage({
         action: 'downloadAllImages',
@@ -538,45 +480,73 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
         totalImages: imageUrlsArray.length
       }, (response) => {
         if (chrome.runtime.lastError) {
+          console.error('[collectAndDownloadAllImagesInContent] Chrome runtime error:', chrome.runtime.lastError);
           reject(new Error(chrome.runtime.lastError.message));
         } else {
+          console.log('[collectAndDownloadAllImagesInContent] Download response received:', response);
           resolve(response);
         }
       });
     });
 
-    // ダウンロード結果からimageMapを作成し、ZIPに追加（個別記事エクスポートと同じ方法）
-    if (downloadedImageData?.success && downloadedImageData.images) {
-      for (const imageData of downloadedImageData.images) {
-        if (isCancelled) break;
+    console.log('[collectAndDownloadAllImagesInContent] Await completed, downloadedImageData:', downloadedImageData);
+
+    // Get downloaded images one by one if download was successful
+    if (downloadedImageData?.success) {
+      console.log('[collectAndDownloadAllImagesInContent] Getting downloaded images from background one by one...');
+      
+      for (const imageUrl of imageUrlsArray) {
+        if (isCancelled) {
+          console.log('[collectAndDownloadAllImagesInContent] Cancelled during image processing');
+          break;
+        }
         
-        if (imageData.success && imageData.base64) {
-          const imagePath = `images/${imageData.filename}`;
-          const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
-          zip.file(imagePath, base64Data, { base64: true });
-          imageMap[imageData.url] = imagePath;
+        const imageResponse: any = await new Promise((resolve) => {
+          chrome.runtime.sendMessage({ 
+            action: 'getDownloadedImage',
+            imageUrl: imageUrl
+          }, resolve);
+        });
+        
+        if (imageResponse?.success && imageResponse.imageData) {
+          const imageData = imageResponse.imageData;
+          if (imageData.success && imageData.base64) {
+            const imagePath = `images/${imageData.filename}`;
+            const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
+            zip.file(imagePath, base64Data, { base64: true });
+            imageMap[imageData.url] = imagePath;
+          } else {
+            imageMap[imageData.url] = imageData.url;
+          }
         } else {
-          imageMap[imageData.url] = imageData.url;
+          imageMap[imageUrl] = imageUrl; // Fallback to original URL
         }
       }
+      
+      console.log('[collectAndDownloadAllImagesInContent] Image processing completed, added', Object.keys(imageMap).length, 'to imageMap');
+    } else {
+      console.error('[collectAndDownloadAllImagesInContent] Download failed:', downloadedImageData);
     }
+  } else {
+    console.log('[collectAndDownloadAllImagesInContent] No images to download');
   }
 
+  console.log('[collectAndDownloadAllImagesInContent] Completed, returning imageMap with', Object.keys(imageMap).length, 'entries');
   return imageMap;
 }
 
 // Handle all articles export from content script
 async function handleAllArticlesExportFromContent(exportDelay: number, isDeveloperMode: boolean, currentLanguage: string): Promise<void> {
   try {
-    // Reset cancellation flag
+    // 初期化：前回のデータをクリア
     isCancelled = false;
     
-    // 1. Get articles from current page
+    // 1. Get articles from current page (毎回新規取得)
     const extractedData = extractBlogEntries();
     
     // 2. Get pagination info
     const totalPages = getPaginationInfo();
-    const isOwnBlog = await detectOwnBlog();
+    const isOwnBlog = detectOwnBlog();
     console.log('[handleAllArticlesExportFromContent] isOwnBlog detected as:', isOwnBlog);
     
     // IMPORTANT: No progress reporting until after confirmation dialog
@@ -666,10 +636,14 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       exportDelay: exportDelay
     });
     
+    // 初期化：前回のデータをクリア
     const allArticles: any[] = [];
     const zip = new JSZip();
     let imageMap: { [key: string]: string } = {};
     const allImageUrls = new Set<string>();
+    
+    // キャンセルフラグも初期化
+    isCancelled = false;
 
     // Phase 0: Download images from image list pages (自分のブログの場合のみ)
     console.log('processAllArticlesFromContent - isOwnBlog:', isOwnBlog);
@@ -679,16 +653,20 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       console.log('Image list download completed, imageMap:', Object.keys(imageMap).length, 'images');
       
       if (isCancelled) {
+        console.log('Cancelled during image list download');
         return;
       }
+      console.log('Proceeding to Phase 1: Article processing');
     } else {
       console.log('Skipping image list download because isOwnBlog is false');
     }
 
     // Phase 1: Get article details and collect all image URLs
+    console.log('Starting Phase 1: Processing', entries.length, 'articles');
     for (let i = 0; i < entries.length; i++) {
       // Check for cancellation before each article
       if (isCancelled) {
+        console.log('Cancelled during article processing at article', i);
         return;
       }
       
