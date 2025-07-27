@@ -3,7 +3,7 @@ import { BlogEntry, ArticleDetails, ExportState, ImageMap } from '@/types';
 import { CONFIG, URLS } from '@/utils/constants';
 import { sanitizeFilename, waitForTabLoad } from '@/utils/helpers';
 import { ImageProcessor } from '@/services/ImageProcessor';
-import { MarkdownConverter } from '@/services/MarkdownConverter';
+// import { MarkdownConverter } from '@/services/MarkdownConverter';
 import { LodestoneAPI } from '@/services/LodestoneAPI';
 
 // Global state
@@ -112,7 +112,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     currentExportDelay = Math.max(request.delay || CONFIG.DEFAULT_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
     isDeveloperMode = request.developerMode || false;
     currentLanguage = request.language || 'ja'; // Update language setting
-    console.log(`開発者モード: ${isDeveloperMode ? '有効' : '無効'}, 遅延: ${currentExportDelay}ms, 言語: ${currentLanguage}`);
     sendResponse({ success: true });
     return true;
   }
@@ -123,25 +122,24 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'exportAllArticles') {
-    console.log('exportAllArticles action received');
     // Check if we're already on the first page of blog list
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
       if (!tab?.url) return;
       
-      console.log('Current URL:', tab.url);
       const currentUrl = tab.url;
       const isBlogListFirstPage = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/?(\?.*)?$/) && 
                                   (!currentUrl.includes('page=') || currentUrl.includes('page=1'));
       
-      console.log('Is blog list first page:', isBlogListFirstPage);
-      
       if (isBlogListFirstPage) {
-        // Already on first page, start export directly
+        // Already on first page, start export via content script
         if (tab.id) {
-          console.log('Sending scrapeLodestone message to tab:', tab.id);
-          chrome.tabs.sendMessage(tab.id, { action: 'scrapeLodestone' }).catch(error => {
-            console.error('Failed to send message to content script:', error);
+          chrome.tabs.sendMessage(tab.id, { 
+            action: 'exportAllArticlesFromContent',
+            exportDelay: currentExportDelay,
+            isDeveloperMode,
+            currentLanguage
+          }).catch(error => {
             chrome.runtime.sendMessage({ 
               action: 'showError', 
               message: backgroundMessages[currentLanguage].contentScriptNotAvailable
@@ -150,7 +148,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       } else {
         // Navigate to first page
-        console.log('Navigating to first page');
         navigateToBlogListFirstPage();
       }
     });
@@ -158,7 +155,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   
   if (request.action === 'confirmExportAll') {
-    handleAllArticlesExport();
+    // コンテンツスクリプトベースの処理の場合
+    if (storedEntriesData) {
+      handleConfirmExportAllFromContent();
+    } else {
+      // 従来の処理（フォールバック）
+      handleAllArticlesExport();
+    }
     return true;
   }
   
@@ -183,6 +186,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
   
+  if (request.action === 'fetchPageInNewTab') {
+    handleFetchPageInNewTab(request.url, request.delay, sendResponse);
+    return true;
+  }
+  
+  if (request.action === 'fetchArticleInNewTab') {
+    handleFetchArticleInNewTab(request.url, request.delay, sendResponse);
+    return true;
+  }
+  
+  if (request.action === 'setAllEntriesData') {
+    // コンテンツスクリプトから記事データを受け取る
+    handleSetAllEntriesData(request.entries, request.isOwnBlog, request.exportDelay, request.isDeveloperMode, request.currentLanguage);
+    return true;
+  }
+  
+  if (request.action === 'confirmExportAllFromContent') {
+    handleConfirmExportAllFromContent();
+    return true;
+  }
+  
+  if (request.action === 'createFinalZip') {
+    handleCreateFinalZip(request.articles, request.imageUrls, request.isOwnBlog, request.currentLanguage);
+    return true;
+  }
+  
   return true;
 });
 
@@ -191,15 +220,11 @@ async function handleSingleArticleExport(): Promise<void> {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tabs[0]?.url || !tabs[0]?.id) return;
 
-    console.log('Attempting single article export on URL:', tabs[0].url);
-
     // Get article data from content script
     let response;
     try {
       response = await chrome.tabs.sendMessage(tabs[0].id, { action: 'getSingleArticleData' });
-      console.log('Content script response:', response);
     } catch (error) {
-      console.error('Failed to communicate with content script:', error);
       throw new Error(backgroundMessages[currentLanguage].contentScriptNotAvailable);
     }
     
@@ -222,13 +247,31 @@ async function handleSingleArticleExport(): Promise<void> {
     
     const zip = new JSZip();
     const imageProcessor = new ImageProcessor(zip, currentExportDelay);
-    const markdownConverter = new MarkdownConverter();
 
-    // Download images
-    const imageMap = await imageProcessor.downloadImages(article.imageUrls);
+    // Download images - combine imageUrls and thumbnailUrls
+    const allImageUrls = [...(article.imageUrls || []), ...(article.thumbnailUrls || [])];
+    const imageMap = await imageProcessor.downloadImages(allImageUrls);
 
-    // Convert to markdown
-    const markdown = markdownConverter.convertArticleToMarkdown(article, imageMap);
+    // Convert to markdown using content script (like original JS version)
+    const activeTabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const markdownResponse = await chrome.tabs.sendMessage(activeTabs[0].id!, {
+      action: 'processImagesAndConvertToMarkdown',
+      title: article.title,
+      htmlContent: article.bodyHtml,
+      likes: article.likes,
+      commentsCount: article.commentsCount,
+      publishDate: article.publishDate,
+      tags: article.tags,
+      imageMap,
+      thumbnailUrls: article.thumbnailUrls,
+      commentsData: article.commentsData
+    });
+
+    if (!markdownResponse?.success) {
+      throw new Error('Failed to convert article to markdown');
+    }
+
+    const markdown = markdownResponse.markdown;
 
     // Create ZIP file
     const sanitizedTitle = sanitizeFilename(article.title);
@@ -236,6 +279,7 @@ async function handleSingleArticleExport(): Promise<void> {
       binary: false,
       compression: 'DEFLATE'
     });
+
 
     const content = await zip.generateAsync({
       type: 'base64',
@@ -255,7 +299,6 @@ async function handleSingleArticleExport(): Promise<void> {
       message: backgroundMessages[currentLanguage].singleArticleExported
     });
   } catch (error) {
-    console.error('Error in single article export:', error);
     chrome.runtime.sendMessage({ 
       action: 'showError', 
       message: backgroundMessages[currentLanguage].failedToExport + (error instanceof Error ? error.message : String(error))
@@ -279,10 +322,11 @@ async function handleAllArticlesExport(): Promise<void> {
     const lodestoneAPI = new LodestoneAPI(currentExportDelay);
     const { entries, totalPages } = await lodestoneAPI.scrapeBlogEntries();
     
-    // Get additional pages if needed
+    // Get additional pages if needed (but respect developer mode)
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     const baseUrl = tabs[0]?.url;
-    if (baseUrl && totalPages > 1 && !isCancelled) {
+    const shouldGetAdditionalPages = baseUrl && totalPages > 1 && !isCancelled && (!isDeveloperMode || entries.length < 5);
+    if (shouldGetAdditionalPages) {
       const additionalEntries = await lodestoneAPI.scrapeAdditionalPages(baseUrl, totalPages, (current, total, pageInfo, currentItem) => {
         chrome.runtime.sendMessage({
           action: 'updateProgress',
@@ -296,16 +340,14 @@ async function handleAllArticlesExport(): Promise<void> {
       entries.push(...additionalEntries);
     }
 
-    // 開発者モードで記事数を制限
+    // Limit article count for developer mode
     let processEntries = entries;
     if (isDeveloperMode && entries.length > 5) {
-      console.log(`開発者モード: ${entries.length}件中5件のみ処理します`);
       processEntries = entries.slice(0, 5);
     }
     
     await processAllArticles(processEntries);
   } catch (error) {
-    console.error('Error in all articles export:', error);
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ 
       action: 'showError', 
@@ -350,7 +392,6 @@ async function handleImageDownload(): Promise<void> {
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ action: 'exportComplete' });
   } catch (error) {
-    console.error('Error downloading images:', error);
     exportState.isExporting = false;
     chrome.runtime.sendMessage({ 
       action: 'showError', 
@@ -363,7 +404,7 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
   const zip = new JSZip();
   const lodestoneAPI = new LodestoneAPI(currentExportDelay);
   const imageProcessor = new ImageProcessor(zip, currentExportDelay);
-  const markdownConverter = new MarkdownConverter();
+  // const markdownConverter = new MarkdownConverter();
   
   exportState.total = blogEntries.length;
   
@@ -384,8 +425,6 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
         currentItem
       });
     }, () => isCancelled);
-  } else {
-    console.log('他人のブログのため、画像一覧のダウンロードをスキップします');
   }
   
   // Check for cancellation after image download
@@ -431,7 +470,6 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
   
   // For other's blog, download images from articles after processing them
   if (!isOwnBlog && articles.length > 0) {
-    console.log('他人のブログ: 記事内画像をダウンロードします');
     
     const articlesWithImages = articles.map(article => ({
       title: article.title,
@@ -469,14 +507,33 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
     }
     
     try {
-      const markdown = markdownConverter.convertArticleToMarkdown(article, imageMap);
+      // Convert to markdown using content script (like original JS version)
+      const tab = await chrome.tabs.query({ active: true, currentWindow: true });
+      const markdownResponse = await chrome.tabs.sendMessage(tab[0].id!, {
+        action: 'processImagesAndConvertToMarkdown',
+        title: article.title,
+        htmlContent: article.bodyHtml,
+        likes: article.likes,
+        commentsCount: article.commentsCount,
+        publishDate: article.publishDate,
+        tags: article.tags,
+        imageMap,
+        thumbnailUrls: article.thumbnailUrls,
+        commentsData: article.commentsData
+      });
+
+      if (!markdownResponse?.success) {
+        throw new Error('Failed to convert article to markdown');
+      }
+
+      const markdown = markdownResponse.markdown;
       const sanitizedTitle = sanitizeFilename(article.title);
       const filename = `${sanitizedTitle}.md`;
       
       zip.file(filename, markdown);
       articleListMarkdown.push(`- [${article.title}](${filename})`);
     } catch (error) {
-      console.error(`Error processing article: ${article.title}`, error);
+      // Skip failed article
     }
   }
 
@@ -510,12 +567,17 @@ async function processAllArticles(blogEntries: BlogEntry[]): Promise<void> {
 }
 
 async function handleLodestoneData(data: BlogEntry[], totalPages: number): Promise<void> {
-  console.log('handleLodestoneData called with', data.length, 'articles');
+  
+  // Limit article count display for developer mode
+  let displayCount = data.length;
+  if (isDeveloperMode && data.length > 5) {
+    displayCount = 5;
+  }
   
   // Show confirmation dialog
   chrome.runtime.sendMessage({
     action: 'showExportConfirmation',
-    totalArticles: data.length
+    totalArticles: displayCount
   });
   
   // Set export state for confirmation
@@ -549,4 +611,209 @@ function handleCancelExport(): void {
 
 async function handleAdditionalPageData(data: BlogEntry[]): Promise<void> {
   // This is now handled directly in handleAllArticlesExport
+}
+
+// Global variables for content script approach
+let storedEntriesData: any = null;
+
+async function handleFetchPageInNewTab(url: string, delay: number, sendResponse: (response: any) => void): Promise<void> {
+  try {
+    const tab = await chrome.tabs.create({ url, active: false });
+    if (!tab.id) {
+      sendResponse({ success: false, message: 'Failed to create tab' });
+      return;
+    }
+
+    await new Promise(resolve => setTimeout(resolve, delay));
+
+    const response = await chrome.tabs.sendMessage(tab.id, { action: 'scrapeAdditionalPage' });
+    await chrome.tabs.remove(tab.id);
+
+    if (response?.success) {
+      sendResponse({ success: true, entries: response.data || [] });
+    } else {
+      sendResponse({ success: false, message: 'Failed to scrape page' });
+    }
+  } catch (error) {
+    sendResponse({ success: false, message: error instanceof Error ? error.message : String(error) });
+  }
+}
+
+async function handleFetchArticleInNewTab(url: string, delay: number, sendResponse: (response: any) => void): Promise<void> {
+  try {
+    const tab = await chrome.tabs.create({ url, active: false });
+    if (!tab.id) {
+      sendResponse({ success: false, message: 'Failed to create tab' });
+      return;
+    }
+
+    await new Promise(resolve => setTimeout(resolve, delay));
+
+    const response = await chrome.tabs.sendMessage(tab.id, { action: 'getSingleArticleData' });
+    await chrome.tabs.remove(tab.id);
+
+    if (response?.success) {
+      sendResponse({ success: true, article: response });
+    } else {
+      sendResponse({ success: false, message: 'Failed to get article data' });
+    }
+  } catch (error) {
+    sendResponse({ success: false, message: error instanceof Error ? error.message : String(error) });
+  }
+}
+
+function handleSetAllEntriesData(entries: any[], isOwnBlog: boolean, exportDelay: number, isDeveloperMode: boolean, currentLanguage: string): void {
+  storedEntriesData = {
+    entries,
+    isOwnBlog,
+    exportDelay,
+    isDeveloperMode,
+    currentLanguage
+  };
+}
+
+async function handleConfirmExportAllFromContent(): Promise<void> {
+  if (!storedEntriesData) {
+    chrome.runtime.sendMessage({
+      action: 'showError',
+      message: 'エクスポート用のデータが見つかりません'
+    });
+    return;
+  }
+
+  exportState = {
+    isExporting: true,
+    showingConfirmation: false,
+    showingProgress: true,
+    type: 'articles',
+    current: 0,
+    total: storedEntriesData.entries.length
+  };
+
+  // コンテンツスクリプトに記事処理を依頼
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs[0]?.id) {
+      chrome.tabs.sendMessage(tabs[0].id, {
+        action: 'processAllArticlesFromContent',
+        entries: storedEntriesData.entries,
+        isOwnBlog: storedEntriesData.isOwnBlog,
+        exportDelay: storedEntriesData.exportDelay,
+        currentLanguage: storedEntriesData.currentLanguage
+      });
+    }
+  });
+}
+
+async function handleCreateFinalZip(articles: any[], imageUrls: string[], isOwnBlog: boolean, currentLanguage: string): Promise<void> {
+  try {
+    const zip = new JSZip();
+    const imageProcessor = new ImageProcessor(zip, currentExportDelay);
+
+    // キャンセル処理のチェック
+    if (isCancelled) {
+      exportState.isExporting = false;
+      return;
+    }
+
+    // 画像をダウンロード（自分の記事の場合のみ進捗表示）
+    let imageMap: ImageMap = {};
+    if (imageUrls.length > 0) {
+      // 自分の記事の場合のみ画像ダウンロード進捗を表示
+      if (isOwnBlog) {
+        chrome.runtime.sendMessage({
+          action: 'updateProgress',
+          type: 'images',
+          current: 0,
+          total: imageUrls.length
+        });
+      }
+
+      imageMap = await imageProcessor.downloadImages(imageUrls, (current, total, pageInfo, currentItem) => {
+        // 自分の記事の場合のみ進捗を送信
+        if (isOwnBlog) {
+          chrome.runtime.sendMessage({
+            action: 'updateProgress',
+            type: 'images',
+            current,
+            total,
+            pageInfo,
+            currentItem
+          });
+        }
+      }, () => isCancelled);
+    }
+
+    // 画像ダウンロード後のキャンセルチェック
+    if (isCancelled) {
+      exportState.isExporting = false;
+      return;
+    }
+
+    // 記事リスト用
+    const articleListMarkdown: string[] = [];
+
+    // 各記事をMarkdownに変換してZIPに追加
+    for (const article of articles) {
+      // 各記事処理前にキャンセルチェック
+      if (isCancelled) {
+        exportState.isExporting = false;
+        return;
+      }
+      try {
+        // コンテンツスクリプトでMarkdown変換
+        const tab = await chrome.tabs.query({ active: true, currentWindow: true });
+        const markdownResponse = await chrome.tabs.sendMessage(tab[0].id!, {
+          action: 'processImagesAndConvertToMarkdown',
+          title: article.title,
+          htmlContent: article.bodyHtml,
+          likes: article.likes,
+          commentsCount: article.commentsCount,
+          publishDate: article.publishDate,
+          tags: article.tags,
+          imageMap,
+          thumbnailUrls: article.thumbnailUrls,
+          commentsData: article.commentsData
+        });
+
+        if (markdownResponse?.success) {
+          const sanitizedTitle = sanitizeFilename(article.title);
+          const filename = `${sanitizedTitle}.md`;
+          
+          zip.file(filename, markdownResponse.markdown);
+          articleListMarkdown.push(`- [${article.title}](${filename})`);
+        }
+      } catch (error) {
+        console.error(`Error processing article: ${article.title}`, error);
+      }
+    }
+
+    // 記事一覧を追加
+    const articleListContent = `# Articles Index\n\n${articleListMarkdown.join('\n')}`;
+    zip.file('index.md', articleListContent);
+
+    // ZIPファイルを生成・ダウンロード
+    const content = await zip.generateAsync({
+      type: 'base64',
+      compression: 'DEFLATE',
+      compressionOptions: { level: 6 }
+    });
+
+    const dataUrl = 'data:application/zip;base64,' + content;
+    const filename = isOwnBlog ? 'lodestone_blog_export.zip' : 'lodestone_others_blog_export.zip';
+    await chrome.downloads.download({
+      url: dataUrl,
+      filename: filename,
+      saveAs: false
+    });
+
+    exportState.isExporting = false;
+    chrome.runtime.sendMessage({ action: 'exportComplete' });
+
+  } catch (error) {
+    exportState.isExporting = false;
+    chrome.runtime.sendMessage({
+      action: 'showError',
+      message: backgroundMessages[currentLanguage].failedToExport + (error instanceof Error ? error.message : String(error))
+    });
+  }
 }

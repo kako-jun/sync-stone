@@ -55,7 +55,7 @@ export class LodestoneAPI {
         onProgress?.(allEntries.length, allEntries.length, {
           currentPage: page,
           totalPages: maxPages
-        }, `ページ ${page} (${entries.length}件発見)`);
+        }, `Page ${page} (${entries.length} entries found)`);
       } catch (error) {
         console.error(`Error scraping page ${page}:`, error);
       }
@@ -138,7 +138,7 @@ export class LodestoneAPI {
         onProgress?.(processedCount, articleUrls.length, {
           currentPage: processedCount,
           totalPages: articleUrls.length
-        }, 'エラー: ' + url);
+        }, 'Error: ' + url);
       }
     }
 

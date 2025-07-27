@@ -66,5 +66,21 @@
   "notOnIndividualArticlePageError": {
     "message": "Please run this on an individual Lodestone article page or edit page.",
     "description": "Error message when not on individual article page"
+  },
+  "cancelExport": {
+    "message": "⛔ Cancel Export",
+    "description": "Text for cancel export button"
+  },
+  "imageDownloadHeader": {
+    "message": "📸 Image Export",
+    "description": "Header text for image download progress"
+  },
+  "articleProcessHeader": {
+    "message": "📝 Article Export",
+    "description": "Header text for article processing progress"
+  },
+  "developerModeLabel": {
+    "message": "🛠️ Developer Mode (Max 5 articles)",
+    "description": "Label for developer mode checkbox"
   }
 }

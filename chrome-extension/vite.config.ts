@@ -33,6 +33,9 @@ export default defineConfig({
         copyFileSync('src/popup.html', 'dist/popup.html');
         cpSync('src/_locales', 'dist/_locales', { recursive: true });
         cpSync('src/icons', 'dist/icons', { recursive: true });
+        
+        // Copy Turndown library for content script
+        copyFileSync('node_modules/turndown/lib/turndown.browser.umd.js', 'dist/turndown.browser.es.js');
       }
     }
   ]

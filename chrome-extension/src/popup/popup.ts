@@ -53,6 +53,8 @@ const messages: { [key: string]: { [key: string]: string } } = {
     yesButton: 'はい',
     noButton: 'いいえ',
     confirmationText: '件の記事が見つかりました。エクスポートしますか？',
+    confirmationOwnBlog: '（自分の記事）',
+    confirmationOthersBlog: '（自分以外の記事）',
     downloadingImages: '画像をダウンロード中',
     exportingArticles: '記事をエクスポート中',
     exportComplete: 'エクスポート完了！',
@@ -97,6 +99,8 @@ const messages: { [key: string]: { [key: string]: string } } = {
     yesButton: 'Yes',
     noButton: 'No',
     confirmationText: ' articles will be exported. Continue?',
+    confirmationOwnBlog: '(Your Articles)',
+    confirmationOthersBlog: '(Others\' Articles)',
     downloadingImages: 'Downloading Images',
     exportingArticles: 'Exporting Articles',
     exportComplete: 'Export Complete!',
@@ -376,7 +380,10 @@ function setupEventListeners(): void {
 chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
   switch (request.action) {
     case 'showExportConfirmation':
-      elements.confirmationText.innerText = `${request.totalArticles}${messages[currentLanguage].confirmationText}`;
+      const blogTypeText = request.isOwnBlog 
+        ? messages[currentLanguage].confirmationOwnBlog 
+        : messages[currentLanguage].confirmationOthersBlog;
+      elements.confirmationText.innerText = `${request.totalArticles}${messages[currentLanguage].confirmationText}${blogTypeText}`;
       elements.confirmationDialog.style.display = 'block';
       break;
 

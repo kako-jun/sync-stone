@@ -5,7 +5,11 @@ export class MarkdownConverter {
   private turndownService: TurndownService;
 
   constructor() {
-    this.turndownService = new TurndownService();
+    // Configure TurndownService for background script environment
+    this.turndownService = new TurndownService({
+      headingStyle: 'atx',
+      codeBlockStyle: 'fenced'
+    });
     this.setupCustomRules();
   }
 

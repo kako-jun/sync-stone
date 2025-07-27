@@ -66,5 +66,21 @@
   "notOnIndividualArticlePageError": {
     "message": "ロドストの個別記事ページまたは編集画面で実行してください。",
     "description": "個別記事ページでない場合のエラーメッセージ"
+  },
+  "cancelExport": {
+    "message": "⛔ エクスポートをキャンセル",
+    "description": "エクスポートキャンセルボタンのテキスト"
+  },
+  "imageDownloadHeader": {
+    "message": "📸 画像エクスポート",
+    "description": "画像ダウンロード進捗のヘッダーテキスト"
+  },
+  "articleProcessHeader": {
+    "message": "📝 記事エクスポート",
+    "description": "記事処理進捗のヘッダーテキスト"
+  },
+  "developerModeLabel": {
+    "message": "🛠️ 開発者モード (最大5記事)",
+    "description": "開発者モードチェックボックスのラベル"
   }
 }

@@ -10,7 +10,8 @@
     "tabs"
   ],
   "host_permissions": [
-    "https://jp.finalfantasyxiv.com/*"
+    "https://jp.finalfantasyxiv.com/*",
+    "https://lds-img.finalfantasyxiv.com/*"
   ],
   "background": {
     "service_worker": "background.js",
@@ -19,8 +20,7 @@
   "content_scripts": [
     {
       "matches": ["https://jp.finalfantasyxiv.com/lodestone/character/*/blog/*"],
-      "js": ["turndown.browser.es.js", "content.js"],
-      "type": "module"
+      "js": ["turndown.browser.es.js", "content.js"]
     }
   ],
   "action": {

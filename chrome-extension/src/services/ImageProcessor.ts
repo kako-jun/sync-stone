@@ -70,7 +70,6 @@ export class ImageProcessor {
         downloadedImageCount++;
         onProgress?.(downloadedImageCount, totalImages, undefined, filename);
       } catch (error) {
-        console.error(`Failed to download image: ${imageUrl}`, error);
         // Keep original URL if download fails
         imageMap[imageUrl] = imageUrl;
         downloadedImageCount++;
@@ -146,11 +145,9 @@ export class ImageProcessor {
       if (response?.success) {
         return response.imageUrls || [];
       } else {
-        console.error(`Failed to scrape image list page: ${imageUrlListPage}`, response?.message);
         return [];
       }
     } catch (error) {
-      console.error(`Image list page scraping error: ${imageUrlListPage}`, error);
       return [];
     }
   }
@@ -170,7 +167,7 @@ export class ImageProcessor {
         return response?.totalPages || 1;
       }
     } catch (error) {
-      console.error('Failed to get total pages:', error);
+      // Failed to get total pages
     }
     return 1;
   }
