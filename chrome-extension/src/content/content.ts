@@ -156,40 +156,63 @@ function extractArticleDetails(): any {
   };
 }
 
-// Helper function to detect if it's own blog
-function detectOwnBlog(): boolean {
-  // 1. GTM variable check (most reliable)
-  if (typeof window !== 'undefined' && (window as any).ldst_gtm_variable) {
-    const gtmVariable = (window as any).ldst_gtm_variable;
-    if (gtmVariable.mychara === 'notmychara') {
-      return false;
-    }
-    if (gtmVariable.mychara === 'mychara') {
-      return true;
+// Helper function to detect if it's own blog with retry for GTM variable
+async function detectOwnBlog(): Promise<boolean> {
+  console.log('[detectOwnBlog] Starting detection...');
+  
+  // 1. GTM variable check with retry (most reliable)
+  for (let attempt = 0; attempt < 10; attempt++) {
+    if (typeof window !== 'undefined' && (window as any).ldst_gtm_variable) {
+      const gtmVariable = (window as any).ldst_gtm_variable;
+      console.log('[detectOwnBlog] GTM variable found on attempt', attempt + 1, ':', JSON.stringify(gtmVariable));
+      console.log('[detectOwnBlog] mychara value:', gtmVariable.mychara, 'type:', typeof gtmVariable.mychara);
+      
+      if (gtmVariable.mychara === 'notmychara') {
+        console.log('[detectOwnBlog] GTM says NOT own blog');
+        return false;
+      }
+      if (gtmVariable.mychara === 'mychara') {
+        console.log('[detectOwnBlog] GTM says IS own blog');
+        return true;
+      }
+      console.log('[detectOwnBlog] GTM variable exists but mychara value is unexpected:', gtmVariable.mychara);
+      break; // GTM variable exists but mychara is undefined, continue to other checks
+    } else {
+      console.log('[detectOwnBlog] GTM variable not found, attempt', attempt + 1);
+      if (attempt < 9) {
+        await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms before retry
+      }
     }
   }
   
   // 2. DOM element check
   const createBlogButton = document.querySelector('a[href*="/blog/add"]');
   const editButton = document.querySelector('a[href*="/blog/edit"]');
+  console.log('[detectOwnBlog] Create button:', !!createBlogButton, 'Edit button:', !!editButton);
   
   if (createBlogButton || editButton) {
+    console.log('[detectOwnBlog] DOM elements say IS own blog');
     return true;
   }
   
   const othersViewElement = document.querySelector('.entry__blog__view--others');
+  console.log('[detectOwnBlog] Others view element:', !!othersViewElement);
   if (othersViewElement) {
+    console.log('[detectOwnBlog] Others view element says NOT own blog');
     return false;
   }
   
   // 3. URL pattern check
   const currentUrl = window.location.href;
+  console.log('[detectOwnBlog] Current URL:', currentUrl);
   if (currentUrl.includes('/lodestone/my/')) {
+    console.log('[detectOwnBlog] URL pattern says IS own blog');
     return true;
   }
   
-  // 4. Default to own blog
-  return true;
+  // 4. Conservative default - assume NOT own blog if unclear
+  console.log('[detectOwnBlog] Unable to determine - defaulting to NOT own blog');
+  return false;
 }
 
 // Show export notification banner
@@ -436,11 +459,22 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
 }
 
 // Collect and download all images from image list pages
-async function collectAndDownloadAllImagesInContent(exportDelay: number): Promise<{ [key: string]: string }> {
+async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JSZip): Promise<{ [key: string]: string }> {
+  console.log('collectAndDownloadAllImagesInContent started');
   const allImageUrls = new Set<string>();
   let currentPage = 1;
   let totalPages = 1;
   const imageMap: { [key: string]: string } = {};
+
+  // 画像収集開始の進捗表示
+  console.log('Sending initial progress update for image collection');
+  chrome.runtime.sendMessage({
+    action: 'updateProgress',
+    type: 'images',
+    current: 0,
+    total: 1,
+    pageInfo: { currentPage: 0, totalPages: 1 }
+  }).catch(() => {});
 
   // 画像一覧ページから画像URLを収集
   while (currentPage <= totalPages) {
@@ -451,6 +485,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
     const imageUrlListPage = `https://jp.finalfantasyxiv.com/lodestone/my/image/?page=${currentPage}`;
     
     try {
+      console.log(`[collectAndDownloadAllImagesInContent] Fetching page ${currentPage}: ${imageUrlListPage}`);
       // バックグラウンドにタブ作成を依頼
       const response: any = await new Promise((resolve) => {
         chrome.runtime.sendMessage({
@@ -460,10 +495,25 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
         }, resolve);
       });
       
+      console.log(`[collectAndDownloadAllImagesInContent] Response for page ${currentPage}:`, response);
+      
       if (response?.success && response.imageUrls) {
         response.imageUrls.forEach((url: string) => allImageUrls.add(url));
         if (currentPage === 1) {
           totalPages = response.totalPages || 1;
+          console.log('[collectAndDownloadAllImagesInContent] First page response:', {
+            imageCount: response.imageUrls.length,
+            totalPages: totalPages,
+            response: response
+          });
+          // 総ページ数が取得できたら進捗を更新
+          chrome.runtime.sendMessage({
+            action: 'updateProgress',
+            type: 'images',
+            current: 0,
+            total: response.imageUrls.length,
+            pageInfo: { currentPage: 1, totalPages: totalPages }
+          }).catch(() => {});
         }
       }
     } catch (error) {
@@ -477,7 +527,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
     return {};
   }
 
-  // 収集した画像をBackground Scriptでダウンロード
+  // 収集した画像をBackground Scriptでダウンロード（個別記事エクスポートと同じ方法）
   const imageUrlsArray = Array.from(allImageUrls);
   
   if (imageUrlsArray.length > 0) {
@@ -495,13 +545,15 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
       });
     });
 
-    // ダウンロード結果からimageMapを作成
+    // ダウンロード結果からimageMapを作成し、ZIPに追加（個別記事エクスポートと同じ方法）
     if (downloadedImageData?.success && downloadedImageData.images) {
       for (const imageData of downloadedImageData.images) {
         if (isCancelled) break;
         
         if (imageData.success && imageData.base64) {
           const imagePath = `images/${imageData.filename}`;
+          const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
+          zip.file(imagePath, base64Data, { base64: true });
           imageMap[imageData.url] = imagePath;
         } else {
           imageMap[imageData.url] = imageData.url;
@@ -524,7 +576,8 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
     
     // 2. Get pagination info
     const totalPages = getPaginationInfo();
-    const isOwnBlog = detectOwnBlog();
+    const isOwnBlog = await detectOwnBlog();
+    console.log('[handleAllArticlesExportFromContent] isOwnBlog detected as:', isOwnBlog);
     
     // IMPORTANT: No progress reporting until after confirmation dialog
     // This prevents any confusion with image download progress
@@ -607,10 +660,30 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
 // Process all articles after confirmation
 async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean, exportDelay: number, currentLanguage: string): Promise<void> {
   try {
+    console.log('processAllArticlesFromContent called with:', {
+      entriesLength: entries.length, 
+      isOwnBlog: isOwnBlog, 
+      exportDelay: exportDelay
+    });
+    
     const allArticles: any[] = [];
     const zip = new JSZip();
-    const imageMap: { [key: string]: string } = {};
+    let imageMap: { [key: string]: string } = {};
     const allImageUrls = new Set<string>();
+
+    // Phase 0: Download images from image list pages (自分のブログの場合のみ)
+    console.log('processAllArticlesFromContent - isOwnBlog:', isOwnBlog);
+    if (isOwnBlog) {
+      console.log('Starting image list download...');
+      imageMap = await collectAndDownloadAllImagesInContent(exportDelay, zip);
+      console.log('Image list download completed, imageMap:', Object.keys(imageMap).length, 'images');
+      
+      if (isCancelled) {
+        return;
+      }
+    } else {
+      console.log('Skipping image list download because isOwnBlog is false');
+    }
 
     // Phase 1: Get article details and collect all image URLs
     for (let i = 0; i < entries.length; i++) {
@@ -651,35 +724,39 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       return;
     }
 
-    // Phase 2: Request background script to download all images
+    // Phase 2: Download additional images not in image list
     const imageUrlsArray = Array.from(allImageUrls);
-    const downloadedImageData: any = await new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage({
-        action: 'downloadAllImages',
-        imageUrls: imageUrlsArray,
-        totalImages: imageUrlsArray.length
-      }, (response) => {
-        if (chrome.runtime.lastError) {
-          reject(new Error(chrome.runtime.lastError.message));
-        } else {
-          resolve(response);
-        }
+    const newImageUrls = imageUrlsArray.filter(url => !imageMap[url]); // 画像一覧からダウンロード済みを除外
+    
+    if (newImageUrls.length > 0) {
+      const downloadedImageData: any = await new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage({
+          action: 'downloadAllImages',
+          imageUrls: newImageUrls,
+          totalImages: newImageUrls.length
+        }, (response) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            resolve(response);
+          }
+        });
       });
-    });
 
-    // Add downloaded images to ZIP and create image map
-    if (downloadedImageData?.success && downloadedImageData.images) {
-      for (const imageData of downloadedImageData.images) {
-        if (isCancelled) break;
-        
-        if (imageData.success && imageData.base64) {
-          const imagePath = `images/${imageData.filename}`;
-          // Convert base64 to blob for JSZip
-          const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
-          zip.file(imagePath, base64Data, { base64: true });
-          imageMap[imageData.url] = imagePath;
-        } else {
-          imageMap[imageData.url] = imageData.url;
+      // Add downloaded images to ZIP and create image map
+      if (downloadedImageData?.success && downloadedImageData.images) {
+        for (const imageData of downloadedImageData.images) {
+          if (isCancelled) break;
+          
+          if (imageData.success && imageData.base64) {
+            const imagePath = `images/${imageData.filename}`;
+            // Convert base64 to blob for JSZip
+            const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
+            zip.file(imagePath, base64Data, { base64: true });
+            imageMap[imageData.url] = imagePath;
+          } else {
+            imageMap[imageData.url] = imageData.url;
+          }
         }
       }
     }
@@ -752,19 +829,21 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
 function scrapeImageListPageUrls(): string[] {
   const imageUrls: string[] = [];
   
-  // ロドストの画像一覧ページのセレクタ（動作していたJS版と同じ）
-  const imageElements = document.querySelectorAll('.image__list img');
+  // 1. 外部参照画像（GitHubなど）を取得
+  const externalImageLinks = document.querySelectorAll('.image__list a.outboundLink.outboundImage[data-target="external_image"]');
+  externalImageLinks.forEach(link => {
+    const anchor = link as HTMLAnchorElement;
+    if (anchor.href) {
+      imageUrls.push(anchor.href);
+    }
+  });
   
-  imageElements.forEach(img => {
-    const imageElement = img as HTMLImageElement;
-    
-    // サムネイル画像ではなく、元の画像URLを取得する
-    // ロドストの画像一覧ページでは、img.srcがサムネイルURLになっている場合があるため、親要素のaタグのhrefを見る
-    const parentLink = imageElement.closest('a.fancybox_element') as HTMLAnchorElement;
-    if (parentLink && parentLink.href) {
-      imageUrls.push(parentLink.href);
-    } else {
-      imageUrls.push(imageElement.src); // フォールバック
+  // 2. ロドスト内部画像（FFXIVスクリーンショット）を取得
+  const internalImageLinks = document.querySelectorAll('.image__list a.fancybox_element[rel="view_image"]');
+  internalImageLinks.forEach(link => {
+    const anchor = link as HTMLAnchorElement;
+    if (anchor.href) {
+      imageUrls.push(anchor.href);
     }
   });
   
@@ -778,9 +857,10 @@ function getImageListTotalPages(): number {
   // 動作していたJS版と同じページネーション取得
   const totalPagesElement = document.querySelector('.btn__pager__current');
   if (totalPagesElement) {
-    const match = totalPagesElement.textContent?.match(/\/ (\d+)ページ/);
-    if (match && match[1]) {
-      totalPages = parseInt(match[1], 10);
+    // "1ページ / 8ページ" のような形式から総ページ数を抽出
+    const match = totalPagesElement.textContent?.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
+    if (match && match[2]) {
+      totalPages = parseInt(match[2], 10);
     }
   }
   
@@ -851,6 +931,7 @@ function processImagesAndConvertToMarkdown(data: any): { success: boolean; markd
 
 // Message listener
 chrome.runtime.onMessage.addListener((request: any, _sender: any, sendResponse: any) => {
+  console.log('Content script received message:', request.action);
   
   switch (request.action) {
     case 'scrapeAdditionalPage':
@@ -910,10 +991,17 @@ chrome.runtime.onMessage.addListener((request: any, _sender: any, sendResponse: 
       
     case 'scrapeImageListPage':
       try {
+        console.log('[Content Script] scrapeImageListPage called, current URL:', window.location.href);
         const imageUrls = scrapeImageListPageUrls();
         const totalPages = getImageListTotalPages();
+        console.log('[Content Script] scrapeImageListPage results:', {
+          imageUrls: imageUrls.length,
+          totalPages: totalPages,
+          currentPageText: document.querySelector('.btn__pager__current')?.textContent
+        });
         sendResponse({ success: true, imageUrls, totalPages });
       } catch (error) {
+        console.error('[Content Script] scrapeImageListPage error:', error);
         sendResponse({ success: false, message: `Failed to scrape image list: ${error instanceof Error ? error.message : String(error)}` });
       }
       break;

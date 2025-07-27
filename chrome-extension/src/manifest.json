@@ -20,7 +20,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://jp.finalfantasyxiv.com/lodestone/character/*/blog/*"],
+      "matches": [
+        "https://jp.finalfantasyxiv.com/lodestone/character/*/blog/*",
+        "https://jp.finalfantasyxiv.com/lodestone/my/image/*"
+      ],
       "js": ["turndown.browser.es.js", "content.js"]
     }
   ],

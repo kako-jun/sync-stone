@@ -151,6 +151,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       return true; // 非同期処理のため
       
     case 'setAllEntriesData':
+      console.log('[Background] setAllEntriesData received with isOwnBlog:', request.isOwnBlog);
       storedEntriesData = {
         entries: request.entries,
         isOwnBlog: request.isOwnBlog,
@@ -247,6 +248,18 @@ async function handleFetchPageInNewTab(url: string, delay: number, sendResponse:
       return;
     }
 
+    // Wait for tab to fully load
+    await new Promise<void>((resolve) => {
+      const listener = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+        if (tabId === tab.id && changeInfo.status === 'complete') {
+          chrome.tabs.onUpdated.removeListener(listener);
+          resolve();
+        }
+      };
+      chrome.tabs.onUpdated.addListener(listener);
+    });
+
+    // Additional delay for content script to initialize
     await new Promise(resolve => setTimeout(resolve, delay));
 
     const response = await chrome.tabs.sendMessage(tab.id, { action: 'scrapeAdditionalPage' });
@@ -271,6 +284,18 @@ async function handleFetchArticleInNewTab(url: string, delay: number, sendRespon
       return;
     }
 
+    // Wait for tab to fully load
+    await new Promise<void>((resolve) => {
+      const listener = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+        if (tabId === tab.id && changeInfo.status === 'complete') {
+          chrome.tabs.onUpdated.removeListener(listener);
+          resolve();
+        }
+      };
+      chrome.tabs.onUpdated.addListener(listener);
+    });
+
+    // Additional delay for content script to initialize
     await new Promise(resolve => setTimeout(resolve, delay));
 
     const response = await chrome.tabs.sendMessage(tab.id, { action: 'getSingleArticleData' });
@@ -295,6 +320,18 @@ async function handleFetchImageListPage(url: string, delay: number, sendResponse
       return;
     }
 
+    // Wait for tab to fully load
+    await new Promise<void>((resolve) => {
+      const listener = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+        if (tabId === tab.id && changeInfo.status === 'complete') {
+          chrome.tabs.onUpdated.removeListener(listener);
+          resolve();
+        }
+      };
+      chrome.tabs.onUpdated.addListener(listener);
+    });
+
+    // Additional delay for content script to initialize
     await new Promise(resolve => setTimeout(resolve, delay));
 
     const response = await chrome.tabs.sendMessage(tab.id, { action: 'scrapeImageListPage' });
@@ -405,10 +442,13 @@ function generateHash(str: string): string {
 
 // Handle confirm export all from content script
 async function handleConfirmExportAllFromContent(): Promise<void> {
+  console.log('[Background] handleConfirmExportAllFromContent called');
   if (!storedEntriesData) {
+    console.log('[Background] storedEntriesData is null!');
     sendErrorMessage(getMessage('exportDataNotFound'));
     return;
   }
+  console.log('[Background] storedEntriesData.isOwnBlog:', storedEntriesData.isOwnBlog);
 
   // Reset cancellation flag when starting export
   isCancelled = false;

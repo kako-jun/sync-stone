@@ -289,13 +289,21 @@ function setupEventListeners(): void {
 
   // Export all articles button
   elements.exportButton.addEventListener('click', () => {
+    // ボタンを無効化
+    elements.exportButton.disabled = true;
+    elements.exportButton.style.cursor = 'not-allowed';
+    
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
     elements.delayInput.value = exportDelay.toString();
     
     // Check if we're on first page first
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs[0];
-      if (!tab?.url) return;
+      if (!tab?.url) {
+        elements.exportButton.disabled = false;
+        elements.exportButton.style.cursor = 'pointer';
+        return;
+      }
       
       const currentUrl = tab.url;
       const isBlogListFirstPage = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/?(\?.*)?$/) && 
@@ -387,6 +395,8 @@ function setupEventListeners(): void {
   elements.cancelExportButton.addEventListener('click', () => {
     chrome.runtime.sendMessage({ action: 'cancelExport' });
     elements.exportControlContainer.style.display = 'none';
+    elements.exportButton.disabled = false;
+    elements.exportButton.style.cursor = 'pointer';
     showStatusMessage(messages[currentLanguage].exportCancelled, 'info');
     resetProgress();
   });
@@ -479,6 +489,8 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       // Complete both progress bars
       completeImageProgress();
       completeArticleProgress();
+      elements.exportButton.disabled = false;
+      elements.exportButton.style.cursor = 'pointer';
       showStatusMessage(messages[currentLanguage].exportComplete, 'success');
       
       // Legacy support
@@ -502,6 +514,8 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       
       showStatusMessage(errorMessage, 'error');
       elements.exportCurrentArticleButton.disabled = false;
+      elements.exportButton.disabled = false;
+      elements.exportButton.style.cursor = 'pointer';
       break;
 
     case 'exportSuccess':
@@ -593,6 +607,8 @@ function resetDialogStates(): void {
   elements.confirmationDialog.style.display = 'none';
   elements.statusMessage.style.display = 'none';
   elements.exportCurrentArticleButton.disabled = false;
+  elements.exportButton.disabled = false;
+  elements.exportButton.style.cursor = 'pointer';
   
   // Reset new progress displays
   resetProgress();
