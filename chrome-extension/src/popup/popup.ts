@@ -292,14 +292,29 @@ function setupEventListeners(): void {
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
     elements.delayInput.value = exportDelay.toString();
     
-    // Set the export delay and developer mode, then start export
-    chrome.runtime.sendMessage({ 
-      action: 'setExportDelay', 
-      delay: exportDelay,
-      developerMode: isDeveloperMode,
-      language: currentLanguage
-    }, () => {
-      chrome.runtime.sendMessage({ action: 'exportAllArticles' });
+    // Check if we're on first page first
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const tab = tabs[0];
+      if (!tab?.url) return;
+      
+      const currentUrl = tab.url;
+      const isBlogListFirstPage = currentUrl.match(/\/lodestone\/character\/\d+\/blog\/?(\?.*)?$/) && 
+                                  (!currentUrl.includes('page=') || currentUrl.includes('page=1'));
+      
+      if (isBlogListFirstPage) {
+        // We're on first page - set delay and start export
+        chrome.runtime.sendMessage({ 
+          action: 'setExportDelay', 
+          delay: exportDelay,
+          developerMode: isDeveloperMode,
+          language: currentLanguage
+        }, () => {
+          chrome.runtime.sendMessage({ action: 'exportAllArticles' });
+        });
+      } else {
+        // Not on first page - just navigate (don't set delay)
+        chrome.runtime.sendMessage({ action: 'exportAllArticles' });
+      }
     });
   });
 
@@ -309,13 +324,31 @@ function setupEventListeners(): void {
     elements.exportCurrentArticleButton.disabled = true;
     
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
-    // Set the export delay first, then start export
-    chrome.runtime.sendMessage({ 
-      action: 'setExportDelay', 
-      delay: exportDelay,
-      language: currentLanguage
-    }, () => {
-      chrome.runtime.sendMessage({ action: 'exportSingleArticle' });
+    
+    // Send directly to content script
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(tabs[0].id, { 
+          action: 'exportSingleArticle',
+          exportDelay,
+          language: currentLanguage
+        }, (response) => {
+          // Handle response from content script
+          if (chrome.runtime.lastError) {
+            showStatusMessage(messages[currentLanguage].contentScriptNotAvailable, 'error');
+            elements.exportCurrentArticleButton.disabled = false;
+          } else if (response?.success) {
+            showStatusMessage(messages[currentLanguage].singleArticleExported, 'success');
+            elements.exportCurrentArticleButton.disabled = false;
+          } else {
+            showStatusMessage(messages[currentLanguage].failedToExportArticle + (response?.message || ''), 'error');
+            elements.exportCurrentArticleButton.disabled = false;
+          }
+        });
+      } else {
+        showStatusMessage(messages[currentLanguage].contentScriptNotAvailable, 'error');
+        elements.exportCurrentArticleButton.disabled = false;
+      }
     });
   });
 
@@ -408,19 +441,19 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       
       // Use new progress display functions
       if (request.type === 'images') {
-        // 画像エクスポート中は記事進捗バーを非表示にする
-        elements.articleProgressContainer.style.display = 'none';
         showImageProgress(request.current, request.total, request.pageInfo, request.currentItem);
       } else if (request.type === 'articles') {
-        // 記事エクスポート中は画像進捗バーを非表示にする（画像エクスポートが完了した後）
+        // 記事エクスポート開始時に画像進捗を完了状態にする（非表示にはしない）
         if (request.current === 1) {
-          // 記事エクスポートの最初のタイミングで画像進捗バーを完了状態にして非表示
           completeImageProgress();
         }
         showArticleProgress(request.current, request.total, request.pageInfo, request.currentItem);
       } else if (request.type === 'pages') {
         // 記事数収集の進捗を表示
         showPageCollectionProgress(request.current, request.total, request.pageInfo);
+      } else if (request.type === 'collecting') {
+        // 記事詳細収集の進捗を表示（記事進捗バーを使用）
+        showArticleProgress(request.current, request.total, request.pageInfo, request.currentItem);
       }
       
       // Legacy support for old progress bar
@@ -538,7 +571,6 @@ function checkCurrentArticle(): void {
       if (tab.id) {
         chrome.tabs.sendMessage(tab.id, { action: 'getArticleInfo' }, (response: any) => {
           if (chrome.runtime.lastError) {
-            console.log('Content script not available:', chrome.runtime.lastError.message);
             return;
           }
           if (response?.success) {

@@ -4,6 +4,9 @@
 declare const TurndownService: any;
 const turndownService = new TurndownService();
 
+// JSZip import for content script
+import JSZip from 'jszip';
+
 // Global cancellation flag
 let isCancelled = false;
 
@@ -100,10 +103,22 @@ function extractArticleDetails(): any {
   if (bodyHtml) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(bodyHtml, 'text/html');
-    const imgElements = doc.querySelectorAll('img');
+    
+    // Extract all img tags with data-origin_src (external images)
+    const imgElements = doc.querySelectorAll('img[data-origin_src]');
     imgElements.forEach(img => {
-      if (img.src) {
-        imageUrls.push(img.src);
+      const originalSrc = img.getAttribute('data-origin_src');
+      if (originalSrc && !imageUrls.includes(originalSrc)) {
+        imageUrls.push(originalSrc);
+      }
+    });
+    
+    // Extract regular img tags without data-origin_src (internal images)
+    const regularImgElements = doc.querySelectorAll('img:not([data-origin_src])');
+    regularImgElements.forEach(img => {
+      const imgElement = img as HTMLImageElement;
+      if (imgElement.src && !imageUrls.includes(imgElement.src)) {
+        imageUrls.push(imgElement.src);
       }
     });
   }
@@ -301,6 +316,203 @@ function sendErrorMessage(message: string): void {
   });
 }
 
+// Helper functions for content script
+function generateHash(str: string): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0;
+  }
+  return Math.abs(hash).toString(16);
+}
+
+function sanitizeFilename(filename: string, maxLength = 50): string {
+  return filename
+    .replace(/[<>:"/\\|?*]/g, '_')
+    .replace(/\s+/g, '_')
+    .substring(0, maxLength);
+}
+
+// Download ZIP using <a> tag download
+function downloadZip(zip: JSZip, filename: string): Promise<void> {
+  return new Promise(async (resolve) => {
+    const content = await zip.generateAsync({
+      type: 'base64',
+      compression: 'DEFLATE',
+      compressionOptions: { level: 6 }
+    });
+
+    const dataUrl = 'data:application/zip;base64,' + content;
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = filename;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    resolve();
+  });
+}
+
+// Handle single article export in content script
+async function handleSingleArticleExportInContent(sendResponse: (response: any) => void): Promise<void> {
+  try {
+    // Get article data
+    const articleDetails = extractArticleDetails();
+    
+    if (!articleDetails.title || !articleDetails.bodyHtml) {
+      throw new Error('記事データを取得できませんでした');
+    }
+    
+    const zip = new JSZip();
+    const imageMap: { [key: string]: string } = {};
+
+    // Download images via background script (remove duplicates)
+    const imageUrlsSet = new Set([...(articleDetails.imageUrls || []), ...(articleDetails.thumbnailUrls || [])]);
+    const allImageUrls = Array.from(imageUrlsSet);
+    
+    if (allImageUrls.length > 0) {
+      const downloadedImageData: any = await new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage({
+          action: 'downloadAllImages',
+          imageUrls: allImageUrls,
+          totalImages: allImageUrls.length
+        }, (response) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            resolve(response);
+          }
+        });
+      });
+
+      // Add downloaded images to ZIP and create image map
+      if (downloadedImageData?.success && downloadedImageData.images) {
+        for (const imageData of downloadedImageData.images) {
+          if (imageData.success && imageData.base64) {
+            const imagePath = `images/${imageData.filename}`;
+            // Convert base64 to blob for JSZip
+            const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
+            zip.file(imagePath, base64Data, { base64: true });
+            imageMap[imageData.url] = imagePath;
+          } else {
+            imageMap[imageData.url] = imageData.url;
+          }
+        }
+      }
+    }
+
+    // Convert to markdown
+    const markdownResult = processImagesAndConvertToMarkdown({
+      title: articleDetails.title,
+      htmlContent: articleDetails.bodyHtml,
+      likes: articleDetails.likes,
+      commentsCount: articleDetails.commentsCount,
+      publishDate: articleDetails.publishDate,
+      tags: articleDetails.tags,
+      imageMap,
+      thumbnailUrls: articleDetails.thumbnailUrls,
+      commentsData: articleDetails.commentsData
+    });
+
+    if (!markdownResult.success || !markdownResult.markdown) {
+      throw new Error('Markdownへの変換に失敗しました');
+    }
+
+    // Create ZIP file
+    const sanitizedTitle = sanitizeFilename(articleDetails.title);
+    zip.file(`${sanitizedTitle}.md`, markdownResult.markdown);
+
+    await downloadZip(zip, `${sanitizedTitle}.zip`);
+
+    sendResponse({ success: true, message: '記事がエクスポートされました！' });
+  } catch (error) {
+    sendResponse({ 
+      success: false, 
+      message: 'エクスポートに失敗しました: ' + (error instanceof Error ? error.message : String(error))
+    });
+  }
+}
+
+// Collect and download all images from image list pages
+async function collectAndDownloadAllImagesInContent(exportDelay: number): Promise<{ [key: string]: string }> {
+  const allImageUrls = new Set<string>();
+  let currentPage = 1;
+  let totalPages = 1;
+  const imageMap: { [key: string]: string } = {};
+
+  // 画像一覧ページから画像URLを収集
+  while (currentPage <= totalPages) {
+    if (isCancelled) {
+      break;
+    }
+    
+    const imageUrlListPage = `https://jp.finalfantasyxiv.com/lodestone/my/image/?page=${currentPage}`;
+    
+    try {
+      // バックグラウンドにタブ作成を依頼
+      const response: any = await new Promise((resolve) => {
+        chrome.runtime.sendMessage({
+          action: 'fetchImageListPage',
+          url: imageUrlListPage,
+          delay: exportDelay
+        }, resolve);
+      });
+      
+      if (response?.success && response.imageUrls) {
+        response.imageUrls.forEach((url: string) => allImageUrls.add(url));
+        if (currentPage === 1) {
+          totalPages = response.totalPages || 1;
+        }
+      }
+    } catch (error) {
+      console.error(`Failed to scrape image list page: ${imageUrlListPage}`, error);
+    }
+    
+    currentPage++;
+  }
+
+  if (isCancelled) {
+    return {};
+  }
+
+  // 収集した画像をBackground Scriptでダウンロード
+  const imageUrlsArray = Array.from(allImageUrls);
+  
+  if (imageUrlsArray.length > 0) {
+    const downloadedImageData: any = await new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({
+        action: 'downloadAllImages',
+        imageUrls: imageUrlsArray,
+        totalImages: imageUrlsArray.length
+      }, (response) => {
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+        } else {
+          resolve(response);
+        }
+      });
+    });
+
+    // ダウンロード結果からimageMapを作成
+    if (downloadedImageData?.success && downloadedImageData.images) {
+      for (const imageData of downloadedImageData.images) {
+        if (isCancelled) break;
+        
+        if (imageData.success && imageData.base64) {
+          const imagePath = `images/${imageData.filename}`;
+          imageMap[imageData.url] = imagePath;
+        } else {
+          imageMap[imageData.url] = imageData.url;
+        }
+      }
+    }
+  }
+
+  return imageMap;
+}
+
 // Handle all articles export from content script
 async function handleAllArticlesExportFromContent(exportDelay: number, isDeveloperMode: boolean, currentLanguage: string): Promise<void> {
   try {
@@ -354,7 +566,6 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
           });
         } catch (error) {
           // Failed to fetch page - continue with available entries
-          console.warn(`Failed to fetch page ${page}:`, error);
         }
       }
     }
@@ -397,9 +608,11 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
 async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean, exportDelay: number, currentLanguage: string): Promise<void> {
   try {
     const allArticles: any[] = [];
-    const imageUrls = new Set<string>();
+    const zip = new JSZip();
+    const imageMap: { [key: string]: string } = {};
+    const allImageUrls = new Set<string>();
 
-    // Get details for each article
+    // Phase 1: Get article details and collect all image URLs
     for (let i = 0; i < entries.length; i++) {
       // Check for cancellation before each article
       if (isCancelled) {
@@ -412,18 +625,18 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         const articleDetails = await fetchArticleDetails(entry.url, exportDelay);
         allArticles.push(articleDetails);
         
-        // Collect image URLs (with deduplication)
+        // Collect all image URLs
         if (articleDetails.imageUrls) {
-          articleDetails.imageUrls.forEach((url: string) => imageUrls.add(url));
+          articleDetails.imageUrls.forEach((url: string) => allImageUrls.add(url));
         }
         if (articleDetails.thumbnailUrls) {
-          articleDetails.thumbnailUrls.forEach((url: string) => imageUrls.add(url));
+          articleDetails.thumbnailUrls.forEach((url: string) => allImageUrls.add(url));
         }
 
-        // Update progress
+        // Update article details collection progress
         chrome.runtime.sendMessage({
           action: 'updateProgress',
-          type: 'articles',
+          type: 'collecting',
           current: i + 1,
           total: entries.length,
           currentItem: articleDetails.title
@@ -431,7 +644,43 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
 
       } catch (error) {
         // Failed to fetch article - continue with available articles
-        console.warn(`Failed to fetch article ${entry.url}:`, error);
+      }
+    }
+
+    if (isCancelled) {
+      return;
+    }
+
+    // Phase 2: Request background script to download all images
+    const imageUrlsArray = Array.from(allImageUrls);
+    const downloadedImageData: any = await new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({
+        action: 'downloadAllImages',
+        imageUrls: imageUrlsArray,
+        totalImages: imageUrlsArray.length
+      }, (response) => {
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+        } else {
+          resolve(response);
+        }
+      });
+    });
+
+    // Add downloaded images to ZIP and create image map
+    if (downloadedImageData?.success && downloadedImageData.images) {
+      for (const imageData of downloadedImageData.images) {
+        if (isCancelled) break;
+        
+        if (imageData.success && imageData.base64) {
+          const imagePath = `images/${imageData.filename}`;
+          // Convert base64 to blob for JSZip
+          const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
+          zip.file(imagePath, base64Data, { base64: true });
+          imageMap[imageData.url] = imagePath;
+        } else {
+          imageMap[imageData.url] = imageData.url;
+        }
       }
     }
 
@@ -440,14 +689,59 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       return;
     }
 
-    // Request background script to create final ZIP
-    chrome.runtime.sendMessage({
-      action: 'createFinalZip',
-      articles: allArticles,
-      imageUrls: Array.from(imageUrls),
-      isOwnBlog,
-      currentLanguage
-    });
+    // Phase 3: Convert articles to markdown and create final ZIP
+    const articleListMarkdown: string[] = [];
+    
+    for (let i = 0; i < allArticles.length; i++) {
+      if (isCancelled) return;
+      
+      const article = allArticles[i];
+      
+      try {
+        const markdownResult = processImagesAndConvertToMarkdown({
+          title: article.title,
+          htmlContent: article.bodyHtml,
+          likes: article.likes,
+          commentsCount: article.commentsCount,
+          publishDate: article.publishDate,
+          tags: article.tags,
+          imageMap,
+          thumbnailUrls: article.thumbnailUrls,
+          commentsData: article.commentsData
+        });
+
+        if (markdownResult.success && markdownResult.markdown) {
+          const sanitizedTitle = sanitizeFilename(article.title);
+          const filename = `${sanitizedTitle}.md`;
+          
+          zip.file(filename, markdownResult.markdown);
+          articleListMarkdown.push(`- [${article.title}](${filename})`);
+        }
+
+        // Update article processing progress
+        chrome.runtime.sendMessage({
+          action: 'updateProgress',
+          type: 'articles',
+          current: i + 1,
+          total: allArticles.length,
+          currentItem: article.title
+        });
+
+      } catch (error) {
+        console.error(`Error processing article: ${article.title}`, error);
+      }
+    }
+
+    // Add article index
+    const articleListContent = `# Articles Index\n\n${articleListMarkdown.join('\n')}`;
+    zip.file('index.md', articleListContent);
+
+    // Download ZIP
+    const filename = isOwnBlog ? 'lodestone_blog_export.zip' : 'lodestone_others_blog_export.zip';
+    await downloadZip(zip, filename);
+
+    // Notify completion
+    chrome.runtime.sendMessage({ action: 'exportComplete' });
 
   } catch (error) {
     sendErrorMessage('記事処理中にエラーが発生しました: ' + (error instanceof Error ? error.message : String(error)));
@@ -458,24 +752,19 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
 function scrapeImageListPageUrls(): string[] {
   const imageUrls: string[] = [];
   
-  // 画像一覧ページの画像要素を取得（過去の動作していたセレクタを使用）
+  // ロドストの画像一覧ページのセレクタ（動作していたJS版と同じ）
   const imageElements = document.querySelectorAll('.image__list img');
   
   imageElements.forEach(img => {
     const imageElement = img as HTMLImageElement;
     
-    // 親要素のfancyboxリンクから元画像URLを取得
+    // サムネイル画像ではなく、元の画像URLを取得する
+    // ロドストの画像一覧ページでは、img.srcがサムネイルURLになっている場合があるため、親要素のaタグのhrefを見る
     const parentLink = imageElement.closest('a.fancybox_element') as HTMLAnchorElement;
     if (parentLink && parentLink.href) {
-      if (!imageUrls.includes(parentLink.href)) {
-        imageUrls.push(parentLink.href);
-      }
+      imageUrls.push(parentLink.href);
     } else {
-      // フォールバック: data-origin_src属性またはsrc属性
-      const imageUrl = imageElement.getAttribute('data-origin_src') || imageElement.src;
-      if (imageUrl && !imageUrls.includes(imageUrl)) {
-        imageUrls.push(imageUrl);
-      }
+      imageUrls.push(imageElement.src); // フォールバック
     }
   });
   
@@ -486,12 +775,11 @@ function scrapeImageListPageUrls(): string[] {
 function getImageListTotalPages(): number {
   let totalPages = 1;
   
-  // 過去の動作していたページネーションセレクタを使用
-  const paginationElement = document.querySelector('.btn__pager__current');
-  if (paginationElement) {
-    const paginationText = paginationElement.textContent || '';
-    const match = paginationText.match(/\/ (\d+)ページ/);
-    if (match?.[1]) {
+  // 動作していたJS版と同じページネーション取得
+  const totalPagesElement = document.querySelector('.btn__pager__current');
+  if (totalPagesElement) {
+    const match = totalPagesElement.textContent?.match(/\/ (\d+)ページ/);
+    if (match && match[1]) {
       totalPages = parseInt(match[1], 10);
     }
   }
@@ -600,6 +888,10 @@ chrome.runtime.onMessage.addListener((request: any, _sender: any, sendResponse: 
       showExportNotification(request.message);
       sendResponse({ success: true });
       break;
+      
+    case 'exportSingleArticle':
+      handleSingleArticleExportInContent(sendResponse);
+      return true; // 非同期処理のため
       
     case 'exportAllArticlesFromContent':
       handleAllArticlesExportFromContent(request.exportDelay, request.isDeveloperMode, request.currentLanguage);
