@@ -19,9 +19,14 @@ export class ImageProcessor {
     onProgress?: (current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string) => void,
     isCancelled?: () => boolean
   ): Promise<ImageMap> {
-    const { allImageUrls, totalPages } = await this.getAllImageUrlsWithPageInfo(isCancelled, (current, total, pageInfo) => {
-      onProgress?.(current, total, pageInfo, `ページ ${pageInfo?.currentPage}/${pageInfo?.totalPages}`);
-    });
+    // フェーズ1: 画像URL収集（進捗は別途管理）
+    const { allImageUrls, totalPages } = await this.getAllImageUrlsWithPageInfo(isCancelled);
+    
+    if (isCancelled?.()) {
+      return {};
+    }
+    
+    // フェーズ2: 実際の画像ダウンロード（メイン進捗）
     return this.downloadImages(Array.from(allImageUrls), onProgress, isCancelled);
   }
 
@@ -173,14 +178,35 @@ export class ImageProcessor {
   }
 
   /**
-   * Fetch image as blob
+   * Fetch image as blob using XMLHttpRequest to avoid CORS issues
    */
   private async fetchImage(imageUrl: string): Promise<Blob> {
-    const response = await fetch(imageUrl);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
-    }
-    return response.blob();
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', imageUrl, true);
+      xhr.responseType = 'blob';
+      
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          resolve(xhr.response);
+        } else {
+          reject(new Error(`Failed to fetch image: ${xhr.status} ${xhr.statusText}`));
+        }
+      };
+      
+      xhr.onerror = function() {
+        reject(new Error(`Network error while fetching image: ${imageUrl}`));
+      };
+      
+      xhr.ontimeout = function() {
+        reject(new Error(`Timeout while fetching image: ${imageUrl}`));
+      };
+      
+      // Set timeout
+      xhr.timeout = 30000; // 30 seconds
+      
+      xhr.send();
+    });
   }
 
   /**

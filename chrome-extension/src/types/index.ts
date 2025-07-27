@@ -28,7 +28,7 @@ export interface ExportState {
   isExporting: boolean;
   showingConfirmation: boolean;
   showingProgress: boolean;
-  type: 'articles' | 'images';
+  type: 'articles' | 'images' | 'pages';
   current: number;
   total: number;
 }

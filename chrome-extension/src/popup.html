@@ -74,23 +74,6 @@
   <!-- Progress Section -->
   <div id="progressSection" style="margin-top: 10px;">
     
-    <!-- Export Control Area (when exporting) -->
-    <div id="exportControlContainer" style="display: none; margin-bottom: 15px; text-align: center;">
-      <button id="cancelExportButton" style="
-        background-color: #f44336; 
-        color: white; 
-        border: none; 
-        padding: 8px 16px; 
-        border-radius: 4px; 
-        cursor: pointer; 
-        font-size: 13px; 
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-      " onmouseover="this.style.backgroundColor='#d32f2f'" onmouseout="this.style.backgroundColor='#f44336'">
-        __MSG_cancelExport__
-      </button>
-    </div>
-    
     <!-- Image Download Progress -->
     <div id="imageProgressContainer" style="display: none; margin-bottom: 15px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
@@ -100,7 +83,7 @@
       </div>
       <div id="imageProgressText" style="font-size: 12px; margin-bottom: 5px; color: #666;"></div>
       <div style="width: 100%; background-color: #ddd; border-radius: 4px; overflow: hidden;">
-        <div id="imageProgressBar" style="width: 0%; height: 20px; background-color: #2196F3; text-align: center; line-height: 20px; color: white; font-size: 11px; transition: width 0.3s ease;"></div>
+        <div id="imageProgressBar" style="width: 0%; height: 20px; background-color: #4CAF50; text-align: center; line-height: 20px; color: white; font-size: 11px; transition: width 0.3s ease;"></div>
       </div>
     </div>
 
@@ -119,9 +102,26 @@
 
   </div>
 
-  <!-- Status Message Display (bottom) -->
+  <!-- Status Message Display -->
   <div id="statusContainer" style="margin-top: 15px;">
     <div id="statusMessage" style="padding: 10px; border-radius: 6px; font-size: 13px; display: none; font-weight: bold;"></div>
+  </div>
+
+  <!-- Export Control Area (when exporting) - bottom -->
+  <div id="exportControlContainer" style="display: none; margin-top: 15px; text-align: center;">
+    <button id="cancelExportButton" style="
+      background-color: #f44336; 
+      color: white; 
+      border: none; 
+      padding: 8px 16px; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 13px; 
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    ">
+      __MSG_cancelExport__
+    </button>
   </div>
 
   <script src="popup.js"></script>

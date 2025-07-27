@@ -87,7 +87,8 @@ const messages: { [key: string]: { [key: string]: string } } = {
     articleProcessHeader: '📝 記事エクスポート',
     imageDownloadComplete: '画像エクスポート完了',
     articleProcessComplete: '記事エクスポート完了',
-    completed: '完了'
+    completed: '完了',
+    collectingArticles: '記事数を収集中'
   },
   en: {
     extensionName: 'SyncStone - Stardustmemoir',
@@ -133,7 +134,8 @@ const messages: { [key: string]: { [key: string]: string } } = {
     articleProcessHeader: '📝 Exporting Articles',
     imageDownloadComplete: 'Image export complete',
     articleProcessComplete: 'Article export complete',
-    completed: 'Complete'
+    completed: 'Complete',
+    collectingArticles: 'Collecting Articles'
   }
 };
 
@@ -356,6 +358,15 @@ function setupEventListeners(): void {
     resetProgress();
   });
 
+  // Cancel button hover effects (CSP compliant)
+  elements.cancelExportButton.addEventListener('mouseenter', () => {
+    elements.cancelExportButton.style.backgroundColor = '#d32f2f';
+  });
+  
+  elements.cancelExportButton.addEventListener('mouseleave', () => {
+    elements.cancelExportButton.style.backgroundColor = '#f44336';
+  });
+
   // Language selector
   elements.languageSelect.addEventListener('change', () => {
     currentLanguage = elements.languageSelect.value;
@@ -380,6 +391,8 @@ function setupEventListeners(): void {
 chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
   switch (request.action) {
     case 'showExportConfirmation':
+      // 記事数収集の進捗表示をクリア
+      elements.statusMessage.style.display = 'none';
       const blogTypeText = request.isOwnBlog 
         ? messages[currentLanguage].confirmationOwnBlog 
         : messages[currentLanguage].confirmationOthersBlog;
@@ -395,16 +408,23 @@ chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
       
       // Use new progress display functions
       if (request.type === 'images') {
+        // 画像エクスポート中は記事進捗バーを非表示にする
+        elements.articleProgressContainer.style.display = 'none';
         showImageProgress(request.current, request.total, request.pageInfo, request.currentItem);
       } else if (request.type === 'articles') {
+        // 記事エクスポート中は画像進捗バーを非表示にする（画像エクスポートが完了した後）
+        if (request.current === 1) {
+          // 記事エクスポートの最初のタイミングで画像進捗バーを完了状態にして非表示
+          completeImageProgress();
+        }
         showArticleProgress(request.current, request.total, request.pageInfo, request.currentItem);
       } else if (request.type === 'pages') {
-        // ページ読み込み進捗は画像進捗として表示
-        showImageProgress(request.current, request.total, request.pageInfo, request.currentItem);
+        // 記事数収集の進捗を表示
+        showPageCollectionProgress(request.current, request.total, request.pageInfo);
       }
       
       // Legacy support for old progress bar
-      if (elements.progressBarContainer && elements.progressBar && elements.progressText) {
+      if (elements.progressBarContainer && elements.progressBar && elements.progressText && request.type !== 'pages') {
         elements.progressBarContainer.style.display = 'block';
         const percentage = (request.current / request.total) * 100;
         elements.progressBar.style.width = `${percentage}%`;
@@ -649,33 +669,61 @@ function displayArticleInfo(title: string, bodyLength: number, imageCount: numbe
 }
 
 // Progress Management Functions
-function showImageProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string): void {
-  elements.imageProgressContainer.style.display = 'block';
-  
-  const percentage = total > 0 ? (current / total) * 100 : 0;
-  elements.imageProgressBar.style.width = `${percentage}%`;
-  elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
-  
+function showPageCollectionProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }): void {
+  // 記事数収集時はステータスメッセージとして表示
   let progressText = '';
   const msgs = messages[currentLanguage];
   if (pageInfo) {
     if (currentLanguage === 'ja') {
-      progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}/${total}件`;
+      progressText = `${msgs.collectingArticles} - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}件`;
     } else {
-      progressText = `Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${current}/${total}`;
+      progressText = `${msgs.collectingArticles} - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Articles: ${current}`;
     }
   } else {
+    if (currentLanguage === 'ja') {
+      progressText = `${msgs.collectingArticles} - 記事数: ${current}件`;
+    } else {
+      progressText = `${msgs.collectingArticles} - Articles: ${current}`;
+    }
+  }
+  
+  showStatusMessage(progressText, 'info');
+}
+
+function showImageProgress(current: number, total: number, pageInfo?: { currentPage: number, totalPages: number }, currentItem?: string): void {
+  elements.imageProgressContainer.style.display = 'block';
+  
+  let progressText = '';
+  const msgs = messages[currentLanguage];
+  
+  if (pageInfo) {
+    // 画像収集フェーズ：記事数収集と同様の表示形式
+    const percentage = total > 0 ? (current / total) * 100 : 0;
+    elements.imageProgressBar.style.width = `${percentage}%`;
+    elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
+    
+    if (currentLanguage === 'ja') {
+      progressText = `画像一覧を収集中 - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}件`;
+    } else {
+      progressText = `Collecting Images - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${current}`;
+    }
+  } else {
+    // 画像ダウンロードフェーズ
+    const percentage = total > 0 ? (current / total) * 100 : 0;
+    elements.imageProgressBar.style.width = `${percentage}%`;
+    elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
+    
     if (currentLanguage === 'ja') {
       progressText = `画像: ${current}/${total}件`;
     } else {
       progressText = `Images: ${current}/${total}`;
     }
-  }
-  
-  // 現在処理中のアイテム情報を追加（20文字まで）
-  if (currentItem) {
-    const truncatedItem = currentItem.length > 20 ? currentItem.substring(0, 20) + '...' : currentItem;
-    progressText += ` | ${truncatedItem}`;
+    
+    // 現在処理中のアイテム情報を追加（20文字まで）
+    if (currentItem) {
+      const truncatedItem = currentItem.length > 20 ? currentItem.substring(0, 20) + '...' : currentItem;
+      progressText += ` | ${truncatedItem}`;
+    }
   }
   
   elements.imageProgressText.textContent = progressText;
@@ -748,7 +796,7 @@ function showStatusMessage(message: string, type: 'error' | 'success' | 'info'):
   const styles = {
     error: { bg: '#ffebee', color: '#c62828', border: '#ef9a9a' },
     success: { bg: '#e8f5e8', color: '#2e7d32', border: '#a5d6a7' },
-    info: { bg: '#e3f2fd', color: '#1565c0', border: '#90caf9' }
+    info: { bg: '#e8f5e8', color: '#2e7d32', border: '#a5d6a7' } // 緑に統一
   };
 
   const style = styles[type];
