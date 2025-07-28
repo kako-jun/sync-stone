@@ -11,7 +11,6 @@ interface PopupElements {
   
   // New Settings Elements
   languageSelect: HTMLSelectElement;
-  developerMode: HTMLInputElement;
   
   // Progress Elements
   progressSection: HTMLElement;
@@ -39,7 +38,6 @@ interface PopupElements {
 
 let elements: PopupElements;
 let currentLanguage = 'ja';
-let isDeveloperMode = false;
 
 // Language messages
 const messages: { [key: string]: { [key: string]: string } } = {
@@ -62,7 +60,6 @@ const messages: { [key: string]: { [key: string]: string } } = {
     startingDownload: 'エクスポート中です...',
     cancelExport: '⛔ エクスポートをキャンセル',
     exportCancelled: 'エクスポートをキャンセルしました',
-    developerModeLabel: '🛠️ 開発者モード (最大5記事)',
     languageLabel: '🌐 Language:',
     singleArticleExported: '記事がエクスポートされました！',
     failedToExportArticle: '記事のエクスポートに失敗しました: ',
@@ -109,7 +106,6 @@ const messages: { [key: string]: { [key: string]: string } } = {
     startingDownload: 'Exporting...',
     cancelExport: '⛔ Cancel Export',
     exportCancelled: 'Export cancelled',
-    developerModeLabel: '🛠️ Developer Mode (Max 5 articles)',
     languageLabel: '🌐 Language:',
     singleArticleExported: 'Single article exported successfully!',
     failedToExportArticle: 'Failed to export article: ',
@@ -152,16 +148,6 @@ function applyI18nMessages(): void {
   document.getElementById('confirmNo')!.textContent = msgs.noButton;
   document.getElementById('cancelExportButton')!.textContent = msgs.cancelExport;
   
-  // Update developer mode label
-  const devModeLabel = document.querySelector('label:has(#developerMode)');
-  if (devModeLabel) {
-    const checkbox = devModeLabel.querySelector('#developerMode');
-    if (checkbox) {
-      devModeLabel.innerHTML = '';
-      devModeLabel.appendChild(checkbox);
-      devModeLabel.appendChild(document.createTextNode(' ' + msgs.developerModeLabel));
-    }
-  }
   
   // Update progress headers
   const imageProgressHeader = document.getElementById('imageProgressHeader');
@@ -178,10 +164,8 @@ function applyI18nMessages(): void {
 // Initialize settings with defaults (no persistence)
 function initializeSettings(): void {
   currentLanguage = 'ja';
-  isDeveloperMode = false;
   
   elements.languageSelect.value = currentLanguage;
-  elements.developerMode.checked = isDeveloperMode;
   elements.delayInput.value = '2000';
   
   applyI18nMessages();
@@ -234,8 +218,7 @@ function initializeElements(): void {
     
     // New Settings Elements
     languageSelect: document.getElementById('languageSelect') as HTMLSelectElement,
-    developerMode: document.getElementById('developerMode') as HTMLInputElement,
-    
+      
     // New Progress Elements
     progressSection: document.getElementById('progressSection') as HTMLElement,
     exportControlContainer: document.getElementById('exportControlContainer') as HTMLElement,
@@ -314,7 +297,6 @@ function setupEventListeners(): void {
         chrome.runtime.sendMessage({ 
           action: 'setExportDelay', 
           delay: exportDelay,
-          developerMode: isDeveloperMode,
           language: currentLanguage
         }, () => {
           chrome.runtime.sendMessage({ action: 'exportAllArticles' });
@@ -424,10 +406,6 @@ function setupEventListeners(): void {
     checkCurrentArticle(); // Re-check to update button texts
   });
 
-  // Developer mode checkbox
-  elements.developerMode.addEventListener('change', () => {
-    isDeveloperMode = elements.developerMode.checked;
-  });
 }
 
 // Message listener for background script communication
@@ -751,9 +729,9 @@ function showImageProgress(current: number, total: number, pageInfo?: { currentP
     elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
     
     if (currentLanguage === 'ja') {
-      progressText = `画像一覧を収集中 - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${pageInfo.imageCount || current}件`;
+      progressText = `画像一覧を収集中 - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}件`;
     } else {
-      progressText = `Collecting Images - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${pageInfo.imageCount || current}`;
+      progressText = `Collecting Images - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${current}`;
     }
   } else {
     // 画像ダウンロードフェーズ

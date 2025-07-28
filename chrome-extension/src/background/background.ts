@@ -13,7 +13,6 @@ let exportState: ExportState = {
 
 let isCancelled = false;
 let currentExportDelay = CONFIG.DEFAULT_EXPORT_DELAY;
-let isDeveloperMode = false;
 let currentLanguage = 'ja';
 
 // Stored entries data for content script approach
@@ -21,7 +20,6 @@ let storedEntriesData: {
   entries: BlogEntry[];
   isOwnBlog: boolean;
   exportDelay: number;
-  isDeveloperMode: boolean;
   currentLanguage: string;
 } | null = null;
 
@@ -111,7 +109,6 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       
     case 'setExportDelay':
       currentExportDelay = Math.max(request.delay || CONFIG.DEFAULT_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
-      isDeveloperMode = request.developerMode || false;
       currentLanguage = request.language || 'ja';
       sendResponse({ success: true });
       break;
@@ -161,12 +158,16 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       break;
       
     case 'setAllEntriesData':
-      console.log('[Background] setAllEntriesData received with isOwnBlog:', request.isOwnBlog);
+      console.log('[Background] setAllEntriesData received with:', {
+        entriesCount: request.entries?.length,
+        isOwnBlog: request.isOwnBlog,
+        exportDelay: request.exportDelay,
+        currentLanguage: request.currentLanguage
+      });
       storedEntriesData = {
         entries: request.entries,
         isOwnBlog: request.isOwnBlog,
         exportDelay: request.exportDelay,
-        isDeveloperMode: request.isDeveloperMode,
         currentLanguage: request.currentLanguage
       };
       sendResponse({ success: true });
@@ -198,7 +199,6 @@ function handleExportAllArticles(): void {
       chrome.tabs.sendMessage(tab.id, { 
         action: 'exportAllArticlesFromContent',
         exportDelay: currentExportDelay,
-        isDeveloperMode,
         currentLanguage
       }).catch(() => {
         sendErrorMessage(getMessage('contentScriptNotAvailable'));
@@ -439,20 +439,33 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
     (globalThis as any).downloadedImages = downloadedImages;
     
     // Send completion signal with images array for compatibility
-    sendResponse({
+    const responseData = {
       success: true,
       totalDownloaded: downloadedCount,
       message: 'Download completed, images stored globally',
       images: downloadedImages
-    });
-    console.log('[Background] Response sent successfully');
+    };
+    console.log('[Background] About to send response:', responseData);
+    try {
+      sendResponse(responseData);
+      console.log('[Background] Response sent successfully');
+    } catch (error) {
+      console.error('[Background] Failed to send response:', error);
+    }
 
   } catch (error) {
-    sendResponse({
+    const errorResponse = {
       success: false,
       message: `Failed to download images: ${error instanceof Error ? error.message : String(error)}`,
       images: []
-    });
+    };
+    console.log('[Background] About to send error response:', errorResponse);
+    try {
+      sendResponse(errorResponse);
+      console.log('[Background] Error response sent successfully');
+    } catch (sendError) {
+      console.error('[Background] Failed to send error response:', sendError);
+    }
   }
 }
 

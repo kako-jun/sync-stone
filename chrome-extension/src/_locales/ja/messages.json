@@ -78,9 +78,5 @@
   "articleProcessHeader": {
     "message": "📝 記事エクスポート",
     "description": "記事処理進捗のヘッダーテキスト"
-  },
-  "developerModeLabel": {
-    "message": "🛠️ 開発者モード (最大5記事)",
-    "description": "開発者モードチェックボックスのラベル"
   }
 }

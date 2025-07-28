@@ -78,9 +78,5 @@
   "articleProcessHeader": {
     "message": "📝 Article Export",
     "description": "Header text for article processing progress"
-  },
-  "developerModeLabel": {
-    "message": "🛠️ Developer Mode (Max 5 articles)",
-    "description": "Label for developer mode checkbox"
   }
 }

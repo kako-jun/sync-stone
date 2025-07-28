@@ -443,7 +443,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
 
 // Collect and download all images from image list pages
 async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JSZip): Promise<{ [key: string]: string }> {
-  console.log('collectAndDownloadAllImagesInContent started');
+  console.log('[collectAndDownloadAllImagesInContent] Function started');
   
   // 初期化：前回のデータをクリア
   const allImageUrls = new Set<string>();
@@ -451,7 +451,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
   let totalPages = 1;
   const imageMap: { [key: string]: string } = {};
 
-
+  console.log('[collectAndDownloadAllImagesInContent] Starting image list page collection');
   // 画像一覧ページから画像URLを収集
   while (currentPage <= totalPages) {
     if (isCancelled) {
@@ -491,12 +491,16 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
           total: totalPages,
           pageInfo: { currentPage: currentPage, totalPages: totalPages, imageCount: allImageUrls.size }
         }).catch(() => {});
+        console.log(`[collectAndDownloadAllImagesInContent] Completed page ${currentPage}/${totalPages}, total images so far: ${allImageUrls.size}`);
+      } else {
+        console.log(`[collectAndDownloadAllImagesInContent] Page ${currentPage} failed or no images found`);
       }
     } catch (error) {
       console.error(`Failed to scrape image list page: ${imageUrlListPage}`, error);
     }
     
     currentPage++;
+    console.log(`[collectAndDownloadAllImagesInContent] Moving to page ${currentPage}`);
   }
 
   if (isCancelled) {
@@ -510,21 +514,30 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
   if (imageUrlsArray.length > 0) {
     console.log('[collectAndDownloadAllImagesInContent] Starting download of', imageUrlsArray.length, 'images');
     
-    const downloadedImageData: any = await new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage({
-        action: 'downloadAllImages',
-        imageUrls: imageUrlsArray,
-        totalImages: imageUrlsArray.length
-      }, (response) => {
-        if (chrome.runtime.lastError) {
-          console.error('[collectAndDownloadAllImagesInContent] Chrome runtime error:', chrome.runtime.lastError);
-          reject(new Error(chrome.runtime.lastError.message));
-        } else {
-          console.log('[collectAndDownloadAllImagesInContent] Download response received:', response);
-          resolve(response);
-        }
-      });
-    });
+    console.log('[collectAndDownloadAllImagesInContent] Sending downloadAllImages request to background...');
+    const downloadedImageData: any = await Promise.race([
+      new Promise((resolve, reject) => {
+        chrome.runtime.sendMessage({
+          action: 'downloadAllImages',
+          imageUrls: imageUrlsArray,
+          totalImages: imageUrlsArray.length
+        }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.error('[collectAndDownloadAllImagesInContent] Chrome runtime error:', chrome.runtime.lastError);
+            reject(new Error(chrome.runtime.lastError.message));
+          } else {
+            console.log('[collectAndDownloadAllImagesInContent] Download response received:', response);
+            resolve(response);
+          }
+        });
+      }),
+      new Promise((_, reject) => {
+        setTimeout(() => {
+          console.error('[collectAndDownloadAllImagesInContent] Timeout after 2 minutes');
+          reject(new Error('Image download timeout after 2 minutes'));
+        }, 2 * 60 * 1000); // 2 minutes timeout
+      })
+    ]);
 
     console.log('[collectAndDownloadAllImagesInContent] Await completed, downloadedImageData:', downloadedImageData);
 
@@ -572,7 +585,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
 }
 
 // Handle all articles export from content script
-async function handleAllArticlesExportFromContent(exportDelay: number, isDeveloperMode: boolean, currentLanguage: string): Promise<void> {
+async function handleAllArticlesExportFromContent(exportDelay: number, currentLanguage: string): Promise<void> {
   try {
     // 初期化：前回のデータをクリア
     isCancelled = false;
@@ -634,16 +647,8 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
       return;
     }
 
-    // 4. Apply developer mode limit
-    let processEntries = allEntries;
-    console.log('[handleAllArticlesExportFromContent] allEntries.length:', allEntries.length, 'isDeveloperMode:', isDeveloperMode);
-    if (isDeveloperMode && allEntries.length > 5) {
-      processEntries = allEntries.slice(0, 5);
-      console.log('[handleAllArticlesExportFromContent] Developer mode: limited to 5 entries');
-    }
-
-    // 5. Check if there are any articles to export
-    const displayCount = processEntries.length;
+    // 4. Check if there are any articles to export
+    const displayCount = allEntries.length;
     console.log('[handleAllArticlesExportFromContent] Found', displayCount, 'articles, isOwnBlog:', isOwnBlog);
     
     if (displayCount === 0) {
@@ -662,10 +667,9 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
     // 7. Store entries data for confirmation
     chrome.runtime.sendMessage({
       action: 'setAllEntriesData',
-      entries: processEntries,
+      entries: allEntries,
       isOwnBlog,
       exportDelay,
-      isDeveloperMode,
       currentLanguage
     });
 
@@ -705,7 +709,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       }
       console.log('Proceeding to Phase 1: Article processing');
     } else {
-      console.log('Skipping image list download because isOwnBlog is false');
+      console.log('Skipping image list download (not own blog)');
     }
 
     // Phase 1: Get article details and collect all image URLs
@@ -750,8 +754,10 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     }
 
     // Phase 2: Download additional images not in image list
+    console.log('Starting Phase 2: Additional image download');
     const imageUrlsArray = Array.from(allImageUrls);
     const newImageUrls = imageUrlsArray.filter(url => !imageMap[url]); // 画像一覧からダウンロード済みを除外
+    console.log('Additional images to download:', newImageUrls.length);
     
     if (newImageUrls.length > 0) {
       const downloadedImageData: any = await new Promise((resolve, reject) => {
@@ -768,6 +774,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         });
       });
 
+      console.log('Additional image download completed');
       // Create image map without adding to main ZIP (images will be in separate ZIP)
       if (downloadedImageData?.success && downloadedImageData.images) {
         for (const imageData of downloadedImageData.images) {
@@ -790,6 +797,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     }
 
     // Phase 3: Convert articles to markdown and create final ZIP
+    console.log('Starting Phase 3: Creating main article ZIP...');
     const articleListMarkdown: string[] = [];
     
     for (let i = 0; i < allArticles.length; i++) {
@@ -869,6 +877,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     }
 
     // Notify completion
+    console.log('All phases completed, sending exportComplete message');
     chrome.runtime.sendMessage({ action: 'exportComplete' });
 
   } catch (error) {
@@ -1038,7 +1047,7 @@ chrome.runtime.onMessage.addListener((request: any, _sender: any, sendResponse: 
       return true; // 非同期処理のため
       
     case 'exportAllArticlesFromContent':
-      handleAllArticlesExportFromContent(request.exportDelay, request.isDeveloperMode, request.currentLanguage);
+      handleAllArticlesExportFromContent(request.exportDelay, request.currentLanguage);
       sendResponse({ success: true });
       break;
       
