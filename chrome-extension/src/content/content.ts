@@ -121,6 +121,17 @@ function extractArticleDetails(): any {
         imageUrls.push(imgElement.src);
       }
     });
+    
+    // Extract linked images (a tags with image URLs)
+    const linkElements = doc.querySelectorAll('a[href]');
+    linkElements.forEach(link => {
+      const linkElement = link as HTMLAnchorElement;
+      const href = linkElement.href;
+      // Check if href is an image URL (jpg, png, gif, webp)
+      if (href && /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(href) && !imageUrls.includes(href)) {
+        imageUrls.push(href);
+      }
+    });
   }
 
   // Extract comments
@@ -858,6 +869,18 @@ function processImagesAndConvertToMarkdown(data: any): { success: boolean; markd
         const alt = node.getAttribute('alt') || '';
         const newSrc = imageMap[originalSrc] || originalSrc;
         return `![${alt}](${newSrc})`;
+      }
+    });
+
+    // Configure Turndown with link replacement rule for image links
+    turndownService.addRule('imageLink', {
+      filter: function (node: any) {
+        return node.nodeName === 'A' && node.getAttribute('href') && /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(node.getAttribute('href'));
+      },
+      replacement: function (content: string, node: any) {
+        const originalHref = node.getAttribute('href');
+        const newHref = imageMap[originalHref] || originalHref;
+        return `[${content}](${newHref})`;
       }
     });
 

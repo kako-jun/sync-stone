@@ -438,11 +438,12 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
     // Store images globally for retrieval
     (globalThis as any).downloadedImages = downloadedImages;
     
-    // Send simple completion signal
+    // Send completion signal with images array for compatibility
     sendResponse({
       success: true,
       totalDownloaded: downloadedCount,
-      message: 'Download completed, images stored globally'
+      message: 'Download completed, images stored globally',
+      images: downloadedImages
     });
     console.log('[Background] Response sent successfully');
 
