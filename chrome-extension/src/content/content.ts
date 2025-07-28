@@ -33,9 +33,17 @@ const SELECTORS = {
 // Helper function to extract blog entries
 function extractBlogEntries(): any[] {
   const blogEntries = document.querySelectorAll(SELECTORS.BLOG_ENTRIES);
+  console.log('[extractBlogEntries] Found', blogEntries.length, 'blog entries using selector:', SELECTORS.BLOG_ENTRIES);
+  console.log('[extractBlogEntries] Current URL:', window.location.href);
+  
+  // Extract current character ID from URL
+  const currentCharacterMatch = window.location.href.match(/\/lodestone\/character\/(\d+)\//);
+  const currentCharacterId = currentCharacterMatch ? currentCharacterMatch[1] : null;
+  console.log('[extractBlogEntries] Current character ID:', currentCharacterId);
+  
   const extractedData: any[] = [];
 
-  blogEntries.forEach(entry => {
+  blogEntries.forEach((entry, index) => {
     const urlElement = entry.querySelector(SELECTORS.BLOG_LINK) as HTMLAnchorElement;
     const titleElement = entry.querySelector(SELECTORS.BLOG_TITLE) as HTMLElement;
     const timeElement = entry.querySelector(SELECTORS.BLOG_TIME) as HTMLElement;
@@ -48,7 +56,18 @@ function extractBlogEntries(): any[] {
     const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
     const thumbnail = thumbnailElement?.src || null;
 
-    extractedData.push({ url, title, date, tags, thumbnail });
+    // Check if this entry belongs to the current character
+    const entryCharacterMatch = url.match(/\/lodestone\/character\/(\d+)\//);
+    const entryCharacterId = entryCharacterMatch ? entryCharacterMatch[1] : null;
+    
+    console.log(`[extractBlogEntries] Entry ${index}:`, { url, title, date, entryCharacterId, currentCharacterId });
+    
+    // Only include entries that belong to the current character
+    if (currentCharacterId && entryCharacterId === currentCharacterId) {
+      extractedData.push({ url, title, date, tags, thumbnail });
+    } else {
+      console.log(`[extractBlogEntries] Skipping entry ${index} (different character: ${entryCharacterId} vs ${currentCharacterId})`);
+    }
   });
 
   return extractedData;
@@ -169,7 +188,14 @@ function extractArticleDetails(): any {
 
 // Helper function to detect if it's own blog
 function detectOwnBlog(): boolean {
-  return !document.body.hasAttribute('id') || document.body.id !== 'community';
+  const bodyId = document.body.getAttribute('id');
+  const hasIdAttribute = document.body.hasAttribute('id');
+  console.log('[detectOwnBlog] body.id:', bodyId, 'hasIdAttribute:', hasIdAttribute);
+  console.log('[detectOwnBlog] URL:', window.location.href);
+  
+  const result = !hasIdAttribute || bodyId !== 'community';
+  console.log('[detectOwnBlog] result:', result);
+  return result;
 }
 
 // Show export notification banner
@@ -523,8 +549,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
           const imageData = imageResponse.imageData;
           if (imageData.success && imageData.base64) {
             const imagePath = `images/${imageData.filename}`;
-            const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
-            zip.file(imagePath, base64Data, { base64: true });
+            // Only update imageMap, don't add to main ZIP
             imageMap[imageData.url] = imagePath;
           } else {
             imageMap[imageData.url] = imageData.url;
@@ -611,19 +636,30 @@ async function handleAllArticlesExportFromContent(exportDelay: number, isDevelop
 
     // 4. Apply developer mode limit
     let processEntries = allEntries;
+    console.log('[handleAllArticlesExportFromContent] allEntries.length:', allEntries.length, 'isDeveloperMode:', isDeveloperMode);
     if (isDeveloperMode && allEntries.length > 5) {
       processEntries = allEntries.slice(0, 5);
+      console.log('[handleAllArticlesExportFromContent] Developer mode: limited to 5 entries');
     }
 
-    // 5. Show confirmation dialog
+    // 5. Check if there are any articles to export
     const displayCount = processEntries.length;
+    console.log('[handleAllArticlesExportFromContent] Found', displayCount, 'articles, isOwnBlog:', isOwnBlog);
+    
+    if (displayCount === 0) {
+      // No articles to export
+      sendErrorMessage('エクスポートする記事がありません。');
+      return;
+    }
+
+    // 6. Show confirmation dialog
     chrome.runtime.sendMessage({
       action: 'showExportConfirmation',
       totalArticles: displayCount,
       isOwnBlog
     });
 
-    // 6. Store entries data for confirmation
+    // 7. Store entries data for confirmation
     chrome.runtime.sendMessage({
       action: 'setAllEntriesData',
       entries: processEntries,
@@ -732,16 +768,14 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         });
       });
 
-      // Add downloaded images to ZIP and create image map
+      // Create image map without adding to main ZIP (images will be in separate ZIP)
       if (downloadedImageData?.success && downloadedImageData.images) {
         for (const imageData of downloadedImageData.images) {
           if (isCancelled) break;
           
           if (imageData.success && imageData.base64) {
             const imagePath = `images/${imageData.filename}`;
-            // Convert base64 to blob for JSZip
-            const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
-            zip.file(imagePath, base64Data, { base64: true });
+            // Only update imageMap, don't add to main ZIP
             imageMap[imageData.url] = imagePath;
           } else {
             imageMap[imageData.url] = imageData.url;
@@ -802,9 +836,37 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     const articleListContent = `# Articles Index\n\n${articleListMarkdown.join('\n')}`;
     zip.file('index.md', articleListContent);
 
-    // Download ZIP
+    // Download main ZIP (articles only)
     const filename = isOwnBlog ? 'lodestone_blog_export.zip' : 'lodestone_others_blog_export.zip';
     await downloadZip(zip, filename);
+    
+    // Download separate image ZIP if there are images
+    const imageUrls = Object.keys(imageMap).filter(url => imageMap[url].startsWith('images/'));
+    if (imageUrls.length > 0) {
+      const imageZip = new JSZip();
+      
+      // Add all images to the image ZIP
+      for (const imageUrl of imageUrls) {
+        if (isCancelled) break;
+        
+        const imageResponse: any = await new Promise((resolve) => {
+          chrome.runtime.sendMessage({ 
+            action: 'getDownloadedImage',
+            imageUrl: imageUrl
+          }, resolve);
+        });
+        
+        if (imageResponse?.success && imageResponse.imageData?.base64) {
+          const imagePath = imageMap[imageUrl].replace('images/', ''); // Remove images/ prefix for separate ZIP
+          const base64Data = imageResponse.imageData.base64.split(',')[1];
+          imageZip.file(imagePath, base64Data, { base64: true });
+        }
+      }
+      
+      // Download image ZIP
+      const imageZipFilename = isOwnBlog ? 'lodestone_images.zip' : 'lodestone_others_images.zip';
+      await downloadZip(imageZip, imageZipFilename);
+    }
 
     // Notify completion
     chrome.runtime.sendMessage({ action: 'exportComplete' });
