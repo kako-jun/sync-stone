@@ -393,17 +393,29 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
         });
       });
 
-      // Add downloaded images to ZIP and create image map
-      if (downloadedImageData?.success && downloadedImageData.images) {
-        for (const imageData of downloadedImageData.images) {
-          if (imageData.success && imageData.base64) {
-            const imagePath = `images/${imageData.filename}`;
-            // Convert base64 to blob for JSZip
-            const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
-            zip.file(imagePath, base64Data, { base64: true });
-            imageMap[imageData.url] = imagePath;
+      // Add downloaded images to ZIP using pull-based approach
+      if (downloadedImageData?.success) {
+        for (const imageUrl of allImageUrls) {
+          const imageResponse: any = await new Promise((resolve) => {
+            chrome.runtime.sendMessage({ 
+              action: 'getDownloadedImage',
+              imageUrl: imageUrl
+            }, resolve);
+          });
+          
+          if (imageResponse?.success && imageResponse.imageData) {
+            const imageData = imageResponse.imageData;
+            if (imageData.success && imageData.base64) {
+              const imagePath = `images/${imageData.filename}`;
+              // Convert base64 to blob for JSZip
+              const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
+              zip.file(imagePath, base64Data, { base64: true });
+              imageMap[imageData.url] = imagePath;
+            } else {
+              imageMap[imageData.url] = imageData.url;
+            }
           } else {
-            imageMap[imageData.url] = imageData.url;
+            imageMap[imageData.url] = imageUrl;
           }
         }
       }
@@ -515,6 +527,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
     console.log('[collectAndDownloadAllImagesInContent] Starting download of', imageUrlsArray.length, 'images');
     
     console.log('[collectAndDownloadAllImagesInContent] Sending downloadAllImages request to background...');
+    let timeoutId: NodeJS.Timeout;
     const downloadedImageData: any = await Promise.race([
       new Promise((resolve, reject) => {
         chrome.runtime.sendMessage({
@@ -522,6 +535,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
           imageUrls: imageUrlsArray,
           totalImages: imageUrlsArray.length
         }, (response) => {
+          clearTimeout(timeoutId); // Clear timeout on success
           if (chrome.runtime.lastError) {
             console.error('[collectAndDownloadAllImagesInContent] Chrome runtime error:', chrome.runtime.lastError);
             reject(new Error(chrome.runtime.lastError.message));
@@ -532,10 +546,10 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
         });
       }),
       new Promise((_, reject) => {
-        setTimeout(() => {
-          console.error('[collectAndDownloadAllImagesInContent] Timeout after 2 minutes');
-          reject(new Error('Image download timeout after 2 minutes'));
-        }, 2 * 60 * 1000); // 2 minutes timeout
+        timeoutId = setTimeout(() => {
+          console.error('[collectAndDownloadAllImagesInContent] Timeout after 10 minutes');
+          reject(new Error('Image download timeout after 10 minutes'));
+        }, 10 * 60 * 1000); // 10 minutes timeout
       })
     ]);
 
@@ -760,32 +774,55 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     console.log('Additional images to download:', newImageUrls.length);
     
     if (newImageUrls.length > 0) {
-      const downloadedImageData: any = await new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage({
-          action: 'downloadAllImages',
-          imageUrls: newImageUrls,
-          totalImages: newImageUrls.length
-        }, (response) => {
-          if (chrome.runtime.lastError) {
-            reject(new Error(chrome.runtime.lastError.message));
-          } else {
-            resolve(response);
-          }
-        });
-      });
+      let timeoutId: NodeJS.Timeout;
+      const downloadedImageData: any = await Promise.race([
+        new Promise((resolve, reject) => {
+          chrome.runtime.sendMessage({
+            action: 'downloadAllImages',
+            imageUrls: newImageUrls,
+            totalImages: newImageUrls.length
+          }, (response) => {
+            clearTimeout(timeoutId); // Clear timeout on success
+            if (chrome.runtime.lastError) {
+              reject(new Error(chrome.runtime.lastError.message));
+            } else {
+              resolve(response);
+            }
+          });
+        }),
+        new Promise((_, reject) => {
+          timeoutId = setTimeout(() => {
+            console.error('[processAllArticlesFromContent] Additional image download timeout after 2 minutes');
+            reject(new Error('Additional image download timeout after 2 minutes'));
+          }, 2 * 60 * 1000);
+        })
+      ]);
 
       console.log('Additional image download completed');
+      console.log('downloadedImageData:', downloadedImageData);
       // Create image map without adding to main ZIP (images will be in separate ZIP)
-      if (downloadedImageData?.success && downloadedImageData.images) {
-        for (const imageData of downloadedImageData.images) {
+      if (downloadedImageData?.success) {
+        for (const imageUrl of newImageUrls) {
           if (isCancelled) break;
           
-          if (imageData.success && imageData.base64) {
-            const imagePath = `images/${imageData.filename}`;
-            // Only update imageMap, don't add to main ZIP
-            imageMap[imageData.url] = imagePath;
+          const imageResponse: any = await new Promise((resolve) => {
+            chrome.runtime.sendMessage({ 
+              action: 'getDownloadedImage',
+              imageUrl: imageUrl
+            }, resolve);
+          });
+          
+          if (imageResponse?.success && imageResponse.imageData) {
+            const imageData = imageResponse.imageData;
+            if (imageData.success && imageData.base64) {
+              const imagePath = `images/${imageData.filename}`;
+              // Only update imageMap, don't add to main ZIP
+              imageMap[imageData.url] = imagePath;
+            } else {
+              imageMap[imageData.url] = imageData.url;
+            }
           } else {
-            imageMap[imageData.url] = imageData.url;
+            imageMap[imageUrl] = imageUrl;
           }
         }
       }
