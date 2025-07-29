@@ -815,7 +815,8 @@ async function handleAllArticlesExportFromContent(exportDelay: number, currentLa
 // Process all articles after confirmation
 async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean, exportDelay: number, currentLanguage: string): Promise<void> {
   try {
-    console.log('processAllArticlesFromContent called with:', {
+    console.log('[EXPORT-LOG] ========== START FULL EXPORT ==========');
+    console.log('[EXPORT-LOG] Export configuration:', {
       entriesLength: entries.length, 
       isOwnBlog: isOwnBlog, 
       exportDelay: exportDelay
@@ -831,42 +832,58 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     isCancelled = false;
 
     // Phase 0: Download images from image list pages (自分のブログの場合のみ)
-    console.log('processAllArticlesFromContent - isOwnBlog:', isOwnBlog);
+    console.log('[EXPORT-LOG] Phase 0: Image list download check (isOwnBlog:', isOwnBlog, ')');
     if (isOwnBlog) {
-      console.log('Starting image list download...');
+      console.log('[EXPORT-LOG] Starting Phase 0: Image list download...');
       imageMap = await collectAndDownloadAllImagesInContent(exportDelay);
-      console.log('Image list download completed, imageMap:', Object.keys(imageMap).length, 'images');
+      console.log('[EXPORT-LOG] Phase 0 completed: Image list download finished with', Object.keys(imageMap).length, 'images');
       
       if (isCancelled) {
-        console.log('Cancelled during image list download');
+        console.log('[EXPORT-LOG] Phase 0 cancelled: Image list download interrupted');
         return;
       }
-      console.log('Proceeding to Phase 1: Article processing');
+      console.log('[EXPORT-LOG] Proceeding to Phase 1: Article processing');
     } else {
-      console.log('Skipping image list download (not own blog)');
+      console.log('[EXPORT-LOG] Phase 0 skipped: Image list download not needed (not own blog)');
     }
 
     // Phase 1: Get article details and collect all image URLs
-    console.log('Starting Phase 1: Processing', entries.length, 'articles');
+    console.log('[EXPORT-LOG] Starting Phase 1: Processing', entries.length, 'articles');
     for (let i = 0; i < entries.length; i++) {
       // Check for cancellation before each article
       if (isCancelled) {
-        console.log('Cancelled during article processing at article', i);
+        console.log('[EXPORT-LOG] Phase 1 cancelled: Article processing interrupted at article', i + 1, '/', entries.length);
         return;
       }
       
       const entry = entries[i];
       
       try {
+        console.log(`[EXPORT-LOG] Processing article ${i + 1}/${entries.length}: ${entry.title || 'Unknown Title'}`);
         const articleDetails = await fetchArticleDetails(entry.url, exportDelay);
         allArticles.push(articleDetails);
         
-        // Collect all image URLs
+        // Collect all image URLs and log detection
+        let articleImageCount = 0;
         if (articleDetails.imageUrls) {
-          articleDetails.imageUrls.forEach((url: string) => allImageUrls.add(url));
+          const newImages = articleDetails.imageUrls.filter((url: string) => !allImageUrls.has(url));
+          newImages.forEach((url: string) => allImageUrls.add(url));
+          articleImageCount += newImages.length;
+          if (newImages.length > 0) {
+            console.log(`[EXPORT-LOG] Article ${i + 1}: Detected ${newImages.length} new image URLs in article content`);
+          }
         }
         if (articleDetails.thumbnailUrls) {
-          articleDetails.thumbnailUrls.forEach((url: string) => allImageUrls.add(url));
+          const newThumbnails = articleDetails.thumbnailUrls.filter((url: string) => !allImageUrls.has(url));
+          newThumbnails.forEach((url: string) => allImageUrls.add(url));
+          articleImageCount += newThumbnails.length;
+          if (newThumbnails.length > 0) {
+            console.log(`[EXPORT-LOG] Article ${i + 1}: Detected ${newThumbnails.length} new thumbnail URLs`);
+          }
+        }
+        
+        if (articleImageCount > 0) {
+          console.log(`[EXPORT-LOG] Article ${i + 1}: Total ${articleImageCount} new images detected, running total: ${allImageUrls.size} unique images`);
         }
 
         // Update article details collection progress
@@ -888,10 +905,13 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     }
 
     // Phase 2: Download additional images not in image list
-    console.log('Starting Phase 2: Additional image download');
+    console.log('[EXPORT-LOG] Starting Phase 2: Additional image download from articles');
     const imageUrlsArray = Array.from(allImageUrls);
     const newImageUrls = imageUrlsArray.filter(url => !imageMap[url]); // 画像一覧からダウンロード済みを除外
-    console.log('Additional images to download:', newImageUrls.length);
+    console.log('[EXPORT-LOG] Phase 2: Article image analysis complete');
+    console.log('[EXPORT-LOG] Phase 2: Total unique images found in articles:', imageUrlsArray.length);
+    console.log('[EXPORT-LOG] Phase 2: Already downloaded from image list:', imageUrlsArray.length - newImageUrls.length);
+    console.log('[EXPORT-LOG] Phase 2: Additional images to download:', newImageUrls.length);
     
     if (newImageUrls.length > 0) {
       let timeoutId: NodeJS.Timeout;
@@ -912,17 +932,22 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         }),
         new Promise((_, reject) => {
           timeoutId = setTimeout(() => {
-            console.error('[processAllArticlesFromContent] Additional image download timeout after 2 minutes');
+            console.error('[EXPORT-LOG] Phase 2 timeout: Additional image download failed after 2 minutes');
             reject(new Error('Additional image download timeout after 2 minutes'));
           }, 2 * 60 * 1000);
         })
       ]);
 
-      console.log('Additional image download completed');
-      console.log('downloadedImageData:', downloadedImageData);
+      console.log('[EXPORT-LOG] Phase 2 completed: Additional image download finished');
+      console.log('[EXPORT-LOG] Phase 2 download response:', downloadedImageData?.success ? 'SUCCESS' : 'FAILED');
       // Create image map without adding to main ZIP (images will be in separate ZIP)
       if (downloadedImageData?.success) {
-        for (const imageUrl of newImageUrls) {
+        console.log('[EXPORT-LOG] Phase 2: Processing', newImageUrls.length, 'additional downloaded images');
+        let phase2SuccessCount = 0;
+        let phase2FailCount = 0;
+        
+        for (let i = 0; i < newImageUrls.length; i++) {
+          const imageUrl = newImageUrls[i];
           if (isCancelled) break;
           
           const imageResponse: any = await new Promise((resolve) => {
@@ -938,13 +963,19 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
               const imagePath = `images/${imageData.filename}`;
               // Only update imageMap, don't add to main ZIP
               imageMap[imageData.url] = imagePath;
+              phase2SuccessCount++;
             } else {
               imageMap[imageData.url] = imageData.url;
+              phase2FailCount++;
             }
           } else {
             imageMap[imageUrl] = imageUrl;
+            phase2FailCount++;
           }
         }
+        
+        console.log('[EXPORT-LOG] Phase 2: Image processing complete -', phase2SuccessCount, 'success,', phase2FailCount, 'failed');
+        console.log('[EXPORT-LOG] Phase 2: Total images in imageMap:', Object.keys(imageMap).length);
       }
     }
 
@@ -954,7 +985,8 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     }
 
     // Phase 3: Convert articles to markdown and prepare for unified ZIP creation
-    console.log('Starting Phase 3: Processing articles for unified ZIP...');
+    console.log('[EXPORT-LOG] Starting Phase 3: Converting articles to Markdown for unified ZIP creation');
+    console.log('[EXPORT-LOG] Phase 3: Processing', allArticles.length, 'articles with', Object.keys(imageMap).length, 'total images');
     const articleListMarkdown: string[] = [];
     const processedArticles: Array<{sanitizedTitle: string, markdownContent: string}> = [];
     
@@ -1108,7 +1140,8 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     await downloadStreamingZip(zipBlob, filename);
 
     // Notify completion
-    console.log('All phases completed, sending exportComplete message');
+    console.log('[EXPORT-LOG] ========== FULL EXPORT COMPLETE ==========');
+    console.log('[EXPORT-LOG] Export summary: All phases completed successfully');
     chrome.runtime.sendMessage({ action: 'exportComplete' });
     
     // Delete entire database after successful export
