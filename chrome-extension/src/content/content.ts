@@ -7,6 +7,7 @@ const turndownService = new TurndownService();
 // JSZip import for content script
 import JSZip from 'jszip';
 
+
 // Global cancellation flag
 let isCancelled = false;
 
@@ -425,7 +426,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
               imageMap[imageData.url] = imageData.url;
             }
           } else {
-            imageMap[imageData.url] = imageUrl;
+            imageMap[imageUrl] = imageUrl;
           }
         }
       }
@@ -890,6 +891,9 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     // Add article index
     const articleListContent = `# Articles Index\n\n${articleListMarkdown.join('\n')}`;
     zip.file('index.md', articleListContent);
+    
+    // Add empty images folder to the main ZIP for easy merging
+    zip.folder('images');
 
     // Download main ZIP (articles only)
     const filename = isOwnBlog ? 'lodestone_blog_export.zip' : 'lodestone_others_blog_export.zip';
@@ -912,7 +916,8 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         });
         
         if (imageResponse?.success && imageResponse.imageData?.base64) {
-          const imagePath = imageMap[imageUrl].replace('images/', ''); // Remove images/ prefix for separate ZIP
+          // Keep the images/ prefix for proper folder structure
+          const imagePath = imageMap[imageUrl];
           const base64Data = imageResponse.imageData.base64.split(',')[1];
           imageZip.file(imagePath, base64Data, { base64: true });
         }
