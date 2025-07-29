@@ -8,7 +8,7 @@
     "description": "Description of the extension."
   },
   "exportAllArticlesButton": {
-    "message": "Export All Articles",
+    "message": "☄ Export All Articles",
     "description": "Text for the button to export all articles."
   },
   "exportAllArticlesButtonFirstPage": {
@@ -16,7 +16,7 @@
     "description": "Text for the export all articles button from other pages"
   },
   "exportCurrentArticleButton": {
-    "message": "Export Current Article",
+    "message": "☄ Export Current Article",
     "description": "Text for the button to export the current article."
   },
   "accessIntervalLabel": {
@@ -36,8 +36,8 @@
     "description": "Text for the No button in confirmation dialog."
   },
   "downloadingImages": {
-    "message": "Downloading Images",
-    "description": "Progress text when downloading images."
+    "message": "Exporting Images",
+    "description": "Progress text when exporting images."
   },
   "exportingArticles": {
     "message": "Exporting Articles",
@@ -72,11 +72,15 @@
     "description": "Text for cancel export button"
   },
   "imageDownloadHeader": {
-    "message": "📸 Image Export",
+    "message": "🖼️ Image Export",
     "description": "Header text for image download progress"
   },
   "articleProcessHeader": {
     "message": "📝 Article Export",
     "description": "Header text for article processing progress"
+  },
+  "doNotClosePopup": {
+    "message": "⚠️ Export in progress. Please keep this popup open and wait.",
+    "description": "Warning message asking users not to close the popup during export"
   }
 }

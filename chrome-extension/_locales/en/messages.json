@@ -32,8 +32,8 @@
     "description": "Text for the No button in confirmation dialog."
   },
   "downloadingImages": {
-    "message": "Downloading Images",
-    "description": "Progress text when downloading images."
+    "message": "Exporting Images",
+    "description": "Progress text when exporting images."
   },
   "exportingArticles": {
     "message": "Exporting Articles",

@@ -6,8 +6,10 @@
   <style>
     body {
       font-family: sans-serif;
-      width: 400px;
+      width: 450px;
       padding: 10px;
+      background: linear-gradient(135deg, #4a7bbb 0%, #6b9bd1 50%, #87b5e5 100%);
+      color: #ffffff;
     }
     button {
       width: 100%;
@@ -15,13 +17,23 @@
       font-size: 16px;
       cursor: pointer;
       margin-bottom: 5px;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #2a4a7b;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     #confirmationDialog {
       display: none;
       margin-top: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       padding: 10px;
-      background-color: #f9f9f9;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
       border-radius: 6px;
     }
   </style>
@@ -30,10 +42,10 @@
   <h1 id="extensionTitle">__MSG_extensionName__</h1>
   <p id="extensionDescription">__MSG_lodestoneExportDescription__</p>
   <!-- Settings Section -->
-  <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; background-color: #f9f9f9;">
+  <div id="settingsContainer" style="margin-bottom: 15px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
     <div>
-      <label for="delayInput" id="accessIntervalLabel">__MSG_accessIntervalLabel__</label>
-      <input type="number" id="delayInput" value="2000" min="2000" max="10000" style="width: 70px;">
+      <label for="delayInput" id="accessIntervalLabel" style="color: #ffffff; margin-right: 5px;">__MSG_accessIntervalLabel__</label>
+      <input type="number" id="delayInput" value="2000" min="2000" max="10000" style="width: 70px; background-color: rgba(255, 255, 255, 0.8); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 2px 5px;">
       <span id="delayUnit">ms</span>
     </div>
     
@@ -51,7 +63,7 @@
   <button id="exportCurrentArticleButton">__MSG_exportCurrentArticleButton__</button>
   
   <!-- Article Info Display -->
-  <div id="articleInfoContainer" style="display: none; margin-top: 10px; padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+  <div id="articleInfoContainer" style="display: none; margin-top: 10px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.3); background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
     <h3 style="margin: 0 0 5px 0; font-size: 14px;">Article Info</h3>
     <p id="articleTitle" style="margin: 2px 0; font-weight: bold; font-size: 12px;"></p>
     <p id="articleStats" style="margin: 2px 0; font-size: 11px; color: #666;"></p>
@@ -70,26 +82,26 @@
     <!-- Image Download Progress -->
     <div id="imageProgressContainer" style="display: none; margin-bottom: 15px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-        <div id="imageProgressHeader" style="font-size: 14px; font-weight: bold; color: #333;">
+        <div id="imageProgressHeader" style="font-size: 14px; font-weight: bold; color: #ffffff;">
           __MSG_imageDownloadHeader__
         </div>
       </div>
-      <div id="imageProgressText" style="font-size: 12px; margin-bottom: 5px; color: #666;"></div>
-      <div style="width: 100%; background-color: #ddd; border-radius: 4px; overflow: hidden;">
-        <div id="imageProgressBar" style="width: 0%; height: 20px; background-color: #4CAF50; text-align: center; line-height: 20px; color: white; font-size: 11px; transition: width 0.3s ease;"></div>
+      <div id="imageProgressText" style="font-size: 12px; margin-bottom: 5px; color: #e0e0e0;"></div>
+      <div style="width: 100%; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden;">
+        <div id="imageProgressBar" style="width: 0%; height: 20px; background-color: #81c784; text-align: center; line-height: 20px; color: white; font-size: 11px; transition: width 0.3s ease;"></div>
       </div>
     </div>
 
     <!-- Article Processing Progress -->
     <div id="articleProgressContainer" style="display: none; margin-bottom: 15px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-        <div id="articleProgressHeader" style="font-size: 14px; font-weight: bold; color: #333;">
+        <div id="articleProgressHeader" style="font-size: 14px; font-weight: bold; color: #ffffff;">
           __MSG_articleProcessHeader__
         </div>
       </div>
-      <div id="articleProgressText" style="font-size: 12px; margin-bottom: 5px; color: #666;"></div>
-      <div style="width: 100%; background-color: #ddd; border-radius: 4px; overflow: hidden;">
-        <div id="articleProgressBar" style="width: 0%; height: 20px; background-color: #4CAF50; text-align: center; line-height: 20px; color: white; font-size: 11px; transition: width 0.3s ease;"></div>
+      <div id="articleProgressText" style="font-size: 12px; margin-bottom: 5px; color: #e0e0e0;"></div>
+      <div style="width: 100%; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden;">
+        <div id="articleProgressBar" style="width: 0%; height: 20px; background-color: #81c784; text-align: center; line-height: 20px; color: white; font-size: 11px; transition: width 0.3s ease;"></div>
       </div>
     </div>
 
@@ -97,13 +109,13 @@
 
   <!-- Status Message Display -->
   <div id="statusContainer" style="margin-top: 15px;">
-    <div id="statusMessage" style="padding: 10px; border-radius: 6px; font-size: 13px; display: none; font-weight: bold;"></div>
+    <div id="statusMessage" style="padding: 10px; border-radius: 6px; font-size: 13px; display: none; font-weight: bold; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);"></div>
   </div>
 
   <!-- Export Control Area (when exporting) - bottom -->
   <div id="exportControlContainer" style="display: none; margin-top: 15px; text-align: center;">
     <button id="cancelExportButton" style="
-      background-color: #f44336; 
+      background-color: #d32f2f; 
       color: white; 
       border: none; 
       padding: 8px 16px; 
@@ -115,6 +127,11 @@
     ">
       __MSG_cancelExport__
     </button>
+  </div>
+
+  <!-- Export Warning Message -->
+  <div id="exportWarningContainer" style="display: none; margin-top: 15px; text-align: center;">
+    <div id="exportWarningText" style="color: #ffffff; font-size: 13px; font-weight: bold;"></div>
   </div>
 
   <script src="popup.js"></script>
