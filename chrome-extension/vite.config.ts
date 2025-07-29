@@ -36,6 +36,8 @@ export default defineConfig({
         
         // Copy Turndown library for content script
         copyFileSync('node_modules/turndown/lib/turndown.browser.umd.js', 'dist/turndown.browser.es.js');
+        // Copy zip.js library for content script
+        copyFileSync('src/zip.js', 'dist/zip.min.js');
       }
     }
   ]

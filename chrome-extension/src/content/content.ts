@@ -4,12 +4,40 @@
 declare const TurndownService: any;
 const turndownService = new TurndownService();
 
-// JSZip import for content script
-import JSZip from 'jszip';
+// zip.js UMD version is loaded via manifest.json
+declare const zip: any;
 
 // IndexedDB utilities (inline for content script)
 const DB_NAME = 'SyncStoneDB';
 const DB_VERSION = 1;
+
+// Utility function to convert base64 to Uint8Array for zip.js
+function base64ToUint8Array(base64String: string): Uint8Array {
+  // Remove data URL prefix if present
+  const base64Data = base64String.includes(',') ? base64String.split(',')[1] : base64String;
+  const binaryString = atob(base64Data);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes;
+}
+
+// Download ZIP file using streaming
+async function downloadStreamingZip(zipBlob: Blob, filename: string): Promise<void> {
+  console.log(`[STREAMING-ZIP] Downloading ZIP file: ${filename} (${Math.round(zipBlob.size / 1024 / 1024)}MB)`);
+  
+  const url = URL.createObjectURL(zipBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  console.log(`[STREAMING-ZIP] ZIP download completed: ${filename}`);
+}
 
 async function deleteDatabase(): Promise<void> {
   console.log('[IndexedDB] Deleting entire database');
@@ -378,26 +406,7 @@ function sanitizeFilename(filename: string, maxLength = 50): string {
     .substring(0, maxLength);
 }
 
-// Download ZIP using <a> tag download
-function downloadZip(zip: JSZip, filename: string): Promise<void> {
-  return new Promise(async (resolve) => {
-    const content = await zip.generateAsync({
-      type: 'base64',
-      compression: 'DEFLATE',
-      compressionOptions: { level: 6 }
-    });
-
-    const dataUrl = 'data:application/zip;base64,' + content;
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    link.download = filename;
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    resolve();
-  });
-}
+// Legacy JSZip download function - removed in favor of streaming download
 
 // Handle single article export in content script
 async function handleSingleArticleExportInContent(sendResponse: (response: any) => void): Promise<void> {
@@ -409,7 +418,6 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
       throw new Error('記事データを取得できませんでした');
     }
     
-    const zip = new JSZip();
     const imageMap: { [key: string]: string } = {};
 
     // Download images via background script (remove duplicates)
@@ -445,9 +453,6 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
             const imageData = imageResponse.imageData;
             if (imageData.success && imageData.base64) {
               const imagePath = `images/${imageData.filename}`;
-              // Convert base64 to blob for JSZip
-              const base64Data = imageData.base64.split(',')[1]; // Remove data:image/...;base64, prefix
-              zip.file(imagePath, base64Data, { base64: true });
               imageMap[imageData.url] = imagePath;
             } else {
               imageMap[imageData.url] = imageData.url;
@@ -485,11 +490,36 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
       throw new Error('Markdownへの変換に失敗しました');
     }
 
-    // Create ZIP file
+    // Create single article ZIP using zip.js streaming
     const sanitizedTitle = sanitizeFilename(articleDetails.title);
-    zip.file(`${sanitizedTitle}.md`, markdownResult.markdown);
-
-    await downloadZip(zip, `${sanitizedTitle}.zip`);
+    const zipWriter = new zip.ZipWriter(new zip.BlobWriter());
+    
+    // Add markdown file
+    await zipWriter.add(`${sanitizedTitle}.md`, new zip.TextReader(markdownResult.markdown));
+    
+    // Add all images to ZIP using streaming
+    const imageUrls = Object.keys(imageMap).filter(url => imageMap[url].startsWith('images/'));
+    for (const imageUrl of imageUrls) {
+      const imageResponse: any = await new Promise((resolve) => {
+        chrome.runtime.sendMessage({ 
+          action: 'getDownloadedImage',
+          imageUrl: imageUrl
+        }, resolve);
+      });
+      
+      if (imageResponse?.success && imageResponse.imageData?.base64) {
+        const imagePath = imageMap[imageUrl];
+        try {
+          const imageBytes = base64ToUint8Array(imageResponse.imageData.base64);
+          await zipWriter.add(imagePath, new zip.Uint8ArrayReader(imageBytes));
+        } catch (error) {
+          console.error(`Failed to add image to single article ZIP:`, error);
+        }
+      }
+    }
+    
+    const zipBlob = await zipWriter.close();
+    await downloadStreamingZip(zipBlob, `${sanitizedTitle}.zip`);
 
     sendResponse({ success: true, message: '記事がエクスポートされました！' });
   } catch (error) {
@@ -501,7 +531,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
 }
 
 // Collect and download all images from image list pages
-async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JSZip): Promise<{ [key: string]: string }> {
+async function collectAndDownloadAllImagesInContent(exportDelay: number): Promise<{ [key: string]: string }> {
   console.log('[collectAndDownloadAllImagesInContent] Function started');
   
   // 初期化：前回のデータをクリア
@@ -793,7 +823,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     
     // 初期化：前回のデータをクリア
     const allArticles: any[] = [];
-    const zip = new JSZip();
+    // Remove JSZip initialization - using zip.js streaming instead
     let imageMap: { [key: string]: string } = {};
     const allImageUrls = new Set<string>();
     
@@ -804,7 +834,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     console.log('processAllArticlesFromContent - isOwnBlog:', isOwnBlog);
     if (isOwnBlog) {
       console.log('Starting image list download...');
-      imageMap = await collectAndDownloadAllImagesInContent(exportDelay, zip);
+      imageMap = await collectAndDownloadAllImagesInContent(exportDelay);
       console.log('Image list download completed, imageMap:', Object.keys(imageMap).length, 'images');
       
       if (isCancelled) {
@@ -923,9 +953,10 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       return;
     }
 
-    // Phase 3: Convert articles to markdown and create final ZIP
-    console.log('Starting Phase 3: Creating main article ZIP...');
+    // Phase 3: Convert articles to markdown and prepare for unified ZIP creation
+    console.log('Starting Phase 3: Processing articles for unified ZIP...');
     const articleListMarkdown: string[] = [];
+    const processedArticles: Array<{sanitizedTitle: string, markdownContent: string}> = [];
     
     for (let i = 0; i < allArticles.length; i++) {
       if (isCancelled) return;
@@ -949,7 +980,11 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
           const sanitizedTitle = sanitizeFilename(article.title);
           const filename = `${sanitizedTitle}.md`;
           
-          zip.file(filename, markdownResult.markdown);
+          // Store processed article for zip.js streaming
+          processedArticles.push({
+            sanitizedTitle,
+            markdownContent: markdownResult.markdown
+          });
           articleListMarkdown.push(`- [${article.title}](${filename})`);
         }
 
@@ -967,42 +1002,47 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       }
     }
 
+    // Create unified ZIP with articles and images using zip.js streaming
+    console.log('[STREAMING-ZIP] ========== START UNIFIED ZIP CREATION ==========');
+    const zipWriter = new zip.ZipWriter(new zip.BlobWriter());
+    
+    // Add all articles to ZIP
+    console.log('[STREAMING-ZIP] Adding articles to ZIP...');
+    for (let i = 0; i < processedArticles.length; i++) {
+      const article = processedArticles[i];
+      const articleFilename = `${String(i + 1).padStart(3, '0')}_${article.sanitizedTitle}.md`;
+      
+      console.log(`[STREAMING-ZIP] Adding article ${i + 1}/${processedArticles.length}: ${articleFilename}`);
+      await zipWriter.add(articleFilename, new zip.TextReader(article.markdownContent));
+    }
+    
     // Add article index
     const articleListContent = `# Articles Index\n\n${articleListMarkdown.join('\n')}`;
-    zip.file('index.md', articleListContent);
+    console.log('[STREAMING-ZIP] Adding article index...');
+    await zipWriter.add('index.md', new zip.TextReader(articleListContent));
     
-    // Add empty images folder to the main ZIP for easy merging
-    zip.folder('images');
-
-    // Download main ZIP (articles only)
-    const filename = isOwnBlog ? 'lodestone_blog_export.zip' : 'lodestone_others_blog_export.zip';
-    await downloadZip(zip, filename);
-    
-    // Download separate image ZIP if there are images
+    // Add all images to ZIP using streaming
     const imageUrls = Object.keys(imageMap).filter(url => imageMap[url].startsWith('images/'));
-    console.log('[ZIP-LOG] ========== START IMAGE ZIP CREATION ==========');
-    console.log('[ZIP-LOG] Total imageMap entries:', Object.keys(imageMap).length);
-    console.log('[ZIP-LOG] Image URLs for ZIP creation:', imageUrls.length);
-    console.log('[ZIP-LOG] Sample image URLs (first 5):', imageUrls.slice(0, 5));
+    console.log('[STREAMING-ZIP] Total imageMap entries:', Object.keys(imageMap).length);
+    console.log('[STREAMING-ZIP] Image URLs for ZIP creation:', imageUrls.length);
+    console.log('[STREAMING-ZIP] Sample image URLs (first 5):', imageUrls.slice(0, 5));
     
     if (imageUrls.length > 0) {
-      const imageZip = new JSZip();
       let zipSuccessCount = 0;
       let zipFailCount = 0;
       const zipFailedUrls: string[] = [];
       
-      console.log('[ZIP-LOG] Starting to add images to ZIP...');
+      console.log('[STREAMING-ZIP] Starting to add images to ZIP...');
       
-      // Add all images to the image ZIP
       for (let i = 0; i < imageUrls.length; i++) {
         const imageUrl = imageUrls[i];
         
         if (isCancelled) {
-          console.log('[ZIP-LOG] Cancelled during ZIP creation at', i + 1, '/', imageUrls.length);
+          console.log('[STREAMING-ZIP] Cancelled during ZIP creation at', i + 1, '/', imageUrls.length);
           break;
         }
         
-        console.log(`[ZIP-LOG] Adding image ${i + 1}/${imageUrls.length} to ZIP: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+        console.log(`[STREAMING-ZIP] Adding image ${i + 1}/${imageUrls.length} to ZIP: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
         
         const imageResponse: any = await new Promise((resolve) => {
           chrome.runtime.sendMessage({ 
@@ -1011,7 +1051,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
           }, resolve);
         });
         
-        console.log(`[ZIP-LOG] Image ${i + 1} response:`, {
+        console.log(`[STREAMING-ZIP] Image ${i + 1} response:`, {
           success: imageResponse?.success,
           hasImageData: !!imageResponse?.imageData,
           hasBase64: !!imageResponse?.imageData?.base64,
@@ -1020,54 +1060,52 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         });
         
         if (imageResponse?.success && imageResponse.imageData?.base64) {
-          // Keep the images/ prefix for proper folder structure
           const imagePath = imageMap[imageUrl];
-          const base64Data = imageResponse.imageData.base64.split(',')[1];
           
           try {
-            imageZip.file(imagePath, base64Data, { base64: true });
+            // Convert base64 to Uint8Array for zip.js
+            const imageBytes = base64ToUint8Array(imageResponse.imageData.base64);
+            await zipWriter.add(imagePath, new zip.Uint8ArrayReader(imageBytes));
+            
             zipSuccessCount++;
-            console.log(`[ZIP-LOG] Successfully added image ${i + 1} to ZIP: ${imagePath} (${Math.round(base64Data.length/1024)}KB)`);
+            console.log(`[STREAMING-ZIP] Successfully added image ${i + 1} to ZIP: ${imagePath} (${Math.round(imageBytes.length/1024)}KB)`);
           } catch (error) {
             zipFailCount++;
             zipFailedUrls.push(imageUrl);
-            console.error(`[ZIP-LOG] Failed to add image ${i + 1} to ZIP:`, error);
+            console.error(`[STREAMING-ZIP] Failed to add image ${i + 1} to ZIP:`, error);
           }
         } else {
           zipFailCount++;
           zipFailedUrls.push(imageUrl);
-          console.log(`[ZIP-LOG] Skipping image ${i + 1} - no valid data`);
+          console.log(`[STREAMING-ZIP] Skipping image ${i + 1} - no valid data`);
         }
         
         if ((i + 1) % 20 === 0) {
-          console.log(`[ZIP-LOG] ZIP progress: ${i + 1}/${imageUrls.length} (${Math.round((i+1)/imageUrls.length*100)}%)`);
-          console.log(`[ZIP-LOG] Added to ZIP: ${zipSuccessCount}, Failed: ${zipFailCount}`);
+          console.log(`[STREAMING-ZIP] ZIP progress: ${i + 1}/${imageUrls.length} (${Math.round((i+1)/imageUrls.length*100)}%)`);
+          console.log(`[STREAMING-ZIP] Added to ZIP: ${zipSuccessCount}, Failed: ${zipFailCount}`);
         }
       }
       
-      console.log('[ZIP-LOG] ========== IMAGE ZIP CREATION COMPLETE ==========');
-      console.log(`[ZIP-LOG] Total images to add: ${imageUrls.length}`);
-      console.log(`[ZIP-LOG] Successfully added to ZIP: ${zipSuccessCount}`);
-      console.log(`[ZIP-LOG] Failed to add to ZIP: ${zipFailCount}`);
-      console.log(`[ZIP-LOG] ZIP success rate: ${Math.round(zipSuccessCount/imageUrls.length*100)}%`);
+      console.log('[STREAMING-ZIP] ========== IMAGE ADDITION COMPLETE ==========');
+      console.log(`[STREAMING-ZIP] Total images to add: ${imageUrls.length}`);
+      console.log(`[STREAMING-ZIP] Successfully added to ZIP: ${zipSuccessCount}`);
+      console.log(`[STREAMING-ZIP] Failed to add to ZIP: ${zipFailCount}`);
+      console.log(`[STREAMING-ZIP] ZIP success rate: ${Math.round(zipSuccessCount/imageUrls.length*100)}%`);
       
       if (zipFailedUrls.length > 0) {
-        console.log('[ZIP-LOG] Failed ZIP URLs (first 10):', zipFailedUrls.slice(0, 10));
+        console.log('[STREAMING-ZIP] Failed ZIP URLs (first 10):', zipFailedUrls.slice(0, 10));
       }
-      
-      // Check actual ZIP contents
-      const zipFiles = Object.keys(imageZip.files);
-      console.log(`[ZIP-LOG] Final ZIP file count: ${zipFiles.length}`);
-      console.log(`[ZIP-LOG] ZIP files (first 10):`, zipFiles.slice(0, 10));
-      
-      // Download image ZIP
-      const imageZipFilename = isOwnBlog ? 'lodestone_images.zip' : 'lodestone_others_images.zip';
-      console.log(`[ZIP-LOG] Downloading ZIP file: ${imageZipFilename}`);
-      await downloadZip(imageZip, imageZipFilename);
-      console.log(`[ZIP-LOG] ZIP download completed: ${imageZipFilename}`);
     } else {
-      console.log('[ZIP-LOG] No images to add to ZIP');
+      console.log('[STREAMING-ZIP] No images to add to ZIP');
     }
+    
+    // Generate final ZIP blob
+    console.log('[STREAMING-ZIP] Generating final ZIP blob...');
+    const zipBlob = await zipWriter.close();
+    
+    // Download unified ZIP
+    const filename = isOwnBlog ? 'lodestone_complete_export.zip' : 'lodestone_others_complete_export.zip';
+    await downloadStreamingZip(zipBlob, filename);
 
     // Notify completion
     console.log('All phases completed, sending exportComplete message');

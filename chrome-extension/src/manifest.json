@@ -24,7 +24,7 @@
         "https://jp.finalfantasyxiv.com/lodestone/character/*/blog/*",
         "https://jp.finalfantasyxiv.com/lodestone/my/image/*"
       ],
-      "js": ["turndown.browser.es.js", "content.js"]
+      "js": ["turndown.browser.es.js", "zip.min.js", "content.js"]
     }
   ],
   "action": {
