@@ -111,7 +111,6 @@ Il est recommandé d'ouvrir les fichiers Markdown exportés avec un éditeur de 
 
 *   **Développé en TypeScript**: Développé en TypeScript pour améliorer la maintenabilité du code et la sécurité des types.
 *   **Compatible Chrome Extension Manifest V3**: Entièrement compatible avec les derniers standards d'extension Chrome.
-*   **Architecture orientée services**: Conception modulaire séparée en classes de services individuelles telles que LodestoneAPI, ImageProcessor et MarkdownConverter.
 *   **Système de construction**: Utilise Vite pour un développement rapide et des constructions de production.
 *   **Gestion dynamique des délais d'attente**: Tous les délais d'attente sont calculés dynamiquement en fonction des paramètres d'intervalle d'accès de l'utilisateur, garantissant un comportement cohérent.
 *   **Stockage IndexedDB**: Utilise IndexedDB pour une gestion efficace des données d'images, évitant les limitations mémoire du Chrome Service Worker.

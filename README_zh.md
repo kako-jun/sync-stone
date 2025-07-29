@@ -96,7 +96,6 @@ SyncStone 也可以使用相同的程序导出其他玩家的日记条目。这�
 
 *   **使用 TypeScript 开发**: 使用 TypeScript 开发，以提高代码可维护性和类型安全性。
 *   **Chrome Extension Manifest V3 兼容**: 完全兼容最新的 Chrome 扩展程序标准。
-*   **服务导向架构**: 模块化设计，分离为单独的服务类，如 LodestoneAPI、ImageProcessor 和 MarkdownConverter。
 *   **构建系统**: 使用 Vite 进行快速开发和生产构建。
 *   **动态超时管理**: 所有超时都根据用户的访问间隔设置动态计算，确保一致的行为。
 *   **IndexedDB 存储**: 使用 IndexedDB 进行高效的图片数据管理，避免 Chrome Service Worker 的内存限制。

@@ -96,7 +96,6 @@ SyncStone은 동일한 절차를 사용하여 다른 플레이어의 일기 항�
 
 *   **TypeScript로 개발**: 코드 유지보수성과 타입 안전성을 향상시키기 위해 TypeScript로 개발되었습니다.
 *   **Chrome Extension Manifest V3 호환**: 최신 Chrome 확장 프로그램 표준에 완전히 호환됩니다.
-*   **서비스 지향 아키텍처**: LodestoneAPI, ImageProcessor, MarkdownConverter와 같은 개별 서비스 클래스로 분리된 모듈러 설계입니다.
 *   **빌드 시스템**: 뱠른 개발과 프로덕션 빌드를 위해 Vite를 사용합니다.
 *   **동적 타임아웃 관리**: 모든 타임아웃은 사용자의 액세스 간격 설정에 따라 동적으로 계산되어 일관된 동작을 보장합니다.
 *   **IndexedDB 저장소**: Chrome Service Worker의 메모리 제한을 피하기 위해 IndexedDB를 사용하여 효율적인 이미지 데이터 관리를 수행합니다.

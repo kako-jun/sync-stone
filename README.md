@@ -113,7 +113,6 @@ It is recommended to open the exported Markdown files with a text editor that su
 
 *   **Built with TypeScript**: The extension is developed using TypeScript for better code maintainability and type safety.
 *   **Chrome Extension Manifest V3**: Fully compatible with the latest Chrome extension standards.
-*   **Service-Oriented Architecture**: Code is organized into separate service classes (LodestoneAPI, ImageProcessor, MarkdownConverter) for better modularity.
 *   **Build System**: Uses Vite for fast development and production builds.
 *   **Dynamic Timeout Management**: All timeouts are dynamically calculated based on the user's access interval setting to ensure consistent behavior.
 *   **IndexedDB Storage**: Uses IndexedDB for efficient image data management, avoiding Chrome Service Worker memory limitations.

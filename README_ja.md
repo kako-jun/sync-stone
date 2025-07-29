@@ -116,7 +116,6 @@ SyncStone では、自分以外のプレイヤーの日記も同様の手順で�
 
 - **TypeScript で開発**: コードの保守性と型安全性を向上させるため、TypeScript で開発されています。
 - **Chrome Extension Manifest V3 対応**: 最新の Chrome 拡張機能標準に完全対応しています。
-- **サービス指向アーキテクチャ**: LodestoneAPI、ImageProcessor、MarkdownConverter など、個別のサービスクラスに分離されたモジュラー設計になっています。
 - **ビルドシステム**: 高速な開発とプロダクションビルドのために Vite を使用しています。
 - **動的タイムアウト管理**: すべてのタイムアウトは、ユーザーのアクセス間隔設定に基づいて動的に計算され、一貫した動作を保証します。
 - **IndexedDB ストレージ**: Chrome Service Worker のメモリ制限を回避するため、IndexedDB を使用して効率的な画像データ管理を行います。

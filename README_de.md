@@ -96,7 +96,6 @@ Es wird empfohlen, die exportierten Markdown-Dateien mit einem Texteditor zu öf
 
 *   **Entwickelt in TypeScript**: In TypeScript entwickelt, um Codewartbarkeit und Typsicherheit zu verbessern.
 *   **Chrome Extension Manifest V3-kompatibel**: Vollständig kompatibel mit den neuesten Chrome-Erweiterungsstandards.
-*   **Serviceorientierte Architektur**: Modulares Design, getrennt in einzelne Serviceklassen wie LodestoneAPI, ImageProcessor und MarkdownConverter.
 *   **Build-System**: Verwendet Vite für schnelle Entwicklung und Produktions-Builds.
 *   **Dynamisches Timeout-Management**: Alle Timeouts werden dynamisch basierend auf den Zugriffsintervall-Einstellungen des Benutzers berechnet, um konsistentes Verhalten zu gewährleisten.
 *   **IndexedDB-Speicher**: Verwendet IndexedDB für effizientes Bilddatenmanagement und vermeidet Chrome Service Worker-Speicherbegrenzungen.
