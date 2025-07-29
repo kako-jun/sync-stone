@@ -1010,14 +1010,16 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
 
         if (markdownResult.success && markdownResult.markdown) {
           const sanitizedTitle = sanitizeFilename(article.title);
-          const filename = `${sanitizedTitle}.md`;
           
           // Store processed article for zip.js streaming
           processedArticles.push({
             sanitizedTitle,
             markdownContent: markdownResult.markdown
           });
-          articleListMarkdown.push(`- [${article.title}](${filename})`);
+          
+          // Use actual filename with ID prefix for index links
+          const actualFilename = `${String(i + 1).padStart(3, '0')}_${sanitizedTitle}.md`;
+          articleListMarkdown.push(`- [${article.title}](${actualFilename})`);
         }
 
         // Update article processing progress

@@ -833,9 +833,9 @@ function showArticleProgress(
     }
   }
 
-  // 現在処理中のアイテム情報を追加（30文字まで）
+  // 現在処理中のアイテム情報を追加（25文字まで）
   if (currentItem) {
-    const truncatedItem = currentItem.length > 30 ? currentItem.substring(0, 30) + "..." : currentItem;
+    const truncatedItem = currentItem.length > 25 ? currentItem.substring(0, 25) + "..." : currentItem;
     progressText += ` | ${truncatedItem}`;
   }
 
@@ -883,11 +883,23 @@ function showStatusMessage(message: string, type: "error" | "success" | "info"):
   elements.statusMessage.textContent = message;
   elements.statusMessage.style.display = "block";
 
-  // Set styles based on type
+  // Set styles based on type - ガラス調半透明背景 + 色の特徴保持
   const styles = {
-    error: { bg: "#ffebee", color: "#c62828", border: "#ef9a9a" },
-    success: { bg: "#e8f5e8", color: "#2e7d32", border: "#a5d6a7" },
-    info: { bg: "#e8f5e8", color: "#2e7d32", border: "#a5d6a7" }, // 緑に統一
+    error: { 
+      bg: "rgba(255, 235, 238, 0.7)", // 赤っぽい半透明背景
+      color: "#c62828", 
+      border: "rgba(239, 154, 154, 0.5)" 
+    },
+    success: { 
+      bg: "rgba(232, 245, 232, 0.7)", // 緑っぽい半透明背景
+      color: "#2e7d32", 
+      border: "rgba(165, 214, 167, 0.5)" 
+    },
+    info: { 
+      bg: "rgba(232, 245, 232, 0.7)", // 緑っぽい半透明背景
+      color: "#2e7d32", 
+      border: "rgba(165, 214, 167, 0.5)" 
+    },
   };
 
   const style = styles[type];
@@ -896,11 +908,7 @@ function showStatusMessage(message: string, type: "error" | "success" | "info"):
   elements.statusMessage.style.border = `1px solid ${style.border}`;
 }
 
-// Update buttons for developer mode
-function updateButtonsForDeveloperMode(): void {
-  // Developer mode no longer changes button appearance or text
-  // The mode is only used internally for limiting the number of articles processed
-}
+// Developer mode functionality removed - no longer needed
 
 // Initialize popup when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
