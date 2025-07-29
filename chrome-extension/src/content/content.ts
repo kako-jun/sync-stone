@@ -141,6 +141,16 @@ function extractArticleDetails(): any {
       }
     });
     
+    // Also extract thumbnail src URLs from img tags that have data-origin_src
+    const imgWithOriginElements = doc.querySelectorAll('img[data-origin_src]');
+    imgWithOriginElements.forEach(img => {
+      const imgElement = img as HTMLImageElement;
+      // Add the thumbnail src URL as well
+      if (imgElement.src && !imageUrls.includes(imgElement.src)) {
+        imageUrls.push(imgElement.src);
+      }
+    });
+    
     // Extract linked images (a tags with image URLs)
     const linkElements = doc.querySelectorAll('a[href]');
     linkElements.forEach(link => {
