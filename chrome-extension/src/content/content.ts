@@ -432,6 +432,15 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
       }
     }
 
+    // Show article export progress
+    chrome.runtime.sendMessage({
+      action: 'updateProgress',
+      type: 'articles',
+      current: 1,
+      total: 1,
+      currentItem: articleDetails.title
+    });
+
     // Convert to markdown
     const markdownResult = processImagesAndConvertToMarkdown({
       title: articleDetails.title,
