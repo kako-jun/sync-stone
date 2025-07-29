@@ -7,6 +7,33 @@ const turndownService = new TurndownService();
 // JSZip import for content script
 import JSZip from 'jszip';
 
+// IndexedDB utilities (inline for content script)
+const DB_NAME = 'SyncStoneDB';
+const DB_VERSION = 1;
+
+async function deleteDatabase(): Promise<void> {
+  console.log('[IndexedDB] Deleting entire database');
+  
+  return new Promise((resolve, reject) => {
+    const deleteReq = indexedDB.deleteDatabase(DB_NAME);
+    
+    deleteReq.onsuccess = () => {
+      console.log('[IndexedDB] Database deleted successfully');
+      resolve();
+    };
+    
+    deleteReq.onerror = () => {
+      console.error('[IndexedDB] Failed to delete database');
+      reject(deleteReq.error);
+    };
+    
+    deleteReq.onblocked = () => {
+      console.warn('[IndexedDB] Database deletion blocked - close all connections');
+      // Still resolve as the database will be deleted when connections close
+      resolve();
+    };
+  });
+}
 
 // Global cancellation flag
 let isCancelled = false;
@@ -577,13 +604,23 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
 
     // Get downloaded images one by one if download was successful
     if (downloadedImageData?.success) {
-      console.log('[collectAndDownloadAllImagesInContent] Getting downloaded images from background one by one...');
+      console.log('[PULL-LOG] ========== START PULL PHASE ==========');
+      console.log('[PULL-LOG] Getting downloaded images from background one by one...');
+      console.log('[PULL-LOG] Total images to pull:', imageUrlsArray.length);
       
-      for (const imageUrl of imageUrlsArray) {
+      let pullSuccessCount = 0;
+      let pullFailCount = 0;
+      const pullFailedUrls: string[] = [];
+      
+      for (let i = 0; i < imageUrlsArray.length; i++) {
+        const imageUrl = imageUrlsArray[i];
+        
         if (isCancelled) {
-          console.log('[collectAndDownloadAllImagesInContent] Cancelled during image processing');
+          console.log('[PULL-LOG] Cancelled during image processing at', i + 1, '/', imageUrlsArray.length);
           break;
         }
+        
+        console.log(`[PULL-LOG] Pulling image ${i + 1}/${imageUrlsArray.length}: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
         
         const imageResponse: any = await new Promise((resolve) => {
           chrome.runtime.sendMessage({ 
@@ -592,18 +629,51 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number, zip: JS
           }, resolve);
         });
         
+        console.log(`[PULL-LOG] Pull response for image ${i + 1}:`, {
+          success: imageResponse?.success,
+          hasImageData: !!imageResponse?.imageData,
+          imageDataSuccess: imageResponse?.imageData?.success,
+          hasBase64: !!imageResponse?.imageData?.base64,
+          base64Length: imageResponse?.imageData?.base64?.length,
+          filename: imageResponse?.imageData?.filename
+        });
+        
         if (imageResponse?.success && imageResponse.imageData) {
           const imageData = imageResponse.imageData;
           if (imageData.success && imageData.base64) {
             const imagePath = `images/${imageData.filename}`;
             // Only update imageMap, don't add to main ZIP
             imageMap[imageData.url] = imagePath;
+            pullSuccessCount++;
+            console.log(`[PULL-LOG] Successfully pulled image ${i + 1}: ${imageData.filename} (${Math.round(imageData.base64.length/1024)}KB)`);
           } else {
             imageMap[imageData.url] = imageData.url;
+            pullFailCount++;
+            pullFailedUrls.push(imageUrl);
+            console.log(`[PULL-LOG] Image ${i + 1} data invalid (no base64):`, imageData);
           }
         } else {
           imageMap[imageUrl] = imageUrl; // Fallback to original URL
+          pullFailCount++;
+          pullFailedUrls.push(imageUrl);
+          console.log(`[PULL-LOG] Failed to pull image ${i + 1}:`, imageResponse);
         }
+        
+        if ((i + 1) % 20 === 0) {
+          console.log(`[PULL-LOG] Pull progress: ${i + 1}/${imageUrlsArray.length} (${Math.round((i+1)/imageUrlsArray.length*100)}%)`);
+          console.log(`[PULL-LOG] Success: ${pullSuccessCount}, Failed: ${pullFailCount}`);
+        }
+      }
+      
+      console.log('[PULL-LOG] ========== PULL PHASE COMPLETE ==========');
+      console.log(`[PULL-LOG] Total images to pull: ${imageUrlsArray.length}`);
+      console.log(`[PULL-LOG] Successfully pulled: ${pullSuccessCount}`);
+      console.log(`[PULL-LOG] Failed to pull: ${pullFailCount}`);
+      console.log(`[PULL-LOG] Pull success rate: ${Math.round(pullSuccessCount/imageUrlsArray.length*100)}%`);
+      console.log(`[PULL-LOG] ImageMap size: ${Object.keys(imageMap).length}`);
+      
+      if (pullFailedUrls.length > 0) {
+        console.log('[PULL-LOG] Failed pull URLs (first 10):', pullFailedUrls.slice(0, 10));
       }
       
       console.log('[collectAndDownloadAllImagesInContent] Image processing completed, added', Object.keys(imageMap).length, 'to imageMap');
@@ -910,12 +980,29 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     
     // Download separate image ZIP if there are images
     const imageUrls = Object.keys(imageMap).filter(url => imageMap[url].startsWith('images/'));
+    console.log('[ZIP-LOG] ========== START IMAGE ZIP CREATION ==========');
+    console.log('[ZIP-LOG] Total imageMap entries:', Object.keys(imageMap).length);
+    console.log('[ZIP-LOG] Image URLs for ZIP creation:', imageUrls.length);
+    console.log('[ZIP-LOG] Sample image URLs (first 5):', imageUrls.slice(0, 5));
+    
     if (imageUrls.length > 0) {
       const imageZip = new JSZip();
+      let zipSuccessCount = 0;
+      let zipFailCount = 0;
+      const zipFailedUrls: string[] = [];
+      
+      console.log('[ZIP-LOG] Starting to add images to ZIP...');
       
       // Add all images to the image ZIP
-      for (const imageUrl of imageUrls) {
-        if (isCancelled) break;
+      for (let i = 0; i < imageUrls.length; i++) {
+        const imageUrl = imageUrls[i];
+        
+        if (isCancelled) {
+          console.log('[ZIP-LOG] Cancelled during ZIP creation at', i + 1, '/', imageUrls.length);
+          break;
+        }
+        
+        console.log(`[ZIP-LOG] Adding image ${i + 1}/${imageUrls.length} to ZIP: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
         
         const imageResponse: any = await new Promise((resolve) => {
           chrome.runtime.sendMessage({ 
@@ -924,25 +1011,86 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
           }, resolve);
         });
         
+        console.log(`[ZIP-LOG] Image ${i + 1} response:`, {
+          success: imageResponse?.success,
+          hasImageData: !!imageResponse?.imageData,
+          hasBase64: !!imageResponse?.imageData?.base64,
+          base64Length: imageResponse?.imageData?.base64?.length,
+          filename: imageResponse?.imageData?.filename
+        });
+        
         if (imageResponse?.success && imageResponse.imageData?.base64) {
           // Keep the images/ prefix for proper folder structure
           const imagePath = imageMap[imageUrl];
           const base64Data = imageResponse.imageData.base64.split(',')[1];
-          imageZip.file(imagePath, base64Data, { base64: true });
+          
+          try {
+            imageZip.file(imagePath, base64Data, { base64: true });
+            zipSuccessCount++;
+            console.log(`[ZIP-LOG] Successfully added image ${i + 1} to ZIP: ${imagePath} (${Math.round(base64Data.length/1024)}KB)`);
+          } catch (error) {
+            zipFailCount++;
+            zipFailedUrls.push(imageUrl);
+            console.error(`[ZIP-LOG] Failed to add image ${i + 1} to ZIP:`, error);
+          }
+        } else {
+          zipFailCount++;
+          zipFailedUrls.push(imageUrl);
+          console.log(`[ZIP-LOG] Skipping image ${i + 1} - no valid data`);
+        }
+        
+        if ((i + 1) % 20 === 0) {
+          console.log(`[ZIP-LOG] ZIP progress: ${i + 1}/${imageUrls.length} (${Math.round((i+1)/imageUrls.length*100)}%)`);
+          console.log(`[ZIP-LOG] Added to ZIP: ${zipSuccessCount}, Failed: ${zipFailCount}`);
         }
       }
       
+      console.log('[ZIP-LOG] ========== IMAGE ZIP CREATION COMPLETE ==========');
+      console.log(`[ZIP-LOG] Total images to add: ${imageUrls.length}`);
+      console.log(`[ZIP-LOG] Successfully added to ZIP: ${zipSuccessCount}`);
+      console.log(`[ZIP-LOG] Failed to add to ZIP: ${zipFailCount}`);
+      console.log(`[ZIP-LOG] ZIP success rate: ${Math.round(zipSuccessCount/imageUrls.length*100)}%`);
+      
+      if (zipFailedUrls.length > 0) {
+        console.log('[ZIP-LOG] Failed ZIP URLs (first 10):', zipFailedUrls.slice(0, 10));
+      }
+      
+      // Check actual ZIP contents
+      const zipFiles = Object.keys(imageZip.files);
+      console.log(`[ZIP-LOG] Final ZIP file count: ${zipFiles.length}`);
+      console.log(`[ZIP-LOG] ZIP files (first 10):`, zipFiles.slice(0, 10));
+      
       // Download image ZIP
       const imageZipFilename = isOwnBlog ? 'lodestone_images.zip' : 'lodestone_others_images.zip';
+      console.log(`[ZIP-LOG] Downloading ZIP file: ${imageZipFilename}`);
       await downloadZip(imageZip, imageZipFilename);
+      console.log(`[ZIP-LOG] ZIP download completed: ${imageZipFilename}`);
+    } else {
+      console.log('[ZIP-LOG] No images to add to ZIP');
     }
 
     // Notify completion
     console.log('All phases completed, sending exportComplete message');
     chrome.runtime.sendMessage({ action: 'exportComplete' });
+    
+    // Delete entire database after successful export
+    try {
+      await deleteDatabase();
+      console.log('[Content] IndexedDB database deleted after successful export');
+    } catch (error) {
+      console.error('[Content] Failed to delete IndexedDB after export:', error);
+    }
 
   } catch (error) {
     sendErrorMessage('記事処理中にエラーが発生しました: ' + (error instanceof Error ? error.message : String(error)));
+    
+    // Delete database even on error
+    try {
+      await deleteDatabase();
+      console.log('[Content] IndexedDB database deleted after error');
+    } catch (clearError) {
+      console.error('[Content] Failed to delete IndexedDB after error:', clearError);
+    }
   }
 }
 

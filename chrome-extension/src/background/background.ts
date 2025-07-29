@@ -1,5 +1,6 @@
 import { BlogEntry, ExportState } from '@/types';
 import { CONFIG, URLS } from '@/utils/constants';
+import { saveImage, getImage, getImageCount, clearAllImages, deleteDatabase, StoredImage } from '@/utils/indexedDB';
 
 // Global state
 let exportState: ExportState = {
@@ -149,13 +150,30 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       
     case 'getDownloadedImage':
       const imageUrl = request.imageUrl;
-      const allImages = (globalThis as any).downloadedImages || [];
-      const imageData = allImages.find((img: any) => img.url === imageUrl);
-      sendResponse({ 
-        success: !!imageData, 
-        imageData: imageData || null
+      console.log(`[PULL-RESPONSE-LOG] getDownloadedImage request for: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+      
+      // Get from IndexedDB instead of globalThis
+      getImage(imageUrl).then(imageData => {
+        const response = { 
+          success: !!imageData && imageData.success, 
+          imageData: imageData || null
+        };
+        
+        console.log(`[PULL-RESPONSE-LOG] Found image data:`, {
+          found: !!imageData,
+          hasBase64: !!imageData?.base64,
+          base64Length: imageData?.base64?.length,
+          filename: imageData?.filename,
+          success: imageData?.success
+        });
+        
+        sendResponse(response);
+      }).catch(error => {
+        console.error(`[PULL-RESPONSE-LOG] Error getting image from IndexedDB:`, error);
+        sendResponse({ success: false, imageData: null });
       });
-      break;
+      
+      return true; // Indicate async response
       
     case 'setAllEntriesData':
       console.log('[Background] setAllEntriesData received with:', {
@@ -183,9 +201,24 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 });
 
 // Handle export all articles
-function handleExportAllArticles(): void {
+async function handleExportAllArticles(): Promise<void> {
   // 新しいエクスポート開始時に前回のデータをクリア
   storedEntriesData = null;
+  
+  // Delete entire database at the start of new export to ensure clean state
+  try {
+    await deleteDatabase();
+    console.log('[Background] IndexedDB database deleted for clean start');
+  } catch (error) {
+    console.error('[Background] Failed to delete IndexedDB:', error);
+    // Even if delete fails, clearAllImages as fallback
+    try {
+      await clearAllImages();
+      console.log('[Background] Fallback: IndexedDB cleared for new export');
+    } catch (clearError) {
+      console.error('[Background] Failed to clear IndexedDB:', clearError);
+    }
+  }
   
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
@@ -212,7 +245,7 @@ function handleExportAllArticles(): void {
 
 
 // Handle cancel export
-function handleCancelExport(): void {
+async function handleCancelExport(): Promise<void> {
   isCancelled = true;
   exportState.isExporting = false;
   exportState.showingProgress = false;
@@ -222,6 +255,14 @@ function handleCancelExport(): void {
   
   // Clear stored entries data
   storedEntriesData = null;
+  
+  // Delete database when export is cancelled
+  try {
+    await deleteDatabase();
+    console.log('[Background] IndexedDB database deleted after cancel');
+  } catch (error) {
+    console.error('[Background] Failed to delete IndexedDB after cancel:', error);
+  }
   
   // Notify content script about cancellation
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -363,10 +404,20 @@ async function handleFetchImageListPage(url: string, delay: number, sendResponse
 
 // Handle downloading all images from background script (optimized for message passing)
 async function handleDownloadAllImages(imageUrls: string[], totalImages: number, sendResponse: (response: any) => void): Promise<void> {
-  console.log('[Background] handleDownloadAllImages called with', imageUrls.length, 'images, totalImages:', totalImages);
+  console.log('[DOWNLOAD-LOG] ========== START DOWNLOAD PHASE ==========');
+  console.log('[DOWNLOAD-LOG] handleDownloadAllImages called with', imageUrls.length, 'images, totalImages:', totalImages);
+  console.log('[DOWNLOAD-LOG] Sample URLs (first 5):', imageUrls.slice(0, 5));
+  
   try {
-    const downloadedImages: any[] = [];
+    // Check existing images in IndexedDB
+    const existingImageCount = await getImageCount();
+    console.log(`[DOWNLOAD-LOG] Existing images in IndexedDB: ${existingImageCount}`);
+    
     let downloadedCount = 0;
+    let failedCount = 0;
+    const failedUrls: string[] = [];
+    const batchSize = 10; // Save to IndexedDB in batches for efficiency
+    const imageBatch: StoredImage[] = [];
 
     // Update progress to show image downloading has started
     chrome.runtime.sendMessage({
@@ -378,16 +429,27 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
       // Popup may not be open, ignore error
     });
 
+    console.log('[DOWNLOAD-LOG] Starting download loop for', imageUrls.length, 'images');
 
-    for (const imageUrl of imageUrls) {
+    for (let i = 0; i < imageUrls.length; i++) {
+      const imageUrl = imageUrls[i];
+      
       if (isCancelled) {
-        console.log('[Background] Download cancelled at image', downloadedCount);
+        console.log('[DOWNLOAD-LOG] Download cancelled at image', downloadedCount, '/', imageUrls.length);
         break;
       }
 
+      console.log(`[DOWNLOAD-LOG] Processing image ${i + 1}/${imageUrls.length}: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+
       try {
         const response = await fetch(imageUrl);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
         const blob = await response.blob();
+        console.log(`[DOWNLOAD-LOG] Image ${i + 1} blob size: ${blob.size} bytes, type: ${blob.type}`);
+        
         // Convert to base64 instead of ArrayBuffer to avoid message passing issues
         const base64 = await new Promise<string>((resolve) => {
           const reader = new FileReader();
@@ -395,21 +457,35 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
           reader.readAsDataURL(blob);
         });
         
+        console.log(`[DOWNLOAD-LOG] Image ${i + 1} base64 length: ${base64.length} chars`);
+        
         const originalFilename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
         const hash = generateHash(imageUrl);
         const uniqueFilename = `${hash}_${originalFilename}`;
 
-        downloadedImages.push({
+        const imageData: StoredImage = {
           url: imageUrl,
           base64: base64,
           filename: uniqueFilename,
           success: true
-        });
+        };
+
+        // Add to batch
+        imageBatch.push(imageData);
+        
+        // Save batch to IndexedDB when batch is full
+        if (imageBatch.length >= batchSize) {
+          await Promise.all(imageBatch.map(img => saveImage(img)));
+          console.log(`[DOWNLOAD-LOG] Saved batch of ${imageBatch.length} images to IndexedDB`);
+          imageBatch.length = 0; // Clear batch
+        }
 
         downloadedCount++;
         
-        if (downloadedCount % 50 === 0 || downloadedCount === totalImages) {
-          console.log('[Background] Downloaded', downloadedCount, '/', totalImages, 'images');
+        if (downloadedCount % 10 === 0 || downloadedCount === totalImages) {
+          const currentTotal = existingImageCount + downloadedCount;
+          console.log(`[DOWNLOAD-LOG] Progress: Downloaded ${downloadedCount}/${totalImages} images (${Math.round(downloadedCount/totalImages*100)}%)`);
+          console.log(`[DOWNLOAD-LOG] Total images in IndexedDB: ${currentTotal}`);
         }
         
         // Update progress
@@ -423,20 +499,44 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
         });
 
       } catch (error) {
-        console.error(`Failed to download image: ${imageUrl}`, error);
-        downloadedImages.push({
+        failedCount++;
+        failedUrls.push(imageUrl);
+        console.error(`[DOWNLOAD-LOG] Failed to download image ${i + 1}: ${imageUrl}`, error);
+        
+        const failedImageData: StoredImage = {
           url: imageUrl,
-          base64: null,
-          filename: null,
+          base64: '',
+          filename: '',
           success: false
-        });
+        };
+        
+        // Save failed image info to IndexedDB as well
+        await saveImage(failedImageData);
       }
     }
 
-    console.log('[Background] All downloads completed. Total:', downloadedCount, '/', totalImages);
+    // Save remaining images in batch
+    if (imageBatch.length > 0) {
+      await Promise.all(imageBatch.map(img => saveImage(img)));
+      console.log(`[DOWNLOAD-LOG] Saved final batch of ${imageBatch.length} images to IndexedDB`);
+    }
+
+    console.log('[DOWNLOAD-LOG] ========== DOWNLOAD PHASE COMPLETE ==========');
+    console.log(`[DOWNLOAD-LOG] Total processed: ${imageUrls.length} images`);
+    console.log(`[DOWNLOAD-LOG] Successfully downloaded: ${downloadedCount} images`);
+    console.log(`[DOWNLOAD-LOG] Failed downloads: ${failedCount} images`);
+    console.log(`[DOWNLOAD-LOG] Previously existing images: ${existingImageCount}`);
+    const finalCount = await getImageCount();
+    console.log(`[DOWNLOAD-LOG] Final total images in IndexedDB: ${finalCount}`);
+    console.log(`[DOWNLOAD-LOG] Success rate: ${Math.round(downloadedCount/imageUrls.length*100)}%`);
     
-    // Store images globally for retrieval
-    (globalThis as any).downloadedImages = downloadedImages;
+    if (failedUrls.length > 0) {
+      console.log('[DOWNLOAD-LOG] Failed URLs (first 10):', failedUrls.slice(0, 10));
+    }
+    
+    // No longer storing in globalThis - all data is in IndexedDB
+    console.log('[DOWNLOAD-LOG] ========== ALL IMAGES STORED IN INDEXEDDB ==========');
+    console.log(`[DOWNLOAD-LOG] IndexedDB is now the single source of truth for all images`);
     
     // Send completion signal without images array (pull-based approach)
     const responseData = {
