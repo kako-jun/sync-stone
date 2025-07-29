@@ -9,7 +9,7 @@ SyncStone, nommé "Stardustmemoir", est un outil non officiel lié à FINAL FANT
 ## Fonctionnalités
 
 *   **Exporter un seul article**: Exporte la page d'article de journal Lodestone actuelle ou la page d'édition de journal, y compris le titre de l'article, le corps, toutes les images (internes et externes), les commentaires, les mentions J'aime, la date de publication et les balises. Il télécharge un fichier ZIP contenant le fichier Markdown et les images associées.
-*   **Exporter tous les articles**: Exporte toutes les entrées de journal de la page de liste de journaux de The Lodestone, y compris les titres d'articles, les corps, toutes les images (internes et externes), les commentaires, les mentions J'aime, les dates de publication et les balises. Il les convertit au format Markdown et les télécharge sous forme de fichier ZIP unique. Toutes les images sont téléchargées et incluses dans un dossier `images/` dans le fichier ZIP.
+*   **Exporter tous les articles**: Exporte toutes les entrées de journal de la page de liste de journaux de The Lodestone, y compris les titres d'articles, les corps, toutes les images (internes et externes), les commentaires, les mentions J'aime, les dates de publication et les balises. Il les convertit au format Markdown et les télécharge sous forme de fichier ZIP unifié contenant à la fois les articles et les images. Toutes les images sont téléchargées et incluses dans un dossier `images/` dans le fichier ZIP.
 *   **Récupération des commentaires**: Récupère le texte intégral des commentaires associés aux articles et les inclut dans les fichiers Markdown.
 *   **Téléchargement en masse d'images**: Lors de l'exportation de tous les articles, toutes les images de la page de gestion d'images de The Lodestone sont pré-téléchargées et incluses dans le fichier ZIP. Cela évite les téléchargements en double d'images référencées dans plusieurs articles et garantit que les images sont affichées correctement lors de la consultation locale.
 *   **Génération de la liste d'articles**: Lors de l'exportation de tous les articles, un fichier `Article_List.md` est généré dans le fichier ZIP, contenant des liens vers tous les articles exportés. Ce fichier peut être utilisé de manière pratique comme une collection de liens vers vos articles exportés lorsqu'il est ouvert avec des éditeurs de texte compatibles avec la prévisualisation Markdown comme [Visual Studio Code](https://code.visualstudio.com/).
@@ -75,7 +75,7 @@ SyncStone peut également exporter les entrées de journal d'autres joueurs en u
 
 **Différences techniques** :
 - Pour les articles d'autres joueurs, les pages de galerie d'images ne sont pas accessibles, donc seules les images contenues dans les articles sont téléchargées
-- Le fichier ZIP exporté sera nommé `lodestone_others_blog_export.zip` pour le distinguer de vos propres articles
+- Le fichier ZIP exporté sera nommé `lodestone_others_complete_export.zip` pour le distinguer de vos propres articles (`lodestone_complete_export.zip`)
 
 **Directives d'utilisation** :
 - Veuillez utiliser cette fonctionnalité dans le but légitime de préserver les souvenirs
@@ -85,7 +85,7 @@ SyncStone peut également exporter les entrées de journal d'autres joueurs en u
 
 Le fichier ZIP téléchargé contiendra les éléments suivants:
 
-*   **Fichiers Markdown (`.md`)**: Chaque article est enregistré en tant que fichier Markdown distinct. Le nom du fichier sera basé sur le titre de l'article.
+*   **Fichiers Markdown (`.md`)**: Chaque article est enregistré en tant que fichier Markdown distinct. Le nom du fichier sera au format `001_TitreArticle.md` avec un préfixe d'ID séquentiel pour éviter les doublons.
     *   Le début de chaque fichier Markdown inclura les métadonnées suivantes au format YAML front matter:
         *   `title`: Titre de l'article
         *   `date`: Date de publication
@@ -106,6 +106,16 @@ Il est recommandé d'ouvrir les fichiers Markdown exportés avec un éditeur de 
 *   **Images externes**: Les images provenant de domaines autres que The Lodestone ne seront pas téléchargées et resteront liées avec leurs URL d'origine dans les fichiers Markdown.
 *   **Modifications des spécifications de Lodestone**: Si la structure HTML ou les spécifications de The Lodestone changent, cette extension pourrait ne pas fonctionner correctement.
 *   **Conversion BBCode**: Le BBCode de Lodestone est récupéré sous forme de HTML converti, puis converti en Markdown par la bibliothèque Turndown. Les notations spéciales ou les mises en page complexes peuvent ne pas être parfaitement reproduites.
+
+## Spécifications techniques
+
+*   **Développé en TypeScript**: Développé en TypeScript pour améliorer la maintenabilité du code et la sécurité des types.
+*   **Compatible Chrome Extension Manifest V3**: Entièrement compatible avec les derniers standards d'extension Chrome.
+*   **Architecture orientée services**: Conception modulaire séparée en classes de services individuelles telles que LodestoneAPI, ImageProcessor et MarkdownConverter.
+*   **Système de construction**: Utilise Vite pour un développement rapide et des constructions de production.
+*   **Gestion dynamique des délais d'attente**: Tous les délais d'attente sont calculés dynamiquement en fonction des paramètres d'intervalle d'accès de l'utilisateur, garantissant un comportement cohérent.
+*   **Stockage IndexedDB**: Utilise IndexedDB pour une gestion efficace des données d'images, évitant les limitations mémoire du Chrome Service Worker.
+*   **Génération de ZIP en streaming**: Utilise zip.js pour la création de ZIP en streaming, permettant un traitement stable de grandes quantités de données d'images sans erreurs mémoire.
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">

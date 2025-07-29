@@ -9,7 +9,7 @@ SyncStone，名为“Stardustmemoir”，是与 FINAL FANTASY XIV 相关的非�
 ## 功能
 
 *   **导出单个文章**: 导出当前的 Lodestone 日记文章页面或日记编辑页面，包括文章标题、正文、所有图片（内部和外部）、评论、点赞、发布日期和标签。它会下载一个包含 Markdown 文件和相关图片的 ZIP 文件。
-*   **导出所有文章**: 导出 The Lodestone 日记列表页面中的所有日记条目，包括文章标题、正文、所有图片（内部和外部）、评论、点赞、发布日期和标签。它将它们转换为 Markdown 格式，并作为单个 ZIP 文件下载。所有图片都会被下载并包含在 ZIP 文件中的 `images/` 文件夹中。
+*   **导出所有文章**: 导出 The Lodestone 日记列表页面中的所有日记条目，包括文章标题、正文、所有图片（内部和外部）、评论、点赞、发布日期和标签。它将它们转换为 Markdown 格式，并作为包含文章和图片的统一 ZIP 文件下载。所有图片都会被下载并包含在 ZIP 文件中的 `images/` 文件夹中。
 *   **评论检索**: 检索与文章相关的评论的完整文本，并将其包含在 Markdown 文件中。
 *   **批量图片下载**: 导出所有文章时，The Lodestone 图片管理页面中的所有图片都会预先下载并包含在 ZIP 文件中。这可以防止重复下载在多篇文章中引用的图片，并确保在本地查看时图片正确显示。
 *   **文章列表生成**: 导出所有文章时，会在 ZIP 文件中生成一个 `Article_List.md` 文件，其中包含指向所有导出文章的链接。当使用支持 Markdown 预览的文本编辑器（如 [Visual Studio Code](https://code.visualstudio.com/)）打开时，此文件可以方便地用作导出文章的链接集合。
@@ -60,7 +60,7 @@ SyncStone 也可以使用相同的程序导出其他玩家的日记条目。这�
 
 **技术差异**：
 - 对于其他玩家的文章，图片库页面无法访问，因此只会下载文章中包含的图片
-- 导出的 ZIP 文件将命名为 `lodestone_others_blog_export.zip`，以与您自己的文章区分
+- 导出的 ZIP 文件将命名为 `lodestone_others_complete_export.zip`，以与您自己的文章（`lodestone_complete_export.zip`）区分
 
 **使用指南**：
 - 请将此功能用于保存回忆的合法目的
@@ -70,7 +70,7 @@ SyncStone 也可以使用相同的程序导出其他玩家的日记条目。这�
 
 下载的 ZIP 文件将包含以下内容：
 
-*   **Markdown 文件 (`.md`)**: 每篇文章都保存为单独的 Markdown 文件。文件名将基于文章的标题。
+*   **Markdown 文件 (`.md`)**: 每篇文章都保存为单独的 Markdown 文件。文件名将为 `001_文章标题.md` 格式，带有顺序ID前缀以避免重复。
     *   每个 Markdown 文件的开头将包含以下 YAML front matter 格式的元数据：
         *   `title`: 文章标题
         *   `date`: 发布日期
@@ -91,6 +91,16 @@ SyncStone 也可以使用相同的程序导出其他玩家的日记条目。这�
 *   **外部图片**: 来自 The Lodestone 以外域名的图片将不会被下载，并将在 Markdown 文件中保留其原始 URL 链接。
 *   **Lodestone 规范更改**: 如果 The Lodestone 的 HTML 结构或规范发生变化，此扩展程序可能无法正常运行。
 *   **BBCode 转换**: Lodestone 的 BBCode 将作为转换后的 HTML 获取，然后由 Turndown 库转换为 Markdown。特殊符号或复杂布局可能无法完美再现。
+
+## 技术规格
+
+*   **使用 TypeScript 开发**: 使用 TypeScript 开发，以提高代码可维护性和类型安全性。
+*   **Chrome Extension Manifest V3 兼容**: 完全兼容最新的 Chrome 扩展程序标准。
+*   **服务导向架构**: 模块化设计，分离为单独的服务类，如 LodestoneAPI、ImageProcessor 和 MarkdownConverter。
+*   **构建系统**: 使用 Vite 进行快速开发和生产构建。
+*   **动态超时管理**: 所有超时都根据用户的访问间隔设置动态计算，确保一致的行为。
+*   **IndexedDB 存储**: 使用 IndexedDB 进行高效的图片数据管理，避免 Chrome Service Worker 的内存限制。
+*   **流式 ZIP 生成**: 利用 zip.js 进行流式 ZIP 创建，实现大量图片数据的稳定处理，无内存错误。
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">

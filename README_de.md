@@ -9,7 +9,7 @@ SyncStone, benannt "Stardustmemoir", ist ein inoffizielles Tool für FINAL FANTA
 ## Funktionen
 
 *   **Einzelnen Artikel exportieren**: Exportiert die aktuelle Lodestone-Tagebuchartikelseite oder Tagebuchbearbeitungsseite, einschließlich des Artikeltitels, des Textkörpers, aller Bilder (interne und externe), der Kommentare, der Likes, des Veröffentlichungsdatums und der Tags. Es wird eine ZIP-Datei heruntergeladen, die die Markdown-Datei und die zugehörigen Bilder enthält.
-*   **Alle Artikel exportieren**: Exportiert alle Tagebucheinträge von der Lodestone-Tagebuchlistenseite, einschließlich Artikeltitel, Textkörper, aller Bilder (interne und externe), Kommentare, Likes, Veröffentlichungsdaten und Tags. Es konvertiert sie in das Markdown-Format und lädt sie als einzelne ZIP-Datei herunter. Alle Bilder werden heruntergeladen und in einem `images/`-Ordner innerhalb der ZIP-Datei abgelegt.
+*   **Alle Artikel exportieren**: Exportiert alle Tagebucheinträge von der Lodestone-Tagebuchlistenseite, einschließlich Artikeltitel, Textkörper, aller Bilder (interne und externe), Kommentare, Likes, Veröffentlichungsdaten und Tags. Es konvertiert sie in das Markdown-Format und lädt sie als einheitliche ZIP-Datei herunter, die sowohl Artikel als auch Bilder enthält. Alle Bilder werden heruntergeladen und in einem `images/`-Ordner innerhalb der ZIP-Datei abgelegt.
 *   **Kommentar-Abruf**: Ruft den vollständigen Text der Kommentare zu Artikeln ab und fügt sie in die Markdown-Dateien ein.
 *   **Massen-Bild-Download**: Beim Exportieren aller Artikel werden alle Bilder von der Bildverwaltungsseite von The Lodestone vorab heruntergeladen und in die ZIP-Datei aufgenommen. Dies verhindert doppelte Downloads von Bildern, die in mehreren Artikeln referenziert werden, und stellt sicher, dass Bilder bei der lokalen Anzeige korrekt angezeigt werden.
 *   **Artikellisten-Generierung**: Beim Exportieren aller Artikel wird eine `Article_List.md`-Datei in der ZIP-Datei generiert, die Links zu allen exportierten Artikeln enthält. Diese Datei kann bequem als Sammlung von Links zu Ihren exportierten Artikeln verwendet werden, wenn sie mit Markdown-Vorschau-fähigen Texteditoren wie [Visual Studio Code](https://code.visualstudio.com/) geöffnet wird.
@@ -60,7 +60,7 @@ SyncStone kann auch Tagebucheinträge anderer Spieler mit demselben Verfahren ex
 
 **Technische Unterschiede**:
 - Bei Artikeln anderer Spieler sind die Bildergalerieseiten nicht zugänglich, daher werden nur Bilder heruntergeladen, die in den Artikeln enthalten sind
-- Die exportierte ZIP-Datei wird `lodestone_others_blog_export.zip` genannt, um sie von Ihren eigenen Artikeln zu unterscheiden
+- Die exportierte ZIP-Datei wird `lodestone_others_complete_export.zip` genannt, um sie von Ihren eigenen Artikeln (`lodestone_complete_export.zip`) zu unterscheiden
 
 **Nutzungsrichtlinien**:
 - Bitte verwenden Sie diese Funktion für den legitimen Zweck der Bewahrung von Erinnerungen
@@ -70,7 +70,7 @@ SyncStone kann auch Tagebucheinträge anderer Spieler mit demselben Verfahren ex
 
 Die heruntergeladene ZIP-Datei enthält Folgendes:
 
-*   **Markdown-Dateien (`.md`)**: Jeder Artikel wird als separate Markdown-Datei gespeichert. Der Dateiname basiert auf dem Titel des Artikels.
+*   **Markdown-Dateien (`.md`)**: Jeder Artikel wird als separate Markdown-Datei gespeichert. Der Dateiname wird im Format `001_Artikeltitel.md` mit einem sequenziellen ID-Präfix zur Vermeidung von Duplikaten sein.
     *   Der Anfang jeder Markdown-Datei enthält die folgenden Metadaten im YAML-Frontmatter-Format:
         *   `title`: Artikeltitel
         *   `date`: Veröffentlichungsdatum
@@ -91,6 +91,16 @@ Es wird empfohlen, die exportierten Markdown-Dateien mit einem Texteditor zu öf
 *   **Externe Bilder**: Bilder von anderen Domains als The Lodestone werden nicht heruntergeladen und bleiben mit ihren ursprünglichen URLs in den Markdown-Dateien verknüpft.
 *   **Änderungen der Lodestone-Spezifikationen**: Wenn sich die HTML-Struktur oder die Spezifikationen von The Lodestone ändern, funktioniert diese Erweiterung möglicherweise nicht mehr korrekt.
 *   **BBCode-Konvertierung**: Der BBCode von Lodestone wird als konvertiertes HTML abgerufen und dann von der Turndown-Bibliothek in Markdown konvertiert. Spezielle Notationen oder komplexe Layouts werden möglicherweise nicht perfekt reproduziert.
+
+## Technische Spezifikationen
+
+*   **Entwickelt in TypeScript**: In TypeScript entwickelt, um Codewartbarkeit und Typsicherheit zu verbessern.
+*   **Chrome Extension Manifest V3-kompatibel**: Vollständig kompatibel mit den neuesten Chrome-Erweiterungsstandards.
+*   **Serviceorientierte Architektur**: Modulares Design, getrennt in einzelne Serviceklassen wie LodestoneAPI, ImageProcessor und MarkdownConverter.
+*   **Build-System**: Verwendet Vite für schnelle Entwicklung und Produktions-Builds.
+*   **Dynamisches Timeout-Management**: Alle Timeouts werden dynamisch basierend auf den Zugriffsintervall-Einstellungen des Benutzers berechnet, um konsistentes Verhalten zu gewährleisten.
+*   **IndexedDB-Speicher**: Verwendet IndexedDB für effizientes Bilddatenmanagement und vermeidet Chrome Service Worker-Speicherbegrenzungen.
+*   **Streaming-ZIP-Generierung**: Nutzt zip.js für Streaming-ZIP-Erstellung, ermöglicht stabile Verarbeitung großer Bilddatenmengen ohne Speicherfehler.
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">

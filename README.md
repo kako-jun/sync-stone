@@ -11,7 +11,7 @@ SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTAS
 ## Features
 
 *   **Export Single Article**: Exports the current Lodestone diary article page or diary editing page, including the article title, body, all images (both internal and external), comments, likes, publication date, and tags. It downloads a ZIP file containing the Markdown file and associated images.
-*   **Export All Articles**: Exports all diary entries from The Lodestone's diary list page, including article titles, bodies, all images (both internal and external), comments, likes, publication dates, and tags. It converts them to Markdown format and downloads them as a single ZIP file. All images are downloaded and included in an `images/` folder within the ZIP file.
+*   **Export All Articles**: Exports all diary entries from The Lodestone's diary list page, including article titles, bodies, all images (both internal and external), comments, likes, publication dates, and tags. It converts them to Markdown format and downloads them as a unified ZIP file containing both articles and images. All images are downloaded and included in an `images/` folder within the ZIP file.
 *   **Comment Retrieval**: Retrieves the full text of comments associated with articles and includes them in the Markdown files.
 *   **Bulk Image Download**: When exporting all articles, all images from The Lodestone's image management page are pre-downloaded and included in the ZIP file. This prevents duplicate downloads of images referenced across multiple articles and ensures images are displayed correctly when viewed locally.
 *   **Article List Generation**: When exporting all articles, an `index.md` file is generated within the ZIP file, containing links to all exported articles. This file can be conveniently used as a collection of links to your exported articles when opened with Markdown preview-enabled text editors like [Visual Studio Code](https://code.visualstudio.com/).
@@ -77,7 +77,7 @@ SyncStone can also export diary entries from other players using the same proced
 
 **Technical differences**:
 - For other players' articles, the image gallery pages are not accessible, so only images contained within the articles are downloaded
-- The exported ZIP file will be named `lodestone_others_blog_export.zip` to distinguish it from your own articles
+- The exported ZIP file will be named `lodestone_others_complete_export.zip` to distinguish it from your own articles (`lodestone_complete_export.zip`)
 
 **Usage guidelines**:
 - Please use this feature for the legitimate purpose of preserving memories
@@ -87,7 +87,7 @@ SyncStone can also export diary entries from other players using the same proced
 
 The downloaded ZIP file will contain the following:
 
-*   **Markdown files (`.md`)**: Each article is saved as a separate Markdown file. The filename will be based on the article's title.
+*   **Markdown files (`.md`)**: Each article is saved as a separate Markdown file. The filename will be in the format `001_ArticleTitle.md` with a sequential ID prefix to avoid duplicates.
     *   The beginning of each Markdown file will include the following metadata in YAML front matter format:
         *   `title`: Article title
         *   `date`: Publication date
@@ -116,6 +116,8 @@ It is recommended to open the exported Markdown files with a text editor that su
 *   **Service-Oriented Architecture**: Code is organized into separate service classes (LodestoneAPI, ImageProcessor, MarkdownConverter) for better modularity.
 *   **Build System**: Uses Vite for fast development and production builds.
 *   **Dynamic Timeout Management**: All timeouts are dynamically calculated based on the user's access interval setting to ensure consistent behavior.
+*   **IndexedDB Storage**: Uses IndexedDB for efficient image data management, avoiding Chrome Service Worker memory limitations.
+*   **Streaming ZIP Generation**: Utilizes zip.js for streaming ZIP creation, enabling stable processing of large amounts of image data without memory errors.
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
