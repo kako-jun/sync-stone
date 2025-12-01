@@ -13,3 +13,4 @@ sync-stone-chrome-extension.zip
 .DS_Store
 Thumbs.db
 .claude/settings.local.json
+.serena/
