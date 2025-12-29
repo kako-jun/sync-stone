@@ -111,20 +111,3 @@ export async function deleteDatabase(): Promise<void> {
     };
   });
 }
-
-// Batch save images (for efficiency)
-export async function saveImagesBatch(images: StoredImage[]): Promise<void> {
-  const db = await openDB();
-  const transaction = db.transaction([IMAGE_STORE], 'readwrite');
-  const store = transaction.objectStore(IMAGE_STORE);
-  
-  const promises = images.map(image => {
-    return new Promise<void>((resolve, reject) => {
-      const request = store.put(image);
-      request.onsuccess = () => resolve();
-      request.onerror = () => reject(request.error);
-    });
-  });
-  
-  await Promise.all(promises);
-}

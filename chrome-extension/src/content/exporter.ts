@@ -1,16 +1,5 @@
 // Export helper functions for content script
 
-import { ImageMap } from '@/types';
-
-// Re-export ImageMap for convenience
-export type { ImageMap };
-
-export interface ProcessedArticle {
-  sanitizedTitle: string;
-  markdownContent: string;
-  originalTitle: string;
-}
-
 /**
  * Download ZIP file using streaming
  */

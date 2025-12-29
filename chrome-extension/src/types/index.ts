@@ -37,17 +37,6 @@ export interface ImageMap {
   [originalUrl: string]: string;
 }
 
-export interface ScrapingResponse<T> {
-  success: boolean;
-  data?: T;
-  message?: string;
-}
-
-export interface PaginationInfo {
-  totalPages: number;
-  currentPage: number;
-}
-
 // Chrome message response types
 export interface BaseResponse {
   success: boolean;
@@ -77,13 +66,6 @@ export interface FetchPageResponse extends BaseResponse {
 
 export interface FetchArticleResponse extends BaseResponse {
   article?: ArticleDetails;
-}
-
-export interface ProcessedArticleData {
-  sanitizedTitle: string;
-  markdownContent: string;
-  originalTitle: string;
-  imageUrls: string[];
 }
 
 export interface FetchImageListPageResponse extends BaseResponse {
@@ -170,19 +152,6 @@ export interface GetSingleArticleDataMessage {
   action: 'getSingleArticleData';
 }
 
-export interface ProcessImagesAndConvertToMarkdownMessage {
-  action: 'processImagesAndConvertToMarkdown';
-  title: string;
-  htmlContent: string;
-  likes: number;
-  commentsCount: number;
-  publishDate: string | null;
-  tags: string[];
-  imageMap: ImageMap;
-  thumbnailUrls: string[];
-  commentsData: CommentData[];
-}
-
 export interface ShowExportNotificationMessage {
   action: 'showExportNotification';
   message: string;
@@ -221,7 +190,6 @@ export interface GetArticleInfoMessage {
 export type ContentScriptMessage =
   | ScrapeAdditionalPageMessage
   | GetSingleArticleDataMessage
-  | ProcessImagesAndConvertToMarkdownMessage
   | ShowExportNotificationMessage
   | ExportSingleArticleMessage
   | ExportAllArticlesFromContentMessage

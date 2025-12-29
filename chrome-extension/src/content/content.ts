@@ -8,7 +8,6 @@ import {
   ArticleDetails,
   DownloadAllImagesResponse,
   GetDownloadedImageResponse,
-  FetchPageResponse,
   FetchArticleResponse,
   FetchImageListPageResponse,
   ContentScriptMessage
@@ -21,11 +20,7 @@ import {
   scrapeImageListPageUrls,
   getImageListTotalPages
 } from './scraper';
-import {
-  downloadZip,
-  ImageMap,
-  ProcessedArticle
-} from './exporter';
+import { downloadZip } from './exporter';
 import { processImagesAndConvertToMarkdown } from './markdown';
 import { showExportNotification } from './notification';
 
@@ -875,11 +870,6 @@ chrome.runtime.onMessage.addListener((request: ContentScriptMessage, _sender: ch
       } catch (error) {
         sendResponse({ success: false, message: `Failed to extract article details: ${error instanceof Error ? error.message : String(error)}` });
       }
-      break;
-      
-    case 'processImagesAndConvertToMarkdown':
-      const result = processImagesAndConvertToMarkdown(request);
-      sendResponse(result);
       break;
       
     case 'showExportNotification':

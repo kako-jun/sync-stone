@@ -1,4 +1,4 @@
-import { FILE_PATTERNS } from './constants';
+import { FILE_PATTERNS, CONFIG } from './constants';
 
 /**
  * Generate a simple hash for unique filenames
@@ -38,7 +38,7 @@ export function extractFilenameFromUrl(url: string): string {
 /**
  * Create a promise that resolves when a tab finishes loading
  */
-export function waitForTabLoad(tabId: number, timeout = 10000): Promise<void> {
+export function waitForTabLoad(tabId: number, timeout: number = CONFIG.MAX_EXPORT_DELAY): Promise<void> {
   return new Promise((resolve) => {
     const listener = (changedTabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
       if (changedTabId === tabId && changeInfo.status === 'complete') {

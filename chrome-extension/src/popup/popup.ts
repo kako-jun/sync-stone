@@ -43,11 +43,6 @@ interface PopupElements {
 let elements: PopupElements;
 let currentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
 
-// Helper to get current language messages
-function msg() {
-  return messages[currentLanguage];
-}
-
 // Initialize internationalization messages
 function applyI18nMessages(): void {
   const msgs = messages[currentLanguage];
@@ -237,8 +232,6 @@ function setupEventListeners(): void {
     showStatusMessage(messages[currentLanguage].startingDownload, "info");
     elements.exportCurrentArticleButton.disabled = true;
 
-    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), CONFIG.MIN_EXPORT_DELAY);
-
     // Send directly to content script
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]?.id) {
@@ -335,7 +328,7 @@ function setupEventListeners(): void {
 }
 
 // Message listener for background script communication
-chrome.runtime.onMessage.addListener((request: PopupMessage, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request: PopupMessage, _sender, _sendResponse) => {
   switch (request.action) {
     case "showExportConfirmation":
       // 記事数収集の進捗表示をクリア
@@ -657,7 +650,7 @@ function displayArticleInfo(
 // Progress Management Functions
 function showPageCollectionProgress(
   current: number,
-  total: number,
+  _total: number,
   pageInfo?: { currentPage: number; totalPages: number }
 ): void {
   const msgs = messages[currentLanguage];
