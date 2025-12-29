@@ -243,12 +243,15 @@ function setupEventListeners(): void {
             if (chrome.runtime.lastError) {
               showStatusMessage(messages[currentLanguage].contentScriptNotAvailable, "error");
               elements.exportCurrentArticleButton.disabled = false;
+              resetProgress();
             } else if (response?.success) {
               showStatusMessage(messages[currentLanguage].singleArticleExported, "success");
               elements.exportCurrentArticleButton.disabled = false;
+              resetProgress();
             } else {
               showStatusMessage(messages[currentLanguage].failedToExportArticle + (response?.message || ""), "error");
               elements.exportCurrentArticleButton.disabled = false;
+              resetProgress();
             }
           }
         );
@@ -403,6 +406,7 @@ chrome.runtime.onMessage.addListener((request: PopupMessage, _sender, _sendRespo
       // Hide cancel button and warning on error
       elements.exportControlContainer.style.display = "none";
       showExportWarning(false);
+      resetProgress();
 
       // Translate common error messages
       let errorMessage = request.message;

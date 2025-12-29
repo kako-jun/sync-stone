@@ -183,10 +183,26 @@ async function handleSingleArticleExportInContent(sendResponse: (response: { suc
     const zipBlob = await zipWriter.close();
     await downloadZip(zipBlob, `${sanitizedTitle}.zip`);
 
+    // Clean up IndexedDB after successful export
+    try {
+      await deleteDatabase();
+      console.log('[Content] IndexedDB database deleted after single article export');
+    } catch (error) {
+      console.error('[Content] Failed to delete IndexedDB after single article export:', error);
+    }
+
     sendResponse({ success: true, message: msg().singleArticleExported });
   } catch (error) {
-    sendResponse({ 
-      success: false, 
+    // Clean up IndexedDB even on error
+    try {
+      await deleteDatabase();
+      console.log('[Content] IndexedDB database deleted after single article export error');
+    } catch (clearError) {
+      console.error('[Content] Failed to delete IndexedDB after single article export error:', clearError);
+    }
+
+    sendResponse({
+      success: false,
       message: msg().failedToExport + (error instanceof Error ? error.message : String(error))
     });
   }
