@@ -2,6 +2,8 @@
 
 SyncStone - 星紡（せいぼう）のメモワールは、FINAL FANTASY XIV 関連の非公式ツールです。本拡張機能は、ロドスト（The Lodestone）に投稿された日記を Markdown 形式でローカルにエクスポートするための Chrome 拡張機能です。ロドストの日記にはエクスポート機能がないため、大切な思い出を失わないようにバックアップすることを目的としています。
 
+**対応リージョン**: JP, NA, EU, FR, DE（すべてのロドストリージョン）
+
 <p align="center">
   <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
 </p>
@@ -48,14 +50,14 @@ SyncStone - 星紡（せいぼう）のメモワールは、FINAL FANTASY XIV �
 
 ### 2. 単一記事のエクスポート
 
-1.  エクスポートしたいロドストの日記個別記事ページ（例: `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`）を開きます。
+1.  エクスポートしたいロドストの日記個別記事ページ（例: `https://{region}.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`、`{region}`は jp, na, eu, fr, de のいずれか）を開きます。
 2.  Chrome のツールバーにある SyncStone のアイコンをクリックしてポップアップを開きます。
 3.  「この記事をエクスポート」ボタンをクリックします。
 4.  Markdown ファイルと画像を含む ZIP ファイルがダウンロードされます。
 
 ### 3. 全記事のエクスポート
 
-1.  ロドストの日記一覧ページ（例: `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`）を開きます。
+1.  ロドストの日記一覧ページ（例: `https://{region}.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`、`{region}`は jp, na, eu, fr, de のいずれか）を開きます。
 2.  Chrome のツールバーにある SyncStone のアイコンをクリックしてポップアップを開きます。
 3.  「すべての記事をエクスポート」ボタンをクリックします。
 4.  エクスポート対象の記事数が表示され、続行するかどうかの確認ダイアログが表示されます。「はい」をクリックするとエクスポートが開始されます。

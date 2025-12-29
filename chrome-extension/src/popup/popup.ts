@@ -74,7 +74,8 @@ function applyI18nMessages(): void {
 
 // Initialize settings with defaults (no persistence)
 function initializeSettings(): void {
-  currentLanguage = "ja";
+  // Auto-detect language based on browser settings
+  currentLanguage = navigator.language.startsWith("ja") ? "ja" : "en";
 
   elements.languageSelect.value = currentLanguage;
   elements.delayInput.value = "2000";
@@ -452,7 +453,7 @@ function checkCurrentArticle(): void {
     const currentUrl = tab.url;
 
     // Check if URL is a Lodestone character blog URL
-    const isLodestoneCharacterUrl = currentUrl.startsWith("https://jp.finalfantasyxiv.com/lodestone/character/");
+    const isLodestoneCharacterUrl = /^https:\/\/(jp|na|eu|fr|de)\.finalfantasyxiv\.com\/lodestone\/character\//.test(currentUrl);
 
     if (!isLodestoneCharacterUrl) {
       // Not a Lodestone character page at all - show guidance

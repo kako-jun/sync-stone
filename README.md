@@ -1,8 +1,10 @@
 # SyncStone - Stardustmemoir Chrome Extension
 
-[日本語](README.ja.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [简体中文](README.zh.md) | [한국어](README.ko.md)
+[日本語](README.ja.md)
 
 SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTASY XIV. This extension operates as a standalone Chrome extension designed to export your diary entries from The Lodestone (FINAL FANTASY XIV's official player site) into Markdown format for local storage. Since The Lodestone lacks an export function, the primary goal is to help you back up your precious memories.
+
+**Supported Regions**: JP, NA, EU, FR, DE (all Lodestone regions)
 
 <p align="center">
   <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
@@ -48,14 +50,14 @@ When you open the extension's popup, you'll find an input field for "Access Inte
 
 ### 2. Exporting a Single Article
 
-1.  Open the Lodestone diary article page (e.g., `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/`) you wish to export.
+1.  Open the Lodestone diary article page (e.g., `https://{region}.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/ARTICLE_ID/` where `{region}` is jp, na, eu, fr, or de) you wish to export.
 2.  Click the SyncStone icon in your Chrome toolbar to open the popup.
 3.  Click the "Export Current Article" button.
 4.  A ZIP file containing the Markdown file and images will be downloaded.
 
 ### 3. Exporting All Articles
 
-1.  Open The Lodestone's diary list page (e.g., `https://jp.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/`).
+1.  Open The Lodestone's diary list page (e.g., `https://{region}.finalfantasyxiv.com/lodestone/character/YOUR_CHARACTER_ID/blog/` where `{region}` is jp, na, eu, fr, or de).
 2.  Click the SyncStone icon in your Chrome toolbar to open the popup.
 3.  Click the "Export All Articles" button.
 4.  A confirmation dialog will appear, showing the number of articles to be exported and asking if you wish to proceed. Click "Yes" to start the export.

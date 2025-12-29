@@ -11,18 +11,18 @@ export const SELECTORS = {
   BLOG_TIME: 'time span',
   BLOG_TAGS: 'div.entry__blog__tag ul li',
   BLOG_THUMBNAIL: 'div.entry__blog__img__inner img',
-  
+
   ARTICLE_TITLE: 'h2.entry__blog__title',
   ARTICLE_BODY: 'div.txt_selfintroduction',
   ARTICLE_LIKES: '.blog__area__like__text__zero, .js__like_count',
   ARTICLE_COMMENTS_COUNT: '.entry__blog__header__comment span',
   ARTICLE_PUBLISH_DATE: '.entry__blog__header time span, time[datetime]',
   ARTICLE_TAGS: '.entry__blog__tag ul li a',
-  
+
   PAGINATION: '.btn__pager__current',
   IMAGE_LIST: '.image__list img',
   THUMBNAIL_LIST: '.thumb_list img',
-  
+
   COMMENT_BODIES: '.thread__comment__body',
   COMMENT_ENTRY: '.entry',
   COMMENT_AUTHOR: '.entry__name',

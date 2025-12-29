@@ -10,6 +10,10 @@
   ],
   "host_permissions": [
     "https://jp.finalfantasyxiv.com/*",
+    "https://na.finalfantasyxiv.com/*",
+    "https://eu.finalfantasyxiv.com/*",
+    "https://fr.finalfantasyxiv.com/*",
+    "https://de.finalfantasyxiv.com/*",
     "https://lds-img.finalfantasyxiv.com/*",
     "https://*/*"
   ],
@@ -21,7 +25,15 @@
     {
       "matches": [
         "https://jp.finalfantasyxiv.com/lodestone/character/*/blog/*",
-        "https://jp.finalfantasyxiv.com/lodestone/my/image/*"
+        "https://jp.finalfantasyxiv.com/lodestone/my/image/*",
+        "https://na.finalfantasyxiv.com/lodestone/character/*/blog/*",
+        "https://na.finalfantasyxiv.com/lodestone/my/image/*",
+        "https://eu.finalfantasyxiv.com/lodestone/character/*/blog/*",
+        "https://eu.finalfantasyxiv.com/lodestone/my/image/*",
+        "https://fr.finalfantasyxiv.com/lodestone/character/*/blog/*",
+        "https://fr.finalfantasyxiv.com/lodestone/my/image/*",
+        "https://de.finalfantasyxiv.com/lodestone/character/*/blog/*",
+        "https://de.finalfantasyxiv.com/lodestone/my/image/*"
       ],
       "js": ["turndown.browser.es.js", "zip.min.js", "content.js"]
     }
