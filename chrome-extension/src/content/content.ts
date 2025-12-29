@@ -19,6 +19,11 @@ import {
   ImageMap,
   ProcessedArticle
 } from './exporter';
+import {
+  processImagesAndConvertToMarkdown,
+  getTurndownService,
+  MarkdownConversionData
+} from './markdown';
 
 // Current language for content script
 let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
@@ -28,12 +33,11 @@ function msg() {
   return messages[contentLanguage];
 }
 
-// TurndownService is loaded from popup.html
-declare const TurndownService: any;
-const turndownService = new TurndownService();
-
 // zip.js UMD version is loaded via manifest.json
 declare const zip: any;
+
+// Get turndown service for direct use
+const turndownService = getTurndownService();
 
 // Global cancellation flag
 let isCancelled = false;
@@ -917,80 +921,6 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     } catch (clearError) {
       console.error('[Content] Failed to delete IndexedDB after error:', clearError);
     }
-  }
-}
-
-// Convert HTML to Markdown with image replacement
-function processImagesAndConvertToMarkdown(data: any): { success: boolean; markdown?: string; message?: string } {
-  try {
-    const { title, htmlContent, likes, commentsCount, publishDate, tags, imageMap, thumbnailUrls, commentsData } = data;
-
-    // Configure Turndown with image replacement rule
-    turndownService.addRule('image', {
-      filter: 'img',
-      replacement: function (_content: string, node: any) {
-        const originalSrc = node.getAttribute('src');
-        const alt = node.getAttribute('alt') || '';
-        const newSrc = imageMap[originalSrc] || originalSrc;
-        return `![${alt}](${newSrc})`;
-      }
-    });
-
-    // Configure Turndown with link replacement rule for image links
-    turndownService.addRule('imageLink', {
-      filter: function (node: any) {
-        return node.nodeName === 'A' && node.getAttribute('href') && /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(node.getAttribute('href'));
-      },
-      replacement: function (content: string, node: any) {
-        const originalHref = node.getAttribute('href');
-        const newHref = imageMap[originalHref] || originalHref;
-        return `[${content}](${newHref})`;
-      }
-    });
-
-    // Build markdown with YAML frontmatter
-    let markdown = `---\n`;
-    markdown += `title: "${title.replace(/"/g, '\\"')}"\n`;
-    if (publishDate) {
-      markdown += `date: "${publishDate}"\n`;
-    }
-    markdown += `likes: ${likes}\n`;
-    markdown += `comments: ${commentsCount}\n`;
-    if (tags && tags.length > 0) {
-      markdown += `tags:\n`;
-      tags.forEach((tag: string) => {
-        markdown += `  - ${tag}\n`;
-      });
-    }
-    markdown += `---\n\n`;
-
-    // Add thumbnail images first
-    if (thumbnailUrls && thumbnailUrls.length > 0) {
-      thumbnailUrls.forEach((thumbnailUrl: string) => {
-        const localPath = imageMap[thumbnailUrl] || thumbnailUrl;
-        markdown += `![](${localPath})\n\n`;
-      });
-    }
-
-    // Convert HTML to markdown
-    markdown += turndownService.turndown(htmlContent);
-
-    // Add comments section
-    if (commentsData && commentsData.length > 0) {
-      markdown += '\n\n## Comments\n\n';
-      commentsData.forEach((comment: any) => {
-        markdown += `### ${comment.author} (${comment.timestamp})\n\n`;
-        markdown += turndownService.turndown(comment.commentBodyHtml);
-        markdown += '\n\n---\n\n';
-      });
-    }
-
-    return { success: true, markdown };
-  } catch (error) {
-    return { 
-      success: false, 
-      message: `Failed to convert to markdown: ${error instanceof Error ? error.message : String(error)}` 
-    };
   }
 }
 
