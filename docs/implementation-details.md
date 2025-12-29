@@ -479,3 +479,256 @@ chrome-extension/src/
 - 記事: `📝 記事エクスポート` / `📝 Exporting Articles`
 
 詳細は `src/locales/messages.ts` を参照。
+
+## CSSセレクタ一覧
+
+スクレイピングで使用するセレクタ。ロドストのHTML構造変更時に更新が必要。
+
+### ブログ一覧ページ
+
+| セレクタ | 用途 | 取得対象 |
+|---------|------|---------|
+| `li.entry__blog` | ブログエントリ | 記事リストの各項目 |
+| `a.entry__blog__link` | 記事リンク | 記事URL |
+| `h2.entry__blog__title` | 記事タイトル | タイトルテキスト |
+| `time span` | 投稿日時 | 日時テキスト |
+| `div.entry__blog__tag ul li` | タグ | 記事のタグ一覧 |
+| `div.entry__blog__img__inner img` | サムネイル | サムネイル画像URL |
+| `.btn__pager__current` | ページネーション | `1ページ / 8ページ` 形式 |
+
+### 個別記事ページ
+
+| セレクタ | 用途 | 取得対象 |
+|---------|------|---------|
+| `h2.entry__blog__title` | 記事タイトル | タイトルテキスト |
+| `div.txt_selfintroduction` | 記事本文 | HTMLコンテンツ |
+| `.blog__area__like__text__zero, .js__like_count` | いいね数 | 数値 |
+| `.entry__blog__header__comment span` | コメント数 | 数値 |
+| `.entry__blog__header time span, time[datetime]` | 公開日時 | datetime属性またはテキスト |
+| `.entry__blog__tag ul li a` | タグ | タグ一覧 |
+| `.thumb_list img` | サムネイル画像 | data-origin_src属性 |
+
+### コメント
+
+| セレクタ | 用途 | 取得対象 |
+|---------|------|---------|
+| `.thread__comment__body` | コメント本文 | HTMLコンテンツ |
+| `.entry__name` | コメント者名 | 名前テキスト |
+| `.entry__time--comment` | コメント日時 | 日時テキスト |
+
+### 画像一覧ページ
+
+| セレクタ | 用途 | 取得対象 |
+|---------|------|---------|
+| `.image__list a.outboundLink.outboundImage[data-target="external_image"]` | 外部画像 | GitHubなどの外部画像URL |
+| `.image__list a.fancybox_element[rel="view_image"]` | 内部画像 | FFXIVスクリーンショットURL |
+
+## 自分のブログ判定
+
+### 判定ロジック
+
+```typescript
+function detectOwnBlog(): boolean {
+  const bodyId = document.body.getAttribute('id');
+  const hasIdAttribute = document.body.hasAttribute('id');
+
+  // 他人のブログの場合、body要素に id="community" が付与される
+  // 自分のブログの場合、id属性がない or "community"以外
+  return !hasIdAttribute || bodyId !== 'community';
+}
+```
+
+### 判定結果の影響
+
+| 判定結果 | Phase 0（画像一覧） | エクスポート対象 |
+|---------|-------------------|----------------|
+| 自分のブログ | 実行（/my/image/にアクセス） | 画像一覧 + 記事内画像 |
+| 他人のブログ | スキップ | 記事内画像のみ |
+
+### 確認ダイアログ表示
+
+- 自分のブログ: `（自分の記事）`
+- 他人のブログ: `（自分以外の記事）`
+
+## Turndown設定
+
+HTMLからMarkdownへの変換設定。
+
+### 画像変換ルール
+
+```typescript
+turndownService.addRule('image', {
+  filter: 'img',
+  replacement: function (_content: string, node: any) {
+    const originalSrc = node.getAttribute('src');
+    const alt = node.getAttribute('alt') || '';
+    // imageMapでローカルパスに変換
+    const newSrc = imageMap[originalSrc] || originalSrc;
+    return `![${alt}](${newSrc})`;
+  }
+});
+```
+
+### 画像リンク変換ルール
+
+```typescript
+turndownService.addRule('imageLink', {
+  filter: function (node: any) {
+    // 画像ファイルへのリンクを検出
+    return node.nodeName === 'A' &&
+           node.getAttribute('href') &&
+           /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(node.getAttribute('href'));
+  },
+  replacement: function (content: string, node: any) {
+    const originalHref = node.getAttribute('href');
+    const newHref = imageMap[originalHref] || originalHref;
+    return `[${content}](${newHref})`;
+  }
+});
+```
+
+### 出力フォーマット
+
+```markdown
+---
+title: "記事タイトル"
+date: "2025-01-15"
+likes: 42
+comments: 5
+tags:
+  - タグ1
+  - タグ2
+---
+
+![](images/xxx_image.jpg)
+
+記事本文...
+
+## Comments
+
+### コメント者名 (2025-01-15 12:34)
+
+コメント本文...
+
+---
+```
+
+## ヘルパー関数
+
+### generateHash
+
+URLからユニークなファイル名を生成するためのハッシュ関数。
+
+```typescript
+function generateHash(str: string): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0; // 32bit整数に変換
+  }
+  return Math.abs(hash).toString(16);
+}
+
+// 使用例
+// URL: https://example.com/image.jpg
+// ハッシュ: "a1b2c3d4"
+// ファイル名: "a1b2c3d4_image.jpg"
+```
+
+### sanitizeFilename
+
+ファイルシステムで使用できない文字を置換。
+
+```typescript
+function sanitizeFilename(filename: string, maxLength = 50): string {
+  return filename
+    .replace(/[<>:"/\\|?*]/g, '_')  // 無効文字を_に置換
+    .replace(/\s+/g, '_')            // 空白を_に置換
+    .substring(0, maxLength);        // 最大50文字に制限
+}
+```
+
+### 定数パターン
+
+```typescript
+export const FILE_PATTERNS = {
+  THUMBNAIL_PATTERN: /_\d{2,3}_\d{2,3}(?:\.|$)/,  // サムネイル判定
+  INVALID_FILENAME_CHARS: /[\\/:*?"<>|]/g,        // 無効文字
+  WHITESPACE: /\s+/g                               // 空白文字
+} as const;
+```
+
+### waitForTabLoad
+
+タブの読み込み完了を待機。
+
+```typescript
+function waitForTabLoad(tabId: number, timeout = 10000): Promise<void> {
+  return new Promise((resolve) => {
+    const listener = (changedTabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+      if (changedTabId === tabId && changeInfo.status === 'complete') {
+        chrome.tabs.onUpdated.removeListener(listener);
+        resolve();
+      }
+    };
+
+    chrome.tabs.onUpdated.addListener(listener);
+
+    // タイムアウト時はフォールバック
+    setTimeout(() => {
+      chrome.tabs.onUpdated.removeListener(listener);
+      resolve();
+    }, timeout);
+  });
+}
+```
+
+## 型定義
+
+### BlogEntry
+
+ブログ一覧から抽出されるエントリ情報。
+
+```typescript
+interface BlogEntry {
+  url: string;           // 記事URL
+  title: string;         // 記事タイトル
+  date: string;          // 投稿日時
+  tags: string[];        // タグ一覧
+  thumbnail: string | null;  // サムネイルURL
+}
+```
+
+### ArticleDetails
+
+個別記事の詳細情報。
+
+```typescript
+interface ArticleDetails {
+  title: string;
+  bodyHtml: string;
+  likes: number;
+  commentsCount: number;
+  publishDate: string | null;
+  tags: string[];
+  imageUrls: string[];
+  thumbnailUrls: string[];
+  commentsData: CommentData[];
+}
+```
+
+### ExportState
+
+エクスポート処理の状態管理。
+
+```typescript
+interface ExportState {
+  isExporting: boolean;
+  showingConfirmation: boolean;
+  showingProgress: boolean;
+  type: 'articles' | 'images' | 'pages';
+  current: number;
+  total: number;
+}
+```
