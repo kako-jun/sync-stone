@@ -72,6 +72,19 @@ v1.2.0では、コードベース全体の型安全性を大幅に強化する�
 *   **モジュール役割の明確化**: `exporter.ts`をZIPダウンロードヘルパーに特化させ、主要なエクスポートロジックを`content.ts`に統合。
 *   **外部ライブラリ型宣言の整備**: `zip.d.ts`と`turndown.d.ts`を拡充し、ライブラリ使用箇所の型カバレッジを向上。
 
+### 2.5 v1.2.1でのバグ修正
+
+v1.2.1では、コードレビューにより発見された11個のバグを修正しました。
+
+*   **IndexedDB接続リーク修正**: `saveImage`、`getImage`、`getImageCount`、`clearAllImages`関数で`db.close()`が呼ばれていなかった問題を修正。
+*   **エクスポート完了検知の改善**: 単一記事エクスポート後のIndexedDBクリア、進捗バーリセット処理を追加。
+*   **exportState状態管理**: `exportComplete`メッセージ受信時にbackground.tsで`exportState`をリセットするように修正。
+*   **parseInt NaN対策**: `getPaginationInfo`、`getImageListTotalPages`、`extractArticleDetails`でのparseInt呼び出しにフォールバック値を追加。
+*   **YAMLエスケープ強化**: タイトルに含まれるバックスラッシュ、改行、タブなどの特殊文字を適切にエスケープ。
+*   **DOM要素蓄積防止**: notification.tsでスタイル要素の重複追加を防止。
+*   **sendMessageエラーハンドリング**: ポップアップが閉じられた状態でのメッセージ送信時のUncaught promise rejectionを防止。
+*   **空ファイル名対策**: `sanitizeFilename`で特殊文字のみのタイトルが空になる場合に`untitled`をフォールバックとして使用。
+
 ## 3. TypeScript化とモダン開発環境
 
 ### 3.1 技術スタックの刷新
