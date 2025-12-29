@@ -1,6 +1,7 @@
 // UI notification functions for content script
 
 const NOTIFICATION_ID = 'sync-stone-notification';
+const STYLE_ID = 'sync-stone-notification-style';
 const AUTO_DISMISS_DELAY = 8000;
 const ANIMATION_DURATION = 300;
 
@@ -9,6 +10,7 @@ const ANIMATION_DURATION = 300;
  */
 function createAnimationStyle(): HTMLStyleElement {
   const style = document.createElement('style');
+  style.id = STYLE_ID;
   style.textContent = `
     @keyframes slideDown {
       from { transform: translateY(-100%); }
@@ -93,8 +95,10 @@ export function showExportNotification(message: string): void {
     existingNotification.remove();
   }
 
-  // Create and add animation styles
-  document.head.appendChild(createAnimationStyle());
+  // Create and add animation styles (only if not already added)
+  if (!document.getElementById(STYLE_ID)) {
+    document.head.appendChild(createAnimationStyle());
+  }
 
   // Create notification banner
   const notification = createNotificationBanner();
