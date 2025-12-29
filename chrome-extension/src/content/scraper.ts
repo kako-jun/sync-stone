@@ -52,10 +52,11 @@ export function getPaginationInfo(): number {
   const paginationElement = document.querySelector(SELECTORS.PAGINATION) as HTMLElement;
   if (paginationElement) {
     const paginationText = paginationElement.innerText;
-    // JP版固定: "1ページ / 8ページ"
-    const match = paginationText.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
-    if (match?.[2]) {
-      totalPages = parseInt(match[2], 10) || 1;
+    // 言語非依存: "1ページ / 8ページ", "Page 1 / 8", "Seite 1 / 8" など全て対応
+    // 数字だけを抽出して、最後の数字を総ページ数とする
+    const numbers = paginationText.match(/\d+/g);
+    if (numbers && numbers.length >= 2) {
+      totalPages = parseInt(numbers[numbers.length - 1], 10) || 1;
     }
   }
   return totalPages;
@@ -203,10 +204,10 @@ export function getImageListTotalPages(): number {
   let totalPages = 1;
   const element = document.querySelector('.btn__pager__current');
   if (element) {
-    // JP版固定: "1ページ / 8ページ"
-    const match = element.textContent?.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
-    if (match?.[2]) {
-      totalPages = parseInt(match[2], 10) || 1;
+    // 言語非依存: 数字だけを抽出して、最後の数字を総ページ数とする
+    const numbers = element.textContent?.match(/\d+/g);
+    if (numbers && numbers.length >= 2) {
+      totalPages = parseInt(numbers[numbers.length - 1], 10) || 1;
     }
   }
   return totalPages;
