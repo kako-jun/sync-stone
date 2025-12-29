@@ -93,3 +93,65 @@ export interface FetchImageListPageResponse extends BaseResponse {
 
 // Chrome message sender callback types
 export type SendResponse<T extends BaseResponse = BaseResponse> = (response: T) => void;
+
+// Popup message types
+export interface ShowExportConfirmationMessage {
+  action: 'showExportConfirmation';
+  totalArticles: number;
+  isOwnBlog: boolean;
+}
+
+export interface ProgressPageInfo {
+  currentPage: number;
+  totalPages: number;
+  imageCount?: number;
+}
+
+export interface UpdateProgressMessage {
+  action: 'updateProgress';
+  type: 'images' | 'articles' | 'pages' | 'collecting';
+  current: number;
+  total: number;
+  pageInfo?: ProgressPageInfo;
+  currentItem?: string;
+}
+
+export interface ExportCompleteMessage {
+  action: 'exportComplete';
+}
+
+export interface ShowErrorMessage {
+  action: 'showError';
+  message: string;
+}
+
+export interface ExportSuccessMessage {
+  action: 'exportSuccess';
+  message?: string;
+}
+
+export interface ArticleInfoMessage {
+  action: 'articleInfo';
+  title?: string;
+  bodyLength?: number;
+  imageCount?: number;
+  likes?: number;
+  commentsCount?: number;
+}
+
+export type PopupMessage =
+  | ShowExportConfirmationMessage
+  | UpdateProgressMessage
+  | ExportCompleteMessage
+  | ShowErrorMessage
+  | ExportSuccessMessage
+  | ArticleInfoMessage;
+
+// Article info response from content script
+export interface GetArticleInfoResponse extends BaseResponse {
+  title?: string;
+  bodyLength?: number;
+  imageCount?: number;
+  likes?: number;
+  commentsCount?: number;
+}

@@ -1,4 +1,4 @@
-import { ExportState } from "@/types";
+import { ExportState, PopupMessage, GetArticleInfoResponse } from "@/types";
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from "@/locales/messages";
 
 interface PopupElements {
@@ -338,7 +338,7 @@ function setupEventListeners(): void {
 }
 
 // Message listener for background script communication
-chrome.runtime.onMessage.addListener((request: any, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request: PopupMessage, sender, sendResponse) => {
   switch (request.action) {
     case "showExportConfirmation":
       // 記事数収集の進捗表示をクリア
@@ -499,7 +499,7 @@ function checkCurrentArticle(): void {
 
       // Get article information
       if (tab.id) {
-        chrome.tabs.sendMessage(tab.id, { action: "getArticleInfo" }, (response: any) => {
+        chrome.tabs.sendMessage(tab.id, { action: "getArticleInfo" }, (response: GetArticleInfoResponse) => {
           if (chrome.runtime.lastError) {
             return;
           }
@@ -626,11 +626,11 @@ function showGuidanceMessage(): void {
 
 // Display article information
 function displayArticleInfo(
-  title: string,
-  bodyLength: number,
-  imageCount: number,
-  likes: number,
-  commentsCount: number
+  title?: string,
+  bodyLength?: number,
+  imageCount?: number,
+  likes?: number,
+  commentsCount?: number
 ): void {
   const msgs = messages[currentLanguage];
 
