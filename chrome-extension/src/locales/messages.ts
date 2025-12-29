@@ -21,8 +21,6 @@ export interface Messages {
 
   // Confirmation dialog
   confirmationText: string;
-  confirmationOwnBlog: string;
-  confirmationOthersBlog: string;
 
   // Progress messages
   downloadingImages: string;
@@ -104,8 +102,6 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Confirmation dialog
     confirmationText: '件の記事が見つかりました。エクスポートしますか？',
-    confirmationOwnBlog: '',
-    confirmationOthersBlog: '',
 
     // Progress messages
     downloadingImages: '画像を処理中',
@@ -185,8 +181,6 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Confirmation dialog
     confirmationText: ' articles found. Export them?',
-    confirmationOwnBlog: '',
-    confirmationOthersBlog: '',
 
     // Progress messages
     downloadingImages: 'Processing Images',

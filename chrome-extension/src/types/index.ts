@@ -80,7 +80,7 @@ export type SendResponse<T extends BaseResponse = BaseResponse> = (response: T) 
 export interface ShowExportConfirmationMessage {
   action: 'showExportConfirmation';
   totalArticles: number;
-  isOwnBlog: boolean;
+  isOwnBlog: boolean;  // Used for logic, not displayed in UI
 }
 
 export interface ProgressPageInfo {
