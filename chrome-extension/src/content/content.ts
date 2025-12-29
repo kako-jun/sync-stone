@@ -133,7 +133,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: { suc
       current: 1,
       total: 1,
       currentItem: articleDetails.title
-    });
+    }).catch(() => {});
 
     // Convert to markdown
     const markdownResult = processImagesAndConvertToMarkdown({
@@ -426,7 +426,7 @@ async function handleAllArticlesExportFromContent(exportDelay: number, currentLa
       current: allEntries.length,
       total: totalPages,
       pageInfo: { currentPage: 1, totalPages }
-    });
+    }).catch(() => {});
     
     if (totalPages > 1) {
       for (let page = 2; page <= totalPages; page++) {
@@ -450,7 +450,7 @@ async function handleAllArticlesExportFromContent(exportDelay: number, currentLa
             current: allEntries.length, // 累積記事数
             total: totalPages,
             pageInfo: { currentPage: page, totalPages }
-          });
+          }).catch(() => {});
         } catch (error) {
           // Failed to fetch page - continue with available entries
         }
@@ -577,7 +577,7 @@ async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: bo
           current: i + 1,
           total: entries.length,
           currentItem: articleDetails.title
-        });
+        }).catch(() => {});
 
       } catch (error) {
         // Failed to fetch article - continue with available articles
@@ -719,7 +719,7 @@ async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: bo
           current: i + 1,
           total: allArticles.length,
           currentItem: article.title
-        });
+        }).catch(() => {});
 
       } catch (error) {
         console.error(`Error processing article: ${article.title}`, error);
@@ -834,7 +834,7 @@ async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: bo
     // Notify completion
     console.log('[EXPORT-LOG] ========== FULL EXPORT COMPLETE ==========');
     console.log('[EXPORT-LOG] Export summary: All phases completed successfully');
-    chrome.runtime.sendMessage({ action: 'exportComplete' });
+    chrome.runtime.sendMessage({ action: 'exportComplete' }).catch(() => {});
     
     // Delete entire database after successful export
     try {
