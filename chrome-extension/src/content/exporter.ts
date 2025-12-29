@@ -1,7 +1,7 @@
 // Export helper functions for content script
 
 import { base64ToUint8Array } from '@/utils/helpers';
-import { ImageMap } from '@/types';
+import { ImageMap, DownloadAllImagesResponse, GetDownloadedImageResponse } from '@/types';
 
 // Declare external dependencies
 declare const zip: any;
@@ -34,13 +34,13 @@ export async function downloadAdditionalImages(
 
   // Request background to download images
   let timeoutId: NodeJS.Timeout;
-  const downloadResult: any = await Promise.race([
-    new Promise((resolve, reject) => {
+  const downloadResult = await Promise.race<DownloadAllImagesResponse>([
+    new Promise<DownloadAllImagesResponse>((resolve, reject) => {
       chrome.runtime.sendMessage({
         action: 'downloadAllImages',
         imageUrls: newImageUrls,
         totalImages: newImageUrls.length
-      }, (response) => {
+      }, (response: DownloadAllImagesResponse) => {
         clearTimeout(timeoutId);
         if (chrome.runtime.lastError) {
           reject(new Error(chrome.runtime.lastError.message));
@@ -49,7 +49,7 @@ export async function downloadAdditionalImages(
         }
       });
     }),
-    new Promise((_, reject) => {
+    new Promise<DownloadAllImagesResponse>((_, reject) => {
       timeoutId = setTimeout(() => {
         reject(new Error('Additional image download timeout after 2 minutes'));
       }, 2 * 60 * 1000);
@@ -65,7 +65,7 @@ export async function downloadAdditionalImages(
   for (const imageUrl of newImageUrls) {
     if (isCancelledFn()) break;
 
-    const imageResponse: any = await new Promise((resolve) => {
+    const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
       chrome.runtime.sendMessage({
         action: 'getDownloadedImage',
         imageUrl: imageUrl
@@ -107,7 +107,7 @@ export async function addImagesToZip(
     }
 
     const imageUrl = imageUrls[i];
-    const imageResponse: any = await new Promise((resolve) => {
+    const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
       chrome.runtime.sendMessage({
         action: 'getDownloadedImage',
         imageUrl: imageUrl
