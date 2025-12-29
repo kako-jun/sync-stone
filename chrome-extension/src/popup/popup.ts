@@ -1,4 +1,5 @@
 import { ExportState } from "@/types";
+import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from "@/locales/messages";
 
 interface PopupElements {
   delayInput: HTMLInputElement;
@@ -39,103 +40,12 @@ interface PopupElements {
 }
 
 let elements: PopupElements;
-let currentLanguage = "ja";
+let currentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
 
-// Language messages
-const messages: { [key: string]: { [key: string]: string } } = {
-  ja: {
-    extensionName: "SyncStone - 星紡のメモワール",
-    lodestoneExportDescription: "ロドストの記事を、Markdown形式でエクスポートします。",
-    accessIntervalLabel: "アクセス間隔:",
-    exportAllArticlesButton: "☄ すべての記事をエクスポート",
-    exportAllArticlesButtonFirstPage: "1ページ目へ移動 → すべての記事をエクスポート",
-    exportCurrentArticleButton: "☄ この記事をエクスポート",
-    yesButton: "はい",
-    noButton: "いいえ",
-    confirmationText: "件の記事が見つかりました。エクスポートしますか？",
-    confirmationOwnBlog: "（自分の記事）",
-    confirmationOthersBlog: "（自分以外の記事）",
-    downloadingImages: "画像をエクスポート中",
-    exportingArticles: "記事をエクスポート中",
-    exportComplete: "エクスポート完了！",
-    startingExport: "エクスポート中です...",
-    startingDownload: "エクスポート中です...",
-    cancelExport: "⛔ エクスポートをキャンセル",
-    exportCancelled: "エクスポートをキャンセルしました",
-    languageLabel: "🌐 Language:",
-    singleArticleExported: "記事がエクスポートされました！",
-    failedToExportArticle: "記事のエクスポートに失敗しました: ",
-    failedToExportArticles: "記事のエクスポートに失敗しました: ",
-    failedToDownloadImages: "画像のエクスポートに失敗しました: ",
-    couldNotRetrieveTitle: "取得できませんでした",
-    contentScriptNotAvailable: "コンテンツスクリプトが利用できません: ",
-    notOnBlogListPageError: "ブログ一覧ページではありません",
-    connectionError: "接続を確立できませんでした。受信側が存在しません。",
-    guidanceTitle: "ロドストのブログページに移動してください",
-    guidanceDetails: "• 記事一覧ページ → 全記事エクスポート<br>• 個別記事ページ → 個別 + 全記事エクスポート",
-    guidanceLinkText: "ロドストにアクセス",
-    articleInfoHeader: "記事情報",
-    articleTitle: "タイトル: ",
-    articleBody: "本文: ",
-    articleImages: "画像: ",
-    articleLikes: "いいね: ",
-    articleComments: "コメント: ",
-    chars: "文字",
-    件: "件",
-    imageDownloadHeader: "🖼️ 画像エクスポート",
-    articleProcessHeader: "📝 記事エクスポート",
-    imageDownloadComplete: "画像エクスポート完了",
-    articleProcessComplete: "記事エクスポート完了",
-    completed: "完了",
-    collectingArticles: "記事数を収集中",
-  },
-  en: {
-    extensionName: "SyncStone - Stardustmemoir",
-    lodestoneExportDescription: "Export your Lodestone diary entries in Markdown format.",
-    accessIntervalLabel: "Access Interval:",
-    exportAllArticlesButton: "Export All Articles",
-    exportAllArticlesButtonFirstPage: "Go to Page 1 and Export All",
-    exportCurrentArticleButton: "Export Current Article",
-    yesButton: "Yes",
-    noButton: "No",
-    confirmationText: " articles will be exported. Continue?",
-    confirmationOwnBlog: "(Your Articles)",
-    confirmationOthersBlog: "(Others' Articles)",
-    downloadingImages: "Exporting Images",
-    exportingArticles: "Exporting Articles",
-    exportComplete: "Export Complete!",
-    startingExport: "Exporting...",
-    startingDownload: "Exporting...",
-    cancelExport: "⛔ Cancel Export",
-    exportCancelled: "Export cancelled",
-    languageLabel: "🌐 Language:",
-    singleArticleExported: "Single article exported successfully!",
-    failedToExportArticle: "Failed to export article: ",
-    failedToExportArticles: "Failed to export articles: ",
-    failedToDownloadImages: "Failed to export images: ",
-    couldNotRetrieveTitle: "Could not retrieve",
-    contentScriptNotAvailable: "Content script not available: ",
-    notOnBlogListPageError: "Not on blog list page",
-    connectionError: "Could not establish connection. Receiving end does not exist.",
-    guidanceTitle: "Please navigate to a Lodestone blog page",
-    guidanceDetails: "• Blog list page → Export all articles<br>• Individual article page → Individual + Export all",
-    guidanceLinkText: "Go to Lodestone",
-    articleInfoHeader: "Article Info",
-    articleTitle: "Title: ",
-    articleBody: "Body: ",
-    articleImages: "Images: ",
-    articleLikes: "Likes: ",
-    articleComments: "Comments: ",
-    chars: " chars",
-    件: "",
-    imageDownloadHeader: "🖼️ Exporting Images",
-    articleProcessHeader: "📝 Exporting Articles",
-    imageDownloadComplete: "Image export complete",
-    articleProcessComplete: "Article export complete",
-    completed: "Complete",
-    collectingArticles: "Collecting Articles",
-  },
-};
+// Helper to get current language messages
+function msg() {
+  return messages[currentLanguage];
+}
 
 // Initialize internationalization messages
 function applyI18nMessages(): void {
@@ -413,7 +323,7 @@ function setupEventListeners(): void {
 
   // Language selector
   elements.languageSelect.addEventListener("change", () => {
-    currentLanguage = elements.languageSelect.value;
+    currentLanguage = elements.languageSelect.value as SupportedLanguage;
     applyI18nMessages();
 
     // Update guidance message if it's currently displayed
@@ -742,21 +652,13 @@ function showPageCollectionProgress(
   total: number,
   pageInfo?: { currentPage: number; totalPages: number }
 ): void {
-  // 記事数収集時はステータスメッセージとして表示
-  let progressText = "";
   const msgs = messages[currentLanguage];
+  let progressText = "";
+
   if (pageInfo) {
-    if (currentLanguage === "ja") {
-      progressText = `${msgs.collectingArticles} - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}件`;
-    } else {
-      progressText = `${msgs.collectingArticles} - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Articles: ${current}`;
-    }
+    progressText = `${msgs.collectingArticles} - ${msgs.progressPage} ${pageInfo.currentPage}/${pageInfo.totalPages} - ${msgs.progressArticleCount}: ${current}${msgs.件}`;
   } else {
-    if (currentLanguage === "ja") {
-      progressText = `${msgs.collectingArticles} - 記事数: ${current}件`;
-    } else {
-      progressText = `${msgs.collectingArticles} - Articles: ${current}`;
-    }
+    progressText = `${msgs.collectingArticles} - ${msgs.progressArticleCount}: ${current}${msgs.件}`;
   }
 
   showStatusMessage(progressText, "info");
@@ -770,33 +672,17 @@ function showImageProgress(
 ): void {
   elements.imageProgressContainer.style.display = "block";
 
-  let progressText = "";
   const msgs = messages[currentLanguage];
+  let progressText = "";
+  const percentage = total > 0 ? (current / total) * 100 : 0;
+  elements.imageProgressBar.style.width = `${percentage}%`;
+  elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
 
   if (pageInfo) {
-    // 画像収集フェーズ：記事数収集と同様の表示形式
-    const percentage = total > 0 ? (current / total) * 100 : 0;
-    elements.imageProgressBar.style.width = `${percentage}%`;
-    elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
-
-    if (currentLanguage === "ja") {
-      progressText = `画像一覧を収集中 - ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 画像数: ${current}件`;
-    } else {
-      progressText = `Collecting Images - Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Images: ${current}`;
-    }
+    progressText = `${msgs.collectingImageList} - ${msgs.progressPage} ${pageInfo.currentPage}/${pageInfo.totalPages} - ${msgs.progressImageCount}: ${current}${msgs.件}`;
   } else {
-    // 画像ダウンロードフェーズ
-    const percentage = total > 0 ? (current / total) * 100 : 0;
-    elements.imageProgressBar.style.width = `${percentage}%`;
-    elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
+    progressText = `${msgs.progressImages}: ${current}/${total}${msgs.件}`;
 
-    if (currentLanguage === "ja") {
-      progressText = `画像: ${current}/${total}件`;
-    } else {
-      progressText = `Images: ${current}/${total}`;
-    }
-
-    // 現在処理中のアイテム情報を追加（20文字まで）
     if (currentItem) {
       const truncatedItem = currentItem.length > 20 ? currentItem.substring(0, 20) + "..." : currentItem;
       progressText += ` | ${truncatedItem}`;
@@ -814,26 +700,18 @@ function showArticleProgress(
 ): void {
   elements.articleProgressContainer.style.display = "block";
 
+  const msgs = messages[currentLanguage];
   const percentage = total > 0 ? (current / total) * 100 : 0;
   elements.articleProgressBar.style.width = `${percentage}%`;
   elements.articleProgressBar.textContent = `${percentage.toFixed(1)}%`;
 
   let progressText = "";
   if (pageInfo) {
-    if (currentLanguage === "ja") {
-      progressText = `ページ ${pageInfo.currentPage}/${pageInfo.totalPages} - 記事数: ${current}/${total}件`;
-    } else {
-      progressText = `Page ${pageInfo.currentPage}/${pageInfo.totalPages} - Articles: ${current}/${total}`;
-    }
+    progressText = `${msgs.progressPage} ${pageInfo.currentPage}/${pageInfo.totalPages} - ${msgs.progressArticleCount}: ${current}/${total}${msgs.件}`;
   } else {
-    if (currentLanguage === "ja") {
-      progressText = `記事: ${current}/${total}件`;
-    } else {
-      progressText = `Articles: ${current}/${total}`;
-    }
+    progressText = `${msgs.progressArticles}: ${current}/${total}${msgs.件}`;
   }
 
-  // 現在処理中のアイテム情報を追加（25文字まで）
   if (currentItem) {
     const truncatedItem = currentItem.length > 25 ? currentItem.substring(0, 25) + "..." : currentItem;
     progressText += ` | ${truncatedItem}`;
@@ -873,7 +751,7 @@ function resetProgress(): void {
 function showExportWarning(show: boolean): void {
   if (show) {
     const warningText = document.getElementById("exportWarningText") as HTMLElement;
-    warningText.textContent = chrome.i18n.getMessage("doNotClosePopup");
+    warningText.textContent = messages[currentLanguage].doNotClosePopup;
   }
   elements.exportWarningContainer.style.display = show ? "block" : "none";
 }

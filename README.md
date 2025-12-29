@@ -1,6 +1,6 @@
 # SyncStone - Stardustmemoir Chrome Extension
 
-[日本語](README_ja.md) | [Français](README_fr.md) | [Deutsch](README_de.md) | [简体中文](README_zh.md) | [한국어](README_ko.md)
+[日本語](README.ja.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [简体中文](README.zh.md) | [한국어](README.ko.md)
 
 SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTASY XIV. This extension operates as a standalone Chrome extension designed to export your diary entries from The Lodestone (FINAL FANTASY XIV's official player site) into Markdown format for local storage. Since The Lodestone lacks an export function, the primary goal is to help you back up your precious memories.
 

@@ -1,6 +1,7 @@
 import { BlogEntry, ExportState } from '@/types';
 import { CONFIG, URLS } from '@/utils/constants';
 import { saveImage, getImage, getImageCount, clearAllImages, deleteDatabase, StoredImage } from '@/utils/indexedDB';
+import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
 
 // Global state
 let exportState: ExportState = {
@@ -14,7 +15,7 @@ let exportState: ExportState = {
 
 let isCancelled = false;
 let currentExportDelay = CONFIG.DEFAULT_EXPORT_DELAY;
-let currentLanguage = 'ja';
+let currentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
 
 // Stored entries data for content script approach
 let storedEntriesData: {
@@ -24,35 +25,9 @@ let storedEntriesData: {
   currentLanguage: string;
 } | null = null;
 
-// Background script messages
-const backgroundMessages: { [key: string]: { [key: string]: string } } = {
-  ja: {
-    contentScriptNotAvailable: 'ページをリロードしてから再度お試しください。',
-    couldNotRetrieveData: '記事データを取得できませんでした。',
-    notOnBlogListPageError: 'ブログ一覧ページではありません。',
-    singleArticleExported: '記事がエクスポートされました！',
-    exportComplete: 'エクスポート完了！',
-    failedToExport: 'エクスポートに失敗しました: ',
-    failedToDownloadImages: '画像のダウンロードに失敗しました: ',
-    blogListMoved: 'ブログ一覧ページに移動しました。全記事エクスポートボタンをもう一度押してください。',
-    exportDataNotFound: 'エクスポート用のデータが見つかりません'
-  },
-  en: {
-    contentScriptNotAvailable: 'Please reload the page and try again.',
-    couldNotRetrieveData: 'Could not retrieve article data from page.',
-    notOnBlogListPageError: 'Not on blog list page.',
-    singleArticleExported: 'Single article exported successfully!',
-    exportComplete: 'Export complete!',
-    failedToExport: 'Failed to export: ',
-    failedToDownloadImages: 'Failed to download images: ',
-    blogListMoved: 'Moved to blog list page. Please press the export all articles button again.',
-    exportDataNotFound: 'Export data not found'
-  }
-};
-
 // Get message in current language
-function getMessage(key: string): string {
-  return backgroundMessages[currentLanguage][key] || backgroundMessages.ja[key];
+function getMessage(key: keyof typeof messages.ja): string {
+  return messages[currentLanguage][key];
 }
 
 // Browser action click handler

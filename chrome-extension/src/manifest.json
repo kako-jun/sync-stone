@@ -1,9 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_extensionName__",
+  "name": "SyncStone - Stardustmemoir",
   "version": "1.1.0",
-  "description": "__MSG_extensionDescription__",
-  "default_locale": "ja",
+  "description": "Export Lodestone diaries to Markdown format",
   "permissions": [
     "activeTab",
     "downloads", 
@@ -29,7 +28,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "__MSG_extensionName__"
+    "default_title": "SyncStone"
   },
   "icons": {
     "16": "icons/icon16.png",

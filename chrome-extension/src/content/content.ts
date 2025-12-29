@@ -1,5 +1,15 @@
 // Content script for SyncStone Chrome extension
 
+import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
+
+// Current language for content script
+let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
+
+// Helper to get current language messages
+function msg() {
+  return messages[contentLanguage];
+}
+
 // TurndownService is loaded from popup.html
 declare const TurndownService: any;
 const turndownService = new TurndownService();
@@ -415,7 +425,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
     const articleDetails = extractArticleDetails();
     
     if (!articleDetails.title || !articleDetails.bodyHtml) {
-      throw new Error('記事データを取得できませんでした');
+      throw new Error(msg().articleDataNotFound);
     }
     
     const imageMap: { [key: string]: string } = {};
@@ -487,7 +497,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
     });
 
     if (!markdownResult.success || !markdownResult.markdown) {
-      throw new Error('Markdownへの変換に失敗しました');
+      throw new Error(msg().markdownConversionFailed);
     }
 
     // Create single article ZIP using zip.js streaming
@@ -521,11 +531,11 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
     const zipBlob = await zipWriter.close();
     await downloadStreamingZip(zipBlob, `${sanitizedTitle}.zip`);
 
-    sendResponse({ success: true, message: '記事がエクスポートされました！' });
+    sendResponse({ success: true, message: msg().singleArticleExported });
   } catch (error) {
     sendResponse({ 
       success: false, 
-      message: 'エクスポートに失敗しました: ' + (error instanceof Error ? error.message : String(error))
+      message: msg().failedToExport + (error instanceof Error ? error.message : String(error))
     });
   }
 }
@@ -720,8 +730,11 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
 
 // Handle all articles export from content script
 async function handleAllArticlesExportFromContent(exportDelay: number, currentLanguage: string): Promise<void> {
+  // Set content language from parameter
+  contentLanguage = (currentLanguage === 'en' ? 'en' : 'ja') as SupportedLanguage;
+
   try {
-    // 初期化：前回のデータをクリア
+    // Initialize: clear previous data
     isCancelled = false;
     
     // 1. Get articles from current page (毎回新規取得)
@@ -787,7 +800,7 @@ async function handleAllArticlesExportFromContent(exportDelay: number, currentLa
     
     if (displayCount === 0) {
       // No articles to export
-      sendErrorMessage('エクスポートする記事がありません。');
+      sendErrorMessage(msg().noArticlesToExport);
       return;
     }
 
@@ -808,27 +821,30 @@ async function handleAllArticlesExportFromContent(exportDelay: number, currentLa
     });
 
   } catch (error) {
-    sendErrorMessage('エクスポート処理中にエラーが発生しました: ' + (error instanceof Error ? error.message : String(error)));
+    sendErrorMessage(msg().exportProcessError + (error instanceof Error ? error.message : String(error)));
   }
 }
 
 // Process all articles after confirmation
 async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean, exportDelay: number, currentLanguage: string): Promise<void> {
+  // Set content language from parameter
+  contentLanguage = (currentLanguage === 'en' ? 'en' : 'ja') as SupportedLanguage;
+
   try {
     console.log('[EXPORT-LOG] ========== START FULL EXPORT ==========');
     console.log('[EXPORT-LOG] Export configuration:', {
-      entriesLength: entries.length, 
-      isOwnBlog: isOwnBlog, 
+      entriesLength: entries.length,
+      isOwnBlog: isOwnBlog,
       exportDelay: exportDelay
     });
-    
-    // 初期化：前回のデータをクリア
+
+    // Initialize: clear previous data
     const allArticles: any[] = [];
     // Remove JSZip initialization - using zip.js streaming instead
     let imageMap: { [key: string]: string } = {};
     const allImageUrls = new Set<string>();
-    
-    // キャンセルフラグも初期化
+
+    // Initialize cancellation flag
     isCancelled = false;
 
     // Phase 0: Download images from image list pages (自分のブログの場合のみ)
@@ -1155,7 +1171,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     }
 
   } catch (error) {
-    sendErrorMessage('記事処理中にエラーが発生しました: ' + (error instanceof Error ? error.message : String(error)));
+    sendErrorMessage(msg().articleProcessError + (error instanceof Error ? error.message : String(error)));
     
     // Delete database even on error
     try {

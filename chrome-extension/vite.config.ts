@@ -31,7 +31,6 @@ export default defineConfig({
         // Copy static files after build
         copyFileSync('src/manifest.json', 'dist/manifest.json');
         copyFileSync('src/popup.html', 'dist/popup.html');
-        cpSync('src/_locales', 'dist/_locales', { recursive: true });
         cpSync('src/icons', 'dist/icons', { recursive: true });
         
         // Copy Turndown library for content script
