@@ -62,11 +62,23 @@ function configureImageLinkRule(imageMap: ImageMap): void {
 }
 
 /**
+ * Escape string for YAML double-quoted value
+ */
+function escapeYamlString(str: string): string {
+  return str
+    .replace(/\\/g, '\\\\')  // Backslash first
+    .replace(/"/g, '\\"')    // Double quotes
+    .replace(/\n/g, '\\n')   // Newlines
+    .replace(/\r/g, '\\r')   // Carriage returns
+    .replace(/\t/g, '\\t');  // Tabs
+}
+
+/**
  * Build YAML frontmatter for markdown file
  */
 function buildFrontmatter(title: string, publishDate: string | null, likes: number, commentsCount: number, tags: string[]): string {
   let frontmatter = `---\n`;
-  frontmatter += `title: "${title.replace(/"/g, '\\"')}"\n`;
+  frontmatter += `title: "${escapeYamlString(title)}"\n`;
   if (publishDate) {
     frontmatter += `date: "${publishDate}"\n`;
   }

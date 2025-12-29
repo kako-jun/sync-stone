@@ -36,11 +36,17 @@ export async function saveImage(image: StoredImage): Promise<void> {
   const db = await openDB();
   const transaction = db.transaction([IMAGE_STORE], 'readwrite');
   const store = transaction.objectStore(IMAGE_STORE);
-  
+
   return new Promise((resolve, reject) => {
     const request = store.put(image);
-    request.onsuccess = () => resolve();
-    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      db.close();
+      resolve();
+    };
+    request.onerror = () => {
+      db.close();
+      reject(request.error);
+    };
   });
 }
 
@@ -49,11 +55,17 @@ export async function getImage(url: string): Promise<StoredImage | null> {
   const db = await openDB();
   const transaction = db.transaction([IMAGE_STORE], 'readonly');
   const store = transaction.objectStore(IMAGE_STORE);
-  
+
   return new Promise((resolve, reject) => {
     const request = store.get(url);
-    request.onsuccess = () => resolve(request.result || null);
-    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      db.close();
+      resolve(request.result || null);
+    };
+    request.onerror = () => {
+      db.close();
+      reject(request.error);
+    };
   });
 }
 
@@ -62,11 +74,17 @@ export async function getImageCount(): Promise<number> {
   const db = await openDB();
   const transaction = db.transaction([IMAGE_STORE], 'readonly');
   const store = transaction.objectStore(IMAGE_STORE);
-  
+
   return new Promise((resolve, reject) => {
     const request = store.count();
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      db.close();
+      resolve(request.result);
+    };
+    request.onerror = () => {
+      db.close();
+      reject(request.error);
+    };
   });
 }
 
@@ -76,14 +94,18 @@ export async function clearAllImages(): Promise<void> {
   const db = await openDB();
   const transaction = db.transaction([IMAGE_STORE], 'readwrite');
   const store = transaction.objectStore(IMAGE_STORE);
-  
+
   return new Promise((resolve, reject) => {
     const request = store.clear();
     request.onsuccess = () => {
       console.log('[IndexedDB] All images cleared successfully');
+      db.close();
       resolve();
     };
-    request.onerror = () => reject(request.error);
+    request.onerror = () => {
+      db.close();
+      reject(request.error);
+    };
   });
 }
 
