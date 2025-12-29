@@ -10,6 +10,14 @@ import {
   scrapeImageListPageUrls,
   getImageListTotalPages
 } from './scraper';
+import {
+  downloadAdditionalImages,
+  addImagesToZip,
+  sendProgressUpdate,
+  downloadZip,
+  ImageMap,
+  ProcessedArticle
+} from './exporter';
 
 // Current language for content script
 let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
@@ -31,21 +39,6 @@ const DB_NAME = 'SyncStoneDB';
 const DB_VERSION = 1;
 
 
-// Download ZIP file using streaming
-async function downloadStreamingZip(zipBlob: Blob, filename: string): Promise<void> {
-  console.log(`[STREAMING-ZIP] Downloading ZIP file: ${filename} (${Math.round(zipBlob.size / 1024 / 1024)}MB)`);
-  
-  const url = URL.createObjectURL(zipBlob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  
-  console.log(`[STREAMING-ZIP] ZIP download completed: ${filename}`);
-}
 
 async function deleteDatabase(): Promise<void> {
   console.log('[IndexedDB] Deleting entire database');
@@ -302,7 +295,7 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
     }
     
     const zipBlob = await zipWriter.close();
-    await downloadStreamingZip(zipBlob, `${sanitizedTitle}.zip`);
+    await downloadZip(zipBlob, `${sanitizedTitle}.zip`);
 
     sendResponse({ success: true, message: msg().singleArticleExported });
   } catch (error) {
@@ -928,7 +921,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     
     // Download unified ZIP
     const filename = isOwnBlog ? 'lodestone_complete_export.zip' : 'lodestone_others_complete_export.zip';
-    await downloadStreamingZip(zipBlob, filename);
+    await downloadZip(zipBlob, filename);
 
     // Notify completion
     console.log('[EXPORT-LOG] ========== FULL EXPORT COMPLETE ==========');
