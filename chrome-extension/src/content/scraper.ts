@@ -52,9 +52,10 @@ export function getPaginationInfo(): number {
   const paginationElement = document.querySelector(SELECTORS.PAGINATION) as HTMLElement;
   if (paginationElement) {
     const paginationText = paginationElement.innerText;
+    // JP版固定: "1ページ / 8ページ"
     const match = paginationText.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
     if (match?.[2]) {
-      totalPages = parseInt(match[2], 10);
+      totalPages = parseInt(match[2], 10) || 1;
     }
   }
   return totalPages;
@@ -73,8 +74,8 @@ export function extractArticleDetails(): ArticleDetails {
 
   const title = titleElement?.innerText.trim() || null;
   const bodyHtml = bodyElement?.innerHTML || null;
-  const likes = likesElement ? parseInt(likesElement.innerText.replace(/[^\d]/g, ''), 10) : 0;
-  const commentsCount = commentsCountElement ? parseInt(commentsCountElement.innerText.trim(), 10) : 0;
+  const likes = likesElement ? (parseInt(likesElement.innerText.replace(/[^\d]/g, ''), 10) || 0) : 0;
+  const commentsCount = commentsCountElement ? (parseInt(commentsCountElement.innerText.trim(), 10) || 0) : 0;
   const publishDate = publishDateElement ?
     (publishDateElement.getAttribute('datetime') || (publishDateElement as HTMLElement).innerText.trim()) : null;
   const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
@@ -202,9 +203,10 @@ export function getImageListTotalPages(): number {
   let totalPages = 1;
   const element = document.querySelector('.btn__pager__current');
   if (element) {
+    // JP版固定: "1ページ / 8ページ"
     const match = element.textContent?.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
     if (match?.[2]) {
-      totalPages = parseInt(match[2], 10);
+      totalPages = parseInt(match[2], 10) || 1;
     }
   }
   return totalPages;
