@@ -206,6 +206,7 @@ function setupEventListeners(): void {
 
       if (isBlogListFirstPage) {
         // We're on first page - set delay and start export
+        // Note: warning is shown AFTER confirmation (in confirmYesButton click handler)
         chrome.runtime.sendMessage(
           {
             action: "setExportDelay",
@@ -214,13 +215,14 @@ function setupEventListeners(): void {
           },
           () => {
             chrome.runtime.sendMessage({ action: "exportAllArticles" });
-            showExportWarning(true);
+            // Don't show warning here - wait until user confirms in dialog
           }
         );
       } else {
-        // Not on first page - just navigate (don't set delay)
+        // Not on first page - just navigate (don't set delay, don't show warning)
+        // The popup will close when new tab opens, and user must reopen popup to start export
         chrome.runtime.sendMessage({ action: "exportAllArticles" });
-        showExportWarning(true);
+        // Note: No showExportWarning here because we're just navigating, not exporting
       }
     });
   });
@@ -279,7 +281,8 @@ function setupEventListeners(): void {
 
     elements.confirmationDialog.style.display = "none";
 
-    // Show starting message
+    // Show warning and starting message after user confirms
+    showExportWarning(true);
     showStatusMessage(messages[currentLanguage].startingExport, "info");
 
     // Legacy support
@@ -381,8 +384,9 @@ chrome.runtime.onMessage.addListener((request: PopupMessage, _sender, _sendRespo
       break;
 
     case "exportComplete":
-      // Hide cancel button
+      // Hide cancel button and warning
       elements.exportControlContainer.style.display = "none";
+      showExportWarning(false);
 
       // Complete both progress bars
       completeImageProgress();

@@ -96,7 +96,7 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Buttons
     exportAllArticlesButton: 'すべての記事をエクスポート',
-    exportAllArticlesButtonFirstPage: '1ページ目へ移動してエクスポート開始',
+    exportAllArticlesButtonFirstPage: '1ページ目へ移動',
     exportCurrentArticleButton: 'この記事をエクスポート',
     yesButton: 'はい',
     noButton: 'いいえ',
@@ -177,7 +177,7 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Buttons
     exportAllArticlesButton: 'Export All Articles',
-    exportAllArticlesButtonFirstPage: 'Go to Page 1 to Start Export',
+    exportAllArticlesButtonFirstPage: 'Go to Page 1',
     exportCurrentArticleButton: 'Export This Article',
     yesButton: 'Yes',
     noButton: 'No',
