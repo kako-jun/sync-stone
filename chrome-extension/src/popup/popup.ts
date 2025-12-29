@@ -673,7 +673,7 @@ function showPageCollectionProgress(
 function showImageProgress(
   current: number,
   total: number,
-  pageInfo?: { currentPage: number; totalPages: number },
+  pageInfo?: { currentPage: number; totalPages: number; imageCount?: number },
   currentItem?: string
 ): void {
   elements.imageProgressContainer.style.display = "block";
@@ -685,7 +685,9 @@ function showImageProgress(
   elements.imageProgressBar.textContent = `${percentage.toFixed(1)}%`;
 
   if (pageInfo) {
-    progressText = `${msgs.collectingImageList} - ${msgs.progressPage} ${pageInfo.currentPage}/${pageInfo.totalPages} - ${msgs.progressImageCount}: ${current}${msgs.件}`;
+    // 画像一覧収集中：pageInfo.imageCountを使用（実際の画像数）
+    const imageCount = pageInfo.imageCount ?? current;
+    progressText = `${msgs.collectingImageList} - ${msgs.progressPage} ${pageInfo.currentPage}/${pageInfo.totalPages} - ${msgs.progressImageCount}: ${imageCount}${msgs.件}`;
   } else {
     progressText = `${msgs.progressImages}: ${current}/${total}${msgs.件}`;
 
