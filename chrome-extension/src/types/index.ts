@@ -47,3 +47,46 @@ export interface PaginationInfo {
   totalPages: number;
   currentPage: number;
 }
+
+// Chrome message response types
+export interface BaseResponse {
+  success: boolean;
+  message?: string;
+}
+
+export interface DownloadedImageInfo {
+  url: string;
+  filename: string;
+  base64: string;
+  success: boolean;
+}
+
+export interface DownloadAllImagesResponse extends BaseResponse {
+  results?: DownloadedImageInfo[];
+  totalImages?: number;
+}
+
+export interface GetDownloadedImageResponse extends BaseResponse {
+  imageData?: DownloadedImageInfo;
+}
+
+export interface FetchPageResponse extends BaseResponse {
+  entries?: BlogEntry[];
+  articleCount?: number;
+}
+
+export interface FetchArticleResponse extends BaseResponse {
+  article?: ArticleDetails;
+}
+
+export interface ProcessedArticleData {
+  sanitizedTitle: string;
+  markdownContent: string;
+  originalTitle: string;
+  imageUrls: string[];
+}
+
+export interface FetchImageListPageResponse extends BaseResponse {
+  imageUrls?: string[];
+  totalPages?: number;
+}

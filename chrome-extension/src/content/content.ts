@@ -4,6 +4,15 @@ import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/message
 import { generateHash, sanitizeFilename, sendErrorMessage, base64ToUint8Array } from '@/utils/helpers';
 import { deleteDatabase } from '@/utils/indexedDB';
 import {
+  BlogEntry,
+  ArticleDetails,
+  DownloadAllImagesResponse,
+  GetDownloadedImageResponse,
+  FetchPageResponse,
+  FetchArticleResponse,
+  FetchImageListPageResponse
+} from '@/types';
+import {
   extractBlogEntries,
   getPaginationInfo,
   extractArticleDetails,
@@ -21,8 +30,7 @@ import {
 } from './exporter';
 import {
   processImagesAndConvertToMarkdown,
-  getTurndownService,
-  MarkdownConversionData
+  getTurndownService
 } from './markdown';
 import { showExportNotification } from './notification';
 
@@ -44,7 +52,7 @@ const turndownService = getTurndownService();
 let isCancelled = false;
 
 // Fetch page entries via background script
-async function fetchPageEntries(pageUrl: string, delay: number): Promise<any[]> {
+async function fetchPageEntries(pageUrl: string, delay: number): Promise<BlogEntry[]> {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage({
       action: 'fetchPageInNewTab',
@@ -61,14 +69,14 @@ async function fetchPageEntries(pageUrl: string, delay: number): Promise<any[]> 
 }
 
 // Fetch article details via background script
-async function fetchArticleDetails(articleUrl: string, delay: number): Promise<any> {
+async function fetchArticleDetails(articleUrl: string, delay: number): Promise<ArticleDetails> {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage({
       action: 'fetchArticleInNewTab',
       url: articleUrl,
       delay
-    }, (response) => {
-      if (response?.success) {
+    }, (response: FetchArticleResponse) => {
+      if (response?.success && response.article) {
         resolve(response.article);
       } else {
         reject(new Error(response?.message || 'Failed to fetch article details'));
@@ -95,12 +103,12 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
     const allImageUrls = Array.from(imageUrlsSet);
     
     if (allImageUrls.length > 0) {
-      const downloadedImageData: any = await new Promise((resolve, reject) => {
+      const downloadedImageData = await new Promise<DownloadAllImagesResponse>((resolve, reject) => {
         chrome.runtime.sendMessage({
           action: 'downloadAllImages',
           imageUrls: allImageUrls,
           totalImages: allImageUrls.length
-        }, (response) => {
+        }, (response: DownloadAllImagesResponse) => {
           if (chrome.runtime.lastError) {
             reject(new Error(chrome.runtime.lastError.message));
           } else {
@@ -112,8 +120,8 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
       // Add downloaded images to ZIP using pull-based approach
       if (downloadedImageData?.success) {
         for (const imageUrl of allImageUrls) {
-          const imageResponse: any = await new Promise((resolve) => {
-            chrome.runtime.sendMessage({ 
+          const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
+            chrome.runtime.sendMessage({
               action: 'getDownloadedImage',
               imageUrl: imageUrl
             }, resolve);
@@ -170,8 +178,8 @@ async function handleSingleArticleExportInContent(sendResponse: (response: any) 
     // Add all images to ZIP using streaming
     const imageUrls = Object.keys(imageMap).filter(url => imageMap[url].startsWith('images/'));
     for (const imageUrl of imageUrls) {
-      const imageResponse: any = await new Promise((resolve) => {
-        chrome.runtime.sendMessage({ 
+      const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
+        chrome.runtime.sendMessage({
           action: 'getDownloadedImage',
           imageUrl: imageUrl
         }, resolve);
@@ -222,7 +230,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
     try {
       console.log(`[collectAndDownloadAllImagesInContent] Fetching page ${currentPage}: ${imageUrlListPage}`);
       // バックグラウンドにタブ作成を依頼
-      const response: any = await new Promise((resolve) => {
+      const response = await new Promise<FetchImageListPageResponse>((resolve) => {
         chrome.runtime.sendMessage({
           action: 'fetchImageListPage',
           url: imageUrlListPage,
@@ -275,13 +283,13 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
     
     console.log('[collectAndDownloadAllImagesInContent] Sending downloadAllImages request to background...');
     let timeoutId: NodeJS.Timeout;
-    const downloadedImageData: any = await Promise.race([
-      new Promise((resolve, reject) => {
+    const downloadedImageData = await Promise.race<DownloadAllImagesResponse>([
+      new Promise<DownloadAllImagesResponse>((resolve, reject) => {
         chrome.runtime.sendMessage({
           action: 'downloadAllImages',
           imageUrls: imageUrlsArray,
           totalImages: imageUrlsArray.length
-        }, (response) => {
+        }, (response: DownloadAllImagesResponse) => {
           clearTimeout(timeoutId); // Clear timeout on success
           if (chrome.runtime.lastError) {
             console.error('[collectAndDownloadAllImagesInContent] Chrome runtime error:', chrome.runtime.lastError);
@@ -292,7 +300,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
           }
         });
       }),
-      new Promise((_, reject) => {
+      new Promise<DownloadAllImagesResponse>((_, reject) => {
         timeoutId = setTimeout(() => {
           console.error('[collectAndDownloadAllImagesInContent] Timeout after 10 minutes');
           reject(new Error('Image download timeout after 10 minutes'));
@@ -321,9 +329,9 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
         }
         
         console.log(`[PULL-LOG] Pulling image ${i + 1}/${imageUrlsArray.length}: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
-        
-        const imageResponse: any = await new Promise((resolve) => {
-          chrome.runtime.sendMessage({ 
+
+        const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
+          chrome.runtime.sendMessage({
             action: 'getDownloadedImage',
             imageUrl: imageUrl
           }, resolve);
@@ -486,7 +494,7 @@ async function handleAllArticlesExportFromContent(exportDelay: number, currentLa
 }
 
 // Process all articles after confirmation
-async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean, exportDelay: number, currentLanguage: string): Promise<void> {
+async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: boolean, exportDelay: number, currentLanguage: string): Promise<void> {
   // Set content language from parameter
   contentLanguage = (currentLanguage === 'en' ? 'en' : 'ja') as SupportedLanguage;
 
@@ -499,7 +507,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     });
 
     // Initialize: clear previous data
-    const allArticles: any[] = [];
+    const allArticles: ArticleDetails[] = [];
     // Remove JSZip initialization - using zip.js streaming instead
     let imageMap: { [key: string]: string } = {};
     const allImageUrls = new Set<string>();
@@ -591,13 +599,13 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
     
     if (newImageUrls.length > 0) {
       let timeoutId: NodeJS.Timeout;
-      const downloadedImageData: any = await Promise.race([
-        new Promise((resolve, reject) => {
+      const downloadedImageData = await Promise.race<DownloadAllImagesResponse>([
+        new Promise<DownloadAllImagesResponse>((resolve, reject) => {
           chrome.runtime.sendMessage({
             action: 'downloadAllImages',
             imageUrls: newImageUrls,
             totalImages: newImageUrls.length
-          }, (response) => {
+          }, (response: DownloadAllImagesResponse) => {
             clearTimeout(timeoutId); // Clear timeout on success
             if (chrome.runtime.lastError) {
               reject(new Error(chrome.runtime.lastError.message));
@@ -606,7 +614,7 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
             }
           });
         }),
-        new Promise((_, reject) => {
+        new Promise<DownloadAllImagesResponse>((_, reject) => {
           timeoutId = setTimeout(() => {
             console.error('[EXPORT-LOG] Phase 2 timeout: Additional image download failed after 2 minutes');
             reject(new Error('Additional image download timeout after 2 minutes'));
@@ -625,9 +633,9 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         for (let i = 0; i < newImageUrls.length; i++) {
           const imageUrl = newImageUrls[i];
           if (isCancelled) break;
-          
-          const imageResponse: any = await new Promise((resolve) => {
-            chrome.runtime.sendMessage({ 
+
+          const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
+            chrome.runtime.sendMessage({
               action: 'getDownloadedImage',
               imageUrl: imageUrl
             }, resolve);
@@ -670,7 +678,13 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       if (isCancelled) return;
       
       const article = allArticles[i];
-      
+
+      // Skip articles with missing title or body
+      if (!article.title || !article.bodyHtml) {
+        console.warn(`[EXPORT-LOG] Skipping article ${i + 1}: missing title or body`);
+        continue;
+      }
+
       try {
         const markdownResult = processImagesAndConvertToMarkdown({
           title: article.title,
@@ -753,9 +767,9 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
         }
         
         console.log(`[STREAMING-ZIP] Adding image ${i + 1}/${imageUrls.length} to ZIP: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
-        
-        const imageResponse: any = await new Promise((resolve) => {
-          chrome.runtime.sendMessage({ 
+
+        const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
+          chrome.runtime.sendMessage({
             action: 'getDownloadedImage',
             imageUrl: imageUrl
           }, resolve);
