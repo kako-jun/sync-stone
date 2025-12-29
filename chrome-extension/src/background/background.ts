@@ -174,8 +174,18 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       };
       sendResponse({ success: true });
       break;
-      
-      
+
+    case 'exportComplete':
+      // Reset export state when export completes
+      exportState.isExporting = false;
+      exportState.showingProgress = false;
+      exportState.showingConfirmation = false;
+      exportState.current = 0;
+      exportState.total = 0;
+      storedEntriesData = null;
+      console.log('[Background] Export completed, state reset');
+      break;
+
     default:
       sendResponse({ success: false, message: 'Unknown action' });
   }
