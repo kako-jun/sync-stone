@@ -1,32 +1,10 @@
 // DOM scraping functions for Lodestone blog pages
 
 import { SELECTORS } from '@/utils/constants';
+import { BlogEntry, ArticleDetails, CommentData } from '@/types';
 
-export interface BlogEntry {
-  url: string;
-  title: string;
-  date: string;
-  tags: string[];
-  thumbnail: string | null;
-}
-
-export interface ArticleDetails {
-  title: string | null;
-  bodyHtml: string | null;
-  likes: number;
-  commentsCount: number;
-  publishDate: string | null;
-  tags: string[];
-  imageUrls: string[];
-  thumbnailUrls: string[];
-  commentsData: CommentData[];
-}
-
-export interface CommentData {
-  author: string;
-  timestamp: string;
-  commentBodyHtml: string;
-}
+// Re-export types for convenience
+export type { BlogEntry, ArticleDetails, CommentData };
 
 /**
  * Extract blog entries from blog list page

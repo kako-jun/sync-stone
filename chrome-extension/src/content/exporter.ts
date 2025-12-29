@@ -1,13 +1,13 @@
 // Export helper functions for content script
 
-import { base64ToUint8Array, generateHash, sanitizeFilename } from '@/utils/helpers';
+import { base64ToUint8Array } from '@/utils/helpers';
+import { ImageMap } from '@/types';
 
 // Declare external dependencies
 declare const zip: any;
 
-export interface ImageMap {
-  [url: string]: string;
-}
+// Re-export ImageMap for convenience
+export type { ImageMap };
 
 export interface ProcessedArticle {
   sanitizedTitle: string;

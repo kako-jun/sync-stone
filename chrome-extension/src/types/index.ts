@@ -7,8 +7,8 @@ export interface BlogEntry {
 }
 
 export interface ArticleDetails {
-  title: string;
-  bodyHtml: string;
+  title: string | null;
+  bodyHtml: string | null;
   likes: number;
   commentsCount: number;
   publishDate: string | null;
