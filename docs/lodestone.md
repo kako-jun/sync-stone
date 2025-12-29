@@ -2,6 +2,40 @@
 
 ロードストーン（Lodestone）はFFXIV公式サイトのコミュニティ機能。
 
+---
+
+## ⚠️ 重要: スクレイピングはJP版URL固定
+
+**この仕様は絶対に変更しないこと。**
+
+| 項目 | 内容 |
+|------|------|
+| スクレイピング対象 | **常に `jp.finalfantasyxiv.com`** |
+| ユーザーが開くページ | どのリージョン（JP/NA/EU/FR/DE）でも可 |
+| 内部処理 | ユーザーのページから`characterId`を抽出し、JP版URLで新規タブを開いてスクレイピング |
+
+### なぜJP版固定か
+
+1. **ページネーション正規表現が日本語固定**
+   - `(\d+)ページ\s*\/\s*(\d+)ページ` のみ対応
+   - 多言語対応は不要（NA: `Page X of Y`, FR: `Page X / Y`, DE: `Seite X (von Y)` は対応しない）
+
+2. **全リージョンは同一バックエンド**
+   - サブドメインを変えてもセッション維持
+   - HTML構造は完全同一
+   - データも同一
+
+3. **検証済みの構造をそのまま利用**
+   - JP版で動作確認済み
+   - 他リージョンへの対応は工数に見合わない
+
+### 関連コード
+
+- `src/utils/constants.ts`: `URLS.LODESTONE_BASE = 'https://jp.finalfantasyxiv.com'`
+- `src/content/scraper.ts`: `getPaginationInfo()`, `getImageListTotalPages()` でJP形式の正規表現を使用
+
+---
+
 ## リージョン構成
 
 | サブドメイン | 対象地域 | UI言語 |
