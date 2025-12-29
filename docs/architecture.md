@@ -65,14 +65,29 @@
 - エラーメッセージの表示
 - 言語自動判定（navigator.language）
 
-### Content Script (content.ts)
+### Content Script (content.ts, scraper.ts, markdown.ts, exporter.ts, notification.ts)
 
+**content.ts（エントリポイント）**:
+- メッセージハンドラの登録
+- エクスポート処理の制御
+- IndexedDBからの画像データ読み込み
+- zip.jsによる統合ZIP生成
+
+**scraper.ts**:
 - ブログ記事一覧の抽出
 - 記事詳細の抽出（記事内画像URL含む）
 - 画像一覧ページのスクレイピング
+
+**markdown.ts**:
 - HTMLからMarkdownへの変換（Turndown）
-- IndexedDBからの画像データ読み込み
-- zip.jsによる統合ZIP生成
+- YAMLフロントマター生成
+- 画像URLの書き換え
+
+**exporter.ts**:
+- ZIPダウンロードヘルパー
+
+**notification.ts**:
+- ページ内通知UIの表示・管理
 
 ### Background Script (background.ts)
 

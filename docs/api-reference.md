@@ -22,8 +22,8 @@ interface BlogEntry {
 
 ```typescript
 interface ArticleDetails {
-  title: string;
-  bodyHtml: string;
+  title: string | null;
+  bodyHtml: string | null;
   likes: number;
   commentsCount: number;
   publishDate: string | null;
@@ -61,17 +61,206 @@ interface ExportState {
 }
 ```
 
-### StoredImage
+### ImageMap
 
-IndexedDBに保存される画像データ。
+画像URLからローカルパスへのマッピング。
 
 ```typescript
-interface StoredImage {
-  url: string;      // キー（一意識別子）
-  base64: string;   // 画像データ（base64エンコード）
-  filename: string; // ファイル名
-  success: boolean; // ダウンロード成功フラグ
+interface ImageMap {
+  [originalUrl: string]: string;
 }
+```
+
+## Chrome Message Response Types
+
+### BaseResponse
+
+全レスポンスの基底型。
+
+```typescript
+interface BaseResponse {
+  success: boolean;
+  message?: string;
+}
+```
+
+### DownloadedImageInfo
+
+ダウンロードされた画像情報。
+
+```typescript
+interface DownloadedImageInfo {
+  url: string;
+  filename: string;
+  base64: string;
+  success: boolean;
+}
+```
+
+### 各種レスポンス型
+
+```typescript
+interface DownloadAllImagesResponse extends BaseResponse {
+  results?: DownloadedImageInfo[];
+  totalImages?: number;
+}
+
+interface GetDownloadedImageResponse extends BaseResponse {
+  imageData?: DownloadedImageInfo;
+}
+
+interface FetchPageResponse extends BaseResponse {
+  entries?: BlogEntry[];
+  articleCount?: number;
+}
+
+interface FetchArticleResponse extends BaseResponse {
+  article?: ArticleDetails;
+}
+
+interface FetchImageListPageResponse extends BaseResponse {
+  imageUrls?: string[];
+  totalPages?: number;
+}
+
+interface GetArticleInfoResponse extends BaseResponse {
+  title?: string;
+  bodyLength?: number;
+  imageCount?: number;
+  likes?: number;
+  commentsCount?: number;
+}
+```
+
+### SendResponse
+
+chrome.runtime.sendMessageのコールバック型。
+
+```typescript
+type SendResponse<T extends BaseResponse = BaseResponse> = (response: T) => void;
+```
+
+## メッセージ型定義
+
+### Popup Messages (Background → Popup)
+
+```typescript
+interface ShowExportConfirmationMessage {
+  action: 'showExportConfirmation';
+  totalArticles: number;
+  isOwnBlog: boolean;
+}
+
+interface ProgressPageInfo {
+  currentPage: number;
+  totalPages: number;
+  imageCount?: number;
+}
+
+interface UpdateProgressMessage {
+  action: 'updateProgress';
+  type: 'images' | 'articles' | 'pages' | 'collecting';
+  current: number;
+  total: number;
+  pageInfo?: ProgressPageInfo;
+  currentItem?: string;
+}
+
+interface ExportCompleteMessage {
+  action: 'exportComplete';
+}
+
+interface ExportCancelledMessage {
+  action: 'exportCancelled';
+}
+
+interface ShowErrorMessage {
+  action: 'showError';
+  message: string;
+}
+
+interface ExportSuccessMessage {
+  action: 'exportSuccess';
+  message?: string;
+}
+
+interface ArticleInfoMessage {
+  action: 'articleInfo';
+  title?: string;
+  bodyLength?: number;
+  imageCount?: number;
+  likes?: number;
+  commentsCount?: number;
+}
+
+// Union type
+type PopupMessage =
+  | ShowExportConfirmationMessage
+  | UpdateProgressMessage
+  | ExportCompleteMessage
+  | ExportCancelledMessage
+  | ShowErrorMessage
+  | ExportSuccessMessage
+  | ArticleInfoMessage;
+```
+
+### Content Script Messages (Background → Content)
+
+```typescript
+interface ScrapeAdditionalPageMessage {
+  action: 'scrapeAdditionalPage';
+}
+
+interface GetSingleArticleDataMessage {
+  action: 'getSingleArticleData';
+}
+
+interface ShowExportNotificationMessage {
+  action: 'showExportNotification';
+  message: string;
+}
+
+interface ExportSingleArticleMessage {
+  action: 'exportSingleArticle';
+}
+
+interface ExportAllArticlesFromContentMessage {
+  action: 'exportAllArticlesFromContent';
+  exportDelay: number;
+  currentLanguage: string;
+}
+
+interface ProcessAllArticlesFromContentMessage {
+  action: 'processAllArticlesFromContent';
+  entries: BlogEntry[];
+  isOwnBlog: boolean;
+  exportDelay: number;
+  currentLanguage: string;
+}
+
+interface CancelExportMessage {
+  action: 'cancelExport';
+}
+
+interface ScrapeImageListPageMessage {
+  action: 'scrapeImageListPage';
+}
+
+interface GetArticleInfoMessage {
+  action: 'getArticleInfo';
+}
+
+// Union type
+type ContentScriptMessage =
+  | ScrapeAdditionalPageMessage
+  | GetSingleArticleDataMessage
+  | ShowExportNotificationMessage
+  | ExportSingleArticleMessage
+  | ExportAllArticlesFromContentMessage
+  | ProcessAllArticlesFromContentMessage
+  | CancelExportMessage
+  | ScrapeImageListPageMessage
+  | GetArticleInfoMessage;
 ```
 
 ## IndexedDB API
@@ -89,6 +278,13 @@ async function openDB(): Promise<IDBDatabase>
 単一画像を保存。
 
 ```typescript
+interface StoredImage {
+  url: string;      // キー（一意識別子）
+  base64: string;   // 画像データ（base64エンコード）
+  filename: string; // ファイル名
+  success: boolean; // ダウンロード成功フラグ
+}
+
 async function saveImage(image: StoredImage): Promise<void>
 ```
 
@@ -203,8 +399,7 @@ export const CONFIG = {
   DEFAULT_EXPORT_DELAY: 2000,
   MIN_EXPORT_DELAY: 2000,
   BASE_PAGE_LOAD_TIMEOUT: 5000,
-  TIMEOUT_MULTIPLIER: 3,
-  EXPERIMENTAL_MAX_PAGES: 2
+  TIMEOUT_MULTIPLIER: 3
 } as const;
 ```
 
@@ -240,7 +435,9 @@ export const CONFIG = {
 | `scrapeImageListPage` | 画像一覧スクレイピング |
 | `scrapeAdditionalPage` | 追加ページスクレイピング |
 | `getSingleArticleData` | 単一記事データ取得 |
+| `getArticleInfo` | 記事情報取得 |
 | `cancelExport` | エクスポートキャンセル |
+| `showExportNotification` | 通知表示 |
 
 ### Background → Popup
 
@@ -251,3 +448,5 @@ export const CONFIG = {
 | `exportCancelled` | エクスポートキャンセル |
 | `showExportConfirmation` | 確認ダイアログ表示 |
 | `showError` | エラー表示 |
+| `exportSuccess` | エクスポート成功 |
+| `articleInfo` | 記事情報 |

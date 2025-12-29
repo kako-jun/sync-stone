@@ -61,6 +61,17 @@ v1.1.0では、大量の画像処理時のメモリ制限問題に対処する�
 *   **エクスポート操作の改善**: 非対応ページでの分かりやすいガイダンス表示を追加した。
 *   **ナビゲーションの一貫性**: 全記事エクスポート時は必ず1ページ目に移動してから実行するようにし、ユーザーガイダンスを追加した。
 
+### 2.4 v1.2.0での型安全性強化
+
+v1.2.0では、コードベース全体の型安全性を大幅に強化するリファクタリングを実施しました。
+
+*   **メッセージ型インターフェースの導入**: Chrome拡張機能のメッセージパッシングに型付きインターフェースを導入。`PopupMessage`と`ContentScriptMessage`のUnion型により、アクション別のペイロードを型安全に扱えるようになった。
+*   **SendResponse型の追加**: `chrome.runtime.sendMessage`のコールバック関数に`SendResponse<T>`型を導入し、レスポンスの型安全性を確保。
+*   **未使用コードのクリーンアップ**: `ScrapingResponse`、`PaginationInfo`、`ProcessedArticleData`などの未使用型を削除し、コードベースを簡素化。
+*   **TypeScript設定の厳格化**: `noUnusedLocals`と`noUnusedParameters`を有効化し、未使用コードの検出を自動化。
+*   **モジュール役割の明確化**: `exporter.ts`をZIPダウンロードヘルパーに特化させ、主要なエクスポートロジックを`content.ts`に統合。
+*   **外部ライブラリ型宣言の整備**: `zip.d.ts`と`turndown.d.ts`を拡充し、ライブラリ使用箇所の型カバレッジを向上。
+
 ## 3. TypeScript化とモダン開発環境
 
 ### 3.1 技術スタックの刷新
@@ -134,10 +145,8 @@ src/
 - ページネーション処理
 
 **exporter.ts**
-- 単一記事/全記事エクスポートの制御
-- zip.jsによるZIPファイル生成
-- 記事インデックス（index.md）生成
-- ダウンロード処理
+- ZIPファイルのダウンロードヘルパー
+- Blob URLの生成とダウンロードリンク処理
 
 **markdown.ts**
 - HTMLからMarkdownへの変換（Turndown）
@@ -158,8 +167,9 @@ src/
 export const CONFIG = {
   DEFAULT_EXPORT_DELAY: 2000,
   MIN_EXPORT_DELAY: 2000,
+  MAX_EXPORT_DELAY: 10000,
   BASE_PAGE_LOAD_TIMEOUT: 5000,
-  TIMEOUT_MULTIPLIER: 3,
+  TIMEOUT_MULTIPLIER: 3,  // タイムアウト = アクセス間隔 × 3
   EXPERIMENTAL_MAX_PAGES: 2
 } as const;
 
@@ -313,6 +323,8 @@ git push origin v1.0.0
 - **自動化**: CI/CDによるリリースプロセス
 - **スケーラビリティ**: zip.js + IndexedDBによる大量データ処理の実現（v1.1.0）
 - **安定性**: メモリ制限問題の根本的解決と446枚画像処理の実証
+- **型安全性**: メッセージパッシング型定義とSendResponse型の導入（v1.2.0）
+- **コード品質**: 未使用コードの検出と削除、TypeScript厳格モードの有効化（v1.2.0）
 
 ### 9.2 技術的な学び
 

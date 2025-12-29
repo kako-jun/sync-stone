@@ -29,9 +29,9 @@ chrome-extension/src/
 ├── background/
 │   └── background.ts      # Service Worker（タブ管理、画像DL、メッセージング）
 ├── content/
-│   ├── content.ts         # Content Scriptエントリポイント
+│   ├── content.ts         # Content Scriptエントリポイント・ZIP生成
 │   ├── scraper.ts         # ロドストページのスクレイピング
-│   ├── exporter.ts        # エクスポート処理・ZIP生成
+│   ├── exporter.ts        # ZIPダウンロードヘルパー
 │   ├── markdown.ts        # HTML→Markdown変換（Turndown）
 │   └── notification.ts    # ページ内通知UI
 ├── popup/
@@ -43,7 +43,7 @@ chrome-extension/src/
 ├── locales/
 │   └── messages.ts        # 多言語メッセージ定義
 ├── types/
-│   ├── index.ts           # アプリケーション型定義
+│   ├── index.ts           # アプリケーション型定義（メッセージ型含む）
 │   ├── zip.d.ts           # zip.js型宣言
 │   └── turndown.d.ts      # Turndown型宣言
 └── manifest.json          # 拡張機能マニフェスト（Manifest V3）
