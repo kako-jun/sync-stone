@@ -334,7 +334,10 @@ chrome.runtime.onMessage.addListener((request: PopupMessage, _sender, _sendRespo
     case "showExportConfirmation":
       // 記事数収集の進捗表示をクリア
       elements.statusMessage.style.display = "none";
-      elements.confirmationText.innerText = `${request.totalArticles}${messages[currentLanguage].confirmationText}`;
+      const blogTypeText = request.isOwnBlog
+        ? messages[currentLanguage].confirmationOwnBlog
+        : messages[currentLanguage].confirmationOthersBlog;
+      elements.confirmationText.innerText = `${request.totalArticles}${messages[currentLanguage].confirmationText}\n${blogTypeText}`;
       elements.confirmationDialog.style.display = "block";
       break;
 

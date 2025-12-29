@@ -21,6 +21,8 @@ export interface Messages {
 
   // Confirmation dialog
   confirmationText: string;
+  confirmationOwnBlog: string;
+  confirmationOthersBlog: string;
 
   // Progress messages
   downloadingImages: string;
@@ -102,6 +104,8 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Confirmation dialog
     confirmationText: '件の記事が見つかりました。エクスポートしますか？',
+    confirmationOwnBlog: '（自分の記事）',
+    confirmationOthersBlog: '（他のプレイヤーの記事 - 記事内の画像のみ取得）',
 
     // Progress messages
     downloadingImages: '画像を処理中',
@@ -181,6 +185,8 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Confirmation dialog
     confirmationText: ' articles found. Export them?',
+    confirmationOwnBlog: '(Your articles)',
+    confirmationOthersBlog: "(Other player's articles - only images within articles)",
 
     // Progress messages
     downloadingImages: 'Processing Images',
