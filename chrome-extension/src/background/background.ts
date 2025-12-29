@@ -1,4 +1,12 @@
-import { BlogEntry, ExportState } from '@/types';
+import {
+  BlogEntry,
+  ExportState,
+  SendResponse,
+  FetchPageResponse,
+  FetchArticleResponse,
+  FetchImageListPageResponse,
+  DownloadAllImagesResponse
+} from '@/types';
 import { CONFIG, URLS } from '@/utils/constants';
 import { saveImage, getImage, getImageCount, clearAllImages, deleteDatabase, StoredImage } from '@/utils/indexedDB';
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
@@ -270,7 +278,7 @@ async function handleCancelExport(): Promise<void> {
 }
 
 // Fetch page in new tab
-async function handleFetchPageInNewTab(url: string, delay: number, sendResponse: (response: any) => void): Promise<void> {
+async function handleFetchPageInNewTab(url: string, delay: number, sendResponse: SendResponse<FetchPageResponse>): Promise<void> {
   try {
     const tab = await chrome.tabs.create({ url, active: false });
     if (!tab.id) {
@@ -306,7 +314,7 @@ async function handleFetchPageInNewTab(url: string, delay: number, sendResponse:
 }
 
 // Fetch article in new tab
-async function handleFetchArticleInNewTab(url: string, delay: number, sendResponse: (response: any) => void): Promise<void> {
+async function handleFetchArticleInNewTab(url: string, delay: number, sendResponse: SendResponse<FetchArticleResponse>): Promise<void> {
   try {
     const tab = await chrome.tabs.create({ url, active: false });
     if (!tab.id) {
@@ -342,7 +350,7 @@ async function handleFetchArticleInNewTab(url: string, delay: number, sendRespon
 }
 
 // Fetch image list page in new tab
-async function handleFetchImageListPage(url: string, delay: number, sendResponse: (response: any) => void): Promise<void> {
+async function handleFetchImageListPage(url: string, delay: number, sendResponse: SendResponse<FetchImageListPageResponse>): Promise<void> {
   try {
     const tab = await chrome.tabs.create({ url, active: false });
     if (!tab.id) {
@@ -379,7 +387,7 @@ async function handleFetchImageListPage(url: string, delay: number, sendResponse
 }
 
 // Handle downloading all images from background script (optimized for message passing)
-async function handleDownloadAllImages(imageUrls: string[], totalImages: number, sendResponse: (response: any) => void): Promise<void> {
+async function handleDownloadAllImages(imageUrls: string[], totalImages: number, sendResponse: SendResponse<DownloadAllImagesResponse>): Promise<void> {
   console.log('[DOWNLOAD-LOG] ========== START DOWNLOAD PHASE ==========');
   console.log('[DOWNLOAD-LOG] handleDownloadAllImages called with', imageUrls.length, 'images, totalImages:', totalImages);
   console.log('[DOWNLOAD-LOG] Sample URLs (first 5):', imageUrls.slice(0, 5));

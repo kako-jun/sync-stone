@@ -90,3 +90,6 @@ export interface FetchImageListPageResponse extends BaseResponse {
   imageUrls?: string[];
   totalPages?: number;
 }
+
+// Chrome message sender callback types
+export type SendResponse<T extends BaseResponse = BaseResponse> = (response: T) => void;
