@@ -95,7 +95,7 @@ function restoreExportState(): void {
           elements.progressBarContainer.style.display = "block";
         }
         if (elements.progressBar) {
-          const percentage = (response.current / response.total) * 100;
+          const percentage = response.total > 0 ? (response.current / response.total) * 100 : 0;
           elements.progressBar.style.width = `${percentage}%`;
         }
 
@@ -106,10 +106,8 @@ function restoreExportState(): void {
           } else {
             progressTypeMessage = messages[currentLanguage].exportingArticles;
           }
-          elements.progressText.innerText = `${progressTypeMessage}: ${response.current} / ${response.total} (${(
-            (response.current / response.total) *
-            100
-          ).toFixed(1)}%)`;
+          const progressPercent = response.total > 0 ? ((response.current / response.total) * 100).toFixed(1) : '0.0';
+          elements.progressText.innerText = `${progressTypeMessage}: ${response.current} / ${response.total} (${progressPercent}%)`;
         }
       }
     }
@@ -161,7 +159,7 @@ function initializeElements(): void {
 function setupEventListeners(): void {
   // Delay input validation
   elements.delayInput.addEventListener("input", function (this: HTMLInputElement) {
-    let value = parseInt(this.value, 10);
+    const value = parseInt(this.value, 10) || CONFIG.MIN_EXPORT_DELAY;
 
     if (value < CONFIG.MIN_EXPORT_DELAY) {
       this.value = String(CONFIG.MIN_EXPORT_DELAY);
@@ -189,7 +187,7 @@ function setupEventListeners(): void {
     elements.exportButton.disabled = true;
     elements.exportButton.style.cursor = "not-allowed";
 
-    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), CONFIG.MIN_EXPORT_DELAY);
+    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10) || CONFIG.MIN_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
     elements.delayInput.value = exportDelay.toString();
 
     // Check if we're on first page first
@@ -264,7 +262,7 @@ function setupEventListeners(): void {
 
   // Confirmation dialog buttons
   elements.confirmYesButton.addEventListener("click", () => {
-    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), CONFIG.MIN_EXPORT_DELAY);
+    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10) || CONFIG.MIN_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
     elements.delayInput.value = exportDelay.toString();
 
     // Set the export delay first, then confirm export
@@ -369,7 +367,7 @@ chrome.runtime.onMessage.addListener((request: PopupMessage, _sender, _sendRespo
       // Legacy support for old progress bar
       if (elements.progressBarContainer && elements.progressBar && elements.progressText && request.type !== "pages") {
         elements.progressBarContainer.style.display = "block";
-        const percentage = (request.current / request.total) * 100;
+        const percentage = request.total > 0 ? (request.current / request.total) * 100 : 0;
         elements.progressBar.style.width = `${percentage}%`;
 
         let progressTypeMessage: string;
@@ -378,9 +376,7 @@ chrome.runtime.onMessage.addListener((request: PopupMessage, _sender, _sendRespo
         } else {
           progressTypeMessage = messages[currentLanguage].exportingArticles;
         }
-        elements.progressText.innerText = `${progressTypeMessage}: ${request.current} / ${
-          request.total
-        } (${percentage.toFixed(1)}%)`;
+        elements.progressText.innerText = `${progressTypeMessage}: ${request.current} / ${request.total} (${percentage.toFixed(1)}%)`;
       }
       break;
 
