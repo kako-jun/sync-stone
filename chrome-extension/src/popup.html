@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>__MSG_extensionName__</title>
+  <title>SyncStone</title>
   <style>
     body {
       font-family: sans-serif;
@@ -59,12 +59,12 @@
   </style>
 </head>
 <body>
-  <h1 id="extensionTitle">__MSG_extensionName__</h1>
-  <p id="extensionDescription">__MSG_lodestoneExportDescription__</p>
+  <h1 id="extensionTitle"></h1>
+  <p id="extensionDescription"></p>
   <!-- Settings Section -->
   <div id="settingsContainer" style="margin-bottom: 15px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
     <div>
-      <label for="delayInput" id="accessIntervalLabel" style="color: #ffffff; margin-right: 5px;">__MSG_accessIntervalLabel__</label>
+      <label for="delayInput" id="accessIntervalLabel" style="color: #ffffff; margin-right: 5px;"></label>
       <input type="number" id="delayInput" value="2000" min="2000" max="10000" style="width: 70px; background-color: rgba(255, 255, 255, 0.8); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px; padding: 2px 5px;">
       <span id="delayUnit">ms</span>
     </div>
@@ -79,8 +79,8 @@
     </div>
     
   </div>
-  <button id="exportButton">__MSG_exportAllArticlesButton__</button>
-  <button id="exportCurrentArticleButton">__MSG_exportCurrentArticleButton__</button>
+  <button id="exportButton"></button>
+  <button id="exportCurrentArticleButton"></button>
   
   <!-- Article Info Display -->
   <div id="articleInfoContainer" style="display: none; margin-top: 15px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.3); background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
@@ -92,8 +92,8 @@
   <!-- Confirmation Dialog -->
   <div id="confirmationDialog">
     <p id="confirmationText" style="margin-top: 0; margin-bottom: 10px;"></p>
-    <button id="confirmYes">__MSG_yesButton__</button>
-    <button id="confirmNo">__MSG_noButton__</button>
+    <button id="confirmYes"></button>
+    <button id="confirmNo"></button>
   </div>
 
   <!-- Progress Section -->
@@ -102,9 +102,7 @@
     <!-- Image Download Progress -->
     <div id="imageProgressContainer" style="display: none; margin-bottom: 15px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-        <div id="imageProgressHeader" style="font-size: 14px; font-weight: bold; color: #ffffff;">
-          __MSG_imageDownloadHeader__
-        </div>
+        <div id="imageProgressHeader" style="font-size: 14px; font-weight: bold; color: #ffffff;"></div>
       </div>
       <div id="imageProgressText" style="font-size: 12px; margin-bottom: 5px; color: #e0e0e0;"></div>
       <div style="width: 100%; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden;">
@@ -115,9 +113,7 @@
     <!-- Article Processing Progress -->
     <div id="articleProgressContainer" style="display: none; margin-bottom: 15px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; background-color: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-        <div id="articleProgressHeader" style="font-size: 14px; font-weight: bold; color: #ffffff;">
-          __MSG_articleProcessHeader__
-        </div>
+        <div id="articleProgressHeader" style="font-size: 14px; font-weight: bold; color: #ffffff;"></div>
       </div>
       <div id="articleProgressText" style="font-size: 12px; margin-bottom: 5px; color: #e0e0e0;"></div>
       <div style="width: 100%; background-color: rgba(255, 255, 255, 0.2); border-radius: 4px; overflow: hidden;">
@@ -135,18 +131,16 @@
   <!-- Export Control Area (when exporting) - bottom -->
   <div id="exportControlContainer" style="display: none; margin-top: 15px; text-align: center;">
     <button id="cancelExportButton" style="
-      background-color: #d32f2f; 
-      color: white; 
-      border: none; 
-      padding: 8px 16px; 
-      border-radius: 4px; 
-      cursor: pointer; 
-      font-size: 13px; 
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
       font-weight: bold;
       transition: background-color 0.3s ease;
-    ">
-      __MSG_cancelExport__
-    </button>
+    "></button>
   </div>
 
   <!-- Export Warning Message -->
