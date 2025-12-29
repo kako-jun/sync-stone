@@ -11,6 +11,7 @@ SyncStone Chrome拡張機能の技術ドキュメント。
 | [scraping.md](scraping.md) | CSSセレクタ、自分のブログ判定、Turndown設定 |
 | [popup-ui.md](popup-ui.md) | ポップアップUI仕様、表示条件、進捗表示 |
 | [api-reference.md](api-reference.md) | 型定義、ヘルパー関数、メッセージパッシング |
+| [own-vs-others.md](own-vs-others.md) | 自分のブログと他人のブログの動作の違い |
 
 ## 概要
 
