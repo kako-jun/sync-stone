@@ -1,6 +1,15 @@
 // Content script for SyncStone Chrome extension
 
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
+import { generateHash, sanitizeFilename, sendErrorMessage, base64ToUint8Array } from '@/utils/helpers';
+import {
+  extractBlogEntries,
+  getPaginationInfo,
+  extractArticleDetails,
+  detectOwnBlog,
+  scrapeImageListPageUrls,
+  getImageListTotalPages
+} from './scraper';
 
 // Current language for content script
 let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
@@ -21,17 +30,6 @@ declare const zip: any;
 const DB_NAME = 'SyncStoneDB';
 const DB_VERSION = 1;
 
-// Utility function to convert base64 to Uint8Array for zip.js
-function base64ToUint8Array(base64String: string): Uint8Array {
-  // Remove data URL prefix if present
-  const base64Data = base64String.includes(',') ? base64String.split(',')[1] : base64String;
-  const binaryString = atob(base64Data);
-  const bytes = new Uint8Array(binaryString.length);
-  for (let i = 0; i < binaryString.length; i++) {
-    bytes[i] = binaryString.charCodeAt(i);
-  }
-  return bytes;
-}
 
 // Download ZIP file using streaming
 async function downloadStreamingZip(zipBlob: Blob, filename: string): Promise<void> {
@@ -75,204 +73,6 @@ async function deleteDatabase(): Promise<void> {
 
 // Global cancellation flag
 let isCancelled = false;
-
-// CSS selectors
-const SELECTORS = {
-  BLOG_ENTRIES: 'li.entry__blog',
-  BLOG_LINK: 'a.entry__blog__link',
-  BLOG_TITLE: 'h2.entry__blog__title',
-  BLOG_TIME: 'time span',
-  BLOG_TAGS: 'div.entry__blog__tag ul li',
-  BLOG_THUMBNAIL: 'div.entry__blog__img__inner img',
-  PAGINATION: '.btn__pager__current',
-  ARTICLE_BODY: 'div.txt_selfintroduction',
-  ARTICLE_LIKES: '.blog__area__like__text__zero, .js__like_count',
-  ARTICLE_COMMENTS_COUNT: '.entry__blog__header__comment span',
-  ARTICLE_PUBLISH_DATE: '.entry__blog__header time span, time[datetime]',
-  ARTICLE_TAGS_CONTAINER: '.entry__blog__tag ul li a',
-  THUMBNAIL_LIST: '.thumb_list img',
-  COMMENT_BODIES: '.thread__comment__body',
-  COMMENT_AUTHOR: '.entry__name',
-  COMMENT_TIMESTAMP: '.entry__time--comment'
-};
-
-// Helper function to extract blog entries
-function extractBlogEntries(): any[] {
-  const blogEntries = document.querySelectorAll(SELECTORS.BLOG_ENTRIES);
-  console.log('[extractBlogEntries] Found', blogEntries.length, 'blog entries using selector:', SELECTORS.BLOG_ENTRIES);
-  console.log('[extractBlogEntries] Current URL:', window.location.href);
-  
-  // Extract current character ID from URL
-  const currentCharacterMatch = window.location.href.match(/\/lodestone\/character\/(\d+)\//);
-  const currentCharacterId = currentCharacterMatch ? currentCharacterMatch[1] : null;
-  console.log('[extractBlogEntries] Current character ID:', currentCharacterId);
-  
-  const extractedData: any[] = [];
-
-  blogEntries.forEach((entry, index) => {
-    const urlElement = entry.querySelector(SELECTORS.BLOG_LINK) as HTMLAnchorElement;
-    const titleElement = entry.querySelector(SELECTORS.BLOG_TITLE) as HTMLElement;
-    const timeElement = entry.querySelector(SELECTORS.BLOG_TIME) as HTMLElement;
-    const tagsElements = entry.querySelectorAll(SELECTORS.BLOG_TAGS);
-    const thumbnailElement = entry.querySelector(SELECTORS.BLOG_THUMBNAIL) as HTMLImageElement;
-
-    const url = urlElement?.href || '';
-    const title = titleElement?.innerText.trim() || '';
-    const date = timeElement?.innerText.trim() || '';
-    const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
-    const thumbnail = thumbnailElement?.src || null;
-
-    // Check if this entry belongs to the current character
-    const entryCharacterMatch = url.match(/\/lodestone\/character\/(\d+)\//);
-    const entryCharacterId = entryCharacterMatch ? entryCharacterMatch[1] : null;
-    
-    console.log(`[extractBlogEntries] Entry ${index}:`, { url, title, date, entryCharacterId, currentCharacterId });
-    
-    // Only include entries that belong to the current character
-    if (currentCharacterId && entryCharacterId === currentCharacterId) {
-      extractedData.push({ url, title, date, tags, thumbnail });
-    } else {
-      console.log(`[extractBlogEntries] Skipping entry ${index} (different character: ${entryCharacterId} vs ${currentCharacterId})`);
-    }
-  });
-
-  return extractedData;
-}
-
-// Helper function to get pagination info
-function getPaginationInfo(): number {
-  let totalPages = 1;
-  const paginationElement = document.querySelector(SELECTORS.PAGINATION) as HTMLElement;
-  if (paginationElement) {
-    const paginationText = paginationElement.innerText;
-    const match = paginationText.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
-    if (match?.[2]) {
-      totalPages = parseInt(match[2], 10);
-    }
-  }
-  return totalPages;
-}
-
-// Helper function to extract article details
-function extractArticleDetails(): any {
-  const titleElement = document.querySelector(SELECTORS.BLOG_TITLE) as HTMLElement;
-  const bodyElement = document.querySelector(SELECTORS.ARTICLE_BODY) as HTMLElement;
-  const likesElement = document.querySelector(SELECTORS.ARTICLE_LIKES) as HTMLElement;
-  const commentsCountElement = document.querySelector(SELECTORS.ARTICLE_COMMENTS_COUNT) as HTMLElement;
-  const publishDateElement = document.querySelector(SELECTORS.ARTICLE_PUBLISH_DATE);
-  const tagsElements = document.querySelectorAll(SELECTORS.ARTICLE_TAGS_CONTAINER);
-
-  const title = titleElement?.innerText.trim() || null;
-  const bodyHtml = bodyElement?.innerHTML || null;
-  const likes = likesElement ? parseInt(likesElement.innerText.replace(/[^\d]/g, ''), 10) : 0;
-  const commentsCount = commentsCountElement ? parseInt(commentsCountElement.innerText.trim(), 10) : 0;
-  const publishDate = publishDateElement ? 
-    (publishDateElement.getAttribute('datetime') || (publishDateElement as HTMLElement).innerText.trim()) : null;
-  const tags = Array.from(tagsElements).map(tag => (tag as HTMLElement).innerText.replace(/[\[\]]/g, '').trim());
-
-  const imageUrls: string[] = [];
-  const thumbnailUrls: string[] = [];
-
-  // Extract thumbnail images（過去の動作していたコードと同じ）
-  const thumbnailElements = document.querySelectorAll('.thumb_list img');
-  thumbnailElements.forEach(img => {
-    const thumbnailImg = img as HTMLImageElement;
-    const originalSrc = thumbnailImg.getAttribute('data-origin_src');
-    if (originalSrc) {
-      thumbnailUrls.push(originalSrc);
-      imageUrls.push(originalSrc);
-    }
-  });
-
-  // Extract images from article body
-  if (bodyHtml) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(bodyHtml, 'text/html');
-    
-    // Extract all img tags with data-origin_src (external images)
-    const imgElements = doc.querySelectorAll('img[data-origin_src]');
-    imgElements.forEach(img => {
-      const originalSrc = img.getAttribute('data-origin_src');
-      if (originalSrc && !imageUrls.includes(originalSrc)) {
-        imageUrls.push(originalSrc);
-      }
-    });
-    
-    // Extract regular img tags without data-origin_src (internal images)
-    const regularImgElements = doc.querySelectorAll('img:not([data-origin_src])');
-    regularImgElements.forEach(img => {
-      const imgElement = img as HTMLImageElement;
-      if (imgElement.src && !imageUrls.includes(imgElement.src)) {
-        imageUrls.push(imgElement.src);
-      }
-    });
-    
-    // Also extract thumbnail src URLs from img tags that have data-origin_src
-    const imgWithOriginElements = doc.querySelectorAll('img[data-origin_src]');
-    imgWithOriginElements.forEach(img => {
-      const imgElement = img as HTMLImageElement;
-      // Add the thumbnail src URL as well
-      if (imgElement.src && !imageUrls.includes(imgElement.src)) {
-        imageUrls.push(imgElement.src);
-      }
-    });
-    
-    // Extract linked images (a tags with image URLs)
-    const linkElements = doc.querySelectorAll('a[href]');
-    linkElements.forEach(link => {
-      const linkElement = link as HTMLAnchorElement;
-      const href = linkElement.href;
-      // Check if href is an image URL (jpg, png, gif, webp)
-      if (href && /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(href) && !imageUrls.includes(href)) {
-        imageUrls.push(href);
-      }
-    });
-  }
-
-  // Extract comments
-  const commentsData: any[] = [];
-  const commentBodies = document.querySelectorAll(SELECTORS.COMMENT_BODIES);
-
-  commentBodies.forEach(bodyElement => {
-    const entryElement = bodyElement.previousElementSibling;
-    if (entryElement?.classList.contains('entry')) {
-      const authorElement = entryElement.querySelector(SELECTORS.COMMENT_AUTHOR) as HTMLElement;
-      const timestampElement = entryElement.querySelector(SELECTORS.COMMENT_TIMESTAMP) as HTMLElement;
-
-      if (authorElement && bodyElement) {
-        commentsData.push({
-          author: authorElement.innerText.trim(),
-          timestamp: timestampElement?.innerText.trim() || '',
-          commentBodyHtml: (bodyElement as HTMLElement).innerHTML
-        });
-      }
-    }
-  });
-
-  return {
-    title,
-    bodyHtml,
-    likes,
-    commentsCount,
-    publishDate,
-    tags,
-    imageUrls,
-    thumbnailUrls,
-    commentsData
-  };
-}
-
-// Helper function to detect if it's own blog
-function detectOwnBlog(): boolean {
-  const bodyId = document.body.getAttribute('id');
-  const hasIdAttribute = document.body.hasAttribute('id');
-  console.log('[detectOwnBlog] body.id:', bodyId, 'hasIdAttribute:', hasIdAttribute);
-  console.log('[detectOwnBlog] URL:', window.location.href);
-  
-  const result = !hasIdAttribute || bodyId !== 'community';
-  console.log('[detectOwnBlog] result:', result);
-  return result;
-}
 
 // Show export notification banner
 function showExportNotification(message: string): void {
@@ -390,33 +190,6 @@ async function fetchArticleDetails(articleUrl: string, delay: number): Promise<a
   });
 }
 
-// Send error message
-function sendErrorMessage(message: string): void {
-  chrome.runtime.sendMessage({
-    action: 'showError',
-    message
-  });
-}
-
-// Helper functions for content script
-function generateHash(str: string): string {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash |= 0;
-  }
-  return Math.abs(hash).toString(16);
-}
-
-function sanitizeFilename(filename: string, maxLength = 50): string {
-  return filename
-    .replace(/[<>:"/\\|?*]/g, '_')
-    .replace(/\s+/g, '_')
-    .substring(0, maxLength);
-}
-
-// Legacy JSZip download function - removed in favor of streaming download
 
 // Handle single article export in content script
 async function handleSingleArticleExportInContent(sendResponse: (response: any) => void): Promise<void> {
@@ -1181,48 +954,6 @@ async function processAllArticlesFromContent(entries: any[], isOwnBlog: boolean,
       console.error('[Content] Failed to delete IndexedDB after error:', clearError);
     }
   }
-}
-
-// Scrape image URLs from image list page
-function scrapeImageListPageUrls(): string[] {
-  const imageUrls: string[] = [];
-  
-  // 1. 外部参照画像（GitHubなど）を取得
-  const externalImageLinks = document.querySelectorAll('.image__list a.outboundLink.outboundImage[data-target="external_image"]');
-  externalImageLinks.forEach(link => {
-    const anchor = link as HTMLAnchorElement;
-    if (anchor.href) {
-      imageUrls.push(anchor.href);
-    }
-  });
-  
-  // 2. ロドスト内部画像（FFXIVスクリーンショット）を取得
-  const internalImageLinks = document.querySelectorAll('.image__list a.fancybox_element[rel="view_image"]');
-  internalImageLinks.forEach(link => {
-    const anchor = link as HTMLAnchorElement;
-    if (anchor.href) {
-      imageUrls.push(anchor.href);
-    }
-  });
-  
-  return imageUrls;
-}
-
-// Get total pages from image list pagination
-function getImageListTotalPages(): number {
-  let totalPages = 1;
-  
-  // 動作していたJS版と同じページネーション取得
-  const totalPagesElement = document.querySelector('.btn__pager__current');
-  if (totalPagesElement) {
-    // "1ページ / 8ページ" のような形式から総ページ数を抽出
-    const match = totalPagesElement.textContent?.match(/(\d+)ページ\s*\/\s*(\d+)ページ/);
-    if (match && match[2]) {
-      totalPages = parseInt(match[2], 10);
-    }
-  }
-  
-  return totalPages;
 }
 
 // Convert HTML to Markdown with image replacement

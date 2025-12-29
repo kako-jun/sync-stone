@@ -2,6 +2,7 @@ import { BlogEntry, ExportState } from '@/types';
 import { CONFIG, URLS } from '@/utils/constants';
 import { saveImage, getImage, getImageCount, clearAllImages, deleteDatabase, StoredImage } from '@/utils/indexedDB';
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
+import { generateHash, sendErrorMessage } from '@/utils/helpers';
 
 // Global state
 let exportState: ExportState = {
@@ -543,16 +544,6 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
   }
 }
 
-// Helper function to generate hash (same as content script)
-function generateHash(str: string): string {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash |= 0;
-  }
-  return Math.abs(hash).toString(16);
-}
 
 // Handle confirm export all from content script
 async function handleConfirmExportAllFromContent(): Promise<void> {
@@ -594,14 +585,4 @@ async function handleConfirmExportAllFromContent(): Promise<void> {
     exportState.isExporting = false;
     sendErrorMessage(getMessage('failedToExport') + (error instanceof Error ? error.message : String(error)));
   }
-}
-
-
-
-// Helper function to send error message
-function sendErrorMessage(message: string): void {
-  chrome.runtime.sendMessage({ 
-    action: 'showError', 
-    message 
-  });
 }

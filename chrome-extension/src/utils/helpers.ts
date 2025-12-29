@@ -70,3 +70,26 @@ export function waitForTabLoad(tabId: number, timeout = 10000): Promise<void> {
 export function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+/**
+ * Send error message to popup via chrome.runtime
+ */
+export function sendErrorMessage(message: string): void {
+  chrome.runtime.sendMessage({
+    action: 'showError',
+    message
+  });
+}
+
+/**
+ * Convert base64 string to Uint8Array (for zip.js)
+ */
+export function base64ToUint8Array(base64String: string): Uint8Array {
+  const base64Data = base64String.includes(',') ? base64String.split(',')[1] : base64String;
+  const binaryString = atob(base64Data);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes;
+}
