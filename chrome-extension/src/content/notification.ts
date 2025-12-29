@@ -38,7 +38,7 @@ function createNotificationBanner(): HTMLDivElement {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a7bbb 0%, #6b9bd1 50%, #87b5e5 100%);
     color: white;
     padding: 15px 20px;
     text-align: center;
@@ -47,7 +47,7 @@ function createNotificationBanner(): HTMLDivElement {
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     z-index: 10000;
     animation: slideDown 0.5s ease-out;
-    border-bottom: 3px solid #ffd700;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.5);
   `;
   return notification;
 }

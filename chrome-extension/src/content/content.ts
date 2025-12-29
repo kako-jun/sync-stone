@@ -85,8 +85,17 @@ async function handleSingleArticleExportInContent(sendResponse: (response: { suc
     // Download images via background script (remove duplicates)
     const imageUrlsSet = new Set([...(articleDetails.imageUrls || []), ...(articleDetails.thumbnailUrls || [])]);
     const allImageUrls = Array.from(imageUrlsSet);
-    
+
     if (allImageUrls.length > 0) {
+      // Show image processing progress
+      chrome.runtime.sendMessage({
+        action: 'updateProgress',
+        type: 'images',
+        current: 0,
+        total: allImageUrls.length,
+        currentItem: msg().downloadingImages
+      }).catch(() => {});
+
       const downloadedImageData = await new Promise<DownloadAllImagesResponse>((resolve, reject) => {
         chrome.runtime.sendMessage({
           action: 'downloadAllImages',
@@ -103,14 +112,25 @@ async function handleSingleArticleExportInContent(sendResponse: (response: { suc
 
       // Add downloaded images to ZIP using pull-based approach
       if (downloadedImageData?.success) {
-        for (const imageUrl of allImageUrls) {
+        for (let i = 0; i < allImageUrls.length; i++) {
+          const imageUrl = allImageUrls[i];
+
+          // Update image progress
+          chrome.runtime.sendMessage({
+            action: 'updateProgress',
+            type: 'images',
+            current: i + 1,
+            total: allImageUrls.length,
+            currentItem: extractFilenameFromUrl(imageUrl)
+          }).catch(() => {});
+
           const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
             chrome.runtime.sendMessage({
               action: 'getDownloadedImage',
               imageUrl: imageUrl
             }, resolve);
           });
-          
+
           if (imageResponse?.success && imageResponse.imageData) {
             const imageData = imageResponse.imageData;
             if (imageData.success && imageData.base64) {

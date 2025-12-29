@@ -600,13 +600,14 @@ function showGuidanceMessage(): void {
     guidanceMessage.style.cssText = `
       margin-top: 15px;
       padding: 15px;
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: linear-gradient(135deg, #4a7bbb 0%, #6b9bd1 50%, #87b5e5 100%);
       border-radius: 8px;
       color: white;
       text-align: center;
       font-size: 14px;
       line-height: 1.5;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     `;
 
     // Insert after extension description first

@@ -95,40 +95,40 @@ export const messages: Record<SupportedLanguage, Messages> = {
     accessIntervalLabel: 'アクセス間隔:',
 
     // Buttons
-    exportAllArticlesButton: '☄ すべての記事をエクスポート',
-    exportAllArticlesButtonFirstPage: '1ページ目へ移動 → すべての記事をエクスポート',
-    exportCurrentArticleButton: '☄ この記事をエクスポート',
+    exportAllArticlesButton: 'すべての記事をエクスポート',
+    exportAllArticlesButtonFirstPage: '1ページ目へ移動してエクスポート開始',
+    exportCurrentArticleButton: 'この記事をエクスポート',
     yesButton: 'はい',
     noButton: 'いいえ',
-    cancelExport: '⛔ エクスポートをキャンセル',
+    cancelExport: 'エクスポートをキャンセル',
 
     // Confirmation dialog
     confirmationText: '件の記事が見つかりました。エクスポートしますか？',
-    confirmationOwnBlog: '（自分の記事）',
-    confirmationOthersBlog: '（自分以外の記事）',
+    confirmationOwnBlog: '',
+    confirmationOthersBlog: '',
 
     // Progress messages
-    downloadingImages: '画像をエクスポート中',
-    exportingArticles: '記事をエクスポート中',
-    exportComplete: 'エクスポート完了！',
-    startingExport: 'エクスポート中です...',
-    startingDownload: 'エクスポート中です...',
+    downloadingImages: '画像を処理中',
+    exportingArticles: '記事を処理中',
+    exportComplete: 'ZIPファイルの準備ができました。ダウンロードダイアログで保存してください。',
+    startingExport: '処理中です...',
+    startingDownload: '処理中です...',
     exportCancelled: 'エクスポートをキャンセルしました',
-    collectingArticles: '記事数を収集中',
-    imageDownloadHeader: '🖼️ 画像エクスポート',
-    articleProcessHeader: '📝 記事エクスポート',
-    imageDownloadComplete: '画像エクスポート完了',
-    articleProcessComplete: '記事エクスポート完了',
+    collectingArticles: '記事を収集中',
+    imageDownloadHeader: '画像処理',
+    articleProcessHeader: '記事処理',
+    imageDownloadComplete: '画像処理完了',
+    articleProcessComplete: '記事処理完了',
     completed: '完了',
 
     // Success/Error messages
-    singleArticleExported: '記事がエクスポートされました！',
+    singleArticleExported: 'ZIPファイルの準備ができました。ダウンロードダイアログで保存してください。',
     failedToExportArticle: 'エクスポートに失敗しました: ',
     failedToExport: 'エクスポートに失敗しました: ',
     couldNotRetrieveTitle: '取得できませんでした',
-    contentScriptNotAvailable: 'ページをリロードしてから再度お試しください。',
+    contentScriptNotAvailable: 'ページとの通信に失敗しました。ページをリロードしてから再度お試しください。',
     notOnBlogListPageError: 'ロドストの日記ページで実行してください。',
-    connectionError: '接続を確立できませんでした。受信側が存在しません。',
+    connectionError: 'ページとの通信に失敗しました。ページをリロードしてください。',
 
     // Guidance
     guidanceTitle: 'ロドストのブログページに移動してください',
@@ -146,7 +146,7 @@ export const messages: Record<SupportedLanguage, Messages> = {
     件: '件',
 
     // Background script messages
-    blogListMoved: 'ブログ一覧ページに移動しました。全記事エクスポートボタンをもう一度押してください。',
+    blogListMoved: '1ページ目に移動しました。拡張機能を開き直してエクスポートを開始してください。',
     exportDataNotFound: 'エクスポート用のデータが見つかりません',
 
     // Content script messages
@@ -157,7 +157,7 @@ export const messages: Record<SupportedLanguage, Messages> = {
     articleProcessError: 'エクスポート処理中にエラーが発生しました: ',
 
     // Warning messages
-    doNotClosePopup: '⚠️ エクスポート中です。ポップアップを閉じずにそのままお待ちください。',
+    doNotClosePopup: '処理中です。ポップアップを閉じずにお待ちください。',
 
     // Progress format strings
     progressPage: 'ページ',
@@ -177,39 +177,39 @@ export const messages: Record<SupportedLanguage, Messages> = {
 
     // Buttons
     exportAllArticlesButton: 'Export All Articles',
-    exportAllArticlesButtonFirstPage: 'Go to Page 1 and Export All',
-    exportCurrentArticleButton: 'Export Current Article',
+    exportAllArticlesButtonFirstPage: 'Go to Page 1 to Start Export',
+    exportCurrentArticleButton: 'Export This Article',
     yesButton: 'Yes',
     noButton: 'No',
-    cancelExport: '⛔ Cancel Export',
+    cancelExport: 'Cancel Export',
 
     // Confirmation dialog
-    confirmationText: ' articles will be exported. Continue?',
-    confirmationOwnBlog: '(Your Articles)',
-    confirmationOthersBlog: "(Others' Articles)",
+    confirmationText: ' articles found. Export them?',
+    confirmationOwnBlog: '',
+    confirmationOthersBlog: '',
 
     // Progress messages
-    downloadingImages: 'Exporting Images',
-    exportingArticles: 'Exporting Articles',
-    exportComplete: 'Export Complete!',
-    startingExport: 'Exporting...',
-    startingDownload: 'Exporting...',
+    downloadingImages: 'Processing Images',
+    exportingArticles: 'Processing Articles',
+    exportComplete: 'ZIP file is ready. Please save it in the download dialog.',
+    startingExport: 'Processing...',
+    startingDownload: 'Processing...',
     exportCancelled: 'Export cancelled',
     collectingArticles: 'Collecting Articles',
-    imageDownloadHeader: '🖼️ Exporting Images',
-    articleProcessHeader: '📝 Exporting Articles',
-    imageDownloadComplete: 'Image export complete',
-    articleProcessComplete: 'Article export complete',
+    imageDownloadHeader: 'Image Processing',
+    articleProcessHeader: 'Article Processing',
+    imageDownloadComplete: 'Image processing complete',
+    articleProcessComplete: 'Article processing complete',
     completed: 'Complete',
 
     // Success/Error messages
-    singleArticleExported: 'Single article exported successfully!',
+    singleArticleExported: 'ZIP file is ready. Please save it in the download dialog.',
     failedToExportArticle: 'Failed to export: ',
     failedToExport: 'Failed to export: ',
     couldNotRetrieveTitle: 'Could not retrieve',
-    contentScriptNotAvailable: 'Please reload the page and try again.',
+    contentScriptNotAvailable: 'Communication with page failed. Please reload and try again.',
     notOnBlogListPageError: 'Please run this on a Lodestone blog page.',
-    connectionError: 'Could not establish connection. Receiving end does not exist.',
+    connectionError: 'Communication with page failed. Please reload the page.',
 
     // Guidance
     guidanceTitle: 'Please navigate to a Lodestone blog page',
@@ -224,10 +224,10 @@ export const messages: Record<SupportedLanguage, Messages> = {
     articleLikes: 'Likes: ',
     articleComments: 'Comments: ',
     chars: ' chars',
-    件: '',
+    件: ' items',
 
     // Background script messages
-    blogListMoved: 'Moved to blog list page. Please press the export all articles button again.',
+    blogListMoved: 'Navigated to page 1. Please reopen the extension to start export.',
     exportDataNotFound: 'Export data not found',
 
     // Content script messages
@@ -238,7 +238,7 @@ export const messages: Record<SupportedLanguage, Messages> = {
     articleProcessError: 'Error occurred during article processing: ',
 
     // Warning messages
-    doNotClosePopup: '⚠️ Export in progress. Please do not close this popup.',
+    doNotClosePopup: 'Processing in progress. Please keep this popup open.',
 
     // Progress format strings
     progressPage: 'Page',
