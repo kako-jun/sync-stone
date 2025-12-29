@@ -10,7 +10,8 @@ import {
   GetDownloadedImageResponse,
   FetchPageResponse,
   FetchArticleResponse,
-  FetchImageListPageResponse
+  FetchImageListPageResponse,
+  ContentScriptMessage
 } from '@/types';
 import {
   extractBlogEntries,
@@ -41,9 +42,6 @@ let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
 function msg() {
   return messages[contentLanguage];
 }
-
-// zip.js UMD version is loaded via manifest.json
-declare const zip: any;
 
 // Get turndown service for direct use
 const turndownService = getTurndownService();
@@ -87,7 +85,7 @@ async function fetchArticleDetails(articleUrl: string, delay: number): Promise<A
 
 
 // Handle single article export in content script
-async function handleSingleArticleExportInContent(sendResponse: (response: any) => void): Promise<void> {
+async function handleSingleArticleExportInContent(sendResponse: (response: { success: boolean; message?: string }) => void): Promise<void> {
   try {
     // Get article data
     const articleDetails = extractArticleDetails();
@@ -858,7 +856,7 @@ async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: bo
 }
 
 // Message listener
-chrome.runtime.onMessage.addListener((request: any, _sender: any, sendResponse: any) => {
+chrome.runtime.onMessage.addListener((request: ContentScriptMessage, _sender: chrome.runtime.MessageSender, sendResponse) => {
   console.log('Content script received message:', request.action);
   
   switch (request.action) {

@@ -3,9 +3,6 @@
 import { base64ToUint8Array } from '@/utils/helpers';
 import { ImageMap, DownloadAllImagesResponse, GetDownloadedImageResponse } from '@/types';
 
-// Declare external dependencies
-declare const zip: any;
-
 // Re-export ImageMap for convenience
 export type { ImageMap };
 
@@ -90,7 +87,7 @@ export async function downloadAdditionalImages(
  * Add images to ZIP from IndexedDB
  */
 export async function addImagesToZip(
-  zipWriter: any,
+  zipWriter: zip.ZipWriter,
   imageMap: ImageMap,
   isCancelledFn: () => boolean
 ): Promise<{ successCount: number; failCount: number }> {

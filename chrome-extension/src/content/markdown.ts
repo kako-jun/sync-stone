@@ -2,10 +2,7 @@
 
 import { ImageMap } from '@/types';
 
-// TurndownService is loaded from popup.html
-declare const TurndownService: any;
-
-// Create and configure TurndownService instance
+// TurndownService is loaded via script tag - types from turndown.d.ts
 const turndownService = new TurndownService();
 
 export interface CommentForMarkdown {
@@ -38,8 +35,8 @@ export interface MarkdownConversionResult {
 function configureImageRule(imageMap: ImageMap): void {
   turndownService.addRule('image', {
     filter: 'img',
-    replacement: function (_content: string, node: any) {
-      const originalSrc = node.getAttribute('src');
+    replacement: function (_content: string, node: HTMLElement) {
+      const originalSrc = node.getAttribute('src') || '';
       const alt = node.getAttribute('alt') || '';
       const newSrc = imageMap[originalSrc] || originalSrc;
       return `![${alt}](${newSrc})`;
@@ -52,11 +49,12 @@ function configureImageRule(imageMap: ImageMap): void {
  */
 function configureImageLinkRule(imageMap: ImageMap): void {
   turndownService.addRule('imageLink', {
-    filter: function (node: any) {
-      return node.nodeName === 'A' && node.getAttribute('href') && /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(node.getAttribute('href'));
+    filter: function (node: HTMLElement) {
+      const href = node.getAttribute('href');
+      return node.nodeName === 'A' && !!href && /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(href);
     },
-    replacement: function (content: string, node: any) {
-      const originalHref = node.getAttribute('href');
+    replacement: function (content: string, node: HTMLElement) {
+      const originalHref = node.getAttribute('href') || '';
       const newHref = imageMap[originalHref] || originalHref;
       return `[${content}](${newHref})`;
     }
@@ -146,6 +144,6 @@ export function processImagesAndConvertToMarkdown(data: MarkdownConversionData):
 /**
  * Get the turndown service instance for direct use
  */
-export function getTurndownService(): any {
+export function getTurndownService(): TurndownService {
   return turndownService;
 }

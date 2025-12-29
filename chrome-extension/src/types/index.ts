@@ -155,3 +155,78 @@ export interface GetArticleInfoResponse extends BaseResponse {
   likes?: number;
   commentsCount?: number;
 }
+
+// Content script message types
+export interface ScrapeAdditionalPageMessage {
+  action: 'scrapeAdditionalPage';
+}
+
+export interface GetSingleArticleDataMessage {
+  action: 'getSingleArticleData';
+}
+
+export interface ProcessImagesAndConvertToMarkdownMessage {
+  action: 'processImagesAndConvertToMarkdown';
+  title: string;
+  htmlContent: string;
+  likes: number;
+  commentsCount: number;
+  publishDate: string | null;
+  tags: string[];
+  imageMap: ImageMap;
+  thumbnailUrls: string[];
+  commentsData: CommentData[];
+}
+
+export interface ShowExportNotificationMessage {
+  action: 'showExportNotification';
+  message: string;
+}
+
+export interface ExportSingleArticleMessage {
+  action: 'exportSingleArticle';
+}
+
+export interface ExportAllArticlesFromContentMessage {
+  action: 'exportAllArticlesFromContent';
+  exportDelay: number;
+  currentLanguage: string;
+}
+
+export interface ProcessAllArticlesFromContentMessage {
+  action: 'processAllArticlesFromContent';
+  entries: BlogEntry[];
+  isOwnBlog: boolean;
+  exportDelay: number;
+  currentLanguage: string;
+}
+
+export interface SetLanguageMessage {
+  action: 'setLanguage';
+  language: string;
+}
+
+export interface CancelExportMessage {
+  action: 'cancelExport';
+}
+
+export interface ScrapeImageListPageMessage {
+  action: 'scrapeImageListPage';
+}
+
+export interface GetArticleInfoMessage {
+  action: 'getArticleInfo';
+}
+
+export type ContentScriptMessage =
+  | ScrapeAdditionalPageMessage
+  | GetSingleArticleDataMessage
+  | ProcessImagesAndConvertToMarkdownMessage
+  | ShowExportNotificationMessage
+  | ExportSingleArticleMessage
+  | ExportAllArticlesFromContentMessage
+  | ProcessAllArticlesFromContentMessage
+  | SetLanguageMessage
+  | CancelExportMessage
+  | ScrapeImageListPageMessage
+  | GetArticleInfoMessage;
