@@ -229,6 +229,9 @@ function setupEventListeners(): void {
 
   // Export current article button
   elements.exportCurrentArticleButton.addEventListener("click", () => {
+    // Reset progress bars before starting new export
+    resetProgress();
+
     showStatusMessage(messages[currentLanguage].startingDownload, "info");
     elements.exportCurrentArticleButton.disabled = true;
 
@@ -264,6 +267,9 @@ function setupEventListeners(): void {
 
   // Confirmation dialog buttons
   elements.confirmYesButton.addEventListener("click", () => {
+    // Reset progress bars before starting new export
+    resetProgress();
+
     const exportDelay = Math.max(parseInt(elements.delayInput.value, 10) || CONFIG.MIN_EXPORT_DELAY, CONFIG.MIN_EXPORT_DELAY);
     elements.delayInput.value = exportDelay.toString();
 
