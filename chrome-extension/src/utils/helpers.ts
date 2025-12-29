@@ -17,10 +17,13 @@ export function generateHash(str: string): string {
  * Sanitize filename for safe file system usage
  */
 export function sanitizeFilename(filename: string, maxLength = 50): string {
-  return filename
+  const sanitized = filename
     .replace(FILE_PATTERNS.INVALID_FILENAME_CHARS, '_')
     .replace(FILE_PATTERNS.WHITESPACE, '_')
     .substring(0, maxLength);
+
+  // Return fallback if sanitized result is empty or only underscores
+  return sanitized.replace(/_+/g, '') === '' ? 'untitled' : sanitized;
 }
 
 /**
