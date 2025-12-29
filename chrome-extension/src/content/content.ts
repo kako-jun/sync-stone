@@ -2,6 +2,7 @@
 
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
 import { generateHash, sanitizeFilename, sendErrorMessage, base64ToUint8Array } from '@/utils/helpers';
+import { deleteDatabase } from '@/utils/indexedDB';
 import {
   extractBlogEntries,
   getPaginationInfo,
@@ -33,36 +34,6 @@ const turndownService = new TurndownService();
 
 // zip.js UMD version is loaded via manifest.json
 declare const zip: any;
-
-// IndexedDB utilities (inline for content script)
-const DB_NAME = 'SyncStoneDB';
-const DB_VERSION = 1;
-
-
-
-async function deleteDatabase(): Promise<void> {
-  console.log('[IndexedDB] Deleting entire database');
-  
-  return new Promise((resolve, reject) => {
-    const deleteReq = indexedDB.deleteDatabase(DB_NAME);
-    
-    deleteReq.onsuccess = () => {
-      console.log('[IndexedDB] Database deleted successfully');
-      resolve();
-    };
-    
-    deleteReq.onerror = () => {
-      console.error('[IndexedDB] Failed to delete database');
-      reject(deleteReq.error);
-    };
-    
-    deleteReq.onblocked = () => {
-      console.warn('[IndexedDB] Database deletion blocked - close all connections');
-      // Still resolve as the database will be deleted when connections close
-      resolve();
-    };
-  });
-}
 
 // Global cancellation flag
 let isCancelled = false;
