@@ -7,7 +7,13 @@ SyncStone, named "Stardustmemoir", is an unofficial tool related to FINAL FANTAS
 **Supported Regions**: JP, NA, EU, FR, DE (all Lodestone regions)
 
 <p align="center">
-  <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
+  <img src="assets/hero.webp" alt="kako-jun">
+</p>
+
+## Screenshots
+
+<p align="center">
+  <img src="assets/screenshot-en.webp" alt="Export in progress" width="400">
 </p>
 
 ## Features
@@ -122,7 +128,7 @@ It is recommended to open the exported Markdown files with a text editor that su
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
-    <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="Thank you FFXIV" width="120">
+    <img src="assets/thanks.webp" alt="Thank you FFXIV" width="120">
   </div>
   <div style="display: inline-block; vertical-align: middle;">
     <p style="margin:0; padding:0; font-size:1.2em;">Thank you, FFXIV</p>

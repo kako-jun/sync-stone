@@ -5,7 +5,13 @@ SyncStone - 星紡（せいぼう）のメモワールは、FINAL FANTASY XIV �
 **対応リージョン**: JP, NA, EU, FR, DE（すべてのロドストリージョン）
 
 <p align="center">
-  <img src="28445b1c091759ab82531cc3a64b5ca7ced45c89.jpg" alt="kako-jun">
+  <img src="assets/hero.webp" alt="kako-jun">
+</p>
+
+## スクリーンショット
+
+<p align="center">
+  <img src="assets/screenshot-jp.webp" alt="エクスポート中" width="400">
 </p>
 
 ## 機能概要
@@ -125,7 +131,7 @@ SyncStone では、自分以外のプレイヤーの日記も同様の手順で�
 
 <div style="text-align: right; margin-top: 20px;">
   <div style="display: inline-block; vertical-align: middle; margin-right: 20px;">
-    <img src="e6486e2b222ab797036f2c3b5bc9d4d850d052d9.jpg" alt="ありがとう、FFXIV" width="120">
+    <img src="assets/thanks.webp" alt="ありがとう、FFXIV" width="120">
   </div>
   <div style="display: inline-block; vertical-align: middle;">
     <p style="margin:0; padding:0; font-size:1.2em;">ありがとう、FFXIV</p>
