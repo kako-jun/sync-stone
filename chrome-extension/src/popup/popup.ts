@@ -769,20 +769,20 @@ function showStatusMessage(message: string, type: "error" | "success" | "info"):
 
   // Set styles based on type - ガラス調半透明背景 + 色の特徴保持
   const styles = {
-    error: { 
+    error: {
       bg: "rgba(255, 235, 238, 0.7)", // 赤っぽい半透明背景
-      color: "#c62828", 
-      border: "rgba(239, 154, 154, 0.5)" 
+      color: "#c62828",
+      border: "rgba(239, 154, 154, 0.5)"
     },
-    success: { 
+    success: {
       bg: "rgba(232, 245, 232, 0.7)", // 緑っぽい半透明背景
-      color: "#2e7d32", 
-      border: "rgba(165, 214, 167, 0.5)" 
+      color: "#2e7d32",
+      border: "rgba(165, 214, 167, 0.5)"
     },
-    info: { 
-      bg: "rgba(232, 245, 232, 0.7)", // 緑っぽい半透明背景
-      color: "#2e7d32", 
-      border: "rgba(165, 214, 167, 0.5)" 
+    info: {
+      bg: "rgba(227, 242, 253, 0.7)", // 青っぽい半透明背景（処理中など）
+      color: "#1565c0",
+      border: "rgba(144, 202, 249, 0.5)"
     },
   };
 
