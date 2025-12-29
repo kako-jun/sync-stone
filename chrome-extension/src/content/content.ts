@@ -24,6 +24,7 @@ import {
   getTurndownService,
   MarkdownConversionData
 } from './markdown';
+import { showExportNotification } from './notification';
 
 // Current language for content script
 let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
@@ -41,88 +42,6 @@ const turndownService = getTurndownService();
 
 // Global cancellation flag
 let isCancelled = false;
-
-// Show export notification banner
-function showExportNotification(message: string): void {
-  // Remove existing notification if any
-  const existingNotification = document.getElementById('sync-stone-notification');
-  if (existingNotification) {
-    existingNotification.remove();
-  }
-
-  // Create notification banner
-  const notification = document.createElement('div');
-  notification.id = 'sync-stone-notification';
-  notification.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px 20px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    z-index: 10000;
-    animation: slideDown 0.5s ease-out;
-    border-bottom: 3px solid #ffd700;
-  `;
-
-  // Add animation CSS
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideDown {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-    #sync-stone-notification {
-      animation: slideDown 0.5s ease-out, pulse 2s infinite 1s;
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Create notification content without innerHTML
-  const notificationContent = document.createElement('div');
-  notificationContent.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 10px;';
-  
-  const leftIcon = document.createElement('span');
-  leftIcon.style.fontSize = '20px';
-  leftIcon.textContent = '📋';
-  
-  const messageSpan = document.createElement('span');
-  messageSpan.textContent = message;
-  
-  const rightIcon = document.createElement('span');
-  rightIcon.style.fontSize = '20px';
-  rightIcon.textContent = '📥';
-  
-  notificationContent.appendChild(leftIcon);
-  notificationContent.appendChild(messageSpan);
-  notificationContent.appendChild(rightIcon);
-  notification.appendChild(notificationContent);
-
-  // Click to dismiss
-  notification.addEventListener('click', () => {
-    notification.style.animation = 'slideDown 0.3s ease-in reverse';
-    setTimeout(() => notification.remove(), 300);
-  });
-
-  // Auto-dismiss after 8 seconds
-  setTimeout(() => {
-    if (notification.parentNode) {
-      notification.style.animation = 'slideDown 0.3s ease-in reverse';
-      setTimeout(() => notification.remove(), 300);
-    }
-  }, 8000);
-
-  document.body.insertBefore(notification, document.body.firstChild);
-}
 
 // Fetch page entries via background script
 async function fetchPageEntries(pageUrl: string, delay: number): Promise<any[]> {
