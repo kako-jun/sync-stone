@@ -36,13 +36,6 @@ export function extractFilenameFromUrl(url: string): string {
 }
 
 /**
- * Check if image is a thumbnail based on filename pattern
- */
-export function isThumbnailImage(src: string): boolean {
-  return FILE_PATTERNS.THUMBNAIL_PATTERN.test(src);
-}
-
-/**
  * Create a promise that resolves when a tab finishes loading
  */
 export function waitForTabLoad(tabId: number, timeout = 10000): Promise<void> {

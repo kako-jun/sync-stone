@@ -140,10 +140,3 @@ export function processImagesAndConvertToMarkdown(data: MarkdownConversionData):
     };
   }
 }
-
-/**
- * Get the turndown service instance for direct use
- */
-export function getTurndownService(): TurndownService {
-  return turndownService;
-}

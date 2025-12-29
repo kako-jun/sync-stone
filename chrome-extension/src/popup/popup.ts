@@ -1,5 +1,6 @@
 import { ExportState, PopupMessage, GetArticleInfoResponse } from "@/types";
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from "@/locales/messages";
+import { CONFIG } from "@/utils/constants";
 
 interface PopupElements {
   delayInput: HTMLInputElement;
@@ -78,7 +79,7 @@ function initializeSettings(): void {
   currentLanguage = navigator.language.startsWith("ja") ? "ja" : "en";
 
   elements.languageSelect.value = currentLanguage;
-  elements.delayInput.value = "2000";
+  elements.delayInput.value = String(CONFIG.DEFAULT_EXPORT_DELAY);
 
   applyI18nMessages();
 }
@@ -167,25 +168,25 @@ function setupEventListeners(): void {
   elements.delayInput.addEventListener("input", function (this: HTMLInputElement) {
     let value = parseInt(this.value, 10);
 
-    if (value < 2000) {
-      this.value = "2000";
-    } else if (value > 10000) {
-      this.value = "10000";
+    if (value < CONFIG.MIN_EXPORT_DELAY) {
+      this.value = String(CONFIG.MIN_EXPORT_DELAY);
+    } else if (value > CONFIG.MAX_EXPORT_DELAY) {
+      this.value = String(CONFIG.MAX_EXPORT_DELAY);
     }
   });
 
   elements.delayInput.addEventListener("blur", function (this: HTMLInputElement) {
     let value = parseInt(this.value, 10);
 
-    if (isNaN(value) || value < 2000) {
-      this.value = "2000";
-    } else if (value > 10000) {
-      this.value = "10000";
+    if (isNaN(value) || value < CONFIG.MIN_EXPORT_DELAY) {
+      this.value = String(CONFIG.MIN_EXPORT_DELAY);
+    } else if (value > CONFIG.MAX_EXPORT_DELAY) {
+      this.value = String(CONFIG.MAX_EXPORT_DELAY);
     }
   });
 
   // Set default delay value
-  elements.delayInput.value = "2000";
+  elements.delayInput.value = String(CONFIG.DEFAULT_EXPORT_DELAY);
 
   // Export all articles button
   elements.exportButton.addEventListener("click", () => {
@@ -193,7 +194,7 @@ function setupEventListeners(): void {
     elements.exportButton.disabled = true;
     elements.exportButton.style.cursor = "not-allowed";
 
-    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
+    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), CONFIG.MIN_EXPORT_DELAY);
     elements.delayInput.value = exportDelay.toString();
 
     // Check if we're on first page first
@@ -236,18 +237,14 @@ function setupEventListeners(): void {
     showStatusMessage(messages[currentLanguage].startingDownload, "info");
     elements.exportCurrentArticleButton.disabled = true;
 
-    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
+    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), CONFIG.MIN_EXPORT_DELAY);
 
     // Send directly to content script
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]?.id) {
         chrome.tabs.sendMessage(
           tabs[0].id,
-          {
-            action: "exportSingleArticle",
-            exportDelay,
-            language: currentLanguage,
-          },
+          { action: "exportSingleArticle" },
           (response) => {
             // Handle response from content script
             if (chrome.runtime.lastError) {
@@ -271,7 +268,7 @@ function setupEventListeners(): void {
 
   // Confirmation dialog buttons
   elements.confirmYesButton.addEventListener("click", () => {
-    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), 2000);
+    const exportDelay = Math.max(parseInt(elements.delayInput.value, 10), CONFIG.MIN_EXPORT_DELAY);
     elements.delayInput.value = exportDelay.toString();
 
     // Set the export delay first, then confirm export
@@ -438,6 +435,16 @@ chrome.runtime.onMessage.addListener((request: PopupMessage, sender, sendRespons
 
     case "articleInfo":
       displayArticleInfo(request.title, request.bodyLength, request.imageCount, request.likes, request.commentsCount);
+      break;
+
+    case "exportCancelled":
+      // Handle cancel signal from background script
+      elements.exportControlContainer.style.display = "none";
+      showExportWarning(false);
+      elements.exportButton.disabled = false;
+      elements.exportButton.style.cursor = "pointer";
+      showStatusMessage(messages[currentLanguage].exportCancelled, "info");
+      resetProgress();
       break;
   }
 });

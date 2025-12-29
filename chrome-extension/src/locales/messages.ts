@@ -250,10 +250,5 @@ export const messages: Record<SupportedLanguage, Messages> = {
   },
 };
 
-// Helper function to get message by key
-export function getMessage(lang: SupportedLanguage, key: keyof Messages): string {
-  return messages[lang][key];
-}
-
 // Default language
 export const DEFAULT_LANGUAGE: SupportedLanguage = 'ja';

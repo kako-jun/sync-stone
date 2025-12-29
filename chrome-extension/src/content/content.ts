@@ -1,7 +1,7 @@
 // Content script for SyncStone Chrome extension
 
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
-import { generateHash, sanitizeFilename, sendErrorMessage, base64ToUint8Array } from '@/utils/helpers';
+import { sanitizeFilename, sendErrorMessage, base64ToUint8Array, extractFilenameFromUrl } from '@/utils/helpers';
 import { deleteDatabase } from '@/utils/indexedDB';
 import {
   BlogEntry,
@@ -22,17 +22,11 @@ import {
   getImageListTotalPages
 } from './scraper';
 import {
-  downloadAdditionalImages,
-  addImagesToZip,
-  sendProgressUpdate,
   downloadZip,
   ImageMap,
   ProcessedArticle
 } from './exporter';
-import {
-  processImagesAndConvertToMarkdown,
-  getTurndownService
-} from './markdown';
+import { processImagesAndConvertToMarkdown } from './markdown';
 import { showExportNotification } from './notification';
 
 // Current language for content script
@@ -42,9 +36,6 @@ let contentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
 function msg() {
   return messages[contentLanguage];
 }
-
-// Get turndown service for direct use
-const turndownService = getTurndownService();
 
 // Global cancellation flag
 let isCancelled = false;
@@ -280,7 +271,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
     console.log('[collectAndDownloadAllImagesInContent] Starting download of', imageUrlsArray.length, 'images');
     
     console.log('[collectAndDownloadAllImagesInContent] Sending downloadAllImages request to background...');
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     const downloadedImageData = await Promise.race<DownloadAllImagesResponse>([
       new Promise<DownloadAllImagesResponse>((resolve, reject) => {
         chrome.runtime.sendMessage({
@@ -326,7 +317,7 @@ async function collectAndDownloadAllImagesInContent(exportDelay: number): Promis
           break;
         }
         
-        console.log(`[PULL-LOG] Pulling image ${i + 1}/${imageUrlsArray.length}: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+        console.log(`[PULL-LOG] Pulling image ${i + 1}/${imageUrlsArray.length}: ${extractFilenameFromUrl(imageUrl)}`);
 
         const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
           chrome.runtime.sendMessage({
@@ -596,7 +587,7 @@ async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: bo
     console.log('[EXPORT-LOG] Phase 2: Additional images to download:', newImageUrls.length);
     
     if (newImageUrls.length > 0) {
-      let timeoutId: NodeJS.Timeout;
+      let timeoutId: ReturnType<typeof setTimeout>;
       const downloadedImageData = await Promise.race<DownloadAllImagesResponse>([
         new Promise<DownloadAllImagesResponse>((resolve, reject) => {
           chrome.runtime.sendMessage({
@@ -764,7 +755,7 @@ async function processAllArticlesFromContent(entries: BlogEntry[], isOwnBlog: bo
           break;
         }
         
-        console.log(`[STREAMING-ZIP] Adding image ${i + 1}/${imageUrls.length} to ZIP: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+        console.log(`[STREAMING-ZIP] Adding image ${i + 1}/${imageUrls.length} to ZIP: ${extractFilenameFromUrl(imageUrl)}`);
 
         const imageResponse = await new Promise<GetDownloadedImageResponse>((resolve) => {
           chrome.runtime.sendMessage({
@@ -931,7 +922,23 @@ chrome.runtime.onMessage.addListener((request: ContentScriptMessage, _sender: ch
         sendResponse({ success: false, message: `Failed to scrape image list: ${error instanceof Error ? error.message : String(error)}` });
       }
       break;
-      
+
+    case 'getArticleInfo':
+      try {
+        const articleInfo = extractArticleDetails();
+        sendResponse({
+          success: true,
+          title: articleInfo.title || undefined,
+          bodyLength: articleInfo.bodyHtml?.length || 0,
+          imageCount: articleInfo.imageUrls.length + articleInfo.thumbnailUrls.length,
+          likes: articleInfo.likes,
+          commentsCount: articleInfo.commentsCount
+        });
+      } catch (error) {
+        sendResponse({ success: false, message: `Failed to get article info: ${error instanceof Error ? error.message : String(error)}` });
+      }
+      break;
+
     default:
       sendResponse({ success: false, message: 'Unknown action' });
   }

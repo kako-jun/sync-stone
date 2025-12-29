@@ -7,10 +7,10 @@ import {
   FetchImageListPageResponse,
   DownloadAllImagesResponse
 } from '@/types';
-import { CONFIG, URLS } from '@/utils/constants';
+import { CONFIG, URLS, calculateTimeout } from '@/utils/constants';
 import { saveImage, getImage, getImageCount, clearAllImages, deleteDatabase, StoredImage } from '@/utils/indexedDB';
 import { messages, SupportedLanguage, DEFAULT_LANGUAGE } from '@/locales/messages';
-import { generateHash, sendErrorMessage } from '@/utils/helpers';
+import { generateHash, sendErrorMessage, sleep, waitForTabLoad, extractFilenameFromUrl } from '@/utils/helpers';
 
 // Global state
 let exportState: ExportState = {
@@ -23,7 +23,7 @@ let exportState: ExportState = {
 };
 
 let isCancelled = false;
-let currentExportDelay = CONFIG.DEFAULT_EXPORT_DELAY;
+let currentExportDelay: number = CONFIG.DEFAULT_EXPORT_DELAY;
 let currentLanguage: SupportedLanguage = DEFAULT_LANGUAGE;
 
 // Stored entries data for content script approach
@@ -134,7 +134,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       
     case 'getDownloadedImage':
       const imageUrl = request.imageUrl;
-      console.log(`[PULL-RESPONSE-LOG] getDownloadedImage request for: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+      console.log(`[PULL-RESPONSE-LOG] getDownloadedImage request for: ${extractFilenameFromUrl(imageUrl)}`);
       
       // Get from IndexedDB instead of globalThis
       getImage(imageUrl).then(imageData => {
@@ -286,19 +286,11 @@ async function handleFetchPageInNewTab(url: string, delay: number, sendResponse:
       return;
     }
 
-    // Wait for tab to fully load
-    await new Promise<void>((resolve) => {
-      const listener = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
-        if (tabId === tab.id && changeInfo.status === 'complete') {
-          chrome.tabs.onUpdated.removeListener(listener);
-          resolve();
-        }
-      };
-      chrome.tabs.onUpdated.addListener(listener);
-    });
+    // Wait for tab to fully load (timeout based on user's export delay setting)
+    await waitForTabLoad(tab.id, calculateTimeout(delay));
 
     // Additional delay for content script to initialize
-    await new Promise(resolve => setTimeout(resolve, delay));
+    await sleep(delay);
 
     const response = await chrome.tabs.sendMessage(tab.id, { action: 'scrapeAdditionalPage' });
     await chrome.tabs.remove(tab.id);
@@ -322,19 +314,11 @@ async function handleFetchArticleInNewTab(url: string, delay: number, sendRespon
       return;
     }
 
-    // Wait for tab to fully load
-    await new Promise<void>((resolve) => {
-      const listener = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
-        if (tabId === tab.id && changeInfo.status === 'complete') {
-          chrome.tabs.onUpdated.removeListener(listener);
-          resolve();
-        }
-      };
-      chrome.tabs.onUpdated.addListener(listener);
-    });
+    // Wait for tab to fully load (timeout based on user's export delay setting)
+    await waitForTabLoad(tab.id, calculateTimeout(delay));
 
     // Additional delay for content script to initialize
-    await new Promise(resolve => setTimeout(resolve, delay));
+    await sleep(delay);
 
     const response = await chrome.tabs.sendMessage(tab.id, { action: 'getSingleArticleData' });
     await chrome.tabs.remove(tab.id);
@@ -358,19 +342,11 @@ async function handleFetchImageListPage(url: string, delay: number, sendResponse
       return;
     }
 
-    // Wait for tab to fully load
-    await new Promise<void>((resolve) => {
-      const listener = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
-        if (tabId === tab.id && changeInfo.status === 'complete') {
-          chrome.tabs.onUpdated.removeListener(listener);
-          resolve();
-        }
-      };
-      chrome.tabs.onUpdated.addListener(listener);
-    });
+    // Wait for tab to fully load (timeout based on user's export delay setting)
+    await waitForTabLoad(tab.id, calculateTimeout(delay));
 
     // Additional delay for content script to initialize
-    await new Promise(resolve => setTimeout(resolve, delay));
+    await sleep(delay);
 
     const response = await chrome.tabs.sendMessage(tab.id, { action: 'scrapeImageListPage' });
     await chrome.tabs.remove(tab.id);
@@ -423,7 +399,7 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
         break;
       }
 
-      console.log(`[DOWNLOAD-LOG] Processing image ${i + 1}/${imageUrls.length}: ${imageUrl.substring(imageUrl.lastIndexOf('/') + 1)}`);
+      console.log(`[DOWNLOAD-LOG] Processing image ${i + 1}/${imageUrls.length}: ${extractFilenameFromUrl(imageUrl)}`);
 
       try {
         const response = await fetch(imageUrl);
@@ -443,7 +419,7 @@ async function handleDownloadAllImages(imageUrls: string[], totalImages: number,
         
         console.log(`[DOWNLOAD-LOG] Image ${i + 1} base64 length: ${base64.length} chars`);
         
-        const originalFilename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+        const originalFilename = extractFilenameFromUrl(imageUrl);
         const hash = generateHash(imageUrl);
         const uniqueFilename = `${hash}_${originalFilename}`;
 

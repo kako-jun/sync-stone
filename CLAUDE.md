@@ -90,44 +90,65 @@ npm run package     # ZIP作成
 
 ## 4. アーキテクチャ設計
 
-### 4.1 サービス指向アーキテクチャ
+### 4.1 モジュール構成
 
-リファクタリングにより、機能別にサービスクラスに分離しました：
+リファクタリングにより、機能別にモジュールを分離しました：
 
 ```
 src/
 ├── background/
-│   └── background.ts      # メインの処理制御
-├── services/
-│   ├── LodestoneAPI.ts    # ロドストAPIアクセス
-│   ├── ImageProcessor.ts   # 画像処理
-│   └── MarkdownConverter.ts # Markdown変換
+│   └── background.ts      # Service Worker（タブ管理、画像DL、メッセージング）
+├── content/
+│   ├── content.ts         # Content Scriptエントリポイント
+│   ├── scraper.ts         # ロドストページのスクレイピング
+│   ├── exporter.ts        # エクスポート処理・ZIP生成
+│   ├── markdown.ts        # HTML→Markdown変換（Turndown）
+│   └── notification.ts    # ページ内通知UI
+├── popup/
+│   └── popup.ts           # ポップアップUI・設定管理
 ├── utils/
-│   ├── constants.ts       # 定数・設定
-│   └── helpers.ts         # ユーティリティ関数
-└── types/
-    └── index.ts          # TypeScript型定義
+│   ├── constants.ts       # 定数・設定値
+│   ├── helpers.ts         # ユーティリティ関数
+│   └── indexedDB.ts       # IndexedDB操作
+├── types/
+│   ├── index.ts           # アプリケーション型定義
+│   ├── zip.d.ts           # zip.js型宣言
+│   └── turndown.d.ts      # Turndown型宣言
+└── locales/
+    └── messages.ts        # 多言語メッセージ定義
 ```
 
-### 4.2 各サービスクラスの役割
+### 4.2 各モジュールの役割
 
-**LodestoneAPI**
-- ブログエントリーのスクレイピング
-- 記事詳細の取得
+**background.ts（Service Worker）**
+- タブの作成と管理
+- 画像のダウンロード処理
+- IndexedDBへの画像データ保存
+- Content Script↔Popupのメッセージルーティング
+- エクスポート状態管理
+
+**scraper.ts**
+- ブログ記事一覧の抽出
+- 記事詳細ページの解析
+- 画像一覧ページのスクレイピング
 - ページネーション処理
-- タイムアウト管理
 
-**ImageProcessor**
-- 画像の一括ダウンロード
-- ユニークファイル名生成
-- 画像マッピング管理
-- ZIP組み込み処理
+**exporter.ts**
+- 単一記事/全記事エクスポートの制御
+- zip.jsによるZIPファイル生成
+- 記事インデックス（index.md）生成
+- ダウンロード処理
 
-**MarkdownConverter**
-- HTMLからMarkdownへの変換
+**markdown.ts**
+- HTMLからMarkdownへの変換（Turndown）
 - 画像URLの書き換え
 - YAMLフロントマター生成
 - メタデータ埋め込み
+
+**indexedDB.ts**
+- 画像データの永続化
+- base64エンコード画像の保存・取得
+- エクスポート完了後のクリーンアップ
 
 ### 4.3 設定の一元管理
 

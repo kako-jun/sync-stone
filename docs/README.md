@@ -27,19 +27,24 @@ SyncStoneは、FFXIV公式サイト「ロードストーン」のブログ記事
 ```
 chrome-extension/src/
 ├── background/
-│   └── background.ts      # Service Worker
+│   └── background.ts      # Service Worker（タブ管理、画像DL、メッセージング）
 ├── content/
-│   └── content.ts         # Content Script
+│   ├── content.ts         # Content Scriptエントリポイント
+│   ├── scraper.ts         # ロドストページのスクレイピング
+│   ├── exporter.ts        # エクスポート処理・ZIP生成
+│   ├── markdown.ts        # HTML→Markdown変換（Turndown）
+│   └── notification.ts    # ページ内通知UI
 ├── popup/
-│   └── popup.ts           # ポップアップロジック
-├── popup.html             # ポップアップUI
+│   └── popup.ts           # ポップアップUI・設定管理
 ├── utils/
-│   ├── constants.ts       # 定数
-│   ├── helpers.ts         # ユーティリティ
+│   ├── constants.ts       # 定数・設定値
+│   ├── helpers.ts         # ユーティリティ関数
 │   └── indexedDB.ts       # IndexedDB操作
 ├── locales/
-│   └── messages.ts        # i18n辞書
+│   └── messages.ts        # 多言語メッセージ定義
 ├── types/
-│   └── index.ts           # 型定義
-└── manifest.json          # 拡張機能マニフェスト
+│   ├── index.ts           # アプリケーション型定義
+│   ├── zip.d.ts           # zip.js型宣言
+│   └── turndown.d.ts      # Turndown型宣言
+└── manifest.json          # 拡張機能マニフェスト（Manifest V3）
 ```

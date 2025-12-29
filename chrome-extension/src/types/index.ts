@@ -120,6 +120,10 @@ export interface ExportCompleteMessage {
   action: 'exportComplete';
 }
 
+export interface ExportCancelledMessage {
+  action: 'exportCancelled';
+}
+
 export interface ShowErrorMessage {
   action: 'showError';
   message: string;
@@ -143,6 +147,7 @@ export type PopupMessage =
   | ShowExportConfirmationMessage
   | UpdateProgressMessage
   | ExportCompleteMessage
+  | ExportCancelledMessage
   | ShowErrorMessage
   | ExportSuccessMessage
   | ArticleInfoMessage;
@@ -201,11 +206,6 @@ export interface ProcessAllArticlesFromContentMessage {
   currentLanguage: string;
 }
 
-export interface SetLanguageMessage {
-  action: 'setLanguage';
-  language: string;
-}
-
 export interface CancelExportMessage {
   action: 'cancelExport';
 }
@@ -226,7 +226,6 @@ export type ContentScriptMessage =
   | ExportSingleArticleMessage
   | ExportAllArticlesFromContentMessage
   | ProcessAllArticlesFromContentMessage
-  | SetLanguageMessage
   | CancelExportMessage
   | ScrapeImageListPageMessage
   | GetArticleInfoMessage;
