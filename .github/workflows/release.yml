@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: chrome-extension/package-lock.json
 
@@ -39,7 +39,7 @@ jobs:
         run: zip -r ../../sync-stone-chrome-extension.zip .
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: sync-stone-chrome-extension.zip
           generate_release_notes: true
